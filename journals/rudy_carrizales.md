@@ -7,6 +7,8 @@ Each team member is required to keep a development journal, which should be a si
 Recommended naming convention is `first_last.md`.
 
 17JAN24
+
     -updated index.html
     -started journal
     -started routes 
+    -created postgres db
