@@ -1,4 +1,4 @@
-# volumes:
+# volumes
 services:
     fastapi:
         environment:
@@ -21,3 +21,14 @@ services:
             - ./ghi:/app
         ports:
             - "5173:5173"
+        environment:
+            - VITE_API_HOST=$VITE_API_HOST
+# database:
+#     image: postgres:16.1-bullseye
+#     volumes:
+#         - never-left-db:/var/lib/postgresql/data
+#     environment:
+#         POSTGRES_USER = $POSTGRES_USER
+#         POSTGRES_PASSWORD = $POSTGRES_PASSWORD
+#     ports:
+#         - "15432:5432"
