@@ -9,8 +9,8 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE categories;
-        """
-        """
+        """,
+      """
         CREATE TABLE Activities (
             name VARCHAR(255) NOT NULL,
             description VARCHAR(255),
