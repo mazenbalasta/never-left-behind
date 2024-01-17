@@ -26,3 +26,9 @@ def launch_details():
             "min": "00"
         }
     }
+
+@app.get("/api/activities")
+def activities():
+    return{
+        
+    }
