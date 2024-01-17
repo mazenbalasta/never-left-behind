@@ -27,8 +27,9 @@ def launch_details():
         }
     }
 
+
 @app.get("/api/activities")
 def activities():
-    return{
-        
+    return {
+
     }
