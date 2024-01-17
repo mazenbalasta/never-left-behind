@@ -40,8 +40,6 @@ services:
             - "5173:5173"
         environment:
             - VITE_API_HOST=$VITE_API_HOST
-        environment:
-            - VITE_API_HOST=$VITE_API_HOST
 
     pg-admin:
         image: dpage/pgadmin4
