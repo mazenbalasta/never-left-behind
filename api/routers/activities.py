@@ -1,5 +1,32 @@
-from fastapi import FastAPI
-from routers import activities
+from fastapi import APIRouter
+from queries.activities import ActivitiesIn, ActivitiesOut
 
-app = FastAPI()
-app.include_router(activities.router)
+router = APIRouter()
+
+
+@router.post("/api/activities", response_model=ActivitiesOut)
+def create_activity(activity_in: ActivitiesIn):
+    return {
+
+    }
+
+
+@router.get("/api/activities", response_model=ActivitiesOut)
+def list_activities():
+    return {
+    
+    }
+
+
+@router.put("/api/activities/{id}", response_model=ActivitiesOut)
+def update_activity(id: int):
+    return {
+
+    }
+
+
+@router.delete("/api/activities/{id}", response_model=ActivitiesOut)
+def delete_activity(id: int):
+    return {
+
+    }
