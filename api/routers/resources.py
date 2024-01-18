@@ -3,6 +3,7 @@ from queries.resources import ResourcesIn, ResourcesOut
 
 router = APIRouter()
 
+
 @router.post("/api/resources", response_model=ResourcesIn)
 def create_resource():
     return {
