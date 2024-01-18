@@ -8,7 +8,6 @@ steps = [
                 name
             )
         VALUES
-            (
                 ('AL','Alabama'),
                 ('AK','Alaska'),
                 ('AZ','Arizona'),
@@ -58,8 +57,7 @@ steps = [
                 ('WA','Washington'),
                 ('WV','West Virginia'),
                 ('WI','Wisconsin'),
-                ('WY','Wyoming')
-            );
+                ('WY','Wyoming');
         """,
     #step 2: Down
         """
