@@ -9,11 +9,13 @@ def create_resource():
 
     }
 
+
 @router.get("/api/resources", response_model=ResourcesOut)
 def list_resources():
     return {
 
     }
+
 
 @router.delete("/api/resources/{id}", response_model=ResourcesOut)
 def delete_resource(id: int):

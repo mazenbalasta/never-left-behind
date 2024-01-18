@@ -13,7 +13,7 @@ def create_activity():
 def list_activities():
     return {
     
-        }
+    }
 
 @router.put("/api/activities/{id}", response_model=ActivitiesOut)
 def update_activity(id: int):
