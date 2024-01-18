@@ -1,8 +1,17 @@
 from fastapi import FastAPI
+from routers import activities
+
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
 app = FastAPI()
+app.include_router(activities.router)
+
+
+
+
+
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -28,8 +37,8 @@ def launch_details():
     }
 
 
-@app.get("/api/activities")
-def activities():
-    return {
+# @app.get("/api/activities")
+# def activities():
+#     return {
 
-    }
+#     }

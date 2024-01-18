@@ -1,5 +1,13 @@
-from fastapi import FastAPI
-from routers import activities
+from fastapi import APIRouter, Depends
+from queries.activities import ActivityIn, ActivityRepo
 
-app = FastAPI()
-app.include_router(activities.router)
+
+router = APIRouter()
+
+
+@router.post("/activities")
+def create_activity(
+    activity: ActivityIn,
+    repo: ActivityRepo = Depends()
+):
+    return repo.create(activity)
