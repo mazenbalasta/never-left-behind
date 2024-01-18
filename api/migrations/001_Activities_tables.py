@@ -3,32 +3,34 @@ steps = [
     [
         # "Up" SQL statement
         """
-        CREATE TABLE category (
+        CREATE TABLE categories (
             id SERIAL PRIMARY KEY NOT NULL,
             name VARCHAR(255) NOT NULL
         );
         """,
         # "Down" SQL statement
         """
-        DROP TABLE category;
+        DROP TABLE categories;
         """,
     ],
+
     #step 2:
     [
+
         """
-        CREATE TABLE activity (
-            id SERIAL PRIMARY KEY,
+        CREATE TABLE Activities (
+            id SERIAL PRIMARY KEY NOT NULL,
             name VARCHAR(255) NOT NULL,
             description VARCHAR(255),
             start_date DATE NOT NULL,
             end_date DATE NOT NULL,
             location VARCHAR(255) NOT NULL,
-            category INT REFERENCES category(id)
+            category INT REFERENCES categories(id)
         );
         """,
         # "Down" SQL statement
         """
-        DROP TABLE activity;
+        DROP TABLE Activities;
         """,
     ]
 ]

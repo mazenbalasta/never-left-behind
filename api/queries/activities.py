@@ -9,7 +9,7 @@ class category(BaseModel):
     description: Optional[str] = None
 
 
-class ActivityIn(BaseModel):
+class ActivitiesIn(BaseModel):
     name: str
     description: Optional[str] = None
     start_date: date
@@ -18,7 +18,7 @@ class ActivityIn(BaseModel):
     # category: category
 
 
-class ActivitiyOut(BaseModel):
+class ActivitiesOut(BaseModel):
     id: int
     name: str
     description: Optional[str] = None
@@ -29,12 +29,12 @@ class ActivitiyOut(BaseModel):
 
 
 class ActivityRepo:
-    def create(self, activity: ActivityIn) -> ActivitiyOut:
+    def create(self, activity: ActivitiesIn) -> ActivitiesOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    INSERT INTO activity
+                    INSERT INTO Activities
                         (
                             name,
                             description,
@@ -56,4 +56,4 @@ class ActivityRepo:
                 )
                 id = result.fetchone()[0]
                 old_data = activity.dict()
-                return ActivitiyOut(id=id, **old_data)
+                return ActivitiesOut(id=id, **old_data)

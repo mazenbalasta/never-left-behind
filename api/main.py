@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from routers import activities
 
 from fastapi.middleware.cors import CORSMiddleware
+from routers import activities, resources, events
 import os
 
 app = FastAPI()
@@ -11,6 +12,11 @@ app.include_router(activities.router)
 
 
 
+
+
+app.include_router(activities.router, tags=["Activities"])
+app.include_router(resources.router, tags=["Resources"])
+app.include_router(events.router, tags=["Events"])
 
 
 app.add_middleware(
@@ -35,10 +41,3 @@ def launch_details():
             "min": "00"
         }
     }
-
-
-# @app.get("/api/activities")
-# def activities():
-#     return {
-
-#     }
