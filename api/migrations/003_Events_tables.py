@@ -4,8 +4,11 @@ steps = [
         """
         CREATE TABLE states (
             id SERIAL PRIMARY KEY NOT NULL,
-            abbreviation VARCHAR(2) NOT NULL
+            abbreviation VARCHAR(2) NOT NULL,
+            name VARCHAR(50) NOT NULL
         );
+
+
         """,
         # "Down" SQL statement
         """

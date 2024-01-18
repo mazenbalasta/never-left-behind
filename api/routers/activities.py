@@ -1,20 +1,21 @@
-from fastapi import APIRouter
-from queries.activities import ActivitiesIn, ActivitiesOut
+from fastapi import APIRouter, Depends
+from queries.activities import ActivitiesIn, ActivitiesOut, ActivityRepo
 
 router = APIRouter()
 
 
-@router.post("/api/activities", response_model=ActivitiesOut)
-def create_activity(activity_in: ActivitiesIn):
-    return {
-
-    }
+@router.post("/activities")
+def create_activity(
+    activity: ActivitiesIn,
+    repo: ActivityRepo = Depends()
+):
+    return repo.create(activity)
 
 
 @router.get("/api/activities", response_model=ActivitiesOut)
 def list_activities():
     return {
-    
+
     }
 
 
