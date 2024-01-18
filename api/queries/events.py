@@ -15,3 +15,12 @@ class EventsIn(BaseModel):
     description: Optional[str] = None
     state: states
     city: cities
+
+class EventsOut(BaseModel):
+    event_title: str
+    start_date: date
+    end_date: date
+    description: Optional[str] = None
+    state: states
+    city: cities
+    id: int
