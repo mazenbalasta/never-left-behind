@@ -4,9 +4,10 @@ from queries.resources import ResourcesIn, ResourcesOut
 router = APIRouter()
 
 
-@router.post("/api/resources", response_model=ResourcesIn)
-def create_resource():
+@router.post("/api/resources", response_model=ResourcesOut)
+def create_resource(resources_in: ResourcesIn):
     return {
+        "name": "string"
 
     }
 

@@ -4,8 +4,8 @@ from queries.events import EventsIn, EventsOut
 router = APIRouter()
 
 
-@router.post("/api/events", response_model=EventsIn)
-def create_event():
+@router.post("/api/events", response_model=EventsOut)
+def create_event(events_in: EventsIn):
     return {
 
     }

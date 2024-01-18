@@ -4,8 +4,8 @@ from queries.activities import ActivitiesIn, ActivitiesOut
 router = APIRouter()
 
 
-@router.post("/api/activities", response_model=ActivitiesIn)
-def create_activity():
+@router.post("/api/activities", response_model=ActivitiesOut)
+def create_activity(activity_in: ActivitiesIn):
     return {
 
     }
