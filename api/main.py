@@ -19,6 +19,11 @@ app.include_router(resources.router, tags=["Resources"])
 app.include_router(events.router, tags=["Events"])
 
 
+app.include_router(activities.router, tags=["Activities"])
+app.include_router(resources.router, tags=["Resources"])
+app.include_router(events.router, tags=["Events"])
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[

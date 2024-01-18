@@ -12,3 +12,10 @@ Recommended naming convention is `first_last.md`.
     -started journal
     -started routes 
     -created postgres db
+
+18JAN24
+
+    -worked on states table
+    -partner coded with Mazen
+    -created FastAPI endpoints
+    -created DB with Mazen

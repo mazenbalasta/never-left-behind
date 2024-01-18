@@ -39,7 +39,7 @@ steps = [
             end_date DATE NOT NULL,
             description VARCHAR(500),
             state INT REFERENCES states(id),
-            city INT REFERENCES cities(id)
+            city VARCHAR(50) NOT NULL 
         );
         """,
         # "Down" SQL statement
