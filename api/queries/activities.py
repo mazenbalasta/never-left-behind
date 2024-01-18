@@ -15,7 +15,7 @@ class ActivitiesIn(BaseModel):
     start_date: date
     end_date: date
     location: str
-    # category: category
+    category: int
 
 
 class ActivitiesOut(BaseModel):
@@ -25,7 +25,7 @@ class ActivitiesOut(BaseModel):
     start_date: date
     end_date: date
     location: str
-    # category: category
+    category: int
 
 
 class ActivityRepo:
