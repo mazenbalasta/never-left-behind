@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from queries.pool import Queries
+# from api.queries import Queries
 
 
 class DuplicateAccountError(ValueError):
@@ -15,10 +15,13 @@ class AccountOut(BaseModel):
     email: str
     full_name: str
 
+class AccountOutWithPassword(AccountOut):
+    hashed_password: str
 
-class AccountQueries(Queries):
-    def get(self, email:str) -> AccountOut:
+
+class AccountQueries():
+    def get(self, email:str) -> AccountOutWithPassword:
         pass
 
-    def create(self, info: AccountIn, hashed_password: str) -> AccountOut:
+    def create(self, info: AccountIn, hashed_password: str) -> AccountOutWithPassword:
         pass
