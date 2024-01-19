@@ -89,15 +89,18 @@ class ActivityRepo:
         except Exception:
             return {"message": "Could not get all activities"}
 
-    # def delete_activity(self, activity: id):
-    #     try:
-    #         with pool.connection() as conn:
-    #             with conn.cursor() as db:
-    #                 result = db.execute(
-    #                     """
-    #                     DELETE FROM activities WHERE id = %s
-    #                     """,
-    #                     id
-    #                 )
-    #     except Exception:
-    #         pass
+    def delete_activity(self, activity_id: int):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM activities WHERE id = %s
+                        """,
+                        [activity_id]
+                    )
+                    return True
+        except Exception as e:
+            return False
+
+ 
