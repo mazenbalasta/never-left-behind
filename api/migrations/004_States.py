@@ -61,7 +61,7 @@ steps = [
         """,
     #step 2: Down
         """
-        DROP TABLE states;
+        DELETE FROM states;
         """,
     ],
 ]
