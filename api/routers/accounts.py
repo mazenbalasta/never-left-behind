@@ -1,4 +1,3 @@
-# router.py
 from fastapi import (
     Depends,
     HTTPException,
@@ -35,8 +34,9 @@ class HttpError(BaseModel):
 
 router = APIRouter()
 
-@router.get("/api/sample_need_login", response_model=bool)
-async def sample_need_login(
+
+@router.get("/protected", response_model=bool)
+async def protected(
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return True
