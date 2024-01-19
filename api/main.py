@@ -2,12 +2,12 @@ from fastapi import FastAPI
 from routers import activities
 from authenticator import authenticator
 from fastapi.middleware.cors import CORSMiddleware
-from routers import activities, resources, events, accounts
+from routers import activities, resources, events
+from routers import accounts
 import os
 
 
 app = FastAPI()
-
 
 app.include_router(accounts.router, tags=["Authentication"])
 app.include_router(authenticator.router, tags=["Authentication"])
@@ -20,9 +20,7 @@ app.include_router(events.router, tags=["Events"])
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        os.environ.get("CORS_HOST")
-    ],
+    allow_origins=[os.environ.get("CORS_HOST")],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -37,6 +35,6 @@ def launch_details():
             "week": 17,
             "day": 5,
             "hour": 19,
-            "min": "00"
+            "min": "00",
         }
     }
