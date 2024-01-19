@@ -25,7 +25,9 @@ steps = [
             start_date DATE NOT NULL,
             end_date DATE NOT NULL,
             location VARCHAR(255) NOT NULL,
-            category INT REFERENCES categories(id)
+            category INT,
+            FOREIGN KEY(category)
+            REFERENCES categories(id)
         );
         """,
         # "Down" SQL statement
