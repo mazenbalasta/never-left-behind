@@ -5,8 +5,8 @@ from queries.pool import pool
 
 
 class category(BaseModel):
+    id: int
     name: str
-    description: Optional[str] = None
 
 
 class ActivitiesIn(BaseModel):
