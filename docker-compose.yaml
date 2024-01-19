@@ -21,6 +21,7 @@ services:
             CORS_HOST: http://localhost:5173
             DATABASE_URL: postgresql://user:password@postgres/nlb-db
             PORT: 8000
+            SIGNING_KEY: ahXm3awpVgy55KxBT6xyteJYdPAPeC0Nux2p5YmTkFyc74KUT3RVeodvJq2qGEG8jKFTwBrkNfsGzdcd
         build:
             context: api
             dockerfile: Dockerfile.dev
