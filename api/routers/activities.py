@@ -27,8 +27,9 @@ def update_activity(id: int):
     }
 
 
-@router.delete("/api/activities/{id}", response_model=ActivitiesOut)
-def delete_activity(id: int):
-    return {
-
-    }
+@router.delete("/api/activities/{activity_id}", response_model=bool)
+def delete_activity(
+    activity_id: int,
+    repo: ActivityRepo = Depends(),
+    ) -> bool:
+    return repo.delete_activity(activity_id)
