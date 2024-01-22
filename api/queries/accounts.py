@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from queries.pool import pool
 
+
 # from queries.pool import Queries
 
 
@@ -32,11 +33,30 @@ class AccountOutWithPassword(BaseModel):
 
 class AccountQueries:
     def get(self, email: str) -> AccountOutWithPassword:
-        pass
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                data = db.execute(
+                    """
+                    SELECT *
+                    FROM accounts
+                    WHERE email = %s;
+                    """,
+                    [email]
+                )
+                account = data.fetchone()
+                if data is None:
+                    return account
+                print('data:', account)
+                return AccountOutWithPassword(**account)
 
     def create(
-        self, info: AccountIn, hashed_password: str
-    ) -> AccountOutWithPassword:
+        self, info: AccountIn, hashed_password: str):
+
+        if self.get(email=info.email) is not None:
+            raise DuplicateAccountError
+        account = info.dict()
+        account['hashed_password'] = hashed_password
+        print(account)
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -46,20 +66,11 @@ class AccountQueries:
                             email,
                             password,
                             full_name
-
                         )
                     VALUES
                         (%s, %s, %s)
-                    RETURNING email, password, full_name;
+                    RETURNING id, email, password, full_name;
                     """,
-                    [info.email, hashed_password, info.full_name],
+                    [info.email, info.password, info.full_name],
                 )
-                id = result.fetchone()[0]
-                print(
-                    id,
-                    "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",
-                )
-                old_data = info.dict()
-                return AccountOutWithPassword(
-                    id=id, hashed_password=hashed_password, **old_data
-                )
+                return account
