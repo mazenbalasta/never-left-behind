@@ -8,12 +8,13 @@ from fastapi import (
 )
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
-
+from typing import List
 from pydantic import BaseModel
 
 from queries.accounts import (
     AccountIn,
     AccountOut,
+    AccountOutWithPassword,
     AccountQueries,
     DuplicateAccountError,
 )
@@ -73,3 +74,10 @@ async def create_account(
     form = AccountForm(username=info.email, password=info.password)
     token = await authenticator.login(response, request, form, accounts)
     return AccountToken(account=account, **token.dict())
+
+
+@router.get("/api/accounts", response_model=List[AccountOutWithPassword])
+def list_accounts(
+    accounts: AccountQueries = Depends(),
+):
+    return accounts.list_accounts()
