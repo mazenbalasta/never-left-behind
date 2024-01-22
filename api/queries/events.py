@@ -68,8 +68,6 @@ class EventsRepo:
                             description,
                             city,
                             state
-                            city,
-                            state
                         )
                     VALUES
                         (%s, %s, %s, %s, %s, %s)
@@ -82,10 +80,7 @@ class EventsRepo:
                         event.description,
                         event.city,
                         event.state.abbreviation,
-                    ],
-                        event.city,
-                        event.state.abbreviation,
-                    ],
+                ],
                 )
                 id = result.fetchone()[0]
                 old_data = event.dict()
@@ -101,82 +96,11 @@ class EventsRepo:
                         ORDER BY start_date DESC;
                         """
                     )
+                    
                     records = db.fetchall()
                     result = []
-                    print(
-                        records,
-                        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
-                    )
-                    for record in records:
-                        event = EventsOut(
-                            id=record[0],
-                            event_title=record[1],
-                            start_date=record[2],
-                            end_date=record[3],
-                            description=record[4],
-                            state=states(abbreviation=record[5]),
-                            city=record[6],
-                        )
-                        result.append(event)
-                        print(
-                            result,
-                            "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",
-                        )
-                    return result
-        except Exception as e:
-            print(f"Error: {e}")
-            raise HTTPException(status_code=500, detail=str(e))
 
-    # def list_events(self) -> Union[Error, List[EventsOut]]:
-    #     try:
-    #         with pool.connection() as conn:
-    #             with conn.cursor() as db:
-    #                 result = db.execute(
-    #                     """
-    #                     SELECT * FROM Events
-    #                     ORDER BY start_date DESC;
-    #                     """
-    #                 )
-    #                 result = []
-    #                 print(
-    #                     EventsOut,
-    #                     "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
-    #                 )
-    #                 for record in db:
-    #                     event = EventsOut(
-    #                         id=record[0],
-    #                         event_title=record[1],
-    #                         start_date=record[2],
-    #                         end_date=record[3],
-    #                         description=record[4],
-    #                         state=states(abbreviation=record[5]),
-    #                         city=record[6],
-    #                     )
-    #                     result.append(event)
-    #                 print(
-    #                     result,
-    #                     "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",
-    #                 )
-    #                 return result
-    #     except Exception:
-    #         return {"message": "Could not get all events"}
-                
-    def list_events(self) -> Union[Error, List[EventsOut]]:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    db.execute(
-                        """
-                        SELECT * FROM Events
-                        ORDER BY start_date DESC;
-                        """
-                    )
-                    records = db.fetchall()
-                    result = []
                     for record in records:
-                        start_datetime = datetime.combine(record[2], datetime.min.time())
-                        end_datetime = datetime.combine(record[3], datetime.min.time())
-                        
                         event = EventsOut(
                             id=record[0],
                             event_title=record[1],
@@ -187,6 +111,7 @@ class EventsRepo:
                             city=record[6],
                         )
                         result.append(event)
+
                     return result
         except Exception as e:
             print(f"Error: {e}")
