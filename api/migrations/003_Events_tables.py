@@ -1,5 +1,5 @@
 steps = [
-    #step 1:
+    # step 1:
     [
         """
         CREATE TABLE states (
@@ -15,7 +15,7 @@ steps = [
         DROP TABLE states;
         """,
     ],
-    #step 2:
+    # step 2:
     [
         """
         CREATE TABLE cities (
@@ -28,18 +28,18 @@ steps = [
         DROP TABLE cities;
         """,
     ],
-    #step 3:
+    # step 3:
     [
         # "Up" SQL statement
         """
         CREATE TABLE events (
             id SERIAL PRIMARY KEY NOT NULL,
             event_title VARCHAR(255) NOT NULL,
-            start_date DATE NOT NULL,
-            end_date DATE NOT NULL,
+            start_date TIMESTAMP,
+            end_date TIMESTAMP,
             description VARCHAR(500),
             state INT REFERENCES states(id),
-            city VARCHAR(50) NOT NULL 
+            city VARCHAR(50) NOT NULL
         );
         """,
         # "Down" SQL statement
