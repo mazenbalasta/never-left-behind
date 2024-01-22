@@ -1,20 +1,21 @@
 from pydantic import BaseModel
-from fastapi import HTTPException
 from queries.pool import pool
 from typing import Optional, List, Union
 from queries import accounts
 from datetime import datetime
-
+from pydantic import BaseModel
+from queries.pool import pool
+from datetime import datetime
 
 
 class Error(BaseModel):
-    body: str
+    message: str
 
 
 class MessagesIn(BaseModel):
     title: str
     body: str
-    userId: int
+    account: int
     date: datetime
 
 
@@ -22,36 +23,35 @@ class MessagesOut(BaseModel):
     id: int
     title: str
     body: str
-    userId: int
+    account: int
     date: datetime
 
 
-class MessageRepo:
+class MessagesRepo:
     def create(self, message: MessagesIn) -> MessagesOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
-                result = db.execute(
+                db.execute(
                     """
-                    INSERT INTO messages 
+                    INSERT INTO messages
                         (
-                            title, 
-                            body, 
-                            userId, 
+                            title,
+                            body,
+                            account,
                             date
                         )
                     VALUES
                         (%s, %s, %s, %s)
-                    RETURNING id, title, body, userId, date;
+                    RETURNING id;
                     """,
                     [
                         message.title,
                         message.body,
-                        message.userId,
-                        message.date
+                        message.account,
+                        message.date,
                     ],
                 )
-                id = result.fetchone()[0]
-                old_data = message.dict()
-                if result is None:
-                    raise HTTPException(status_code=404, detail="Message not found")
-                return MessagesOut(**result)
+                result = db.fetchone()
+            id = result[0]
+            old_data = message.dict()
+            return MessagesOut(id=id, **old_data)

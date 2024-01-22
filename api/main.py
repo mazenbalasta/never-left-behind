@@ -17,7 +17,7 @@ app.include_router(resources.router, tags=["Resources"])
 app.include_router(events.router, tags=["Events"])
 app.include_router(resources.router, tags=["Resources"])
 app.include_router(events.router, tags=["Events"])
-app.include_router(messages.router, tags=["Messages"])
+app.include_router(messages.router, tags=["Message Board"])
 
 
 app.add_middleware(

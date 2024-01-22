@@ -1,17 +1,8 @@
 from pydantic import BaseModel
 from datetime import datetime
-from fastapi import HTTPException
-from typing import Optional
-from datetime import datetime
 from queries.pool import pool
 from typing import Optional, List, Union
 from fastapi import HTTPException
-
-
-class Error(BaseModel):
-    message: str
-
-from typing import Optional, List, Union
 
 
 class Error(BaseModel):
@@ -22,22 +13,17 @@ class states(BaseModel):
     abbreviation: str
 
 
-
 class cities(BaseModel):
     name: str
-
 
 
 class EventsIn(BaseModel):
     event_title: str
     start_date: datetime
     end_date: datetime
-    start_date: datetime
-    end_date: datetime
     description: Optional[str] = None
     state: states
     city: str
-
 
 
 class EventsOut(BaseModel):
@@ -45,13 +31,9 @@ class EventsOut(BaseModel):
     event_title: str
     start_date: datetime
     end_date: datetime
-    start_date: datetime
-    end_date: datetime
     description: Optional[str] = None
     state: states
     city: str
-
-
 
 
 class EventsRepo:
@@ -80,7 +62,7 @@ class EventsRepo:
                         event.description,
                         event.city,
                         event.state.abbreviation,
-                ],
+                    ],
                 )
                 id = result.fetchone()[0]
                 old_data = event.dict()
@@ -96,10 +78,8 @@ class EventsRepo:
                         ORDER BY start_date DESC;
                         """
                     )
-                    
                     records = db.fetchall()
                     result = []
-
                     for record in records:
                         event = EventsOut(
                             id=record[0],
@@ -111,7 +91,6 @@ class EventsRepo:
                             city=record[6],
                         )
                         result.append(event)
-
                     return result
         except Exception as e:
             print(f"Error: {e}")
