@@ -80,10 +80,6 @@ class EventsRepo:
                     )
                     records = db.fetchall()
                     result = []
-                    print(
-                        records,
-                        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
-                    )
                     for record in records:
                         event = EventsOut(
                             id=record[0],
@@ -95,45 +91,7 @@ class EventsRepo:
                             city=record[6],
                         )
                         result.append(event)
-                        print(
-                            result,
-                            "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",
-                        )
                     return result
         except Exception as e:
             print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
-
-    # def list_events(self) -> Union[Error, List[EventsOut]]:
-    #     try:
-    #         with pool.connection() as conn:
-    #             with conn.cursor() as db:
-    #                 result = db.execute(
-    #                     """
-    #                     SELECT * FROM Events
-    #                     ORDER BY start_date DESC;
-    #                     """
-    #                 )
-    #                 result = []
-    #                 print(
-    #                     EventsOut,
-    #                     "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
-    #                 )
-    #                 for record in db:
-    #                     event = EventsOut(
-    #                         id=record[0],
-    #                         event_title=record[1],
-    #                         start_date=record[2],
-    #                         end_date=record[3],
-    #                         description=record[4],
-    #                         state=states(abbreviation=record[5]),
-    #                         city=record[6],
-    #                     )
-    #                     result.append(event)
-    #                 print(
-    #                     result,
-    #                     "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",
-    #                 )
-    #                 return result
-    #     except Exception:
-    #         return {"message": "Could not get all events"}
