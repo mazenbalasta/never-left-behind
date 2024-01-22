@@ -1,17 +1,19 @@
 from pydantic import BaseModel
+from fastapi import HTTPException
 from queries.pool import pool
 from typing import Optional, List, Union
 from queries import accounts
 from datetime import datetime
 
 
+
 class Error(BaseModel):
-    message: str
+    body: str
 
 
 class MessagesIn(BaseModel):
     title: str
-    message: str
+    body: str
     userId: int
     date: datetime
 
@@ -19,33 +21,37 @@ class MessagesIn(BaseModel):
 class MessagesOut(BaseModel):
     id: int
     title: str
-    message: str
+    body: str
     userId: int
     date: datetime
 
 
 class MessageRepo:
-    def create_message(self, message: MessagesIn) -> MessagesOut:
+    def create(self, message: MessagesIn) -> MessagesOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    INSERT INTO Messages
+                    INSERT INTO messages 
                         (
-                            title,
-                            message,
-                            userId
+                            title, 
+                            body, 
+                            userId, 
+                            date
                         )
                     VALUES
-                        (%s, %s, %s)
-                    RETURNING id, title, body, userId;
+                        (%s, %s, %s, %s)
+                    RETURNING id, title, body, userId, date;
                     """,
                     [
                         message.title,
                         message.body,
-                        message.userId
-                    ]
+                        message.userId,
+                        message.date
+                    ],
                 )
-                return MessagesOut(**result[0])
-            
-    
+                id = result.fetchone()[0]
+                old_data = message.dict()
+                if result is None:
+                    raise HTTPException(status_code=404, detail="Message not found")
+                return MessagesOut(**result)

@@ -22,10 +22,10 @@ steps = [
         CREATE TABLE messages (
             id SERIAL PRIMARY KEY NOT NULL,
             title VARCHAR(255) NOT NULL,
-            message VARCHAR(1000) NOT NULL,
+            body VARCHAR(1000) NOT NULL,
             date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             userId INT,
-            FOREIGN KEY(id) REFERENCES accounts(id)
+            FOREIGN KEY(userId) REFERENCES accounts(id)
         );
 
 
