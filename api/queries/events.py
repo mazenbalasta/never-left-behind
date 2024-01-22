@@ -1,30 +1,40 @@
 from pydantic import BaseModel
 from typing import Optional
-from datetime import date
+from datetime import datetime
 from queries.pool import pool
+from typing import Optional, List, Union
+
+
+class Error(BaseModel):
+    message: str
+
 
 class states(BaseModel):
     abbreviation: str
 
+
 class cities(BaseModel):
     name: str
 
+
 class EventsIn(BaseModel):
     event_title: str
-    start_date: date
-    end_date: date
+    start_date: datetime
+    end_date: datetime
     description: Optional[str] = None
     state: states
     city: str
 
+
 class EventsOut(BaseModel):
     event_title: str
-    start_date: date
-    end_date: date
+    start_date: datetime
+    end_date: datetime
     description: Optional[str] = None
     state: states
     city: str
     id: int
+
 
 class EventsRepo:
     def create(self, event: EventsIn) -> EventsOut:
@@ -38,8 +48,8 @@ class EventsRepo:
                             start_date,
                             end_date,
                             description,
-                            state,
-                            city
+                            city,
+                            state
                         )
                     VALUES
                         (%s, %s, %s, %s, %s, %s)
@@ -50,9 +60,36 @@ class EventsRepo:
                         event.start_date,
                         event.end_date,
                         event.description,
-                        event.city
-                    ]
+                        event.city,
+                        event.state.abbreviation,
+                    ],
                 )
                 id = result.fetchone()[0]
                 old_data = event.dict()
                 return EventsOut(id=id, **old_data)
+                
+    def list_events(self) -> Union[Error, List[EventsOut]]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT * FROM Events
+                        ORDER BY start_date DESC;
+                        """
+                    )
+                    result = []
+                    for record in db:
+                        event = EventsOut(
+                            id=record[0],
+                            event_title=record[1],
+                            start_date=record[2],
+                            end_date=record[3],
+                            description=record[4],
+                            state=states(abbreviation=record[5]),
+                            city=record[6],
+                        )
+                        result.append(event)
+                    return result
+        except Exception:
+            return {"message": "Could not get all events"}
