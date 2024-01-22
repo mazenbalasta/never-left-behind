@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from fastapi import HTTPException
 from typing import Optional
 from datetime import datetime
 from queries.pool import pool
@@ -72,14 +73,18 @@ class EventsRepo:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
                         SELECT * FROM Events
                         ORDER BY start_date DESC;
                         """
                     )
+                    records = db.fetchall()
                     result = []
-                    for record in db:
+                    for record in records:
+                        start_datetime = datetime.combine(record[2], datetime.min.time())
+                        end_datetime = datetime.combine(record[3], datetime.min.time())
+                        
                         event = EventsOut(
                             id=record[0],
                             event_title=record[1],
@@ -91,5 +96,6 @@ class EventsRepo:
                         )
                         result.append(event)
                     return result
-        except Exception:
-            return {"message": "Could not get all events"}
+        except Exception as e:
+            print(f"Error: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
