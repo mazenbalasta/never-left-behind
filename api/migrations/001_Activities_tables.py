@@ -1,5 +1,5 @@
 steps = [
-    #step 1:
+    # step 1
     [
         # "Up" SQL statement
         """
@@ -11,15 +11,12 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE categories;
-        """,
+        """
     ],
-
-    #step 2:
+    # step 2
     [
-
         """
         CREATE TABLE Activities (
-            id SERIAL PRIMARY KEY NOT NULL,
             name VARCHAR(255) NOT NULL,
             description VARCHAR(255),
             start_date DATE NOT NULL,

@@ -94,6 +94,7 @@ class MessagesRepo:
             raise HTTPException(status_code=500, detail=str(e))
 
 
+
     def update_message(self, message_id: int, message: MessagesIn) -> Union[MessagesOut, Error]:
         try:
             with pool.connection() as conn:
@@ -146,7 +147,8 @@ class MessagesRepo:
                         [message_id]
                     )
                     if db.rowcount == 0:
-                        raise HTTPException(status_code=404, detail="Message not found")
+                        raise HTTPException(status_code=404,
+                                            detail="Message not found")
                     return True
         except HTTPException as error:
             raise error
