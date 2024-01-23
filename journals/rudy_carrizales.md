@@ -19,3 +19,8 @@ Recommended naming convention is `first_last.md`.
     -partner coded with Mazen
     -created FastAPI endpoints
     -created DB with Mazen
+
+22JAN24
+    -coded with team to create message
+    -completed CRUD for messages
+
