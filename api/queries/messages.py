@@ -105,7 +105,11 @@ class MessagesRepo:
                     db.execute(
                         """
                         UPDATE messages
-                        SET title = %s, body = %s, account = %s, date = %s
+                        SET 
+                            title = %s,
+                            body = %s,
+                            account = %s,
+                            date = %s
                         WHERE id = %s
                         RETURNING id, title, body, account, date;
                         """,
