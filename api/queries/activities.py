@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from fastapi import HTTPException
 from typing import Optional, List, Union
 from datetime import date
 from queries.pool import pool
@@ -88,6 +89,60 @@ class ActivityRepo:
                     return result
         except Exception:
             return {"message": "Could not get all activities"}
+        
+    def update_activity(self, activity_id: int, activity: ActivitiesIn) -> Union[ActivitiesOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE activities
+                        SET
+                            name = %s,
+                            description = %s,
+                            start_date = %s,
+                            end_date = %s,
+                            location = %s,
+                            category = %s
+                        WHERE id = %s
+                        RETURNING
+                            id,
+                            name,
+                            description,
+                            start_date,
+                            end_date,
+                            location,
+                            category;
+                        """,
+                        [
+                            activity.name,
+                            activity.description,
+                            activity.start_date,
+                            activity.end_date,
+                            activity.location,
+                            activity.category,
+                            activity_id
+                        ]
+                    )
+                    result = db.fetchone()
+                    if result is None:
+                        raise HTTPException(status_code=404, detail="Activity not found")
+                    
+                    updated_activity = ActivitiesOut(
+                        id=result[0],
+                        name=result[1],
+                        description=result[2],
+                        start_date=result[3],
+                        end_date=result[4],
+                        location=result[5],
+                        category=result[6]
+                    )
+                    return updated_activity
+        except HTTPException as error:
+            raise error
+        except Exception as e:
+            print(f"Error: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
 
     def delete_activity(self, activity_id: int):
         try:

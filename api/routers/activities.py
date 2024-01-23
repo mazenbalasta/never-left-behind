@@ -21,10 +21,8 @@ def list_activities(
 
 
 @router.put("/api/activities/{id}", response_model=ActivitiesOut)
-def update_activity(id: int):
-    return {
-
-    }
+def update_activity(id: int, activity: ActivitiesIn, repo: ActivityRepo = Depends()):
+    return repo.update_activity(id, activity)
 
 
 @router.delete("/api/activities/{activity_id}", response_model=bool)
