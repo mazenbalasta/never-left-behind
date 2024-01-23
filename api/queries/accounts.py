@@ -3,7 +3,6 @@ from queries.pool import pool
 from typing import Optional, List, Union
 from typing import Optional
 
-
 # from queries.pool import Queries
 
 
@@ -21,9 +20,6 @@ class AccountOut(BaseModel):
     id: int
     email: str
     full_name: str
-
-class AccountOutWithPassword(AccountOut):
-    hashed_password: str
 
 
 class AccountOutWithPassword(AccountOut):
@@ -57,13 +53,8 @@ class AccountQueries:
             return {"message": "Could not get all accounts"}
 
     def create(
-        self, info: AccountIn, hashed_password: str):
-
-        if self.get(email=info.email) is not None:
-            raise DuplicateAccountError
-        account = info.dict()
-        account['hashed_password'] = hashed_password
-        print(account)
+        self, info: AccountIn, hashed_password: str
+    ) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -73,6 +64,7 @@ class AccountQueries:
                             email,
                             password,
                             full_name
+
                         )
                     VALUES
                         (%s, %s, %s)
