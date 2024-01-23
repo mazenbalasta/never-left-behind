@@ -15,7 +15,7 @@ def create_activity(
 
 @router.get("/api/activities", response_model=List[ActivitiesOut])
 def list_activities(
-    repo: ActivityRepo = Depends ()
+    repo: ActivityRepo = Depends()
 ):
     return repo.list_activities()
 
@@ -29,5 +29,5 @@ def update_activity(id: int, activity: ActivitiesIn, repo: ActivityRepo = Depend
 def delete_activity(
     activity_id: int,
     repo: ActivityRepo = Depends(),
-    ) -> bool:
+) -> bool:
     return repo.delete_activity(activity_id)

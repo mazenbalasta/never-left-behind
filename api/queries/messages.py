@@ -60,11 +60,11 @@ class MessagesRepo:
                         message.date,
                     ],
                 )
-            result = db.fetchone()
+                result = db.fetchone()
             id = result[0]
             old_data = message.dict()
             return MessagesOut(id=id, **old_data)
-    
+
     def list_messages(self) -> Union[Error, List[MessagesOut]]:
         try:
             with pool.connection() as conn:
@@ -92,7 +92,6 @@ class MessagesRepo:
         except Exception as e:
             print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
-        
 
     def update_message(self, message_id: int, message: MessagesIn) -> Union[MessagesOut, Error]:
         try:
@@ -120,7 +119,6 @@ class MessagesRepo:
                     result = db.fetchone()
                     if result is None:
                         raise HTTPException(status_code=404, detail="Message not found")
-                    
                     updated_message = MessagesOut(
                         id=result[0],
                         title=result[1],
@@ -146,7 +144,8 @@ class MessagesRepo:
                         [message_id]
                     )
                     if db.rowcount == 0:
-                        raise HTTPException(status_code=404, detail="Message not found")
+                        raise HTTPException(status_code=404,
+                                            detail="Message not found")
                     return True
         except HTTPException as error:
             raise error
