@@ -2,10 +2,6 @@ from pydantic import BaseModel, validator
 from fastapi import HTTPException
 from queries.pool import pool
 from typing import Optional, List, Union
-from queries import accounts
-from datetime import datetime
-from pydantic import BaseModel
-from queries.pool import pool
 from datetime import datetime
 
 
@@ -64,7 +60,7 @@ class MessagesRepo:
                         message.date,
                     ],
                 )
-                result = db.fetchone()
+            result = db.fetchone()
             id = result[0]
             old_data = message.dict()
             return MessagesOut(id=id, **old_data)
