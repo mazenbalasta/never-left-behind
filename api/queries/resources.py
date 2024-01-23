@@ -1,18 +1,20 @@
 from pydantic import BaseModel
 from fastapi import HTTPException
 from queries.pool import pool
-from typing import List, Union
+from typing import List, Union, Optional
 
 class Error(BaseModel):
     message: str
 
 class ResourcesIn(BaseModel):
     name: str
+    description: Optional[str] = None
     url: str
 
 
 class ResourcesOut(BaseModel):
     name: str
+    description: Optional[str] = None
     url: str
     id: int
 
@@ -25,20 +27,23 @@ class ResourcesRepo:
                     INSERT INTO resources
                         (
                             name,
+                            description,
                             url
                         )
                     VALUES
-                        (%s, %s)
+                        (%s, %s, %s)
                     Returning id;
                     """,
                     [
                         resource.name,
+                        resource.description,
                         resource.url,
                     ],
                 )
-                result = db.fetchone()
-                id = result[0]
+                id = db.fetchone()[0]
+                print("______ID_____:", id)
                 old_data = resource.dict()
+                print("----OLD DATA----:", old_data)
                 return ResourcesOut(id=id, **old_data)
             
     def list_resources(self) -> Union[List[ResourcesOut], Error]:

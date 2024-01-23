@@ -118,7 +118,6 @@ class MessagesRepo:
                         ]
                     )
                     result = db.fetchone()
-                    print("MessagesOut:", result)
                     if result is None:
                         raise HTTPException(status_code=404, detail="Message not found")
                     
