@@ -1,4 +1,7 @@
 ## Journal
+Jan 24, 2024:
+Made table for account type to relate to accounts for different user groups. 
+
 Jan 23, 2024:
 Navigator for building of the rest of the tables.
 

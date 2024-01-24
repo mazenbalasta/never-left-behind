@@ -14,12 +14,14 @@ class AccountIn(BaseModel):
     email: str
     password: str
     full_name: str
+    account_type: int
 
 
 class AccountOut(BaseModel):
     id: int
     email: str
     full_name: str
+    account_type: int
 
 
 class AccountOutWithPassword(AccountOut):
@@ -46,6 +48,7 @@ class AccountQueries:
                             email=record[1],
                             hashed_password=record[2],
                             full_name=record[3],
+                            account_type=record[4]
                         )
                         result.append(account)
                     return result
@@ -63,17 +66,19 @@ class AccountQueries:
                         (
                             email,
                             password,
-                            full_name
+                            full_name,
+                            account_type
 
                         )
                     VALUES
-                        (%s, %s, %s)
+                        (%s, %s, %s, %s)
                     RETURNING id, email, password, full_name;
                     """,
                     [
                         info.email,
                         hashed_password,
                         info.full_name,
+                        info.account_type
                     ],
                 )
                 id = result.fetchone()[0]
@@ -98,11 +103,13 @@ class AccountQueries:
                     [email],
                 )
                 record = db.fetchone()
+                print(record, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
                 if record:
                     return AccountOutWithPassword(
                         id=record[0],
                         email=record[1],
                         hashed_password=record[2],
                         full_name=record[3],
+                        account_type=record[4]
                     )
                 return None
