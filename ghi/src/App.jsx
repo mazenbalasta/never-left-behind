@@ -2,9 +2,11 @@
 //@ts-check
 import { useState, useEffect } from 'react'
 import ErrorNotification from './ErrorNotification'
-import Construct from './construct'
+import Construct from './Construct'
 import './App.css'
 import { Footer, Nav } from './components'
+import Resources from './Resources';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // All your environment variables in vite are in this object
 console.table(import.meta.env)
@@ -21,9 +23,22 @@ if (!API_HOST) {
  * This is an example of using JSDOC to define types for your component
  * @typedef {{module: number, week: number, day: number, min: number, hour: number}} LaunchInfo
  * @typedef {{launch_details: LaunchInfo, message?: string}} LaunchData
- * 
+ *
  * @returns {React.ReactNode}
  */
+
+
+const router = createBrowserRouter([
+
+    {
+        path: '/resources',
+        element: <Resources />,
+
+    }
+
+]);
+
+
 function App() {
     // Replace this App component with your own.
     /** @type {[LaunchInfo | undefined, (info: LaunchInfo) => void]} */
@@ -54,14 +69,26 @@ function App() {
         getData()
     }, [])
 
+
+
     return (
         <main className='relative'>
             <Nav />
             <section>
                 <div>
+                    <section>
+                <div>
                     <ErrorNotification error={error} />
                     <Construct info={launchInfo} />
                 </div>
+            </section>
+                    <>
+            <div className="container">
+                <RouterProvider router={router} />
+                    </div>
+            </>
+                </div>
+
             </section>
             <section>
                 <Footer />

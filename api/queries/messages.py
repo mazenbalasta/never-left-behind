@@ -61,6 +61,7 @@ class MessagesRepo:
                     ],
                 )
                 result = db.fetchone()
+                result = db.fetchone()
             id = result[0]
             old_data = message.dict()
             return MessagesOut(id=id, **old_data)
@@ -84,8 +85,6 @@ class MessagesRepo:
                             body=record[2],
                             date=record[3],
                             account=record[4],
-
-
                         )
                         result.append(message)
                     return result
@@ -93,15 +92,16 @@ class MessagesRepo:
             print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
-
-
-    def update_message(self, message_id: int, message: MessagesIn) -> Union[MessagesOut, Error]:
+    def update_message(
+        self, message_id: int, message: MessagesIn
+    ) -> Union[MessagesOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
                         UPDATE messages
+                        SET
                         SET
                             title = %s,
                             body = %s,
@@ -115,12 +115,14 @@ class MessagesRepo:
                             message.body,
                             message.account,
                             message.date,
-                            message_id
-                        ]
+                            message_id,
+                        ],
                     )
                     result = db.fetchone()
                     if result is None:
-                        raise HTTPException(status_code=404, detail="Message not found")
+                        raise HTTPException(
+                            status_code=404, detail="Message not found"
+                        )
 
                     updated_message = MessagesOut(
                         id=result[0],
@@ -144,11 +146,12 @@ class MessagesRepo:
                         """
                         DELETE FROM messages WHERE id = %s
                         """,
-                        [message_id]
+                        [message_id],
                     )
                     if db.rowcount == 0:
-                        raise HTTPException(status_code=404,
-                                            detail="Message not found")
+                        raise HTTPException(
+                            status_code=404, detail="Message not found"
+                        )
                     return True
         except HTTPException as error:
             raise error

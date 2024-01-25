@@ -9,13 +9,18 @@ router = APIRouter()
 def create_message(message: MessagesIn, repo: MessagesRepo = Depends()):
     return repo.create(message)
 
+
 @router.get("/api/messages", response_model=List[MessagesOut])
 def list_messages(repo: MessagesRepo = Depends()):
     return repo.list_messages()
 
+
 @router.put("/api/messages/{id}", response_model=MessagesOut)
-def update_message(id: int, message: MessagesIn, repo: MessagesRepo = Depends()):
+def update_message(
+    id: int, message: MessagesIn, repo: MessagesRepo = Depends()
+):
     return repo.update_message(id, message)
+
 
 @router.delete("/api/messages/{id}", status_code=status.HTTP_200_OK)
 def delete_message(id: int, repo: MessagesRepo = Depends()):

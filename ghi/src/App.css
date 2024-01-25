@@ -1,8 +1,6 @@
-/* You should probably replace this with your own CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 .App {
     text-align: center;
