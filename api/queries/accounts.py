@@ -1,9 +1,8 @@
 from pydantic import BaseModel
 from queries.pool import pool
 from typing import Optional, List, Union
-from typing import Optional
-
-# from queries.pool import Queries
+from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
 
 
 class DuplicateAccountError(ValueError):
@@ -77,10 +76,6 @@ class AccountQueries:
                     ],
                 )
                 id = result.fetchone()[0]
-                print(
-                    info,
-                    "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",
-                )
                 old_data = info.dict()
                 return AccountOutWithPassword(
                     id=id, hashed_password=hashed_password, **old_data
@@ -106,3 +101,26 @@ class AccountQueries:
                         full_name=record[3],
                     )
                 return None
+
+
+Base = declarative_base()
+
+
+class AccountRole(Base):
+    __tablename__ = "account_roles"
+
+    account_id = Column(Integer, ForeignKey("accounts.id"), primary_key=True)
+    role_id = Column(Integer, ForeignKey("roles.id"), primary_key=True)
+
+
+async def assign_role(self, account_id: int, role_id: int):
+    with pool.connection() as conn:
+        with conn.cursor() as db:
+            db.execute(
+                """
+                INSERT INTO account_roles (account_id, role_id)
+                VALUES (%s, %s)
+                """,
+                [account_id, role_id],
+            )
+            return True

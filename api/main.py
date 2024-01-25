@@ -1,13 +1,15 @@
 from fastapi import FastAPI
 from authenticator import authenticator
 from fastapi.middleware.cors import CORSMiddleware
-from routers import activities, resources, events, messages, jobs
+from routers import activities, resources, events, messages, jobs, roles
 from routers import accounts
 import os
 
 
 app = FastAPI()
 
+app.add_api_route("/api/roles", roles.create_role, methods=["POST"])
+app.add_api_route("/api/roles", roles.assign_role, methods=["PUT"])
 app.include_router(accounts.router, tags=["Authentication"])
 app.include_router(authenticator.router, tags=["Authentication"])
 app.include_router(accounts.router, tags=["Authentication"])

@@ -45,7 +45,7 @@ class ResourcesRepo:
                 old_data = resource.dict()
                 print("----OLD DATA----:", old_data)
                 return ResourcesOut(id=id, **old_data)
-            
+
     def list_resources(self) -> Union[List[ResourcesOut], Error]:
         try:
             with pool.connection() as conn:

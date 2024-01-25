@@ -93,9 +93,8 @@ class EventsRepo:
                         result.append(event)
                     return result
         except Exception as e:
-            print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
-        
+
     def update_event(self, event_id: int, event: EventsIn) -> Union[EventsOut, Error]:
         try:
             with pool.connection() as conn:
@@ -103,7 +102,7 @@ class EventsRepo:
                     db.execute(
                         """
                         UPDATE events
-                        SET 
+                        SET
                             event_title = %s,
                             start_date = %s,
                             end_date = %s,
@@ -111,7 +110,7 @@ class EventsRepo:
                             state = %s,
                             city = %s
                         WHERE id = %s
-                        RETURNING 
+                        RETURNING
                             id,
                             event_title,
                             start_date,
@@ -133,7 +132,7 @@ class EventsRepo:
                     result = db.fetchone()
                     if result is None:
                         raise HTTPException(status_code=404, detail="Message not found")
-                    
+
                     updated_event = EventsOut(
                         id=result[0],
                         event_title=result[1],
@@ -147,9 +146,8 @@ class EventsRepo:
         except HTTPException as error:
             raise error
         except Exception as e:
-            print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
-        
+
     def delete_event(self, event_id: int):
         try:
             with pool.connection() as conn:
@@ -166,5 +164,4 @@ class EventsRepo:
         except HTTPException as error:
             raise error
         except Exception as e:
-            print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))

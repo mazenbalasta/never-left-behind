@@ -4,8 +4,10 @@ from typing import Optional, List, Union
 from datetime import date
 from queries.pool import pool
 
+
 class Error(BaseModel):
     message: str
+
 
 class category(BaseModel):
     id: int
@@ -89,7 +91,7 @@ class ActivityRepo:
                     return result
         except Exception:
             return {"message": "Could not get all activities"}
-   
+
     def update_activity(self, activity_id: int, activity: ActivitiesIn) -> Union[ActivitiesOut, Error]:
         try:
             with pool.connection() as conn:
@@ -127,7 +129,7 @@ class ActivityRepo:
                     result = db.fetchone()
                     if result is None:
                         raise HTTPException(status_code=404, detail="Activity not found")
-                    
+
                     updated_activity = ActivitiesOut(
                         id=result[0],
                         name=result[1],
@@ -156,6 +158,4 @@ class ActivityRepo:
                     )
                     return True
         except Exception as e:
-            return False
-
- 
+            return {"message": f"Error: {e}"}

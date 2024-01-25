@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from queries.pool import pool
-from typing import Optional, List, Union
+from typing import List, Union
 from fastapi import HTTPException
 
 
