@@ -61,6 +61,7 @@ class MessagesRepo:
                     ],
                 )
                 result = db.fetchone()
+                result = db.fetchone()
             id = result[0]
             old_data = message.dict()
             return MessagesOut(id=id, **old_data)
@@ -100,6 +101,7 @@ class MessagesRepo:
                     db.execute(
                         """
                         UPDATE messages
+                        SET
                         SET
                             title = %s,
                             body = %s,

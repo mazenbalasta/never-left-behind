@@ -89,7 +89,7 @@ class ActivityRepo:
                     return result
         except Exception:
             return {"message": "Could not get all activities"}
-        
+   
     def update_activity(self, activity_id: int, activity: ActivitiesIn) -> Union[ActivitiesOut, Error]:
         try:
             with pool.connection() as conn:
@@ -158,4 +158,4 @@ class ActivityRepo:
         except Exception as e:
             return False
 
- 
+
