@@ -1,4 +1,6 @@
-/* You should probably replace this with your own CSS */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 .App {
     text-align: center;

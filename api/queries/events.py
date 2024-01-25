@@ -104,8 +104,6 @@ class EventsRepo:
     def update_event(
         self, event_id: int, event: EventsIn
     ) -> Union[EventsOut, Error]:
-
-    def update_event(self, event_id: int, event: EventsIn) -> Union[EventsOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:

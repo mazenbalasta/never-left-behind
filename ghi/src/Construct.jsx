@@ -10,7 +10,7 @@ function Construct(props) {
         return (
             <div className="App">
                 <header className="App-header">
-                    <p>Loading...</p>
+                    <p>This is construct.</p>
                 </header>
             </div>
         )

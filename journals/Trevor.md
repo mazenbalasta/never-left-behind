@@ -13,3 +13,6 @@ I also created the functions for getting all messages, and deleting a message.
 
 Jan 24, 2024:
 Today I added a street address property to events, this will help with the 3rd party mapping tool, in identifying the location of the event. Completed accounts foreign key for account types and worked with Mazen, on implementation of account types for Veteran and Partner.
+
+Jan 25, 2024:
+Today we implemented the first steps of our front end framework, we installed redux, tailwinds, and react router. Rudy also created a basic layout for the home page, while I worked on the Navigation functionality using routers.
