@@ -10,3 +10,6 @@ Today I finished the authentication for accounts. As well as created a table for
 Jan 23, 2024:
 Today I fininshed the message board, and the create message function. I also created a table for messages.
 I also created the functions for getting all messages, and deleting a message.
+
+Jan 24, 2024:
+Today I added a street address property to events, this will help with the 3rd party mapping tool, in identifying the location of the event. Completed accounts foreign key for account types and worked with Mazen, on implementation of account types for Veteran and Partner.

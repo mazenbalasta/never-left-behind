@@ -22,6 +22,7 @@ class EventsIn(BaseModel):
     start_date: datetime
     end_date: datetime
     description: Optional[str] = None
+    street_address: str
     state: states
     city: str
 
@@ -32,6 +33,7 @@ class EventsOut(BaseModel):
     start_date: datetime
     end_date: datetime
     description: Optional[str] = None
+    street_address: str
     state: states
     city: str
 
@@ -48,11 +50,12 @@ class EventsRepo:
                             start_date,
                             end_date,
                             description,
+                            street_address,
                             city,
                             state
                         )
                     VALUES
-                        (%s, %s, %s, %s, %s, %s)
+                        (%s, %s, %s, %s, %s, %s, %s)
                     RETURNING id;
                     """,
                     [
@@ -60,6 +63,7 @@ class EventsRepo:
                         event.start_date,
                         event.end_date,
                         event.description,
+                        event.street_address,
                         event.city,
                         event.state.abbreviation,
                     ],
@@ -87,36 +91,41 @@ class EventsRepo:
                             start_date=record[2],
                             end_date=record[3],
                             description=record[4],
-                            state=states(abbreviation=record[5]),
-                            city=record[6],
+                            street_address=record[5],
+                            state=states(abbreviation=record[6]),
+                            city=record[7],
                         )
                         result.append(event)
                     return result
         except Exception as e:
             print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
-        
-    def update_event(self, event_id: int, event: EventsIn) -> Union[EventsOut, Error]:
+
+    def update_event(
+        self, event_id: int, event: EventsIn
+    ) -> Union[EventsOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
                         UPDATE events
-                        SET 
+                        SET
                             event_title = %s,
                             start_date = %s,
                             end_date = %s,
                             description = %s,
+                            street_address = %s,
                             state = %s,
                             city = %s
                         WHERE id = %s
-                        RETURNING 
+                        RETURNING
                             id,
                             event_title,
                             start_date,
                             end_date,
                             description,
+                            street_address,
                             state,
                             city;
                         """,
@@ -125,23 +134,27 @@ class EventsRepo:
                             event.start_date,
                             event.end_date,
                             event.description,
+                            event.street_address,
                             event.state.abbreviation,
                             event.city,
                             event_id,
-                        ]
+                        ],
                     )
                     result = db.fetchone()
                     if result is None:
-                        raise HTTPException(status_code=404, detail="Message not found")
-                    
+                        raise HTTPException(
+                            status_code=404, detail="Message not found"
+                        )
+
                     updated_event = EventsOut(
                         id=result[0],
                         event_title=result[1],
                         start_date=result[2],
                         end_date=result[3],
                         description=result[4],
-                        state=states(abbreviation=result[5]),
-                        city=result[6],
+                        street_address=result[5],
+                        state=states(abbreviation=result[6]),
+                        city=result[7],
                     )
                     return updated_event
         except HTTPException as error:
@@ -149,7 +162,7 @@ class EventsRepo:
         except Exception as e:
             print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
-        
+
     def delete_event(self, event_id: int):
         try:
             with pool.connection() as conn:
@@ -158,10 +171,12 @@ class EventsRepo:
                         """
                         DELETE FROM events WHERE id = %s
                         """,
-                        [event_id]
+                        [event_id],
                     )
                     if db.rowcount == 0:
-                        raise HTTPException(status_code=404, detail="Message not found")
+                        raise HTTPException(
+                            status_code=404, detail="Message not found"
+                        )
                     return True
         except HTTPException as error:
             raise error

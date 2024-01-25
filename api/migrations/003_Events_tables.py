@@ -38,6 +38,7 @@ steps = [
             start_date TIMESTAMP,
             end_date TIMESTAMP,
             description VARCHAR(500),
+            street_address VARCHAR(255),
             state INT REFERENCES states(id),
             city VARCHAR(50) NOT NULL
         );

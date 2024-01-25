@@ -14,7 +14,6 @@ from pydantic import BaseModel
 from queries.accounts import (
     AccountIn,
     AccountOut,
-    AccountOutWithPassword,
     AccountQueries,
     DuplicateAccountError,
 )
@@ -76,7 +75,7 @@ async def create_account(
     return AccountToken(account=account, **token.dict())
 
 
-@router.get("/api/accounts", response_model=List[AccountOutWithPassword])
+@router.get("/api/accounts", response_model=List[AccountOut])
 def list_accounts(
     accounts: AccountQueries = Depends(),
 ):

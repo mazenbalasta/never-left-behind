@@ -14,12 +14,22 @@ class AccountIn(BaseModel):
     email: str
     password: str
     full_name: str
+    partner_name: str
+    city: str
+    state: str
+    country: str
+    account_type: int
 
 
 class AccountOut(BaseModel):
     id: int
     email: str
     full_name: str
+    partner_name: str
+    city: str
+    state: str
+    country: str
+    account_type: int
 
 
 class AccountOutWithPassword(AccountOut):
@@ -46,6 +56,11 @@ class AccountQueries:
                             email=record[1],
                             hashed_password=record[2],
                             full_name=record[3],
+                            partner_name=record[4],
+                            city=record[5],
+                            state=record[6],
+                            country=record[7],
+                            account_type=record[8],
                         )
                         result.append(account)
                     return result
@@ -63,17 +78,22 @@ class AccountQueries:
                         (
                             email,
                             password,
-                            full_name
+                            account_type
 
                         )
                     VALUES
-                        (%s, %s, %s)
+                        (%s, %s, %s, %s, %s, %s, %s, %s)
                     RETURNING id, email, password, full_name;
                     """,
                     [
                         info.email,
                         hashed_password,
                         info.full_name,
+                        info.partner_name if info.partner_name else None,
+                        info.city,
+                        info.state,
+                        info.country,
+                        info.account_type,
                     ],
                 )
                 id = result.fetchone()[0]
