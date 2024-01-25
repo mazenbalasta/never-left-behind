@@ -1,7 +1,5 @@
-import { logo } from './assets/images'
-import { NavLink } from 'react-router-dom';
-import hamburger from './assets/images/hamburger.svg'
-
+import { logo } from '../assets/images'
+import { hamburger } from '../assets/icons'
 
 const Nav = () => {
     return (
@@ -10,10 +8,6 @@ const Nav = () => {
                 <a href='/'>
                     <img src={logo} alt="logo" width={130} height={29} />
                 </a>
-                <div>
-                <a href="/">Home Page</a>
-                <a href="/resources">Resources for real</a>
-                </div>
                 <ul className='flex-1 flex justify-center items-center gap-16 max-lg:hidden'>
                         <li className='text-sm font-bold text-white uppercase'>Home</li>
                         <li className='text-sm font-bold text-white uppercase'>Resources</li>
