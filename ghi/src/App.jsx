@@ -2,8 +2,9 @@
 //@ts-check
 import { useState, useEffect } from 'react'
 import ErrorNotification from './ErrorNotification'
-import Construct from './Construct'
+import Construct from './construct'
 import './App.css'
+import { Footer, Nav } from './components'
 
 // All your environment variables in vite are in this object
 console.table(import.meta.env)
@@ -54,10 +55,18 @@ function App() {
     }, [])
 
     return (
-        <div>
-            <ErrorNotification error={error} />
-            <Construct info={launchInfo} />
-        </div>
+        <main className='relative'>
+            <Nav />
+            <section>
+                <div>
+                    <ErrorNotification error={error} />
+                    <Construct info={launchInfo} />
+                </div>
+            </section>
+            <section>
+                <Footer />
+            </section>
+        </main>
     )
 }
 
