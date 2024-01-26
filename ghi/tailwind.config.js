@@ -8,6 +8,6 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require("tw-elements/dist/plugin.cjs")],
-  darkMode: "class"
-};
+  plugins: [],
+  mode: 'jit'
+}

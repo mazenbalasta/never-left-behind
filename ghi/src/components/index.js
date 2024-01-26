@@ -2,7 +2,7 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 // import Carousel from "./Carousel";
 
-export { 
+export {
     Nav,
     Footer,
     // Carousel,
