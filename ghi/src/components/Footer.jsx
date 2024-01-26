@@ -18,10 +18,10 @@ const Footer = () => {
             />
           </a>
           <p className='mt-6 text-base leading-7 text-white sm:max-w-sm'>
-                Never Left Behind's focus is to enhance the lives of America's veterans by 
-                fostering connections with their community through a range of social and outdoor 
-                activities. Established in 2024, this organization is dedicated to integrating veterans 
-                into their local communities, promoting engagement and well-being through various 
+                Never Left Behind's focus is to enhance the lives of America's veterans by
+                fostering connections with their community through a range of social and outdoor
+                activities. Established in 2024, this organization is dedicated to integrating veterans
+                into their local communities, promoting engagement and well-being through various
                 outdoor and social events.
           </p>
           <div className='flex items-center gap-5 mt-8'>

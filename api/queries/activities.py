@@ -87,9 +87,11 @@ class ActivityRepo:
                         )
                         result.append(activity)
                     return result
+                    # activities = db.fetchall()
+                    # return [ActivitiesOut(activities)]
         except Exception:
             return {"message": "Could not get all activities"}
-   
+
     def update_activity(self, activity_id: int, activity: ActivitiesIn) -> Union[ActivitiesOut, Error]:
         try:
             with pool.connection() as conn:
@@ -127,7 +129,7 @@ class ActivityRepo:
                     result = db.fetchone()
                     if result is None:
                         raise HTTPException(status_code=404, detail="Activity not found")
-                    
+
                     updated_activity = ActivitiesOut(
                         id=result[0],
                         name=result[1],
@@ -157,5 +159,3 @@ class ActivityRepo:
                     return True
         except Exception as e:
             return False
-
-

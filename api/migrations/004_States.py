@@ -5,7 +5,7 @@ steps = [
         INSERT INTO states
             (
                 abbreviation,
-                name
+                state_name
             )
         VALUES
                 ('AL','Alabama'),
