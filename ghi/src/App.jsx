@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react'
 import ErrorNotification from './ErrorNotification'
 import Construct from './Construct'
 import './App.css'
+import { Footer, Nav } from './components'
+import Resources from './Resources';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // All your environment variables in vite are in this object
 console.table(import.meta.env)
@@ -23,6 +26,19 @@ if (!API_HOST) {
  *
  * @returns {React.ReactNode}
  */
+
+
+const router = createBrowserRouter([
+
+    {
+        path: '/resources',
+        element: <Resources />,
+
+    }
+
+]);
+
+
 function App() {
     // Replace this App component with your own.
     /** @type {[LaunchInfo | undefined, (info: LaunchInfo) => void]} */
@@ -53,11 +69,31 @@ function App() {
         getData()
     }, [])
 
+
+
     return (
-        <div>
-            <ErrorNotification error={error} />
-            <Construct info={launchInfo} />
-        </div>
+        <main className='relative'>
+            <Nav />
+            <section>
+                <div>
+                    <section>
+                <div>
+                    <ErrorNotification error={error} />
+                    <Construct info={launchInfo} />
+                </div>
+            </section>
+                    <>
+            <div className="container">
+                <RouterProvider router={router} />
+                    </div>
+            </>
+                </div>
+
+            </section>
+            <section>
+                <Footer />
+            </section>
+        </main>
     )
 }
 

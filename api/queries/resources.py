@@ -3,8 +3,10 @@ from fastapi import HTTPException
 from queries.pool import pool
 from typing import List, Union, Optional
 
+
 class Error(BaseModel):
     message: str
+
 
 class ResourcesIn(BaseModel):
     name: str
@@ -17,6 +19,7 @@ class ResourcesOut(BaseModel):
     description: Optional[str] = None
     url: str
     id: int
+
 
 class ResourcesRepo:
     def create(self, resource: ResourcesIn) -> ResourcesOut:
@@ -45,7 +48,7 @@ class ResourcesRepo:
                 old_data = resource.dict()
                 print("----OLD DATA----:", old_data)
                 return ResourcesOut(id=id, **old_data)
-            
+
     def list_resources(self) -> Union[List[ResourcesOut], Error]:
         try:
             with pool.connection() as conn:
@@ -62,14 +65,15 @@ class ResourcesRepo:
                         resource = ResourcesOut(
                             id=record[0],
                             name=record[1],
-                            url=record[2],
+                            description=record[2],
+                            url=record[3],
                         )
                         result.append(resource)
                     return result
         except Exception as e:
             print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
-        
+
     def delete_resource(self, resource_id: int):
         try:
             with pool.connection() as conn:
@@ -78,10 +82,12 @@ class ResourcesRepo:
                         """
                         DELETE FROM resources WHERE id = %s
                         """,
-                        [resource_id]
+                        [resource_id],
                     )
                     if db.rowcount == 0:
-                        raise HTTPException(status_code=404, detail="Resource not found")
+                        raise HTTPException(
+                            status_code=404, detail="Resource not found"
+                        )
                     return True
         except HTTPException as error:
             raise error

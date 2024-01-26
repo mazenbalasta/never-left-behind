@@ -48,7 +48,7 @@ class AccountQueries:
                             email=record[1],
                             hashed_password=record[2],
                             full_name=record[3],
-                            account_type=record[4]
+                            account_type=record[4],
                         )
                         result.append(account)
                     return result
@@ -78,7 +78,7 @@ class AccountQueries:
                         info.email,
                         hashed_password,
                         info.full_name,
-                        info.account_type
+                        info.account_type,
                     ],
                 )
                 id = result.fetchone()[0]
@@ -103,13 +103,16 @@ class AccountQueries:
                     [email],
                 )
                 record = db.fetchone()
-                print(record, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+                print(
+                    record,
+                    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+                )
                 if record:
                     return AccountOutWithPassword(
                         id=record[0],
                         email=record[1],
                         hashed_password=record[2],
                         full_name=record[3],
-                        account_type=record[4]
+                        account_type=record[4],
                     )
                 return None
