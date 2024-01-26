@@ -1,8 +1,12 @@
+// import { Carousel } from "./components";
+
+
 function HomePage() {
     return (
-        <div>
-            <div className="App">
-            <header className="App-header">
+        <main className='relative'>
+            <section className="xl:padding-l wide:padding-r padding-b">
+                <Carousel />
+            </section>
                 <div>
                     <h1>Welcome to our home page!!!</h1>
                 </div>
@@ -11,9 +15,7 @@ function HomePage() {
                 </h1>
                 <h1>Under construction</h1>
                 <h2>Coming on (or before) Feb 12, 2024</h2>
-            </header>
-        </div>
-        </div>
+        </main>
     )
 }
 export default HomePage
