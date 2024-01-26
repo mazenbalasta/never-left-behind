@@ -16,3 +16,6 @@ Today I added a street address property to events, this will help with the 3rd p
 
 Jan 25, 2024:
 Today we implemented the first steps of our front end framework, we installed redux, tailwinds, and react router. Rudy also created a basic layout for the home page, while I worked on the Navigation functionality using routers.
+
+Jan 26, 2024:
+Today I fixed the errors that resulted from yesterdays merges, I then created the events page and added the data to a table on the page. We now how navigation fully functional as well.

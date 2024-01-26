@@ -6,6 +6,7 @@ import './App.css'
 import { Footer, Nav } from './components'
 import Resources from './Resources';
 import HomePage from './HomePage';
+import Events from './Events';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // All your environment variables in vite are in this object
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         path: '/resources',
         element: <Resources />,
 
+    },
+    {
+        path: '/events',
+        element: <Events />,
     }
 
 ]);

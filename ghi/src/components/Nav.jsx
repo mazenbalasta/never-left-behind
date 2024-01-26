@@ -14,7 +14,7 @@ const Nav = () => {
                         <li className='text-sm font-bold text-white uppercase'><a href="/">Home</a></li>
                         <li className='text-sm font-bold text-white uppercase'><a href="/resources">Resources</a></li>
                         <li className='text-sm font-bold text-white uppercase'>Messages</li>
-                        <li className='text-sm font-bold text-white uppercase'>Events</li>
+                        <li className='text-sm font-bold text-white uppercase'><a href="/events">Events</a></li>
                         <li className='text-sm font-bold text-white uppercase'>Jobs</li>
                         <li className='text-sm font-bold text-white uppercase'>Activities</li>
                 </ul>
