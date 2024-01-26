@@ -6,8 +6,8 @@ import { footerLinks, socialMedia } from "../constants";
 const Footer = () => {
   return (
     <footer className='px-8 py-8 bg-gray-900'>
-      <div className='flex justify-between items-start gap-20 flex-wrap max-lg:flex-col'>
-        <div className='flex flex-col items-start'>
+      <div className='flex justify-between items-center gap-20 flex-wrap max-lg:flex-col'>
+        <div className='flex flex-col items-center'>
           <a href='/'>
             <img
               src={logo}
@@ -36,7 +36,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className='flex flex-1 justify-between lg:gap-10 gap-20 flex-wrap'>
+        <div className='flex flex-1 justify-between lg:gap-10 gap-20 flex-wrap max-container'>
           {footerLinks.map((section) => (
             <div key={section.title}>
               <h4 className='text-2xl leading-normal font-medium mb-6 text-white'>
@@ -66,7 +66,7 @@ const Footer = () => {
             height={20}
             className='rounded-full m-0'
           />
-          <p className="text-white">Copyright. All rights reserved Never Left Behind.</p>
+          <p className="text-white">Copyright Veterans 'R Us. All rights reserved.</p>
         </div>
       </div>
     </footer>
