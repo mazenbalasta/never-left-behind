@@ -73,6 +73,7 @@ function ShowEvent() {
                     <div className="inline-block min-w-full">
                         <table className="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
                             <thead className="bg-gray-900 dark:bg-gray-700">
+                                <p className="text-4xl text-gray-300 underline font-bold">Events</p>
                                 <tr>
                                     <th scope="col" className="p-4"></th>
                                     <th scope="col" className="py-3 px-6 text-s font-medium tracking-wider text-left text-gray-400 uppercase dark:text-gray-400">
