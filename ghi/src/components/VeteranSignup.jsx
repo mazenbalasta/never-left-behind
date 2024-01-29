@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useGetAllAccountsQuery } from '../app/apiSlice';
+import PasswordMatchMessage from '../fucntions/FormUtils'
+
+
 function VeteranSignup () {
 
   const InitForm = {
@@ -14,6 +18,28 @@ function VeteranSignup () {
   const [showRepeatPassword, setRepeatShowPassword] = useState(false);
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [usedUsernames, setUsedUsernames] = useState([]);
+  const [usedEmails, setUsedEmails] = useState([]);
+
+  const {data, isLoading} = useGetAllAccountsQuery();
+
+  useEffect(() => {
+      if (!isLoading) {
+          const dbUsernames = data.map((user) => user.username)
+          setUsedUsernames(dbUsernames)
+
+          const dbEmails = data.map((user) => user.email)
+          setUsedEmails(dbEmails)
+      }
+  }, [data, isLoading])
+
+  const isEmailUsed = (email) => {
+    return usedEmails.includes(email)
+  };
+
+  const isUsernameUsed = (username) => {
+    return usedUsernames.includes(username)
+  };
 
   const togglePassVisibility = () => {
     setShowPassword(!showPassword);
@@ -22,35 +48,6 @@ function VeteranSignup () {
   const toggleRepeatPassVisibility = () => {
     setRepeatShowPassword(!showRepeatPassword);
   };
-
-  const passwordMatchMessage = () => {
-      if (repeatPassword && password !== repeatPassword) {
-          return (
-              <span
-                  style={{
-                      color: '#ff6666',
-                      fontSize: '15px',
-                      marginTop: '0px',
-                  }}
-              >
-                  Passwords do not match
-              </span>
-          )
-      } else if (repeatPassword === password && repeatPassword !== '') {
-          return (
-              <span
-                style={{
-                  color: 'green',
-                  fontSize: '15px',
-                  marginTop: '0px'
-                }}
-              >
-                  Passwords match
-              </span>
-          )
-      }
-      return null
-  }
 
   const handleInputChange = (e) => {
     const inputName = e.target.name
@@ -69,41 +66,40 @@ function VeteranSignup () {
     })
   };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        const confirmSubmit = window.confirm(
-            'Are you sure you want to create this account?'
-        )
+  const handleSubmit = async (e) => {
+      e.preventDefault()
+      const confirmSubmit = window.confirm(
+          'Are you sure you want to create this account?'
+      )
 
-        if (confirmSubmit) {
-            const url = `http://localhost:8000/api/accounts/veterans`
-            console.log(formData)
-            const fetchConfig = {
-                method: 'post',
-                body: JSON.stringify(formData),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
+      if (confirmSubmit) {
+          const url = `http://localhost:8000/api/accounts/veterans`
+          const fetchConfig = {
+              method: 'post',
+              body: JSON.stringify(formData),
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+          }
 
-            const response = await fetch(url, fetchConfig)
-            if (response.ok) {
-                setFormData({ ...InitForm })
-                window.alert('Account created!')
-            } else {
-                window.alert('Account creation failed!')
-            }
-        } else {
-            window.alert('Creation cancelled')
-            setFormData({ ...InitForm })
-        }
-    }
+          const response = await fetch(url, fetchConfig)
+          if (response.ok) {
+              setFormData({ ...InitForm })
+              window.alert('Account created!')
+          } else {
+              window.alert('Account creation failed!')
+          };
+      } else {
+          window.alert('Creation cancelled')
+          setFormData({ ...InitForm })
+      }
+  }
 
   return (
       <>
           <h1>SIGNUP TO BE A F**KING VETERAN</h1>
-          <div>
-              <form className="max-w-sm mx-auto" onSubmit={handleSubmit}>
+          <div className="form-container">
+              <form className="form-column" onSubmit={handleSubmit}>
                   <div className="mb-5">
                       <label
                           htmlFor="first-name"
@@ -206,7 +202,7 @@ function VeteranSignup () {
                           </button>
                       </div>
                   </div>
-                  {passwordMatchMessage()}
+                  {PasswordMatchMessage(password, repeatPassword)}
                   <div className="mb-5">
                       <label
                           htmlFor="email"
