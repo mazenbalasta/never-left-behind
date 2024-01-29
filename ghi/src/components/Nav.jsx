@@ -1,29 +1,48 @@
 import { logo } from '../assets/images'
 import { hamburger } from '../assets/icons'
+import { DropdownButton } from '../assets/buttons'
+import { Link } from 'react-router-dom'
 
 const Nav = () => {
+
     return (
         <header className="bg-gray-900">
-            <nav className="flex justify-between px-8 py-8">
-                <a href='/'>
+            <nav className="flex justify-between items-center max-container">
+                <a href="/">
                     <img src={logo} alt="logo" width={130} height={29} />
                 </a>
-                <div>
-                </div>
-                <ul className='flex-1 flex justify-center items-center gap-16 max-lg:hidden'>
-                        <li className='text-sm font-bold text-white uppercase hover:text-gray-500'><a href="/">Home</a></li>
-                        <li className='text-sm font-bold text-white uppercase hover:text-gray-500'><a href="/resources">Resources</a></li>
-                        <li className='text-sm font-bold text-white uppercase hover:text-gray-500'>Messages</li>
-                        <li className='text-sm font-bold text-white uppercase hover:text-gray-500'>Events</li>
-                        <li className='text-sm font-bold text-white uppercase hover:text-gray-500'>Jobs</li>
-                        <li className='text-sm font-bold text-white uppercase hover:text-gray-500'>Activities</li>
+                <div></div>
+                <ul className="flex-1 flex justify-center items-center gap-16 max-lg:hidden">
+                    <li className="text-sm font-bold text-white uppercase">
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li className="text-sm font-bold text-white uppercase">
+                        <Link to="/resources">Resources</Link>
+                    </li>
+                    <li className="text-sm font-bold text-white uppercase">
+                        Messages
+                    </li>
+                    <li className="text-sm font-bold text-white uppercase">
+                        Events
+                    </li>
+                    <li className="text-sm font-bold text-white uppercase">
+                        Jobs
+                    </li>
+                    <li className="text-sm font-bold text-white uppercase">
+                        Activities
+                    </li>
                 </ul>
-                <div>
-                    <button className=' max-lg:block bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold'>Log In</button>
-                    <button className=' max-lg:block bg-white text-black px-4 py-2 rounded-full text-sm font-bold'>Sign Up</button>
-                </div>
-                <div className='hidden max-lg:block'>
-                    <img src={hamburger} alt="hamburger" width={25} height={25} />
+                <div className="login-signup-button">
+                    <button className="w-30 h-10 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold">
+                        Log In
+                    </button>
+                    <DropdownButton
+                        label="Sign up"
+                        items={[
+                            { label: "Veteran", link: "/signup/veteran" },
+                            { label: "Partner", link: "/signup/partner" }
+                        ]}
+                    />
                 </div>
             </nav>
         </header>

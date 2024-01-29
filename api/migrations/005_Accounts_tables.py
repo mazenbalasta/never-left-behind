@@ -5,7 +5,7 @@ steps = [
         """
         CREATE TABLE account_types (
             id SERIAL PRIMARY KEY NOT NULL,
-            account_type VARCHAR(20) NOT NULL
+            account_type VARCHAR(20) UNIQUE NOT NULL
         );
         """,
         # "Down" SQL statement
@@ -19,15 +19,18 @@ steps = [
         """
         CREATE TABLE accounts (
             id SERIAL PRIMARY KEY NOT NULL,
-            email VARCHAR(255) NOT NULL,
+            account_type VARCHAR,
+            username VARCHAR(50) UNIQUE NOT NULL,
             password VARCHAR(1000) NOT NULL,
-            full_name VARCHAR(255) NULL,
-            account_type INT,
-            partner_name VARCHAR(150) NULL,
+            email VARCHAR(255) UNIQUE NOT NULL,
+            first_name VARCHAR(255) NOT NULL,
+            last_name VARCHAR(255) NOT NULL,
+            company_name VARCHAR(150) NULL,
             city VARCHAR(50) NULL,
-            state VARCHAR(50) NULL,
+            state VARCHAR(2) NULL,
             country VARCHAR(75) NULL,
-            FOREIGN KEY(account_type) REFERENCES account_types(id)
+            FOREIGN KEY(account_type) REFERENCES account_types(account_type),
+            FOREIGN KEY(state) REFERENCES states(abbreviation)
         );
         """,
         # "Down" SQL statement
@@ -57,7 +60,11 @@ steps = [
     [
         # "Up" SQL statement
         """
-        INSERT INTO account_types (account_type) VALUES ('Partner'), ('Veteran');
+        INSERT INTO account_types
+            (account_type)
+        VALUES
+            ('veteran'),
+            ('partner');
         """,
         # "Down" SQL statement
         """
