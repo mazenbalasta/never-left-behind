@@ -16,7 +16,7 @@ const Nav = () => {
                         <li className='text-sm font-bold text-white uppercase'>Messages</li>
                         <li className='text-sm font-bold text-white uppercase'>Events</li>
                         <li className='text-sm font-bold text-white uppercase'>Jobs</li>
-                        <li className='text-sm font-bold text-white uppercase'>Activities</li>
+                        <li className='text-sm font-bold text-white uppercase'><a href="/Activities">Activities</a></li>
                 </ul>
                 <div>
                     <button className=' max-lg:block bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold'>Log In</button>
