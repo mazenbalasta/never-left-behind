@@ -4,3 +4,4 @@ fastapi[all]==0.92.0
 uvicorn[standard]==0.17.6
 pytest
 psycopg[binary,pool]==3.1.17
+black==21.12b0
