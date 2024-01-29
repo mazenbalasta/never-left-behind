@@ -1,48 +1,13 @@
-from pydantic import BaseModel
-from datetime import datetime
 from queries.pool import pool
-from typing import Optional, List, Union
+from typing import Union
 from fastapi import HTTPException
-
-
-class Error(BaseModel):
-    message: str
-
-
-class States(BaseModel):
-    state_id: int
-    abbreviation: str
-    state_name: str
-
-class EventsIn(BaseModel):
-    event_title: str
-    start_date: datetime
-    end_date: datetime
-    description: Optional[str] = None
-    street_address: str
-    city: str
-    state: str
-
-
-class EventsOut(BaseModel):
-    id: int
-    event_title: str
-    start_date: datetime
-    end_date: datetime
-    description: Optional[str] = None
-    street_address: str
-    city: str
-    state: str
-
-class EventsOutWithStateInfo(BaseModel):
-    id: int
-    event_title: str
-    start_date: datetime
-    end_date: datetime
-    description: Optional[str] = None
-    street_address: str
-    city: str
-    state: States
+from models.model import (
+    EventsIn,
+    EventsOut,
+    EventsOutWithStateInfo,
+    Error,
+    States
+)
 
 class EventsRepo:
     def create(self, event: EventsIn) -> EventsOut:
