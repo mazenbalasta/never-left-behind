@@ -6,3 +6,7 @@ On 23 Jan 24,
 
 On 24 Jan 24,
     Looked into alchemy and created roles with PUT, POST, and GET method to try and assign roles to respective groups i.e. Veterans, Business, and Partners. had to update requirements.txt file to get it implemented correctly and added some routes for the Roles table created. Added new installs as well on the virtual env to keep the libraries up to date.
+
+
+On 25 Jan 24, 
+    worked on front end work to start developing the look of the webpage. Was able to get tailwinds installed along with redux and started to develop the front still trying to figure out the navs that was start by Trevor and thanks to Rudy we as able to install Tailwinds

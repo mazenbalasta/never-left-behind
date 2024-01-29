@@ -19,6 +19,7 @@ function Construct(props) {
     return (
         <div className="App">
             <header className="App-header">
+                <nav className="flex justify-between items-center max-container"> HOME </nav>
                 <h1>Under construction</h1>
                 <h2>Coming on (or before)</h2>
                 <h2>
