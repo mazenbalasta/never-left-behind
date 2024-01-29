@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Response, status
-from queries.events import EventsIn, EventsOut, EventsRepo, EventsOutWithStateInfo
+from models import EventsIn, EventsOut, EventsOutWithStateInfo
+from queries.events import EventsRepo
 from typing import List
 
 router = APIRouter()
