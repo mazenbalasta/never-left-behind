@@ -3,7 +3,7 @@ import aboutUs from './about_us.jpg'
 import activities from './activities.jpg'
 import events from './events.jpg'
 import jobs from './jobs.jpg'
-import message from './messages.jpg'
+import messages from './messages.jpg'
 
 export {
     logo,
@@ -11,5 +11,5 @@ export {
     activities,
     events,
     jobs,
-    message
+    messages
 }

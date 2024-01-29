@@ -11,12 +11,12 @@ const Nav = () => {
                 <div>
                 </div>
                 <ul className='flex-1 flex justify-center items-center gap-16 max-lg:hidden'>
-                        <li className='text-sm font-bold text-white uppercase'><a href="/">Home</a></li>
-                        <li className='text-sm font-bold text-white uppercase'><a href="/resources">Resources</a></li>
-                        <li className='text-sm font-bold text-white uppercase'>Messages</li>
-                        <li className='text-sm font-bold text-white uppercase'>Events</li>
-                        <li className='text-sm font-bold text-white uppercase'>Jobs</li>
-                        <li className='text-sm font-bold text-white uppercase'>Activities</li>
+                        <li className='text-sm font-bold text-white uppercase hover:text-gray-500'><a href="/">Home</a></li>
+                        <li className='text-sm font-bold text-white uppercase hover:text-gray-500'><a href="/resources">Resources</a></li>
+                        <li className='text-sm font-bold text-white uppercase hover:text-gray-500'>Messages</li>
+                        <li className='text-sm font-bold text-white uppercase hover:text-gray-500'>Events</li>
+                        <li className='text-sm font-bold text-white uppercase hover:text-gray-500'>Jobs</li>
+                        <li className='text-sm font-bold text-white uppercase hover:text-gray-500'>Activities</li>
                 </ul>
                 <div>
                     <button className=' max-lg:block bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold'>Log In</button>

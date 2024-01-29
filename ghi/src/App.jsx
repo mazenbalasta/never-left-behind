@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react'
 import ErrorNotification from './ErrorNotification'
 import './App.css'
-import { Footer, Nav } from './components'
 import Resources from './Resources';
-import HomePage from './HomePage';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Nav, Footer } from "./components";
+import HomePage from "./sections/HomePage";
 
 // All your environment variables in vite are in this object
 console.table(import.meta.env)
@@ -38,21 +38,14 @@ function App() {
 
 
     return (
-        <main className='relative'>
-            <Nav />
+        <main className='relative bg-[#282c34]'>
             <section>
-                <div>
-                    <section>
-                <div>
-                </div>
+                <Nav />
             </section>
-                    <>
-            <div className="container">
-                <RouterProvider router={router} />
-                    </div>
-            </>
+            <section>
+                <div className="container mx-auto">
+                    <RouterProvider router={router} />
                 </div>
-
             </section>
             <section>
                 <Footer />
