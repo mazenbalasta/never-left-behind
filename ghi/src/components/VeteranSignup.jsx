@@ -97,8 +97,8 @@ function VeteranSignup () {
 
   return (
       <>
-          <h1>SIGNUP TO BE A F**KING VETERAN</h1>
-          <div className="form-container">
+          <h1 className='mt-10 mb-10'>SIGNUP TO BE A F**KING VETERAN</h1>
+          <div className="form-container mb-20">
               <form className="form-column" onSubmit={handleSubmit}>
                   <div className="mb-5">
                       <label

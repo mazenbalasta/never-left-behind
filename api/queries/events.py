@@ -1,7 +1,7 @@
 from queries.pool import pool
 from typing import Union
 from fastapi import HTTPException
-from models.model import (
+from models import (
     EventsIn,
     EventsOut,
     EventsOutWithStateInfo,

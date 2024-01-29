@@ -9,7 +9,7 @@ from fastapi import (
 from queries.veterans_accounts import AccountQueries
 from authenticator import authenticator
 from typing import List
-from models.model import (
+from models import (
     VetAccountIn,
     AccountOut,
     DuplicateAccountError,

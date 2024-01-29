@@ -1,7 +1,7 @@
 import os
 from fastapi import Depends
 from jwtdown_fastapi.authentication import Authenticator
-from models.model import AccountOut
+from models import AccountOut
 from queries.veterans_accounts import AccountQueries
 
 

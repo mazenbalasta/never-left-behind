@@ -4,8 +4,10 @@ from typing import Optional, List, Union
 from datetime import date
 from queries.pool import pool
 
+
 class Error(BaseModel):
     message: str
+
 
 class category(BaseModel):
     id: int
@@ -157,5 +159,5 @@ class ActivityRepo:
                         [activity_id]
                     )
                     return True
-        except Exception as e:
+        except Exception:
             return False

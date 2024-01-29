@@ -10,7 +10,7 @@ from queries.veterans_accounts import AccountQueries
 from authenticator import authenticator
 from typing import List
 from pydantic import BaseModel
-from models.model import (
+from models import (
     PartnerAccountIn,
     AccountOut,
     DuplicateAccountError,

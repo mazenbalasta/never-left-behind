@@ -10,12 +10,15 @@ class States(BaseModel):
     abbreviation: str
     state_name: str
 
+
 class DuplicateAccountError(ValueError):
     pass
+
 
 class AccountType(str, Enum):
     veteran = "veteran"
     partner = "partner"
+
 
 class VetAccountIn(BaseModel):
     account_type: AccountType
@@ -24,6 +27,7 @@ class VetAccountIn(BaseModel):
     email: str
     first_name: str
     last_name: str
+
 
 class PartnerAccountIn(BaseModel):
     account_type: AccountType
@@ -37,6 +41,7 @@ class PartnerAccountIn(BaseModel):
     state: str
     country: str
 
+
 class AccountOut(BaseModel):
     id: int
     account_type: AccountType
@@ -45,12 +50,15 @@ class AccountOut(BaseModel):
     first_name: str
     last_name: str
 
+
 class AccountOutWithPassword(AccountOut):
     hashed_password: str
+
 
 class AccountForm(BaseModel):
     username: str
     password: str
+
 
 class AccountToken(Token):
     account: AccountOut
@@ -59,14 +67,10 @@ class AccountToken(Token):
 class HttpError(BaseModel):
     detail: str
 
+
 class Error(BaseModel):
     message: str
 
-
-class States(BaseModel):
-    state_id: int
-    abbreviation: str
-    state_name: str
 
 class EventsIn(BaseModel):
     event_title: str
@@ -77,6 +81,7 @@ class EventsIn(BaseModel):
     city: str
     state: str
 
+
 class EventsOut(BaseModel):
     id: int
     event_title: str
@@ -86,6 +91,7 @@ class EventsOut(BaseModel):
     street_address: str
     city: str
     state: str
+
 
 class EventsOutWithStateInfo(BaseModel):
     id: int

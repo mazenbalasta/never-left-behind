@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from queries.pool import pool
 from typing import Optional, List, Union
 from typing import Optional
-from models.model import VetAccountIn, AccountOutWithPassword
+from models import VetAccountIn, AccountOutWithPassword
 from fastapi import HTTPException
 
 # from queries.pool import Queries
