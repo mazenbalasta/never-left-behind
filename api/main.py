@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from authenticator import authenticator
+
 from fastapi.middleware.cors import CORSMiddleware
 from routers import activities, resources, events, messages, jobs
 from routers import accounts

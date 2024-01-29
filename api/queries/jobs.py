@@ -1,6 +1,7 @@
 from pydantic import BaseModel
+from datetime import datetime
 from queries.pool import pool
-from typing import Optional, List, Union
+from typing import List, Union
 from fastapi import HTTPException
 
 
@@ -32,38 +33,38 @@ class JobsOut(BaseModel):
 
 
 class JobsRepo:
-    def create_job(self, job: JobsIn) -> JobsOut:
+    def create(self, job: JobsIn) -> JobsOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
                     """
                     INSERT INTO jobs
-                    (
-                        position,
-                        company_name,
-                        role,
-                        requirements,
-                        qualifications,
-                        pref_qualifications,
-                        location,
-                        apply_url
-                    )
+                        (
+                            position,
+                            company_name,
+                            role,
+                            requirements,
+                            qualifications,
+                            pref_qualifications,
+                            location,
+                            apply_url
+                        )
                     VALUES
-                    (%s,%s,%s,%s,%s,%s,%s,%s)
+                        (%s, %s, %s, %s, %s, %s, %s, %s)
                     RETURNING id;
                     """,
                     [
                         job.position,
-                        job.role,
                         job.company_name,
+                        job.role,
                         job.requirements,
                         job.qualifications,
                         job.pref_qualifications,
                         job.location,
-                        job.apply_url
-                    ]
+                        job.apply_url,
+                    ],
                 )
-                id = result.fetchone()[0]
+                id = db.fetchone()[0]
                 old_data = job.dict()
                 return JobsOut(id=id, **old_data)
 
@@ -71,28 +72,31 @@ class JobsRepo:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
-                        SELECT *
-                        FROM Jobs;
+                        SELECT * FROM Jobs
+                        ORDER BY position ASC;
                         """
                     )
+                    records = db.fetchall()
                     result = []
-                    for record in db:
-                        job = JobsOut(
+                    for record in records:
+                        jobs = JobsOut(
                             id=record[0],
                             position=record[1],
                             company_name=record[2],
                             role=record[3],
-                            qualifications=record[4],
-                            pref_qualifications=record[5],
-                            location=record[6],
-                            apply_url=record[7]
+                            requirements=record[4],
+                            qualifications=record[5],
+                            pref_qualifications=record[6],
+                            location=record[7],
+                            apply_url=record[8],
                         )
-                        result.append(job)
+                        result.append(jobs)
                     return result
-        except Exception:
-            return {"message": "Could not get all jobs"}
+        except Exception as e:
+            print(f"Error: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
 
     def update_job(self, job_id: int, job: JobsIn) -> Union[JobsOut, Error]:
         try:
@@ -100,7 +104,7 @@ class JobsRepo:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        UPDATE Jobs
+                        UPDATE jobs
                         SET
                             position = %s,
                             company_name = %s,
@@ -111,16 +115,7 @@ class JobsRepo:
                             location = %s,
                             apply_url = %s
                         WHERE id = %s
-                        RETURNING
-                        id,
-                        position,
-                        company_name,
-                        role,
-                        requirements,
-                        qualifications,
-                        pref_qualifications,
-                        location,
-                        apply_url;
+                        RETURNING id;
                         """,
                         [
                             job.position,
@@ -132,25 +127,11 @@ class JobsRepo:
                             job.location,
                             job.apply_url,
                             job_id,
-                        ]
+                        ],
                     )
-                    result = db.fetchone()
-                    if result is None:
-                        raise HTTPException(status_code=404, detail="Job not found")
-                    updated_job = JobsOut(
-                        id=result[0],
-                        position=result[1],
-                        company_name=result[2],
-                        role=result[3],
-                        requirements=result[4],
-                        qualifications=result[5],
-                        pref_qualifications=result[6],
-                        location=result[7],
-                        apply_url=result[8]
-                    )
-                    return updated_job
-        except HTTPException as error:
-            raise error
+                    id = db.fetchone()[0]
+                    old_data = job.dict()
+                    return JobsOut(id=id, **old_data)
         except Exception as e:
             print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
@@ -161,10 +142,15 @@ class JobsRepo:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        DELETE FROM Jobs WHERE id = %s
+                        DELETE FROM jobs WHERE id = %s
                         """,
-                        [job_id]
+                        [job_id],
                     )
+                    if db.rowcount == 0:
+                        raise HTTPException(
+                            status_code=404, detail="Job not found"
+                        )
                     return True
         except Exception as e:
-            return Error(message=str(e))
+            print(f"Error: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
