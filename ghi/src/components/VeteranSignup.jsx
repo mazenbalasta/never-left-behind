@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 function VeteranSignup () {
+
   const InitForm = {
     first_name: '',
     last_name: '',
@@ -11,6 +12,8 @@ function VeteranSignup () {
   const [formData, setFormData] = useState({ ...InitForm });
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setRepeatShowPassword] = useState(false);
+  const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
 
   const togglePassVisibility = () => {
     setShowPassword(!showPassword);
@@ -20,9 +23,44 @@ function VeteranSignup () {
     setRepeatShowPassword(!showRepeatPassword);
   };
 
+  const passwordMatchMessage = () => {
+      if (repeatPassword && password !== repeatPassword) {
+          return (
+              <span
+                  style={{
+                      color: '#ff6666',
+                      fontSize: '15px',
+                      marginTop: '0px',
+                  }}
+              >
+                  Passwords do not match
+              </span>
+          )
+      } else if (repeatPassword === password && repeatPassword !== '') {
+          return (
+              <span
+                style={{
+                  color: 'green',
+                  fontSize: '15px',
+                  marginTop: '0px'
+                }}
+              >
+                  Passwords match
+              </span>
+          )
+      }
+      return null
+  }
+
   const handleInputChange = (e) => {
     const inputName = e.target.name
     const value = e.target.value
+
+    if (inputName === 'password') {
+      setPassword(value);
+    } else if (inputName === 'repeatPassword') {
+      setRepeatPassword(value)
+    };
 
     setFormData({
       account_type: 'veteran',
@@ -39,14 +77,14 @@ function VeteranSignup () {
 
         if (confirmSubmit) {
             const url = `http://localhost:8000/api/accounts/veterans`
-
+            console.log(formData)
             const fetchConfig = {
                 method: 'post',
                 body: JSON.stringify(formData),
                 headers: {
                     'Content-Type': 'application/json',
                 },
-            };
+            }
 
             const response = await fetch(url, fetchConfig)
             if (response.ok) {
@@ -153,8 +191,11 @@ function VeteranSignup () {
                               type={showRepeatPassword ? 'text' : 'password'}
                               id="repeat-password"
                               autoComplete="new-password"
+                              name="repeatPassword"
+                              onChange={handleInputChange}
                               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                               required
+                              pattern={password}
                           />
                           <button
                               type="button"
@@ -165,6 +206,7 @@ function VeteranSignup () {
                           </button>
                       </div>
                   </div>
+                  {passwordMatchMessage()}
                   <div className="mb-5">
                       <label
                           htmlFor="email"
