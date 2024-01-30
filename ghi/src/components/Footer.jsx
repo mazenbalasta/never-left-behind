@@ -5,6 +5,7 @@ import { footerLinks, socialMedia } from "../constants";
 
 const Footer = () => {
   return (
+    <div style={{ position: "relative", bottom: 0, height:"100px", width: "100%" }}>
     <footer className='bg-gray-900'>
       <div className='flex justify-between items-start gap-20 flex-wrap max-lg:flex-col'>
         <div className='flex flex-col items-start'>
@@ -70,6 +71,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    </div>
   );
 };
 

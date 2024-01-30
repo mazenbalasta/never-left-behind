@@ -19,3 +19,6 @@ Today we implemented the first steps of our front end framework, we installed re
 
 Jan 26, 2024:
 Today I fixed the errors that resulted from yesterdays merges, I then created the events page and added the data to a table on the page. We now how navigation fully functional as well.
+
+Jan 29, 2024:
+Today I worked on the event page, I added an events list I also added the ability to view all events on a map using a 3rd party mapping tool. I also added the ability to view the details of an event. in matching with the color scheme of the website.
