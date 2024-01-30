@@ -1,7 +1,7 @@
 from pydantic import BaseModel, validator
 from fastapi import HTTPException
 from queries.pool import pool
-from typing import Optional, List, Union
+from typing import List, Union
 from datetime import datetime
 
 

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useGetAllAccountsQuery } from '../app/apiSlice';
 import PasswordMatchMessage from '../fucntions/FormUtils'
+import { Link } from 'react-router-dom';
 
 
 function VeteranSignup () {
@@ -97,9 +98,12 @@ function VeteranSignup () {
 
   return (
       <>
-          <h1 className='mt-10 mb-10'>SIGNUP TO BE A F**KING VETERAN</h1>
+          <h1 className="mt-10 mb-10">SIGNUP TO BE A F**KING VETERAN</h1>
           <div className="form-container mb-20">
-              <form className="form-column" onSubmit={handleSubmit}>
+              <form
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                  onSubmit={handleSubmit}
+              >
                   <div className="mb-5">
                       <label
                           htmlFor="first-name"
@@ -151,6 +155,22 @@ function VeteranSignup () {
                   </div>
                   <div className="mb-5">
                       <label
+                          htmlFor="email"
+                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                          Email
+                      </label>
+                      <input
+                          type="email"
+                          name="email"
+                          id="email"
+                          onChange={handleInputChange}
+                          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                          required
+                      />
+                  </div>
+                  <div className="mb-5">
+                      <label
                           htmlFor="password"
                           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
@@ -175,7 +195,7 @@ function VeteranSignup () {
                           </button>
                       </div>
                   </div>
-                  <div className="mb-5">
+                  <div className="mb-0">
                       <label
                           htmlFor="password"
                           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -201,23 +221,7 @@ function VeteranSignup () {
                               {showRepeatPassword ? '🫣' : '👀'}
                           </button>
                       </div>
-                  </div>
-                  {PasswordMatchMessage(password, repeatPassword)}
-                  <div className="mb-5">
-                      <label
-                          htmlFor="email"
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                          Email
-                      </label>
-                      <input
-                          type="email"
-                          name="email"
-                          id="email"
-                          onChange={handleInputChange}
-                          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                          required
-                      />
+                      {PasswordMatchMessage(password, repeatPassword)}
                   </div>
                   <div className="flex items-start mb-5">
                       <div className="flex items-center h-5">
@@ -234,12 +238,12 @@ function VeteranSignup () {
                           className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                       >
                           I agree with the{' '}
-                          <a
-                              href="#"
+                          <Link
+                              to="/"
                               className="text-blue-600 hover:underline dark:text-blue-500"
                           >
                               terms and conditions
-                          </a>
+                          </Link>
                       </label>
                   </div>
                   <button

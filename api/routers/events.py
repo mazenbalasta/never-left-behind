@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Response, status
+from fastapi import APIRouter, Depends
 from models import EventsIn, EventsOut, EventsOutWithStateInfo
 from queries.events import EventsRepo
 from typing import List
@@ -23,4 +23,4 @@ def update_event(id: int, event: EventsIn, repo: EventsRepo = Depends()):
 
 @router.delete("/api/events/{id}", response_model=bool)
 def delete_event(id: int, repo: EventsRepo = Depends()) -> bool:
-    return repo. delete_event(id)
+    return repo.delete_event(id)
