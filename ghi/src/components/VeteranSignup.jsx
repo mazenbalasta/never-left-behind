@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useGetAllAccountsQuery } from '../app/apiSlice';
-import PasswordMatchMessage from '../fucntions/FormUtils'
+import PasswordMatchMessage from '../functions/FormUtils'
 
 
 function VeteranSignup () {

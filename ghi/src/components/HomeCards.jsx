@@ -15,7 +15,7 @@ const HomeCards = ({ imgURL, label, subtext }) => {
             {subtext}
         </p>
         <div className='mt-11 flex flex-wrap gap-4'>
-        <Button label='Learn more' iconURL={arrowRight} />
+        <Button type='submit' label='Learn more' iconURL={arrowRight} />
         </div>
     </div>
   );

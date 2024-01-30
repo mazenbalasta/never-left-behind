@@ -1,4 +1,4 @@
-import logo from './logo_never_left2.png'
+import logo from './nlb.png'
 import aboutUs from './about_us.jpg'
 import activities from './activities.jpg'
 import events from './events.jpg'

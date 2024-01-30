@@ -20,7 +20,7 @@ const Nav = () => {
                         <Link to="/resources">Resources</Link>
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
-                        Messages
+                        <Link to="/messages">Messages</Link>
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
                         Events

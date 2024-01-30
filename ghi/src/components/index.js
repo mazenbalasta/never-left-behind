@@ -6,8 +6,8 @@ import HomeCards from "./HomeCards";
 import Resources from './Resources';
 import VeteranSignup from './VeteranSignup';
 import PartnerSignup from './PartnerSignup';
+import { Dashboard, CreateMessage, DeleteMessage, UpdateMessage } from './messages';
 
 export { Nav, Footer, Resources, VeteranSignup, PartnerSignup, Carousel,
-    Button,
-    HomeCards
+    Button, HomeCards, Dashboard, CreateMessage, DeleteMessage, UpdateMessage
 }

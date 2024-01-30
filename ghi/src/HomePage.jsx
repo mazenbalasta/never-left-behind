@@ -1,5 +1,5 @@
-import { Carousel, HomeCards } from "../components";
-import { services } from "../constants";
+import { Carousel, HomeCards } from "./components";
+import { services } from "./constants";
 
 
 

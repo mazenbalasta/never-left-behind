@@ -3,10 +3,12 @@
 // import { useState, useEffect } from 'react';
 // import ErrorNotification from './ErrorNotification';
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup } from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup,
+    Dashboard, UpdateMessage, DeleteMessage} from './components';
 import HomePage from './HomePage';
 // import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { CreateMessage } from './components/messages';
 
 
 // All your environment variables in vite are in this object
@@ -20,30 +22,6 @@ if (!API_HOST) {
     throw new Error('VITE_API_HOST is not defined')
 }
 
-// const router = createBrowserRouter([
-//     {
-//         path: '/',
-//         element: <HomePage />,
-//     },
-//     {
-//         path: '/resources',
-//         element: <Resources />,
-//     },
-//     {
-//         path: '/signup',
-//         // element: <Signup />,
-//         children: [
-//             {
-//                 path: 'signup/veteran',
-//                 element: <VeteranSignup />,
-//             },
-//             {
-//                 path: 'signup/partner',
-//                 element: <PartnerSignup />,
-//             },
-//         ],
-//     },
-// ])
 
 
 function App() {
@@ -55,8 +33,20 @@ function App() {
                 <Nav />
             </section>
             <section>
-                <div className="container mx-auto">
-                    <RouterProvider router={router} />
+                <div className="App-header">
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/resources" element={<Resources />} />
+                        <Route path="/signup">
+                            <Route path="veteran" element={<VeteranSignup />} />
+                            <Route path="partner" element={<PartnerSignup />} />
+                        </Route>
+                        <Route path="/messages" element={<Dashboard />} >
+                            <Route path="create" element={<CreateMessage onMessageSubmit={undefined}/>} />
+                            <Route path=":id/update" element={<UpdateMessage onMessageSubmit={undefined}/>} />
+                            <Route path=":id/delete" element={<DeleteMessage />} />
+                        </Route>
+                    </Routes>
                 </div>
             </section>
             <section>
