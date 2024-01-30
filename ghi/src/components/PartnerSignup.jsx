@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useGetAllAccountsQuery } from '../app/apiSlice'
-import PasswordMatchMessage from '../fucntions/FormUtils'
+import PasswordMatchMessage from '../functions/FormUtils'
 import { Link } from 'react-router-dom'
 
 function VeteranSignup() {
-
     const InitForm = {
         first_name: '',
         last_name: '',
@@ -25,7 +24,7 @@ function VeteranSignup() {
     const [usedUsernames, setUsedUsernames] = useState([])
     const [usedEmails, setUsedEmails] = useState([])
 
-    const { data, isLoading } = useGetAllAccountsQuery();
+    const { data, isLoading } = useGetAllAccountsQuery()
 
     useEffect(() => {
         if (!isLoading) {

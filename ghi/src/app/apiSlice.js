@@ -11,9 +11,10 @@ export const neverLeftBehindApi = createApi({
             query: () => '/api/accounts',
         }),
         getToken: builder.query({
-            query: () => ({
+            query: (credentials) => ({
                 url: '/token',
-                credentials: 'include'
+                credentials: 'include',
+                body: credentials,
             }),
             providesTags: ['Account'],
         }),
@@ -23,23 +24,24 @@ export const neverLeftBehindApi = createApi({
                 method: 'DELETE',
                 credentials: 'include',
             }),
-            invalidatesTags: ['Account']
+            invalidatesTags: ['Account'],
         }),
         login: builder.mutation({
             query: (info) => {
-                const formData = new FormData();
-                formData.append('username', info.username);
-                formData.append('password', info.password);
+                const formData = new FormData()
+                formData.append('username', info.username)
+                formData.append('password', info.password)
 
-                return{
+                return {
                     url: '/token',
                     method: 'POST',
                     body: formData,
-                    credentials: 'include'
+                    credentials: 'include',
                 }
             },
-            invalidatesTags: ['Account']
-        })
+            // invalidatesTags: ['Account'],
+
+        }),
     }),
 })
 export const {
