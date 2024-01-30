@@ -3,11 +3,14 @@
 // import { useState, useEffect } from 'react';
 // import ErrorNotification from './ErrorNotification';
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup } from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login } from './components';
 import HomePage from './HomePage';
 // import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
-import Events from './Events';
+// import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
+import { BrowserRouter } from 'react-router-dom'
+
+
 // All your environment variables in vite are in this object
 console.table(import.meta.env)
 // When using environment variables, you should do a check to see if
@@ -61,7 +64,8 @@ function App() {
         // </main>
 
         <>
-            <Nav />
+            <BrowserRouter>
+                <Nav />
                 <div className="App-header">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
@@ -70,9 +74,11 @@ function App() {
                             <Route path="veteran" element={<VeteranSignup />} />
                             <Route path="partner" element={<PartnerSignup />} />
                         </Route>
+                        <Route path="/login" element={<Login />} />
                     </Routes>
                 </div>
-            <Footer />
+                <Footer />
+            </BrowserRouter>
         </>
     )
 }

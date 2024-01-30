@@ -15,10 +15,8 @@ from models import (
     DuplicateAccountError,
     AccountForm,
     AccountToken,
-    HttpError
+    HttpError,
 )
-
-
 
 
 router = APIRouter()
