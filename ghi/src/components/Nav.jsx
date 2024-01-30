@@ -2,11 +2,16 @@ import { logo } from '../assets/images'
 import { hamburger } from '../assets/icons'
 import { DropdownButton } from '../assets/buttons'
 import { NavLink } from 'react-router-dom'
-// import { useGetTokenQuery } from '../app/apiSlice'
+import { useGetTokenQuery } from '../app/apiSlice'
+
+
+
 
 const Nav = () => {
-    // const { data:account, isLoading } = useGetTokenQuery();
-    // console.log({ account, isLoading })
+    const { data:account, isLoading } = useGetTokenQuery();
+    console.log({ account, isLoading })
+
+
     return (
         <header className="bg-gray-900">
             <nav className="flex justify-between items-center max-container">

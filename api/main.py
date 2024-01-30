@@ -3,13 +3,13 @@ from authenticator import authenticator
 
 from fastapi.middleware.cors import CORSMiddleware
 from routers import activities, resources, events, messages, jobs
-from routers import vaterans_accounts, partners_accounts
+from routers import veterans_accounts, partners_accounts
 import os
 
 
 app = FastAPI()
 
-app.include_router(vaterans_accounts.router, tags=["Authentication"])
+app.include_router(veterans_accounts.router, tags=["Authentication"])
 app.include_router(partners_accounts.router, tags=["Authentication"])
 app.include_router(authenticator.router, tags=["Login/Logout"])
 app.include_router(activities.router, tags=["Activities"])
