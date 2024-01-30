@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+
 export const neverLeftBehindApi = createApi({
     reducerPath: 'neverLeftBehindApi',
     baseQuery: fetchBaseQuery({
@@ -12,7 +13,7 @@ export const neverLeftBehindApi = createApi({
         getToken: builder.query({
             query: () => ({
                 url: '/token',
-                credentials: 'include',
+                credentials: 'include'
             }),
             providesTags: ['Account'],
         }),

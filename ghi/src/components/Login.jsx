@@ -11,22 +11,27 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
-
-        try {
-            const response = await login({
-                username,
-                password
-            });
-            console.log('Login success', response)
-        } catch (error) {
-            console.error('Login failed', error);
-            console.log('Error details', error.data)
-        }
+        console.log('login')
+        console.log({ username, password })
+        login({ username, password })
     }
 
+    const getTokenAgain = async () => {
+        const url = `http://localhost:8000/token`;
+        const response = await fetch(url, {
+            method: "GET",
+            credentials: "include",
+        });
+        const data = await response.json();
+        console.log(data);
+    }
 
     return (
+        <>
+            <div>
+                <button className="w-30 h-10 hover:bg-blue-800 bg-red text-black px-4 py-2 mr-5 rounded-full text-sm font-bold" onClick={getTokenAgain}>Get Token Again</button>
+            </div>
+
         <div className="card text-bg-light mb-3">
             <h5 className="card-header">Login</h5>
             <div className="card-body">
@@ -66,6 +71,7 @@ const Login = () => {
                 </form>
             </div>
         </div>
+        </>
     )
 }
 

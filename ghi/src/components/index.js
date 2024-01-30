@@ -4,5 +4,6 @@ import Resources from './Resources';
 import VeteranSignup from './VeteranSignup';
 import PartnerSignup from './PartnerSignup';
 import Login from "./Login";
+import UserDataCard from "./UserDataCard";
 
-export { Nav, Footer, Resources, VeteranSignup, PartnerSignup, Login }
+export { Nav, Footer, Resources, VeteranSignup, PartnerSignup, Login, UserDataCard }
