@@ -3,7 +3,7 @@
 // import { useState, useEffect } from 'react';
 // import ErrorNotification from './ErrorNotification';
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup } from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, ActivitiesForm, ActivitiesList } from './components';
 import HomePage from './HomePage';
 // import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
@@ -74,6 +74,9 @@ function App() {
                             <Route path="veteran" element={<VeteranSignup />} />
                             <Route path="partner" element={<PartnerSignup />} />
                         </Route>
+                        <Route path="/activitiesForm" element={<ActivitiesForm />} />
+                        <Route path='/activities' element={<ActivitiesList />} />
+                        
                     </Routes>
                 </div>
             <Footer />

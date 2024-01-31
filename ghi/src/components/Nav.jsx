@@ -29,8 +29,11 @@ const Nav = () => {
                         Jobs
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
-                        <a href="/Activities">Activities
-                    </a></li>
+                        <Link to="/activitiesForm">Activities Form
+                        </Link></li>
+                    <li className="text-sm font-bold text-white uppercase">
+                        <Link to="/activities">Activities</Link>
+                    </li>
                 </ul>
                 <div className="login-signup-button">
                     <button className="w-30 h-10 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold">

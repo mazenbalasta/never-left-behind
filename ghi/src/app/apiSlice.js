@@ -9,8 +9,16 @@ export const neverLeftBehindApi = createApi({
         getAllAccounts: builder.query({
             query: () => '/api/accounts',
         }),
+        getAllActivities: builder.query({
+            query: () => '/api/activities',
+        }),
+        getAllCategories: builder.query({
+            query: () => '/api/categories',
+        }),
     }),
 })
 export const {
-    useGetAllAccountsQuery
+    useGetAllAccountsQuery,
+    useGetAllActivitiesQuery,
+    useGetAllCategoriesQuery,
 } = neverLeftBehindApi;

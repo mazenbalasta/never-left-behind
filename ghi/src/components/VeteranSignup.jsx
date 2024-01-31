@@ -33,6 +33,7 @@ function VeteranSignup () {
       }
   }, [data, isLoading])
 
+    
   const isEmailUsed = (email) => {
     return usedEmails.includes(email)
   };
