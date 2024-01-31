@@ -6,63 +6,75 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
 
 
-const API_HOST = import.meta.env.VITE_API_HOST
-
-
 function App() {
 
     const baseUrl = import.meta.env.VITE_API_HOST
 
     return (
         <main className="relative bg-[#282c34]">
-            <AuthProvider baseUrl={baseUrl}>
-                <BrowserRouter>
-                    <Nav />
-                    <section>
-                        <div className="App-header">
-                            <Routes>
-                                <Route path="/" element={<HomePage />} />
-                                <Route
-                                    path="/resources"
-                                    element={<Resources />}
-                                />
-                                <Route path="/signup">
+            <section>
+                <AuthProvider baseUrl={baseUrl}>
+                    <BrowserRouter>
+                        <Nav />
+                        <section>
+                            <div className="App-header">
+                                <Routes>
+                                    <Route path="/" element={<HomePage />} />
                                     <Route
-                                        path="veteran"
-                                        element={<VeteranSignup />}
+                                        path="/resources"
+                                        element={<Resources />}
                                     />
+                                    <Route path="/signup">
+                                        <Route
+                                            path="veteran"
+                                            element={<VeteranSignup />}
+                                        />
+                                        <Route
+                                            path="partner"
+                                            element={<PartnerSignup />}
+                                        />
+                                    </Route>
+                                    {/* <Route path="/messages" element={<ListMessages />} >
+                                        <Route
+                                            path="create"
+                                            element={<MessageForm />}
+                                        />
+                                        <Route
+                                            path=":id/update"
+                                            element={<EditMessage />}
+                                        />
+                                        <Route
+                                            path=":id/delete"
+                                            element={<DeleteMessage />}
+                                        />
+                                    </Route> */}
                                     <Route
-                                        path="partner"
-                                        element={<PartnerSignup />}
-                                    />
-                                </Route>
-                                <Route
-                                    path="/messages"
-                                    element={<ListMessages />}
-                                >
-                                    <Route
-                                        path="create"
-                                        element={<MessageForm />}
-                                    />
-                                    <Route
-                                        path=":id/update"
-                                        element={<EditMessage />}
-                                    />
-                                    <Route
-                                        path=":id/delete"
-                                        element={<DeleteMessage />}
-                                    />
-                                </Route>
-                                <Route path="/login" element={<Login />} />
-                            </Routes>
-                        </div>
-                    </section>
-                    <section>
-                        <Footer />
-                    </section>
-                </BrowserRouter>
-            </AuthProvider>  
-            </section>          
+                                        path="/messages"
+                                        // element={<ListMessages />}
+                                    >
+                                        <Route
+                                            path="create"
+                                            element={<MessageForm />}
+                                        />
+                                        <Route
+                                            path=":id/update"
+                                            element={<EditMessage />}
+                                        />
+                                        <Route
+                                            path=":id/delete"
+                                            element={<DeleteMessage />}
+                                        />
+                                    </Route>
+                                    <Route path="/login" element={<Login />} />
+                                </Routes>
+                            </div>
+                        </section>
+                        <section>
+                            <Footer />
+                        </section>
+                    </BrowserRouter>
+                </AuthProvider>
+            </section>
         </main>
     )
 }

@@ -12,14 +12,34 @@ class Error(BaseModel):
     message: str
 
 class Account(BaseModel):
+    id: int
+    body: str
+
+
+class MessagesIn(BaseModel):
+    title: str
+    body: str
+    date: datetime
     account: int
+    views: int
 
+    # @validator("account")
+    # def account_must_be_int(cls, valid):
+    #     if not isinstance(valid, int):
+    #         raise ValueError("Account must be an integer")
+    #     return valid
 
-    @validator("account")
-    def account_must_be_int(cls, valid):
-        if not isinstance(valid, int):
-            raise ValueError("Account must be an integer")
-        return valid
+class MessageViewIn(BaseModel):
+    views: int
+    # body: str
+
+class MessageViewOut(BaseModel):
+    id: int
+    title: str
+    body: str
+    date: datetime
+    account: int
+    views: int
 
 
 class MessagesIn(Account):
@@ -32,12 +52,19 @@ class MessagesOut(Account):
     id: int
     title: str
     body: str
-    account: int
     date: datetime
-    views: Optional[int] = 0
-    response_count: Optional[int] = 0
+    account: int
+    views: int
+    # response_count: int
 
-class ResponsesIn(Account):
+    # @validator("account")
+    # def account_must_be_int(cls, valid):
+    #     if not isinstance(valid, int):
+    #         raise ValueError("Account must be an integer")
+    #     return valid
+
+
+class ResponsesIn(BaseModel):
     body: str
 
 
@@ -62,25 +89,34 @@ class MessagesRepo:
     
 
     def create(self, message: MessagesIn) -> MessagesOut:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    db.execute(
-                        """
-                        INSERT INTO messages ( title, body, account, date)
-                        VALUES (%s, %s, %s, %s) RETURNING id, title, body, account, date;
-                        """,
-                        [message.title, message.body, message.account, message.date]
-                    )
-                    result = db.fetchone()
-                    if result and len(result) == 5:
-                        return self.message_from_db_record(result + (0, 0))
-                    else:
-                        logger.error(f'Unexepected result format from create_message: {result}')
-                        raise HTTPException(status_code=500, detail="Error in creating message")
-        except Exception as e:
-            logger.error(f"Error in create message: {e}")
-            raise HTTPException(status_code=500, detail="Internal server error")
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    INSERT INTO messages
+                        (
+                            title,
+                            body,
+                            date,
+                            account,
+                            views
+                        )
+                    VALUES
+                        (%s, %s, %s, %s, %s)
+                    RETURNING id;
+                    """,
+                    [
+                        message.title,
+                        message.body,
+                        message.date,
+                        message.account,
+                        message.views
+                    ],
+                )
+                result = db.fetchone()
+            id = result[0]
+            old_data = message.dict()
+            return MessagesOut(id=id, **old_data)
 
     def list_messages(self) -> Union[Error, List[MessagesOut]]:
         try:
@@ -152,37 +188,29 @@ class MessagesRepo:
                         raise HTTPException(status_code=404, detail="Message not found")
                     return self.message_from_db_record(result)
         except Exception as e:
-            logger.error(f'Error in get_message_with_responses: {e}')
-            raise HTTPException(status_code=500, detail="Internal server error")
-        
-    def read_increment_message_views(self, message_id: int) -> Union[Error, MessagesOut]:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    db.execute(
-                        """
-                        WITH updated AS (
-                            UPDATE messages
-                            SET views = COALESCE(views, 0) + 1
-                            WHERE id = %s
-                            RETURNING id, title, body, account, date
-                        )
-                        SELECT updated.*,
-                            (SELECT COUNT(*) FROM responses WHERE message_id = updated.id) AS response_count
-                        FROM updated;
-                        """,
-                        [message_id]
-                    )
-                    result = db.fetchone()
-                    print(result)
-                    if result is None:
-                        raise HTTPException(status_code=404, detail="Message not found")
-                    logger.debug(f'query result: {result}')
-                    return self.message_from_db_record(result)
-        except Exception as e:
-            logger.error(f'Error in read_increment_message_views: {e}')
-            raise HTTPException(status_code=500, detail="Internal server error")
-    
+            print(f"Error: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
+
+    def read_increment_message_views(
+            self,
+            message_id: int,
+        ):
+
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    UPDATE messages
+                    SET
+                        views = views + 1
+                    WHERE id = %s
+                    RETURNING *;
+                    """,
+                    [message_id],
+                )
+                return True
+
+
     def create_response(self, message_id: int, response: ResponsesIn) -> ResponsesOut:
         with pool.connection() as conn:
             with conn.cursor() as db:

@@ -34,13 +34,6 @@ export const neverLeftBehindApi = createApi({
                 return (result && ['Token']) || []
             },
         }),
-        getToken: builder.query({
-            query: () => ({
-                url: '/token',
-                credentials: 'include',
-            }),
-            providesTags: ['Token'],
-        }),
         getAllMessages: builder.query({
             query: () => '/api/messages',
         }),
@@ -48,7 +41,7 @@ export const neverLeftBehindApi = createApi({
             query: (id) => ({
                 url: `/api/messages/${id}`,
                 method: 'GET',
-            })
+            }),
         }),
         createMessage: builder.mutation({
             query: (message) => ({
@@ -69,6 +62,13 @@ export const neverLeftBehindApi = createApi({
                 url: `/api/messages/${id}`,
                 method: 'DELETE',
             }),
+        }),
+        getToken: builder.query({
+            query: () => ({
+                url: '/token',
+                credentials: 'include',
+            }),
+            providesTags: ['Token'],
         }),
     }),
 })

@@ -8,7 +8,7 @@ import { arrowRight } from '../../assets/icons'
 function ListMessages() {
     const { data: messages, isLoading, isError, error } = useGetAllMessagesQuery();
     const navigate = useNavigate();
-    
+
     useEffect(() => {
         if (isError) {
             console.error('Error fetching messages:', error);
@@ -26,7 +26,7 @@ function ListMessages() {
     const navToCreateMessage = () => {
         navigate('/messages/create');
     };
-    
+
     if (isLoading) return <p>Loading messages...</p>;
     if (isError) return <p>Error loading messages.</p>;
 
@@ -35,9 +35,9 @@ function ListMessages() {
             <h1 className='text-3xl font-bold text-white text-center mt-10'>Messages</h1>
             <div className='container mx-auto mt-10 p-4'>
                 <div className='flex justify-end mb-4'>
-                    <Button 
+                    <Button
                         label='Create Message'
-                        size='medium'                        
+                        size='medium'
                         iconURL={arrowRight}
                         onClick={navToCreateMessage}
                         />
@@ -65,17 +65,17 @@ function ListMessages() {
                                     </div>
                                 </div>
                                 <div className='flex-shrink-0 ml-4'>
-                                    <Button 
+                                    <Button
                                         label='Edit'
                                         size='small'
                                         onClick={() => handleEdit(message.id)}
                                     />
-                                    <Button 
+                                    <Button
                                         label='Reply'
                                         size='small'
                                         onClick={() => handleEdit(message.id)}
                                     />
-                                    <Button 
+                                    <Button
                                         label='Delete'
                                         size='small'
                                         onClick={() => handleDelete(message.id)}

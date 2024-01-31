@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Response, status
-from typing import List
-from queries.messages import MessagesIn, MessagesOut, MessagesRepo
+from typing import List, Union
+from queries.messages import MessagesIn, MessagesOut, MessagesRepo, MessageViewOut, MessageViewIn
 from queries.messages import ResponsesOut, ResponsesIn
 
 router = APIRouter()
@@ -27,7 +27,7 @@ def delete_message(id: int, repo: MessagesRepo = Depends()):
         raise HTTPException(status_code=404, detail="Message not found")
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
-@router.get("/api/messages/{message_id}/read", response_model=MessagesOut)
+@router.put("/api/messages/{message_id}/add-view")
 def read_message(message_id: int, repo: MessagesRepo = Depends()):
     return repo.read_increment_message_views(message_id)
 

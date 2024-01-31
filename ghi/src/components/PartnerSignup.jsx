@@ -33,6 +33,8 @@ function VeteranSignup() {
 
             const dbEmails = data.map((user) => user.email)
             setUsedEmails(dbEmails)
+
+            console.log({usedUsernames},{usedEmails})
         }
     }, [data, isLoading])
 

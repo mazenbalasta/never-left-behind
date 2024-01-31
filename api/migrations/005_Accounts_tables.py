@@ -44,11 +44,11 @@ steps = [
         """
         CREATE TABLE messages (
             id SERIAL PRIMARY KEY NOT NULL,
-            title VARCHAR(255) NOT NULL,
-            body VARCHAR(1000) NOT NULL,
+            title VARCHAR(255),
+            body VARCHAR(1000),
             date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             account INT,
-            views INT DEFAULT 0,
+            views INT,
             FOREIGN KEY(account) REFERENCES accounts(id)
         );
         """,
@@ -57,6 +57,7 @@ steps = [
         DROP TABLE messages;
         """
     ],
+
     # Step 4: Create responses table
     [
         # "Up" SQL statement
