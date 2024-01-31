@@ -1,7 +1,7 @@
 from pydantic import BaseModel, validator
 from fastapi import HTTPException
 from queries.pool import pool
-from typing import List, Union
+from typing import List, Union, Optional
 from datetime import datetime
 
 
@@ -176,7 +176,7 @@ class MessagesRepo:
         except Exception as e:
             print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
-        
+
     def get_message_with_responses(self, message_id: int) -> Union[Error, MessagesOut]:
         try:
             with pool.connection() as conn:
@@ -210,7 +210,7 @@ class MessagesRepo:
         except Exception as e:
             print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
-        
+
     def read_increment_message_views(self, message_id: int):
         try:
             with pool.connection() as conn:
@@ -253,7 +253,7 @@ class MessagesRepo:
         except Exception as e:
             print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
-    
+
     def create_response(self, message_id: int, response: ResponsesIn) -> ResponsesOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
@@ -285,7 +285,7 @@ class MessagesRepo:
                 account=result[3],
                 date=result[4],
             )
-    
+
     def get_message_stats(self, message_id: int) -> dict:
         with pool.connection() as conn:
             with conn.cursor() as db:
