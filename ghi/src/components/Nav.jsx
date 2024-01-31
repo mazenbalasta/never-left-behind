@@ -3,25 +3,31 @@ import { hamburger } from '../assets/icons'
 import { DropdownButton } from '../assets/buttons'
 import { NavLink } from 'react-router-dom'
 import { useGetTokenQuery } from '../app/apiSlice'
-import useAuthContext from '@galvanize-inc/jwtdown-for-react'
 import {useLogoutMutation} from '../app/apiSlice'
+import UserGreeting from '../functions/UserGreeeting'
 
 
 
 
 const Nav = () => {
-    const { data:account, isLoading } = useGetTokenQuery();
+    const { data:account } = useGetTokenQuery();
     const [logOut] = useLogoutMutation()
 
-
+    if (account) {
+        const firstName = account.account.first_name;
+    };
 
     return (
         <header className="bg-gray-900">
             <nav className="flex justify-between items-center max-container">
-                <a href="/">
-                    <img src={logo} alt="logo" width={130} height={29} />
-                </a>
-                <div></div>
+                <div className="flex items-center flex-col">
+                    <a href="/">
+                        <img src={logo} alt="logo" width={130} height={29} />
+                    </a>
+                    {account && (
+                        <UserGreeting firstName={account.account.first_name} />
+                    )}
+                </div>
                 <ul className="flex-1 flex justify-center items-center gap-16 max-lg:hidden">
                     <li className="text-sm font-bold text-white uppercase">
                         <NavLink to="/">Home</NavLink>
@@ -59,7 +65,7 @@ const Nav = () => {
                     )}
                     {account && (
                         <button
-                            onClick={logOut}
+                            onClick={() => logOut()}
                             className="w-30 h-10 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold"
                         >
                             Logout
