@@ -1,6 +1,6 @@
-import Dashboard from "./Dashboard";
-import UpdateMessage from "./UpdateMessage";
-import CreateMessage from "./CreateMessage";
-import DeleteMessage from "./DeleteMessage";
+import EditMessage from "./EditMessage";
+import ListMessages from "./ListMessages";
+import MessageForm from "./MessageForm";
+import DeleteMessage from './DeleteMessage'
 
-export { Dashboard, UpdateMessage, DeleteMessage, CreateMessage };
+export { EditMessage, ListMessages, MessageForm, DeleteMessage };

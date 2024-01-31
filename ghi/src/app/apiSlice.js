@@ -12,6 +12,12 @@ export const neverLeftBehindApi = createApi({
         getAllMessages: builder.query({
             query: () => '/api/messages',
         }),
+        getMessage: builder.query({
+            query: (id) => ({
+                url: `/api/messages/${id}`,
+                method: 'GET',
+            })
+        }),
         createMessage: builder.mutation({
             query: (message) => ({
                 url: '/api/messages',
@@ -37,6 +43,7 @@ export const neverLeftBehindApi = createApi({
 export const {
     useGetAllAccountsQuery,
     useGetAllMessagesQuery,
+    useGetMessageQuery,
     useCreateMessageMutation,
     useUpdateMessageMutation,
     useDeleteMessageMutation,

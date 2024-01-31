@@ -6,6 +6,7 @@ const Button = ({
     textColor,
     borderColor,
     fullwitdh,
+    onClick,
     size = 'normal',
     type = 'button'
 }) => {
@@ -25,6 +26,7 @@ const Button = ({
     return (
         <button
             type={type}
+            onClick={onClick}
             className={`flex justify-center items-center gap-2 px-7 py-4 border text-lg leading-none
             ${sizeClass[size]}
             ${

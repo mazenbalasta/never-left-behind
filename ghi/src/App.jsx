@@ -3,12 +3,11 @@
 // import { useState, useEffect } from 'react';
 // import ErrorNotification from './ErrorNotification';
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup,
-    Dashboard, UpdateMessage, DeleteMessage} from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup } from './components';
+import { MessageForm, ListMessages, EditMessage, DeleteMessage } from './components/messages';
 import HomePage from './HomePage';
 // import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { CreateMessage } from './components/messages';
 
 
 // All your environment variables in vite are in this object
@@ -41,9 +40,9 @@ function App() {
                             <Route path="veteran" element={<VeteranSignup />} />
                             <Route path="partner" element={<PartnerSignup />} />
                         </Route>
-                        <Route path="/messages" element={<Dashboard />} >
-                            <Route path="create" element={<CreateMessage onMessageSubmit={undefined}/>} />
-                            <Route path=":id/update" element={<UpdateMessage onMessageSubmit={undefined}/>} />
+                        <Route path="/messages" element={<ListMessages />} >
+                            <Route path="create" element={<MessageForm />} />
+                            <Route path=":id/update" element={<EditMessage />} />
                             <Route path=":id/delete" element={<DeleteMessage />} />
                         </Route>
                     </Routes>
