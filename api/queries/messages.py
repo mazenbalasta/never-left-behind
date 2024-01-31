@@ -1,39 +1,71 @@
 from pydantic import BaseModel, validator
 from fastapi import HTTPException
 from queries.pool import pool
-from typing import List, Union
+from typing import List, Union, Optional
 from datetime import datetime
 
 
 class Error(BaseModel):
     message: str
 
+class Account(BaseModel):
+    id: int
+    body: str
+
 
 class MessagesIn(BaseModel):
     title: str
     body: str
-    account: int
     date: datetime
+    account: int
+    views: int
 
-    @validator("account")
-    def account_must_be_int(cls, valid):
-        if not isinstance(valid, int):
-            raise ValueError("Account must be an integer")
-        return valid
+    # @validator("account")
+    # def account_must_be_int(cls, valid):
+    #     if not isinstance(valid, int):
+    #         raise ValueError("Account must be an integer")
+    #     return valid
+
+class MessageViewIn(BaseModel):
+    views: int
+    # body: str
+
+class MessageViewOut(BaseModel):
+    id: int
+    title: str
+    body: str
+    date: datetime
+    account: int
+    views: int
 
 
 class MessagesOut(BaseModel):
     id: int
     title: str
     body: str
+    date: datetime
+    account: int
+    views: int
+    # response_count: int
+
+    # @validator("account")
+    # def account_must_be_int(cls, valid):
+    #     if not isinstance(valid, int):
+    #         raise ValueError("Account must be an integer")
+    #     return valid
+
+
+class ResponsesIn(BaseModel):
+    body: str
+    account: int
+
+
+class ResponsesOut(BaseModel):
+    id: int
+    message_id: int
+    body: str
     account: int
     date: datetime
-
-    @validator("account")
-    def account_must_be_int(cls, valid):
-        if not isinstance(valid, int):
-            raise ValueError("Account must be an integer")
-        return valid
 
 
 class MessagesRepo:
@@ -46,18 +78,20 @@ class MessagesRepo:
                         (
                             title,
                             body,
+                            date,
                             account,
-                            date
+                            views
                         )
                     VALUES
-                        (%s, %s, %s, %s)
+                        (%s, %s, %s, %s, %s)
                     RETURNING id;
                     """,
                     [
                         message.title,
                         message.body,
-                        message.account,
                         message.date,
+                        message.account,
+                        message.views
                     ],
                 )
                 result = db.fetchone()
@@ -71,8 +105,10 @@ class MessagesRepo:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT * from Messages
-                        ORDER BY date DESC;
+                        SELECT m.id, m.title, m.body, m.account, m.date, COALESCE(m.views, 0),
+                            (SELECT COUNT(*) FROM responses WHERE message_id = m.id) AS response_count
+                        FROM messages m
+                        ORDER BY m.date DESC;
                         """
                     )
                     records = db.fetchall()
@@ -82,10 +118,13 @@ class MessagesRepo:
                             id=record[0],
                             title=record[1],
                             body=record[2],
-                            date=record[3],
-                            account=record[4],
+                            account=record[3],
+                            date=record[4],
+                            views=record[5],
+                            response_count=record[6],
                         )
                         result.append(message)
+                        print("____records____:", records)
                     return result
         except Exception as e:
             print(f"Error: {e}")
@@ -100,7 +139,6 @@ class MessagesRepo:
                     db.execute(
                         """
                         UPDATE messages
-                        SET
                         SET
                             title = %s,
                             body = %s,
@@ -157,3 +195,110 @@ class MessagesRepo:
         except Exception as e:
             print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
+
+    def get_message_with_responses(self, message_id: int) -> Union[Error, MessagesOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT m.id, m.title, m.body, m.account, m.date, COALESCE(m.views, 0),
+                            (SELECT COUNT(*) FROM responses WHERE message_id = m.id) AS response_count
+                        FROM messages m
+                        WHERE m.id = %s;
+                        """,
+                        [message_id],
+                    )
+                    result = db.fetchone()
+                    if result is None:
+                        raise HTTPException(
+                            status_code=404, detail="Message not found"
+                        )
+                    message = MessagesOut(
+                        id=result[0],
+                        title=result[1],
+                        body=result[2],
+                        date=result[4],
+                        account=result[3],
+                        views=result[5],
+                        response_count=result[6],
+                    )
+                    return message
+        except HTTPException as error:
+            raise error
+        except Exception as e:
+            print(f"Error: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
+
+    def read_increment_message_views(
+            self,
+            message_id: int,
+        ):
+
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    UPDATE messages
+                    SET
+                        views = views + 1
+                    WHERE id = %s
+                    RETURNING *;
+                    """,
+                    [message_id],
+                )
+                return True
+
+
+    def create_response(self, message_id: int, response: ResponsesIn) -> ResponsesOut:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    INSERT INTO responses
+                        (
+                            message_id,
+                            body,
+                            account,
+                            date
+                        )
+                    VALUES
+                        (%s, %s, %s, %s)
+                    RETURNING id, message_id, body, account, date;
+                    """,
+                    [
+                        message_id,
+                        response.body,
+                        response.account,
+                        datetime.now(),
+                    ],
+                )
+                result = db.fetchone()
+            return ResponsesOut(
+                id=result[0],
+                message_id=result[1],
+                body=result[2],
+                account=result[3],
+                date=result[4],
+            )
+
+    def get_message_stats(self, message_id: int) -> dict:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    SELECT COUNT(*) FROM responses WHERE message_id = %s;
+                    """
+                    [message_id],
+                )
+                response_count = db.fetchone()[0]
+
+                db.execute(
+                    """
+                    SELECT views FROM messages WHERE id = %s;
+                    """
+                    [message_id],
+                )
+                views_count = db.fetchone()[0]
+
+                return {"response_count": response_count, "views_count": views_count}

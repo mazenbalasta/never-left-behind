@@ -1,6 +1,22 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap");
+@tailwind base;
+@layer base {
+  html {
+    @apply text-neutral-800;
+  }
+  html.dark {
+    @apply text-neutral-50;
+  }
+}
+
+@layer components {
+  .bg-neutral-800 {
+    background-color: #333333;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;
 
 
 body {

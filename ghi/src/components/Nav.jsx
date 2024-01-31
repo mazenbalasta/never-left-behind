@@ -1,5 +1,4 @@
 import { logo } from '../assets/images'
-import { hamburger } from '../assets/icons'
 import { DropdownButton } from '../assets/buttons'
 import { NavLink } from 'react-router-dom'
 import { useGetTokenQuery } from '../app/apiSlice'
@@ -34,7 +33,7 @@ const Nav = () => {
                         <NavLink to="/resources">Resources</NavLink>
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
-                        Messages
+                        <NavLink to="/messages">Messages</NavLink>
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
                         Events
