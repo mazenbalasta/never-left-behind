@@ -1,5 +1,4 @@
 import { logo } from '../assets/images'
-import { hamburger } from '../assets/icons'
 import { DropdownButton } from '../assets/buttons'
 import { NavLink } from 'react-router-dom'
 import { useGetTokenQuery } from '../app/apiSlice'

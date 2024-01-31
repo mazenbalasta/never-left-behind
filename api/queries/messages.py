@@ -8,34 +8,51 @@ from datetime import datetime
 class Error(BaseModel):
     message: str
 
+class Account(BaseModel):
+    id: int
+    body: str
+
 
 class MessagesIn(BaseModel):
     title: str
     body: str
-    account: int
     date: datetime
+    account: int
+    views: int
 
-    @validator("account")
-    def account_must_be_int(cls, valid):
-        if not isinstance(valid, int):
-            raise ValueError("Account must be an integer")
-        return valid
+    # @validator("account")
+    # def account_must_be_int(cls, valid):
+    #     if not isinstance(valid, int):
+    #         raise ValueError("Account must be an integer")
+    #     return valid
+
+class MessageViewIn(BaseModel):
+    views: int
+    # body: str
+
+class MessageViewOut(BaseModel):
+    id: int
+    title: str
+    body: str
+    date: datetime
+    account: int
+    views: int
 
 
 class MessagesOut(BaseModel):
     id: int
     title: str
     body: str
-    account: int
     date: datetime
-    views: Optional[int] = 0
-    response_count: Optional[int] = 0
+    account: int
+    views: int
+    # response_count: int
 
-    @validator("account")
-    def account_must_be_int(cls, valid):
-        if not isinstance(valid, int):
-            raise ValueError("Account must be an integer")
-        return valid
+    # @validator("account")
+    # def account_must_be_int(cls, valid):
+    #     if not isinstance(valid, int):
+    #         raise ValueError("Account must be an integer")
+    #     return valid
 
 
 class ResponsesIn(BaseModel):
@@ -61,18 +78,20 @@ class MessagesRepo:
                         (
                             title,
                             body,
+                            date,
                             account,
-                            date
+                            views
                         )
                     VALUES
-                        (%s, %s, %s, %s)
+                        (%s, %s, %s, %s, %s)
                     RETURNING id;
                     """,
                     [
                         message.title,
                         message.body,
-                        message.account,
                         message.date,
+                        message.account,
+                        message.views
                     ],
                 )
                 result = db.fetchone()
@@ -211,48 +230,25 @@ class MessagesRepo:
             print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
-    def read_increment_message_views(self, message_id: int):
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    db.execute(
-                        """
-                        UPDATE messages
-                        SET views = COALESCE(views, 0) + 1
-                        WHERE id = %s
-                        """,
-                        [message_id],
-                    )
+    def read_increment_message_views(
+            self,
+            message_id: int,
+        ):
 
-                    db.execute(
-                        """
-                        SELECT m.id, m.title, m.body, m.account, m.date, COALESCE(m.views, 0),
-                            (SELECT COUNT(*) FROM responses WHERE message_id = m.id) AS response_count
-                        FROM messages m
-                        WHERE m.id = %s
-                        """,
-                        [message_id],
-                    )
-                    result = db.fetchone()
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    UPDATE messages
+                    SET
+                        views = views + 1
+                    WHERE id = %s
+                    RETURNING *;
+                    """,
+                    [message_id],
+                )
+                return True
 
-                    if result is None:
-                        raise HTTPException(
-                            status_code=404, detail="Message not found"
-                        )
-                    return MessagesOut(
-                        id=result[0],
-                        title=result[1],
-                        body=result[2],
-                        date=result[3],
-                        account=result[4],
-                        views=result[5],
-                        response_count=result[6],
-                    )
-        except HTTPException as error:
-            raise error
-        except Exception as e:
-            print(f"Error: {e}")
-            raise HTTPException(status_code=500, detail=str(e))
 
     def create_response(self, message_id: int, response: ResponsesIn) -> ResponsesOut:
         with pool.connection() as conn:

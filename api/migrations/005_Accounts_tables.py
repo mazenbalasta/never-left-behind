@@ -44,10 +44,11 @@ steps = [
         """
         CREATE TABLE messages (
             id SERIAL PRIMARY KEY NOT NULL,
-            title VARCHAR(255) NOT NULL,
-            body VARCHAR(1000) NOT NULL,
+            title VARCHAR(255),
+            body VARCHAR(1000),
             date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             account INT,
+            views INT,
             FOREIGN KEY(account) REFERENCES accounts(id)
         );
         """,
@@ -56,20 +57,8 @@ steps = [
         DROP TABLE messages;
         """,
     ],
-    # Step 4: Alter messages to add views column
-    [
-        # "Up" SQL statement
-        """
-        ALTER TABLE messages
-        ADD COLUMN views INT DEFAULT 0;
-        """,
-        # "Down" SQL statement
-        """
-        ALTER TABLE messages
-        DROP COLUMN views;
-        """,
-    ],
-    # Step 5: Create responses table
+
+    # Step 4: Create responses table
     [
         # "Up" SQL statement
         """
@@ -88,7 +77,7 @@ steps = [
         DROP TABLE responses;
         """,
     ],
-    # Step 6: Insert data to account types table
+    # Step 5: Insert data to account types table
     [
         # "Up" SQL statement
         """

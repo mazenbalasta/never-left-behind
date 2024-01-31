@@ -2,11 +2,16 @@ import { useNavigate } from 'react-router-dom';
 import { useCreateMessageMutation } from '../../app/apiSlice'
 import { Button } from '../../components'
 import { arrowRight } from '../../assets/icons'
+import { useState } from 'react';
+import { useGetTokenQuery } from '../../app/apiSlice';
 
 
 function MessageForm() {
+    const {token} = useGetTokenQuery();
+    console.log({token})
+
 const [message, setMessage] = useState({
-        title: '', 
+        title: '',
         body: ''
     });
 
@@ -39,7 +44,7 @@ const [message, setMessage] = useState({
             <div className='bg-gray-50 shadow-md rounded px-8 pt-6 pb-8 mb-4'>
                 <h1 className='text-xl color-white font-bold mb-5'>Create a Message</h1>
                 <form onSubmit={handleSubmit} id='create-message-form'>
-                    <div className='mb-4'>
+                    {token && <div className='mb-4'>
                         <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='title'>Title</label>
                         <input
                             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -50,7 +55,7 @@ const [message, setMessage] = useState({
                             name='title'
                             id='title'
                         />
-                    </div>
+                    </div>}
 
                     <div className='mb-6'>
                         <label className='block text- text-sm font-bold mb-2' htmlFor='body'>Message Body</label>
@@ -66,13 +71,13 @@ const [message, setMessage] = useState({
                     <div className='flex items-center justify-between'>
                         <Button
                             type='submit'
-                            text='Create Message'
-                            size='medium'                        
+                            label='Create Message'
+                            size='medium'
                             imageURL={arrowRight}
                         />
                         <Button
                             type='button'
-                            text='Cancel'
+                            label='Cancel'
                             size='medium'
                             imageURL={arrowRight}
                             onClick={navToMessageList}
@@ -81,7 +86,7 @@ const [message, setMessage] = useState({
                 </form>
             </div>
         </div>
-    </>    
+    </>
     );
 };
 
