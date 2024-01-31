@@ -1,4 +1,8 @@
 import { facebook, instagram, twitter } from "../assets/icons";
+import { FiMessageSquare } from "react-icons/fi";
+import { GrResources } from "react-icons/gr";
+import { MdCardMembership } from "react-icons/md";
+import { RxActivityLog } from "react-icons/rx";
 
 export const socialMedia = [
     { src: facebook, alt: "Facebook logo" },
@@ -29,5 +33,28 @@ export const footerLinks = [
             { name: "Latroy?", link: "/" },
             { name: "placeholder", link: "/" },
         ],
+    },
+];
+
+export const services = [
+    {
+        imgURL: FiMessageSquare,
+        label: "Message Forum",
+        subtext: "Share your thoughts and questions. Our members will help you get answers."
+    },
+    {
+        imgURL: GrResources,
+        label: "Resources",
+        subtext: "Looking for veteran qualifications? We can help."
+    },
+    {
+        imgURL: RxActivityLog,
+        label: "Activities",
+        subtext: "Find what to do in your area with fellow veterans."
+    },
+    {
+        imgURL: MdCardMembership,
+        label: "Benefits",
+        subtext: "I don't know what to say yet, but something is going here."
     },
 ];
