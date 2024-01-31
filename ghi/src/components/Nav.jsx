@@ -9,6 +9,7 @@ import UserGreeting from '../functions/UserGreeeting'
 const Nav = () => {
     const { data:account } = useGetTokenQuery();
     const [logOut] = useLogoutMutation()
+    // console.log({account})
 
     if (account) {
         const firstName = account.account.first_name;
