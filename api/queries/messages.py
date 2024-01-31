@@ -61,7 +61,6 @@ class MessagesRepo:
                     ],
                 )
                 result = db.fetchone()
-                result = db.fetchone()
             id = result[0]
             old_data = message.dict()
             return MessagesOut(id=id, **old_data)

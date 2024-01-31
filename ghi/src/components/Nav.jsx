@@ -3,13 +3,16 @@ import { hamburger } from '../assets/icons'
 import { DropdownButton } from '../assets/buttons'
 import { NavLink } from 'react-router-dom'
 import { useGetTokenQuery } from '../app/apiSlice'
+import useAuthContext from '@galvanize-inc/jwtdown-for-react'
+import {useLogoutMutation} from '../app/apiSlice'
 
 
 
 
 const Nav = () => {
     const { data:account, isLoading } = useGetTokenQuery();
-    console.log({ account, isLoading })
+    const [logOut] = useLogoutMutation()
+
 
 
     return (
@@ -40,16 +43,28 @@ const Nav = () => {
                     </li>
                 </ul>
                 <div className="login-signup-button">
-                    <button className="w-30 h-10 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold">
-                        <NavLink to="/login">Log In</NavLink>
-                    </button>
-                    <DropdownButton
-                        label="Sign up"
-                        items={[
-                            { label: 'Veteran', link: '/signup/veteran' },
-                            { label: 'Partner', link: '/signup/partner' },
-                        ]}
-                    />
+                    {!account && (
+                        <button className="w-30 h-10 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold">
+                            <NavLink to="/login">Log In</NavLink>
+                        </button>
+                    )}
+                    {!account && (
+                        <DropdownButton
+                            label="Sign up"
+                            items={[
+                                { label: 'Veteran', link: '/signup/veteran' },
+                                { label: 'Partner', link: '/signup/partner' },
+                            ]}
+                        />
+                    )}
+                    {account && (
+                        <button
+                            onClick={logOut}
+                            className="w-30 h-10 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold"
+                        >
+                            Logout
+                        </button>
+                    )}
                 </div>
             </nav>
         </header>
