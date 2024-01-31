@@ -285,24 +285,3 @@ class MessagesRepo:
                 account=result[3],
                 date=result[4],
             )
-    
-    def get_message_stats(self, message_id: int) -> dict:
-        with pool.connection() as conn:
-            with conn.cursor() as db:
-                db.execute(
-                    """
-                    SELECT COUNT(*) FROM responses WHERE message_id = %s;
-                    """
-                    [message_id],
-                )
-                response_count = db.fetchone()[0]
-
-                db.execute(
-                    """
-                    SELECT views FROM messages WHERE id = %s;
-                    """
-                    [message_id],
-                )
-                views_count = db.fetchone()[0]
-
-                return {"response_count": response_count, "views_count": views_count}
