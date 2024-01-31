@@ -184,24 +184,54 @@ class MessagesRepo:
             raise HTTPException(status_code=500, detail="Internal server error")
     
     def create_response(self, message_id: int, response: ResponsesIn) -> ResponsesOut:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    db.execute(
-                        """
-                        INSERT INTO responses (message_id, body, account, date)
-                        VALUES (%s, %s, %s, %s) RETURNING id, message_id, body, account, date;
-                        """,
-                        [message_id, response.body, response.account, datetime.now()]
-                    )
-                    result = db.fetchone()
-                    return ResponsesOut(
-                        id=result[0],
-                        message_id=result[1],
-                        body=result[2],
-                        account=result[3],
-                        date=result[4],
-                    )
-        except Exception as e:
-            logger.error(f'Error in create_response: {e}')
-            raise HTTPException(status_code=500, detail="Internal server error")
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    INSERT INTO responses
+                        (
+                            message_id,
+                            body,
+                            account,
+                            date
+                        )
+                    VALUES
+                        (%s, %s, %s, %s)
+                    RETURNING id, message_id, body, account, date;
+                    """,
+                    [
+                        message_id,
+                        response.body,
+                        response.account,
+                        datetime.now(),
+                    ],
+                )
+                result = db.fetchone()
+            return ResponsesOut(
+                id=result[0],
+                message_id=result[1],
+                body=result[2],
+                account=result[3],
+                date=result[4],
+            )
+    
+    def get_message_stats(self, message_id: int) -> dict:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    SELECT COUNT(*) FROM responses WHERE message_id = %s;
+                    """
+                    [message_id],
+                )
+                response_count = db.fetchone()[0]
+
+                db.execute(
+                    """
+                    SELECT views FROM messages WHERE id = %s;
+                    """
+                    [message_id],
+                )
+                views_count = db.fetchone()[0]
+
+                return {"response_count": response_count, "views_count": views_count}

@@ -1,36 +1,43 @@
-import { useState } from 'react'
-// import { useLoginMutation } from '../app/apiSlice'
-import useAuthContext from '@galvanize-inc/jwtdown-for-react'
-import useToken from '@galvanize-inc/jwtdown-for-react'
+import { useState, useEffect } from 'react'
+import { useLoginMutation, useGetTokenQuery } from '../app/apiSlice'
+import { useNavigate } from 'react-router-dom'
+import { ErrorAlert } from '../assets/alerts'
 
 
 const Login = () => {
-  const { token } = useAuthContext()
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
+
+    const [ login, loginStatus ] = useLoginMutation();
+    const { data: account } = useGetTokenQuery()
+    const navigate = useNavigate()
 
 
+    useEffect (() => {
+        if (loginStatus.isSuccess) navigate('/');
+        if (loginStatus.isError) {
+            setErrorMessage(loginStatus.error.data.detail)
+        }
+    }, [loginStatus])
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const { login } = useToken()
-
-  const handleSubmit = (e) => {
-      e.preventDefault()
-      login(username, password)
-      e.target.reset()
-  }
-
-
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        login({ username, password });
+    }
 
 
     return (
         <>
-            {token && <h1>YOU'RE LOGGED IN DUMMY!</h1>}
+            {account && <h1>YOU'RE LOGGED IN DUMMY!</h1>}
+            {!account && <h1>YOU'RE LOGGED OUT!!</h1>}
             <div className="card text-bg-light mb-3">
                 <h5 className="card-header">Login</h5>
+                {errorMessage && <ErrorAlert alert="WARNING:  " message={errorMessage} />}
                 <div className="card-body">
                     <form onSubmit={handleSubmit} className="text-color black">
                         <div className="mb-3">
-                            <label className="form-label">Username:</label>
+                            <label className="form-label">Username: </label>
                             <input
                                 name="username"
                                 type="text"
@@ -41,7 +48,7 @@ const Login = () => {
                             />
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">Password:</label>
+                            <label className="form-label">Password: </label>
                             <input
                                 name="password"
                                 type="password"
