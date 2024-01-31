@@ -11,7 +11,7 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE account_types;
-        """,
+        """
     ],
     # Step 2: Create accounts table
     [
@@ -19,7 +19,7 @@ steps = [
         """
         CREATE TABLE accounts (
             id SERIAL PRIMARY KEY NOT NULL,
-            account_type VARCHAR,
+            account_type VARCHAR(20),
             username VARCHAR(50) UNIQUE NOT NULL,
             password VARCHAR(1000) NOT NULL,
             email VARCHAR(255) UNIQUE NOT NULL,
@@ -36,7 +36,7 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE accounts;
-        """,
+        """
     ],
     # Step 3: Create message table
     [
@@ -48,28 +48,16 @@ steps = [
             body VARCHAR(1000) NOT NULL,
             date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             account INT,
+            views INT DEFAULT 0,
             FOREIGN KEY(account) REFERENCES accounts(id)
         );
         """,
         # "Down" SQL statement
         """
         DROP TABLE messages;
-        """,
-    ],
-    # Step 4: Alter messages to add views column
-    [
-        # "Up" SQL statement
         """
-        ALTER TABLE messages
-        ADD COLUMN views INT DEFAULT 0;
-        """,
-        # "Down" SQL statement
-        """
-        ALTER TABLE messages
-        DROP COLUMN views;
-        """,
     ],
-    # Step 5: Create responses table
+    # Step 4: Create responses table
     [
         # "Up" SQL statement
         """
@@ -86,9 +74,9 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE responses;
-        """,
+        """
     ],
-    # Step 6: Insert data to account types table
+    # Step 5: Insert data to account types table
     [
         # "Up" SQL statement
         """
@@ -101,6 +89,6 @@ steps = [
         # "Down" SQL statement
         """
         DELETE FROM account_types;
-        """,
+        """
     ],
 ]

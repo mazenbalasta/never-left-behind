@@ -1,15 +1,11 @@
 import { logo } from '../assets/images'
 import { DropdownButton } from '../assets/buttons'
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom' // Added import statement
 import { useGetTokenQuery } from '../app/apiSlice'
-
-
-
 
 const Nav = () => {
     const { data:account, isLoading } = useGetTokenQuery();
     console.log({ account, isLoading })
-
 
     return (
         <header className="bg-gray-900">
@@ -26,7 +22,7 @@ const Nav = () => {
                         <NavLink to="/resources">Resources</NavLink>
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
-                        <Link to="/messages">Messages</Link>
+                        <NavLink to="/messages">Messages</NavLink>
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
                         Events
