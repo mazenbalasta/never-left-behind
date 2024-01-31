@@ -58,8 +58,8 @@ class ActivityRepo:
                         activity.start_date,
                         activity.end_date,
                         activity.location,
-                        activity.category
-                    ]
+                        activity.category,
+                    ],
                 )
                 id = result.fetchone()[0]
                 old_data = activity.dict()
@@ -85,7 +85,7 @@ class ActivityRepo:
                             start_date=record[3],
                             end_date=record[4],
                             location=record[5],
-                            category=record[6]
+                            category=record[6],
                         )
                         result.append(activity)
                     return result
@@ -94,7 +94,9 @@ class ActivityRepo:
         except Exception:
             return {"message": "Could not get all activities"}
 
-    def update_activity(self, activity_id: int, activity: ActivitiesIn) -> Union[ActivitiesOut, Error]:
+    def update_activity(
+        self, activity_id: int, activity: ActivitiesIn
+    ) -> Union[ActivitiesOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -125,12 +127,14 @@ class ActivityRepo:
                             activity.end_date,
                             activity.location,
                             activity.category,
-                            activity_id
-                        ]
+                            activity_id,
+                        ],
                     )
                     result = db.fetchone()
                     if result is None:
-                        raise HTTPException(status_code=404, detail="Activity not found")
+                        raise HTTPException(
+                            status_code=404, detail="Activity not found"
+                        )
 
                     updated_activity = ActivitiesOut(
                         id=result[0],
@@ -139,7 +143,7 @@ class ActivityRepo:
                         start_date=result[3],
                         end_date=result[4],
                         location=result[5],
-                        category=result[6]
+                        category=result[6],
                     )
                     return updated_activity
         except HTTPException as error:
@@ -156,7 +160,7 @@ class ActivityRepo:
                         """
                         DELETE FROM activities WHERE id = %s
                         """,
-                        [activity_id]
+                        [activity_id],
                     )
                     return True
         except Exception:

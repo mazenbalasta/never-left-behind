@@ -9,6 +9,38 @@ export const neverLeftBehindApi = createApi({
         getAllAccounts: builder.query({
             query: () => '/api/accounts',
         }),
+        getToken: builder.query({
+            query: (credentials) => ({
+                url: '/token',
+                credentials: 'include',
+                body: credentials,
+            }),
+            providesTags: ['Account'],
+        }),
+        logout: builder.mutation({
+            query: () => ({
+                url: '/token',
+                method: 'DELETE',
+                credentials: 'include',
+            }),
+            invalidatesTags: ['Account'],
+        }),
+        login: builder.mutation({
+            query: (info) => {
+                const formData = new FormData()
+                formData.append('username', info.username)
+                formData.append('password', info.password)
+
+                return {
+                    url: '/token',
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'include',
+                }
+            },
+            // invalidatesTags: ['Account'],
+            
+        }),
         getAllMessages: builder.query({
             query: () => '/api/messages',
         }),
@@ -42,6 +74,9 @@ export const neverLeftBehindApi = createApi({
 })
 export const {
     useGetAllAccountsQuery,
+    useGetTokenQuery,
+    useLogoutMutation,
+    useLoginMutation,
     useGetAllMessagesQuery,
     useGetMessageQuery,
     useCreateMessageMutation,

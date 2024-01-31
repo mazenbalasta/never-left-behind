@@ -4,23 +4,20 @@ from main import app
 
 client = TestClient(app)
 
+
 def test():
     """
-       TEST TEMPLATE
+    TEST TEMPLATE
     """
 
+    # (AAA)
+    # ARRANGE
 
-    #(AAA)
-    #ARRANGE
+    # ACT
 
+    # ASSERT
 
-    #ACT
-
-
-    #ASSERT
-
-
-    #CLEAN UP
-    #app.dependency
+    # CLEAN UP
+    # app.dependency
 
     pass

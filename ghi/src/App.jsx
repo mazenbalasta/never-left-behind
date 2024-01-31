@@ -8,6 +8,8 @@ import { MessageForm, ListMessages, EditMessage, DeleteMessage } from './compone
 import HomePage from './HomePage';
 // import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
+import { BrowserRouter } from 'react-router-dom'
 
 
 // All your environment variables in vite are in this object
@@ -29,28 +31,39 @@ function App() {
     return (
         <main className='relative bg-[#282c34]'>
             <section>
-                <Nav />
+                <AuthProvider baseUrl={'http://localhost:8000'}>
+                <BrowserRouter>
+                    <Nav />
             </section>
             <section>
-                <div className="App-header">
-                    <Routes>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/resources" element={<Resources />} />
-                        <Route path="/signup">
-                            <Route path="veteran" element={<VeteranSignup />} />
-                            <Route path="partner" element={<PartnerSignup />} />
-                        </Route>
+                    <div className="App-header">
+                        <Routes>
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/resources" element={<Resources />} />
+                            <Route path="/signup">
+                                <Route
+                                    path="veteran"
+                                    element={<VeteranSignup />}
+                                />
+                                <Route
+                                    path="partner"
+                                    element={<PartnerSignup />}
+                                />
+                            </Route>
                         <Route path="/messages" element={<ListMessages />} >
                             <Route path="create" element={<MessageForm />} />
                             <Route path=":id/update" element={<EditMessage />} />
                             <Route path=":id/delete" element={<DeleteMessage />} />
                         </Route>
-                    </Routes>
-                </div>
+                            <Route path="/login" element={<Login />} />
+                        </Routes>
+                    </div>
             </section>
             <section>
-                <Footer />
+                        <Footer />
             </section>
+                </BrowserRouter>
+            </AuthProvider>
         </main>
     )
 }
