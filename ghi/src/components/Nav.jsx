@@ -2,15 +2,13 @@ import { logo } from '../assets/images'
 import { hamburger } from '../assets/icons'
 import { DropdownButton } from '../assets/buttons'
 import { NavLink } from 'react-router-dom'
-import { useGetTokenQuery } from '../app/apiSlice'
-
+import { useAuthContext } from '@galvanize-inc/jwtdown-for-react'
 
 
 
 const Nav = () => {
-    const { data:account, isLoading } = useGetTokenQuery();
-    console.log({ account, isLoading })
-
+    const { token: loggedIn } = useAuthContext();
+    console.log({ loggedIn })
 
     return (
         <header className="bg-gray-900">
@@ -30,7 +28,10 @@ const Nav = () => {
                         Messages
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
-                        Events
+                        <NavLink to="/chat">Chat</NavLink>
+                    </li>
+                    <li className="text-sm font-bold text-white uppercase">
+                        <NavLink to="/events">Events</NavLink>
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
                         Jobs

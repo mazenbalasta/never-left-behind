@@ -22,3 +22,9 @@ Today I fixed the errors that resulted from yesterdays merges, I then created th
 
 Jan 29, 2024:
 Today I worked on the event page, I added an events list I also added the ability to view all events on a map using a 3rd party mapping tool. I also added the ability to view the details of an event. in matching with the color scheme of the website.
+
+Jan 30, 2024:
+Today I worked with Mazen on the front end authentication, we were able to get the log in feature working with token access on the front end.
+
+Jan 31, 2024:
+Today I created a chat feature, letting members chat with each other. The chat is using websockets allowing for real time communication between anyone who is a user on our app.

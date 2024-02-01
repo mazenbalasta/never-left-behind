@@ -19,11 +19,9 @@ const Login = () => {
       e.target.reset()
   }
 
-
-
-
     return (
         <>
+        <div className="App-header">
             {token && <h1>YOU'RE LOGGED IN DUMMY!</h1>}
             <div className="card text-bg-light mb-3">
                 <h5 className="card-header">Login</h5>
@@ -61,6 +59,7 @@ const Login = () => {
                     </form>
                 </div>
             </div>
+        </div>
         </>
     )
 }

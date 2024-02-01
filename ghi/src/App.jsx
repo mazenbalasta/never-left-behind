@@ -3,8 +3,10 @@
 // import { useState, useEffect } from 'react';
 // import ErrorNotification from './ErrorNotification';
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login, UserDataCard } from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login} from './components';
 import HomePage from './HomePage';
+import Events from './Events';
+import Chat from './Chat';
 // import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
@@ -47,8 +49,10 @@ if (!API_HOST) {
 
 function App() {
 
+    const baseUrl = import.meta.env.VITE_API_HOST
 
     return (
+
         // <main className="relative">
         //     <section>
         //         <Nav />
@@ -64,10 +68,10 @@ function App() {
         // </main>
 
         <>
-            <AuthProvider baseUrl={'http://localhost:8000'}>
+            <AuthProvider baseUrl={baseUrl}>
                 <BrowserRouter>
                     <Nav />
-                    <div className="App-header">
+
                         <Routes>
                             <Route path="/" element={<HomePage />} />
                             <Route path="/resources" element={<Resources />} />
@@ -82,8 +86,9 @@ function App() {
                                 />
                             </Route>
                             <Route path="/login" element={<Login />} />
+                            <Route path="/events" element={<Events />} />
+                            <Route path="/chat" element={<Chat />} />
                         </Routes>
-                    </div>
                     <Footer />
                 </BrowserRouter>
             </AuthProvider>

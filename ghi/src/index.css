@@ -1,6 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import 'font.css';
 
 
 body {
@@ -53,4 +54,8 @@ code {
   .padding-b {
     @apply sm:pb-24 pb-12;
   }
+}
+
+.App-Section {
+  font-family: 'Virgil'
 }
