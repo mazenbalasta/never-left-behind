@@ -70,3 +70,7 @@ code {
     @apply sm:pb-24 pb-12;
   }
 }
+
+.App-Section {
+  font-family: 'Virgil'
+}

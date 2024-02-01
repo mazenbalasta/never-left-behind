@@ -1,6 +1,9 @@
 import unittest
 from fastapi.testclient import TestClient
 from main import app
+from queries.events import EventsRepo, EventsIn, EventsOut
+import datetime
+from fastapi import HTTPException
 from queries.jobs import JobsIn, JobsOut
 from unittest.mock import patch
 from queries.events import EventsIn, EventsRepo
@@ -63,5 +66,5 @@ def test_events_list():
     assert response.json()[len(response.json()) -1]["event_title"] == KEY
     print(response.json()[0]["event_title"])
     # CLEAN UP
-    repo.delete_event(event_id=response.json()[0]["id"])
-# python -m pytest tests/test.py
+    # app.dependency
+

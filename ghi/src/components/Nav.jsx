@@ -33,7 +33,10 @@ const Nav = () => {
                         <NavLink to="/messages">Messages</NavLink>
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
-                        Events
+                        <NavLink to="/chat">Chat</NavLink>
+                    </li>
+                    <li className="text-sm font-bold text-white uppercase">
+                        <NavLink to="/events">Events</NavLink>
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
                         Jobs
