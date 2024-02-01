@@ -14,7 +14,7 @@ function App() {
         <main className="relative bg-[#282c34]">
             <section>
                 <AuthProvider baseUrl={baseUrl}>
-                    <BrowserRouter>
+
                         <Nav />
                         <section>
                             <div className="App-header">
@@ -34,24 +34,7 @@ function App() {
                                             element={<PartnerSignup />}
                                         />
                                     </Route>
-                                    {/* <Route path="/messages" element={<ListMessages />} >
-                                        <Route
-                                            path="create"
-                                            element={<MessageForm />}
-                                        />
-                                        <Route
-                                            path=":id/update"
-                                            element={<EditMessage />}
-                                        />
-                                        <Route
-                                            path=":id/delete"
-                                            element={<DeleteMessage />}
-                                        />
-                                    </Route> */}
-                                    <Route
-                                        path="/messages"
-                                        // element={<ListMessages />}
-                                    >
+                                    <Route path="/messages/*" element={<ListMessages />}>
                                         <Route
                                             path="create"
                                             element={<MessageForm />}
@@ -72,7 +55,6 @@ function App() {
                         <section>
                             <Footer />
                         </section>
-                    </BrowserRouter>
                 </AuthProvider>
             </section>
         </main>

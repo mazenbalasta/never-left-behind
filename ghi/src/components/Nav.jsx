@@ -11,10 +11,6 @@ const Nav = () => {
     const [logOut] = useLogoutMutation()
     // console.log({account})
 
-    if (account) {
-        const firstName = account.account.first_name;
-    };
-
     return (
         <header className="bg-gray-900">
             <nav className="flex justify-between items-center max-container">

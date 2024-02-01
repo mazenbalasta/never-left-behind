@@ -2,8 +2,13 @@ import { useState, useEffect } from 'react'
 import { useGetAllAccountsQuery } from '../app/apiSlice'
 import PasswordMatchMessage from '../functions/FormUtils'
 import { Link } from 'react-router-dom'
+import { useGetTokenQuery } from '../app/apiSlice'
 
 function VeteranSignup() {
+
+    const { token } = useGetTokenQuery()
+    console.log({ token })
+
     const InitForm = {
         first_name: '',
         last_name: '',
@@ -25,7 +30,7 @@ function VeteranSignup() {
     const [usedEmails, setUsedEmails] = useState([])
 
     const { data, isLoading } = useGetAllAccountsQuery()
-
+    console.log({data, isLoading})
     useEffect(() => {
         if (!isLoading) {
             const dbUsernames = data.map((user) => user.username)
