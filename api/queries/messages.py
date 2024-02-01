@@ -189,7 +189,7 @@ class MessagesRepo:
                     return self.message_from_db_record(result)
         except Exception as e:
             print(f"Error: {e}")
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="Internal server error")
 
     def read_increment_message_views(
             self,
