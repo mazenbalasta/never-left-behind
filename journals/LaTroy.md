@@ -1,2 +1,3 @@
 On 17 Jan 24, 
     We just forked and cloned our own repos to start the project after taking the whole first day to get the localhost to work properly day two my goal is to create an model for Activity and to have it hold one to three activities.
+    

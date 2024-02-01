@@ -3,7 +3,7 @@ import { useGetAllCategoriesQuery } from "../app/apiSlice";
 
 function ActivitiesForm() {
   const { data: categories, error, isLoading } = useGetAllCategoriesQuery();
-  
+
 
   const [activities, setActivities] = useState([]);
   const [formData, setFormData] = useState({
@@ -29,7 +29,7 @@ function ActivitiesForm() {
     getData();
   }, []);
 
-  
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -99,7 +99,7 @@ function ActivitiesForm() {
           <div>
             <label className="block mb-1 text-blue-200">Category:</label>
             <select name="category" value={formData.category} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md text-black hover:bg-blue-100">
-              {categories && categories.map((category) => (
+              {Array. isArray(categories) && categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}
                 </option>
