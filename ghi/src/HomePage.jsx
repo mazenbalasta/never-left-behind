@@ -4,6 +4,8 @@ import { services } from "./constants";
 
 
 function HomePage() {
+    const isLoggedIn = true; // Replace this with your actual login logic
+
     return (
         <main className='relative text-white py-16'>
             <section className='padding'>

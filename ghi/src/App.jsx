@@ -1,9 +1,47 @@
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login } from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login} from './components';
 import { MessageForm, ListMessages, EditMessage, DeleteMessage } from './components/messages';
 import HomePage from './HomePage';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import Events from './Events';
+import Chat from './Chat';
+// import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
+import { BrowserRouter } from 'react-router-dom'
+
+
+// All your environment variables in vite are in this object
+console.table(import.meta.env)
+// When using environment variables, you should do a check to see if
+// they are defined or not and throw an appropriate error message
+const API_HOST = import.meta.env.VITE_API_HOST
+if (!API_HOST) {
+    throw new Error('VITE_API_HOST is not defined')
+}
+// const router = createBrowserRouter([
+//     {
+//         path: '/',
+//         element: <HomePage />,
+//     },
+//     {
+//         path: '/resources',
+//         element: <Resources />,
+//     },
+//     {
+//         path: '/signup',
+//         // element: <Signup />,
+//         children: [
+//             {
+//                 path: 'signup/veteran',
+//                 element: <VeteranSignup />,
+//             },
+//             {
+//                 path: 'signup/partner',
+//                 element: <PartnerSignup />,
+//             },
+//         ],
+//     },
+// ])
 
 
 function App() {

@@ -96,6 +96,7 @@ function VeteranSignup() {
 
     return (
         <>
+            <div className="App-header">
             <h1 className="mt-10 mb-10">SIGNUP TO BE A F**KING VETERAN</h1>
             <div className="form-container mb-20">
                 <form
@@ -252,6 +253,7 @@ function VeteranSignup() {
                     </button>
                 </form>
             </div>
+        </div>
         </>
     )
 }
