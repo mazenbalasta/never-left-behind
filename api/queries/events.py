@@ -141,3 +141,37 @@ class EventsRepo:
                     return True
         except Exception:
             raise HTTPException(status_code=500, detail="Delete failed")
+
+    def create_entries(self):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    for i in range(20000000000):
+                        db.execute(
+                            """
+                            INSERT INTO events
+                                (
+                                    event_title,
+                                    start_date,
+                                    end_date,
+                                    description,
+                                    street_address,
+                                    city,
+                                    state
+                                )
+                            VALUES
+                                (%s, %s, %s, %s, %s, %s, %s);
+                            """,
+                            [
+                                f"Event {i+1}",
+                                "2022-01-01",
+                                "2022-01-02",
+                                "Sample description",
+                                "Sample street address",
+                                "Sample city",
+                                "Sample state",
+                            ],
+                        )
+            return "Entries created successfully"
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

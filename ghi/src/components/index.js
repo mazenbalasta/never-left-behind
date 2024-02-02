@@ -8,6 +8,14 @@ import VeteranSignup from './VeteranSignup';
 import PartnerSignup from './PartnerSignup';
 import Login from "./Login";
 
-export { Nav, Footer, Resources, VeteranSignup, PartnerSignup, Login, Carousel,
-    Button, HomeCards
+export {
+    Nav,
+    Footer,
+    Resources,
+    VeteranSignup,
+    PartnerSignup,
+    Login,
+    Button,
+    Carousel,
+    HomeCards,
 }

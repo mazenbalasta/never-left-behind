@@ -2,8 +2,13 @@ import { useState, useEffect } from 'react'
 import { useGetAllAccountsQuery } from '../app/apiSlice'
 import PasswordMatchMessage from '../functions/FormUtils'
 import { Link } from 'react-router-dom'
+import { useGetTokenQuery } from '../app/apiSlice'
 
 function VeteranSignup() {
+
+    const { token } = useGetTokenQuery()
+    console.log({ token })
+
     const InitForm = {
         first_name: '',
         last_name: '',
@@ -25,7 +30,7 @@ function VeteranSignup() {
     const [usedEmails, setUsedEmails] = useState([])
 
     const { data, isLoading } = useGetAllAccountsQuery()
-
+    console.log({data, isLoading})
     useEffect(() => {
         if (!isLoading) {
             const dbUsernames = data.map((user) => user.username)
@@ -102,6 +107,7 @@ function VeteranSignup() {
 
     return (
         <>
+            <div className="App-header">
             <h1 className="mt-10 mb-10">SIGNUP TO BE A F**KING PARTNER</h1>
             <div className="form-container mb-20">
                 <form
@@ -322,6 +328,7 @@ function VeteranSignup() {
                     </button>
                 </form>
             </div>
+        </div>
         </>
     )
 }
