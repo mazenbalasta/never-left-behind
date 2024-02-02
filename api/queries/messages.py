@@ -7,14 +7,12 @@ from queries.pool import pool
 
 logger = logging.getLogger(__name__)
 
-
 class Error(BaseModel):
     message: str
 
 class Account(BaseModel):
     id: int
     body: str
-
 
 class MessagesIn(BaseModel):
     title: str
@@ -41,12 +39,10 @@ class MessageViewOut(BaseModel):
     account: int
     views: int
 
-
 class MessagesIn(Account):
     title: str
     body: str
     date: datetime
-
 
 class MessagesOut(Account):
     id: int
@@ -63,17 +59,14 @@ class MessagesOut(Account):
     #         raise ValueError("Account must be an integer")
     #     return valid
 
-
 class ResponsesIn(BaseModel):
     body: str
-
 
 class ResponsesOut(Account):
     id: int
     message_id: int
     body: str
     date: datetime
-
 
 class MessagesRepo:
     def message_from_db_record(self, record) -> MessagesOut:
@@ -189,7 +182,7 @@ class MessagesRepo:
                     return self.message_from_db_record(result)
         except Exception as e:
             print(f"Error: {e}")
-            raise HTTPException(status_code=500, detail="Internal server error")
+            raise HTTPException(status_code=500, detail=str(e))
 
     def read_increment_message_views(
             self,
@@ -209,7 +202,6 @@ class MessagesRepo:
                     [message_id],
                 )
                 return True
-
 
     def create_response(self, message_id: int, response: ResponsesIn) -> ResponsesOut:
         with pool.connection() as conn:
@@ -263,3 +255,4 @@ class MessagesRepo:
                 views_count = db.fetchone()[0]
 
                 return {"response_count": response_count, "views_count": views_count}
+
