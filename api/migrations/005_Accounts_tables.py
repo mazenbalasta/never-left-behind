@@ -11,7 +11,7 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE account_types;
-        """,
+        """
     ],
     # Step 2: Create accounts table
     [
@@ -19,7 +19,7 @@ steps = [
         """
         CREATE TABLE accounts (
             id SERIAL PRIMARY KEY NOT NULL,
-            account_type VARCHAR,
+            account_type VARCHAR(20),
             username VARCHAR(50) UNIQUE NOT NULL,
             password VARCHAR(1000) NOT NULL,
             email VARCHAR(255) UNIQUE NOT NULL,
@@ -36,7 +36,7 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE accounts;
-        """,
+        """
     ],
     # Step 3: Create message table
     [
@@ -55,7 +55,7 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE messages;
-        """,
+        """
     ],
 
     # Step 4: Create responses table
@@ -75,7 +75,7 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE responses;
-        """,
+        """
     ],
     # Step 5: Insert data to account types table
     [
@@ -90,6 +90,6 @@ steps = [
         # "Down" SQL statement
         """
         DELETE FROM account_types;
-        """,
+        """
     ],
 ]

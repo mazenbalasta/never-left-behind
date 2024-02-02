@@ -6,7 +6,7 @@ import { arrowRight } from '../../assets/icons'
 
 
 function ListMessages() {
-    const { data: messages, isLoading, isError, error, refetch } = useGetAllMessagesQuery();
+    const { data: messages, isLoading, isError, error } = useGetAllMessagesQuery();
     const navigate = useNavigate();
 
     useEffect(() => {

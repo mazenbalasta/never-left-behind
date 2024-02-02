@@ -1,6 +1,6 @@
 import { logo } from '../assets/images'
 import { DropdownButton } from '../assets/buttons'
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom' // Added import statement
 import { useGetTokenQuery } from '../app/apiSlice'
 import {useLogoutMutation} from '../app/apiSlice'
 import UserGreeting from '../functions/UserGreeeting'
@@ -10,6 +10,10 @@ const Nav = () => {
     const { data:account } = useGetTokenQuery();
     const [logOut] = useLogoutMutation()
     // console.log({account})
+
+    if (account) {
+        const firstName = account.account.first_name;
+    };
 
     return (
         <header className="bg-gray-900">
