@@ -1,13 +1,11 @@
 import './App.css';
 import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login} from './components';
-import { MessageForm, ListMessages, EditMessage, DeleteMessage } from './components/messages';
 import HomePage from './HomePage';
 import Events from './Events';
 import Chat from './Chat';
 // import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
-import { BrowserRouter } from 'react-router-dom'
 import { ListMessages, DeleteMessage, EditMessage, MessageForm } from './components/messages';
 
 
