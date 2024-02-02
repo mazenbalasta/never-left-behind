@@ -4,16 +4,19 @@ import { Button } from '../../components'
 import { arrowRight } from '../../assets/icons'
 import { useState } from 'react';
 import { useGetTokenQuery } from '../../app/apiSlice';
+import { useAuthContext } from '@galvanize-inc/jwtdown-for-react'
+import { useEffect } from 'react';
 
 
 function MessageForm() {
-    const { token: account } = useGetTokenQuery()
-    console.log(account)
+    const { token } = useAuthContext()
+    // const { token: token } = useGetTokenQuery()
+    useEffect(() => {
+        console.log('Token:', token)
+    }, [token])
 
-    if (account) {
-        const firstName = account.account.first_name
-        console.log(firstName)
-    }
+
+
 
     const [message, setMessage] = useState({
         title: '',
