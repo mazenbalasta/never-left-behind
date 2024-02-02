@@ -104,6 +104,8 @@ function App() {
                                         />
                                     </Route>
                                     <Route path="/login" element={<Login />} />
+                                    <Route path="/events" element={<Events />} />
+                                    <Route path="/chat" element={<Chat />} />
                                 </Routes>
                             </div>
                         </section>
