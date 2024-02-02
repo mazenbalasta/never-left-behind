@@ -8,8 +8,7 @@ import UserGreeting from '../functions/UserGreeeting'
 
 const Nav = () => {
     const { data:account } = useGetTokenQuery();
-    const [logOut] = useLogoutMutation()
-    // console.log({account})
+    const [logOut] = useLogoutMutation();
 
     if (account) {
         const firstName = account.account.first_name;
@@ -43,7 +42,7 @@ const Nav = () => {
                         <NavLink to="/events">Events</NavLink>
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
-                        Jobs
+                        <NavLink to="/jobs">Jobs</NavLink>
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
                         Activities

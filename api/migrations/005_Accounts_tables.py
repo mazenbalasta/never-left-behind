@@ -25,10 +25,10 @@ steps = [
             email VARCHAR(255) UNIQUE NOT NULL,
             first_name VARCHAR(255) NOT NULL,
             last_name VARCHAR(255) NOT NULL,
-            company_name VARCHAR(150) NULL,
-            city VARCHAR(50) NULL,
-            state VARCHAR(2) NULL,
-            country VARCHAR(75) NULL,
+            company_name VARCHAR(150),
+            city VARCHAR(50),
+            state VARCHAR(2),
+            country VARCHAR(75),
             FOREIGN KEY(account_type) REFERENCES account_types(account_type),
             FOREIGN KEY(state) REFERENCES states(abbreviation)
         );

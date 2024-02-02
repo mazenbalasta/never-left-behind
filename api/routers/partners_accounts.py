@@ -7,6 +7,7 @@ from fastapi import (
     Request,
 )
 from queries.veterans_accounts import AccountQueries
+from queries.partners_accounts import PartnerAccountQueries
 from authenticator import authenticator
 from typing import List
 from models import (
@@ -47,7 +48,7 @@ async def create_account(
     info: PartnerAccountIn,
     request: Request,
     response: Response,
-    accounts: AccountQueries = Depends(),
+    accounts: PartnerAccountQueries = Depends(),
 ):
     hashed_password = authenticator.hash_password(info.password)
     try:

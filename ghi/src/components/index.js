@@ -7,6 +7,7 @@ import Resources from './Resources';
 import VeteranSignup from './VeteranSignup';
 import PartnerSignup from './PartnerSignup';
 import Login from "./Login";
+import Jobslist from "./Jobslist";
 
 export {
     Nav,
@@ -18,4 +19,5 @@ export {
     Button,
     Carousel,
     HomeCards,
+    Jobslist
 }

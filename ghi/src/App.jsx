@@ -1,5 +1,5 @@
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login} from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login, Jobslist} from './components';
 import HomePage from './HomePage';
 import Events from './Events';
 import Chat from './Chat';
@@ -53,9 +53,22 @@ function App() {
                                         element={<DeleteMessage />}
                                     />
                                 </Route>
-                                <Route path="/events" element={<Events />} />
-                                <Route path="/chat" element={<Chat />} />
-                                <Route path="/login" element={<Login />} />
+                                <Route
+                                    path="/events"
+                                    element={<Events />}
+                                />
+                                <Route
+                                    path="/chat"
+                                    element={<Chat />}
+                                />
+                                <Route
+                                    path="/login"
+                                     element={<Login />}
+                                />
+                                <Route
+                                    path="/jobs"
+                                     element={<Jobslist />}
+                                />
                             </Routes>
                         </div>
                     </section>
