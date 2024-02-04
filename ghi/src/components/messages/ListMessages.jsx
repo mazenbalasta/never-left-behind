@@ -1,30 +1,42 @@
-import { useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useGetAllMessagesQuery } from '../../app/apiSlice';
-import { Button } from '../../components'
+import { useGetAllMessagesQuery, useDeleteMessageMutation } from '../../app/apiSlice';
+import { Button, Modal } from '../../components'
 import { arrowRight } from '../../assets/icons'
+import EditMessage from './EditMessage';
 
 
 function ListMessages() {
-    const { data: messages, isLoading, isError, error } = useGetAllMessagesQuery();
+    const { data: messages, isLoading, isError, error, refetch } = useGetAllMessagesQuery();
+    const [deleteMessage] = useDeleteMessageMutation();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editingMessageId, setEditingMessageId] = useState(null);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (isError) {
-            console.error('Error fetching messages:', error);
-        }
-    }, [isError, error]);
-
-    const handleDelete = (id) => {
-        navigate(`/messages/${id}/delete`)
-    };
 
     const handleEdit = (id) => {
-        navigate(`/messages/${id}/update`);
+        setEditingMessageId(id);
+        setIsModalOpen(true);
     };
 
+    const handleCloseModal = (updated) => {
+        setIsModalOpen(false);
+        setEditingMessageId(null);
+        if (updated) {
+            refetch();
+        }
+    };
+
+    const handleDelete = async (id) => {
+        if (window.confirm('Are you sure you want to delete this message?')) {
+            await deleteMessage(id).unwrap();
+            refetch();
+        }
+    };
+
+
     const navToCreateMessage = () => {
-        navigate('/messages/create');
+        navigate('/messages/update');
     };
 
     if (isLoading) return <p>Loading messages...</p>;
@@ -42,7 +54,7 @@ function ListMessages() {
                         onClick={navToCreateMessage}
                         />
                 </div>
-                <div className='space-y-4'>
+                <div className='container mx-auto mt-10 p-4'>
                     {messages.map(message => (
                         <div key={message.id} className='bg-gray-500 shadow overflow-hidden sm:rounded-md p-4'>
                             <div className='flex items-center  justify-between '>
@@ -70,6 +82,18 @@ function ListMessages() {
                                         size='small'
                                         onClick={() => handleEdit(message.id)}
                                     />
+                                    <Modal 
+                                        isOpen={isModalOpen}
+                                        title='Edit Message'
+                                        onClose={() => handleCloseModal(false)}
+                                    >
+                                        {editingMessageId && (
+                                            <EditMessage 
+                                            messageId={editingMessageId}
+                                            onClose={handleCloseModal}
+                                        />
+                                        )}
+                                    </Modal>
                                     <Button
                                         label='Reply'
                                         size='small'

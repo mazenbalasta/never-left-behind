@@ -1,22 +1,23 @@
 import { useState, useEffect } from "react"
-import { useParams, useNavigate } from "react-router-dom"
-import { useGetMessageQuery, useUpdateMessageMutation } from "../../app/apiSlice"
+import { useGetTokenQuery, useGetMessageQuery, useUpdateMessageMutation } from "../../app/apiSlice"
 import { Button } from "../../components"
 import { arrowRight } from "../../assets/icons"
 
-function EditMessage() {
-    const { id } = useParams();
-    const { data: message, isLoading } = useGetMessageQuery(id);
+
+function EditMessage( { messageId, onClose }) {
+    const { data: tokenData } = useGetTokenQuery();
+    const { data: message, isLoading, isError } = useGetMessageQuery(messageId);
     const [updateMessage] = useUpdateMessageMutation();
-    const navigate = useNavigate();
-    const [formData, setFormData] = useState({ title: '', body: '' });
+    const [formData, setFormData] = useState({ title: '', body: '', account: null, date: null});
+
 
     useEffect(() => {
-        if (message) {
-            setFormData({ title: message.title, body: message.body });
+        if (message && tokenData) {
+            setFormData({ title: message.title, body: message.body, account: tokenData.account.id, date: new Date().toISOString()
+            });
         }
-    }, [message]);
-
+    }, [message, tokenData]);
+    
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData(prevFormData => ({...prevFormData, [name]: value }));
@@ -24,15 +25,18 @@ function EditMessage() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        await updateMessage({ id, ...formData }).unwrap();
-        navigate('/messages');
+        try {
+            await updateMessage({ id: messageId, ...formData }).unwrap();
+            onClose(true);
+        } catch (error) {
+            console.error('Failed to update the message:', error)
+            onClose(false);
+        };
     };
 
-    const navToMessageList = () => {
-        navigate('/messages');
-    };
 
     if (isLoading) return <p>Loading...</p>
+    if (isError) return <p>Error loading the message</p>
 
     return (
         <div className='max-w-md mx-auto mt-10'>
@@ -66,16 +70,16 @@ function EditMessage() {
                     <div className='flex items-center justify-between'>
                         <Button
                             type='submit'
-                            text='Update Message'
-                            size='medium'                        
+                            label='Update'
+                            size='small'                        
                             imageURL={arrowRight}
                         />
                         <Button
                             type='button'
-                            text='Cancel'
-                            size='medium'
+                            label='Cancel'
+                            size='small'
                             imageURL={arrowRight}
-                            onClick={navToMessageList}
+                            onClick={onClose}
                         />
                     </div>
                 </form>

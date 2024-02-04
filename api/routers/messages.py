@@ -10,8 +10,15 @@ def create_message(message: MessagesIn, repo: MessagesRepo = Depends()):
     return repo.create(message)
 
 @router.get("/api/messages", response_model=List[MessagesOut])
-def list_messages(repo: MessagesRepo = Depends()):
+def list_all_messages(repo: MessagesRepo = Depends()):
     return repo.list_messages()
+
+@router.get("/api/messages/{id}", response_model=MessagesOut)
+def get_message(id: int, repo: MessagesRepo = Depends()):
+    message = repo.get_message(id)
+    if message is None:
+        raise HTTPException(status_code=404, detail="Message not found")
+    return message
 
 @router.put("/api/messages/{id}", response_model=MessagesOut)
 def update_message(id: int, message: MessagesIn, repo: MessagesRepo = Depends()):

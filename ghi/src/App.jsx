@@ -36,22 +36,11 @@ function App() {
                                         element={<PartnerSignup />}
                                     />
                                 </Route>
-                                <Route
-                                    path="/messages/*"
-                                    element={<ListMessages />}
-                                >
-                                    <Route
-                                        path="create"
-                                        element={<MessageForm />}
-                                    />
-                                    <Route
-                                        path=":id/update"
-                                        element={<EditMessage />}
-                                    />
-                                    <Route
-                                        path=":id/delete"
-                                        element={<DeleteMessage />}
-                                    />
+                                {/* <Route> */}
+                                <Route path="/messages" element={<ListMessages />}>
+                                    <Route path="create" element={<MessageForm />} />
+                                    {/* <Route path=":id/update" element={<EditMessage />} />
+                                    <Route path=":id/delete"element={<DeleteMessage />} /> */}
                                 </Route>
                                 <Route path="/events" element={<Events />} />
                                 <Route path="/chat" element={<Chat />} />
