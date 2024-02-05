@@ -29,3 +29,13 @@ Recommended naming convention is `first_last.md`.
     -we succeeded in getting tailwaind CSS 
     -created template for frontend
     -GREAT SUCCESS
+
+26JAN24
+    -Partner coding with team
+
+29JAN24
+    -partner coded with team
+    -adjusted mainpage
+    -started messages
+    -reasearched sockets
+    -read about creating message forums

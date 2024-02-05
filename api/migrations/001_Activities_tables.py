@@ -11,7 +11,7 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE categories;
-        """
+        """,
     ],
     # step 2
     [
@@ -32,5 +32,5 @@ steps = [
         """
         DROP TABLE Activities;
         """,
-    ]
+    ],
 ]

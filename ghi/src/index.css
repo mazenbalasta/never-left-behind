@@ -1,7 +1,24 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'font.css';
 
+@layer base {
+  html {
+    @apply text-neutral-800;
+  }
+
+  html.dark {
+    @apply text-neutral-50;
+  }
+}
+
+@layer components {
+  .bg-neutral-800 {
+    background-color: #333333;
+  }
+}
 
 body {
   margin: 0;
@@ -53,4 +70,8 @@ code {
   .padding-b {
     @apply sm:pb-24 pb-12;
   }
+}
+
+.App-Section {
+  font-family: 'Virgil'
 }

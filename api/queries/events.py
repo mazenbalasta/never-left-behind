@@ -1,13 +1,8 @@
 from queries.pool import pool
 from typing import Union
 from fastapi import HTTPException
-from models import (
-    EventsIn,
-    EventsOut,
-    EventsOutWithStateInfo,
-    Error,
-    States
-)
+from models import EventsIn, EventsOut, EventsOutWithStateInfo, Error, States
+
 
 class EventsRepo:
     def create(self, event: EventsIn) -> EventsOut:
@@ -37,7 +32,7 @@ class EventsRepo:
                             event.description,
                             event.street_address,
                             event.city,
-                            event.state
+                            event.state,
                         ],
                     )
                     id = result.fetchone()[0]
@@ -73,7 +68,7 @@ class EventsRepo:
                             state=States(
                                 state_id=record[8],
                                 abbreviation=record[9],
-                                state_name=record[10]
+                                state_name=record[10],
                             ),
                         )
                         result.append(event)
@@ -123,8 +118,11 @@ class EventsRepo:
                     db.fetchone()[0]
                     old_data = event.dict()
                     return EventsOut(id=event_id, **old_data)
-        except Exception as e:
-            raise HTTPException(status_code=500, detail="Event failed to update, please check if event id exist")
+        except Exception:
+            raise HTTPException(
+                status_code=500,
+                detail="Event failed to update, please check if event id exist",
+            )
 
     def delete_event(self, event_id: int):
         try:
@@ -143,3 +141,37 @@ class EventsRepo:
                     return True
         except Exception:
             raise HTTPException(status_code=500, detail="Delete failed")
+
+    def create_entries(self):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    for i in range(20000000000):
+                        db.execute(
+                            """
+                            INSERT INTO events
+                                (
+                                    event_title,
+                                    start_date,
+                                    end_date,
+                                    description,
+                                    street_address,
+                                    city,
+                                    state
+                                )
+                            VALUES
+                                (%s, %s, %s, %s, %s, %s, %s);
+                            """,
+                            [
+                                f"Event {i+1}",
+                                "2022-01-01",
+                                "2022-01-02",
+                                "Sample description",
+                                "Sample street address",
+                                "Sample city",
+                                "Sample state",
+                            ],
+                        )
+            return "Entries created successfully"
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

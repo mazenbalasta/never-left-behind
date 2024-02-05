@@ -1,7 +1,5 @@
-from pydantic import BaseModel
 from queries.pool import pool
 from typing import Optional, List, Union
-from typing import Optional
 from models import VetAccountIn, AccountOutWithPassword
 from fastapi import HTTPException
 
@@ -10,6 +8,7 @@ from fastapi import HTTPException
 
 class DuplicateAccountError(ValueError):
     pass
+
 
 class AccountQueries:
     def list_accounts(
@@ -33,7 +32,7 @@ class AccountQueries:
                             hashed_password=record[3],
                             email=record[4],
                             first_name=record[5],
-                            last_name=record[6]
+                            last_name=record[6],
                         )
                         result.append(account)
                     return result
@@ -67,20 +66,18 @@ class AccountQueries:
                             hashed_password,
                             info.email,
                             info.first_name,
-                            info.last_name
+                            info.last_name,
                         ],
                     )
                     id = result.fetchone()[0]
                     old_data = info.dict()
                     return AccountOutWithPassword(
-                        id=id,
-                        hashed_password=hashed_password,
-                        **old_data
+                        id=id, hashed_password=hashed_password, **old_data
                     )
             except Exception:
                 raise HTTPException(
                     status_code=400,
-                    detail="Username or email already in use, please use a different one"
+                    detail="Username or email already in use, please use a different one",
                 )
 
     async def get(self, username: str) -> Optional[AccountOutWithPassword]:
@@ -103,6 +100,6 @@ class AccountQueries:
                         hashed_password=record[3],
                         email=record[4],
                         first_name=record[5],
-                        last_name=record[6]
+                        last_name=record[6],
                     )
                 return None

@@ -1,0 +1,116 @@
+import React from 'react';
+
+function MessageRow(props) {
+  const when = new Date(props.message.timestamp);
+  return (
+    <tr className="flex-row py-6 px-3 justify-center items-center">
+      <td className="text-lg">Radio Check:</td>
+      <td className="flex flex-row py-6 px-7 mb-7 mr-7 ml-7 justify-center items-center bg-gray-950 rounded-r-lg rounded-t-lg border-b-2 border-gray-800">
+        {props.message.content}
+      </td>
+      <td className="pl-7 text-xs font-medium">{when.toLocaleString()}</td>
+    </tr>
+  );
+}
+
+class Chat extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: [],
+      clientId: Number.parseInt(Math.random() * 10000000),
+      connected: false,
+      message: '',
+    };
+    this.sendMessage = this.sendMessage.bind(this);
+    this.updateMessage = this.updateMessage.bind(this);
+  }
+
+  connect() {
+    if (this.loading && !this.state.connected) {
+      return;
+    }
+    this.loading = true;
+    // Should be an environment variable in the future
+    const url = `ws://localhost:8000/chat/${this.state.clientId}`;
+    this.socket = new WebSocket(url);
+    this.socket.addEventListener('open', () => {
+      this.setState({ connected: true });
+      this.loading = false;
+    });
+    this.socket.addEventListener('close', () => {
+      this.setState({ connected: false });
+      this.loading = false;
+      setTimeout(() => {
+        this.connect();
+      }, 1000);
+    });
+    this.socket.addEventListener('error', () => {
+      this.setState({ connected: false });
+      this.loading = false;
+      setTimeout(() => {
+        this.connect();
+      }, 1000);
+    });
+    this.socket.addEventListener('message', (message) => {
+      this.setState({
+        messages: [JSON.parse(message.data), ...this.state.messages],
+      });
+    });
+  }
+
+  componentDidMount() {
+    this.connect();
+  }
+
+  sendMessage(e) {
+    e.preventDefault();
+    this.socket.send(this.state.message);
+    this.setState({ message: '' });
+  }
+
+  updateMessage(e) {
+    this.setState({ message: e.target.value });
+  }
+
+  render() {
+    return (
+      <><div className="App-Section">
+        <div className="w-full bg-gray-900 text-green-600">
+            <h1 className="App-Section text-5xl underline font-virgil">NLB Radio</h1>
+          <h2 className="text-xl">Your ID: {this.state.clientId}</h2>
+          <table className="table-auto ml-6 flex-1  px-7 py-6 bg-black">
+            <thead>
+              <tr>
+                <th className="text-xl underline">Radio Traffic</th>
+              </tr>
+            </thead>
+            <tbody className="overflow-y-scroll min-w-96 w-full max-h-96 flex flex-col-reverse h-screen">
+              {this.state.messages.map((message) => (
+                <MessageRow
+                  key={message.clientId + message.timestamp}
+                  message={message}
+                />
+              ))}
+            </tbody>
+          </table>
+          <form onSubmit={this.sendMessage}>
+            <input
+              value={this.state.message}
+              className="form-control text-black w-96 px-3 py-3 message-input"
+              type="text"
+              id="messageText"
+              autoComplete="off"
+              spellCheck="True"
+              onChange={this.updateMessage}
+            />
+            <button type="submit" className="mt-7 ml-7 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-lg px-7 py-3 mb-3 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Send It!</button>
+          </form>
+        </div>
+        </div>
+      </>
+    );
+  }
+}
+
+export default Chat;

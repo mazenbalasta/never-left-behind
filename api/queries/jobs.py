@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-from datetime import datetime
 from queries.pool import pool
 from typing import List, Union
 from fastapi import HTTPException
@@ -36,7 +35,7 @@ class JobsRepo:
     def create(self, job: JobsIn) -> JobsOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
-                result = db.execute(
+                db.execute(
                     """
                     INSERT INTO jobs
                         (

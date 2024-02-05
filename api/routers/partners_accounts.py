@@ -9,17 +9,14 @@ from fastapi import (
 from queries.veterans_accounts import AccountQueries
 from authenticator import authenticator
 from typing import List
-from pydantic import BaseModel
 from models import (
     PartnerAccountIn,
     AccountOut,
     DuplicateAccountError,
     AccountForm,
     AccountToken,
-    HttpError
+    HttpError,
 )
-
-
 
 
 router = APIRouter()

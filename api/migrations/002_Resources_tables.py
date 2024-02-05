@@ -1,5 +1,5 @@
 steps = [
-    #step 1:
+    # step 1:
     [
         # "Up" SQL statement
         """
