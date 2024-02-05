@@ -7,6 +7,8 @@ import Resources from './Resources';
 import VeteranSignup from './VeteranSignup';
 import PartnerSignup from './PartnerSignup';
 import Login from "./Login";
+import ActivitiesForm from './ActivitiesForm';
+import ActivitiesList from "./ActivitiesList";
 
 export {
     Nav,
@@ -14,6 +16,8 @@ export {
     Resources,
     VeteranSignup,
     PartnerSignup,
+    ActivitiesForm,
+    ActivitiesList,
     Login,
     Button,
     Carousel,

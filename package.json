@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "pytest": "^1.0.0",
     "maplibre-gl": "^3.6.2",
     "radar-sdk-js": "^4.1.17",
     "tailwindcss": "^3.4.1"
