@@ -66,6 +66,13 @@ export const neverLeftBehindApi = createApi({
                 method: 'DELETE',
             }),
         }),
+        createResponse: builder.mutation({
+            query: (response) => ({
+                url: '/api/messages/{message_id}/responses',
+                method: 'POST',
+                body: response,
+            }),
+        }),
         getToken: builder.query({
             query: () => ({
                 url: '/token',
@@ -85,4 +92,5 @@ export const {
     useCreateMessageMutation,
     useUpdateMessageMutation,
     useDeleteMessageMutation,
+    useCreateResponseMutation,
 } = neverLeftBehindApi;

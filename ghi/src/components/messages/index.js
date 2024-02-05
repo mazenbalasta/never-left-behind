@@ -1,5 +1,6 @@
-import EditMessage from "./EditMessage";
+import EditMessageForm from "./EditMessageForm";
 import ListMessages from "./ListMessages";
 import CreateMessageForm from "./CreateMessageForm";
+import ReplyMessageForm from "./ReplyMessageForm";
 
-export { EditMessage, ListMessages, CreateMessageForm };
+export { EditMessageForm, ListMessages, CreateMessageForm, ReplyMessageForm};

@@ -1,13 +1,13 @@
-import { facebook, instagram, twitter } from "../assets/icons";
+import { facebook, instagram, twitterX } from "../assets/icons";
 import { FiMessageSquare } from "react-icons/fi";
 import { GrResources } from "react-icons/gr";
 import { MdCardMembership } from "react-icons/md";
 import { RxActivityLog } from "react-icons/rx";
 
 export const socialMedia = [
-    { src: facebook, alt: "Facebook logo" },
-    { src: instagram, alt: "Instagram logo" },
-    { src: twitter, alt: "Twitter logo" },
+    { src: facebook, alt: "Facebook logo", link: "https://www.facebook.com/profile.php?id=61556115600897" },
+    { src: instagram, alt: "Instagram logo", link: "https://www.instagram.com/neverlftbhnd/" },
+    { src: twitterX, alt: "Twitter logo", link: "https://twitter.com/NeverLeftB/media" },
 ];
 
 export const footerLinks = [

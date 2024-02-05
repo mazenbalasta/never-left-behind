@@ -86,6 +86,7 @@ function CreateMessageForm({ onClose }) {
                                 type="submit"
                                 label="Create"
                                 size="small"
+                                backgroundColor="bg-blue-500"
                             />
                             <Button
                                 type="button"

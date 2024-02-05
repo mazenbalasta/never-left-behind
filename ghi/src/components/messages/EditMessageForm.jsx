@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useGetTokenQuery, useGetMessageQuery, useUpdateMessageMutation } from "../../app/apiSlice"
-import { Button } from "../../components"
+import { Button } from ".."
 
 
 function EditMessage( { messageId, onClose }) {
@@ -70,7 +70,8 @@ function EditMessage( { messageId, onClose }) {
                         <Button
                             type='submit'
                             label='Update'
-                            size='small'                        
+                            size='small'
+                            backgroundColor='bg-blue-500'
                         />
                         <Button
                             type='button'

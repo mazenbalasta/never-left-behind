@@ -1,4 +1,4 @@
-import { copyrightSign } from "../assets/icons";
+import { copyrightSign, twitterX } from "../assets/icons";
 import { logo } from "../assets/images";
 import { footerLinks, socialMedia } from "../constants";
 
@@ -30,12 +30,15 @@ const Footer = () => {
 
       <div className='flex justify-center items-center gap-5 mt-8 mx-8'>
         {socialMedia.map((icon) => (
-          <div
+          <a
+            href={icon.link}
+            key={icon.name}
             className='flex justify-center items-center w-12 h-12 bg-white rounded-full'
-            key={icon.alt}
+            target="_blank"
+            rel="noreferrer noopener"
           >
-            <img src={icon.src} alt={icon.alt} width={24} height={24} />
-          </div>
+            <img src={icon.src} alt={icon.alt} style={icon.alt === 'twitterX' ? { width: '30px', height: '30px' } : null} />
+          </a>
         ))}
       </div>
 

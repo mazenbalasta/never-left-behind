@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { useGetAllMessagesQuery, useDeleteMessageMutation, useGetTokenQuery } from '../../app/apiSlice';
-import { Button, Modal } from '../../components'
+import { Button, Modal } from '..'
 import { arrowRight } from '../../assets/icons'
-import EditMessage from './EditMessage';
+import EditMessage from './EditMessageForm';
 import CreateMessageForm from './CreateMessageForm';
+import ReplyMessageForm from './ReplyMessageForm';
 
 
 function ListMessages() {
@@ -14,6 +15,8 @@ function ListMessages() {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [editingMessageId, setEditingMessageId] = useState(null);
     const [deletingMessageId, setDeletingMessageId] = useState(null);
+    const [isReplyModalOpen, setIsReplyModalOpen] = useState(false);
+    const [replyingMessageId, setReplyingMessageId] = useState(null);
     const { data: tokenData } = useGetTokenQuery();
 
     const isAuthenticated = tokenData && tokenData.account;
@@ -60,12 +63,24 @@ function ListMessages() {
         }
     };
 
+    const handleReplyMessage = (id) => {
+        setReplyingMessageId(id);
+        setIsReplyModalOpen(true);
+    };
+
+    const handleCloseReplyModal = (updated) => {
+        setIsReplyModalOpen(false);
+        if (updated) {
+            refetch();
+        }
+    };
+
 
     if (isLoading) return <p>Loading messages...</p>;
     if (isError) return <p>Error loading messages.</p>;
 
     return (
-        <main>
+        <main className='p-4 md:p-8 lg:p-12'>
             <h1 className='text-3xl font-bold text-white text-center mt-10'>Messages</h1>
             <div className='container mx-auto mt-10 p-4'>
                 {isAuthenticated && (
@@ -131,7 +146,7 @@ function ListMessages() {
                                     <Button
                                         label='Reply'
                                         size='small'
-                                        onClick={() => handleEdit(message.id)}
+                                        onClick={() => handleReplyMessage(message.id)}
                                     />
                                     )}
                                 </div>
@@ -161,12 +176,26 @@ function ListMessages() {
                             label='Delete'
                             size='small'
                             onClick={confirmDeleteMessage}
+                            backgroundColor='bg-red-500'
                         />
                         <Button
                             label='Cancel'
                             size='small'
                             onClick={() => setIsDeleteModalOpen(false)}
                         />
+                </Modal>
+                <Modal
+                    isOpen={isReplyModalOpen}
+                    title='Reply to Message'
+                    onClose={() => handleCloseReplyModal(false)}
+                >
+                    {replyingMessageId && (
+                        <ReplyMessageForm
+                            messageId={replyingMessageId}
+                            accountId={userId}
+                            onClose={handleCloseReplyModal}
+                        />
+                    )}
                 </Modal>
             </div>
         </main>
