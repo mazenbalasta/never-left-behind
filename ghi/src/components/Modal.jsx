@@ -11,15 +11,6 @@ const Modal = ({ isOpen, title, children, onClose }) => {
 
                 {children}
 
-                <Button 
-                    label="Close"
-                    size="medium"
-                    onClick={onClose}
-                    backgroundColor="bg-red-500"
-                    textColor="text-white"
-                    borderColor="border-red-500"
-                    
-                />
             </div>
         </div>
     );

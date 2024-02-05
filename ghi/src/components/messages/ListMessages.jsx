@@ -69,7 +69,7 @@ function ListMessages() {
             <h1 className='text-3xl font-bold text-white text-center mt-10'>Messages</h1>
             <div className='container mx-auto mt-10 p-4'>
                 {isAuthenticated && (
-                <div className='flex justify-end mb-4'>
+                <div className='flex justify-center mb-4'>
                     <Button
                         label='Create Message'
                         size='medium'
@@ -90,7 +90,7 @@ function ListMessages() {
                     </Modal>
                 </div>
                 )}
-                <div className='container mx-auto mt-10 p-4'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10'>
                     {messages.map(message => (
                         <div key={message.id} className='bg-gray-500 shadow overflow-hidden sm:rounded-md p-4 mb-1'>
                             <div className='flex items-center  justify-between '>
@@ -112,7 +112,7 @@ function ListMessages() {
                                         {message.response_count} replies
                                     </div>
                                 </div>
-                                <div className='flex-shrink-0 ml-4'>
+                                <div className='flex-shrink-0 space-y-1 ml-4 my-1'>
                                     {userId === message.account && (
                                         <>
                                             <Button
@@ -127,11 +127,13 @@ function ListMessages() {
                                             />
                                         </>
                                     )}
+                                    {isAuthenticated && (
                                     <Button
                                         label='Reply'
                                         size='small'
                                         onClick={() => handleEdit(message.id)}
                                     />
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -159,6 +161,11 @@ function ListMessages() {
                             label='Delete'
                             size='small'
                             onClick={confirmDeleteMessage}
+                        />
+                        <Button
+                            label='Cancel'
+                            size='small'
+                            onClick={() => setIsDeleteModalOpen(false)}
                         />
                 </Modal>
             </div>

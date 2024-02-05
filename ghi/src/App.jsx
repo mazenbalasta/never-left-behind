@@ -6,7 +6,7 @@ import Chat from './Chat';
 // import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
-import { ListMessages, DeleteMessage, EditMessage, CreateMessageForm } from './components/messages';
+import { ListMessages } from './components/messages';
 
 
 function App() {
