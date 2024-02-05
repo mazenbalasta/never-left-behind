@@ -46,10 +46,10 @@ const Nav = () => {
                         Jobs
                     </li>
                     <li className="text-sm font-bold text-white uppercase">
-                        <Link to="/activitiesForm">Activities Form
-                        </Link></li>
+                        <NavLink to="/activitiesForm">Activities Form
+                        </NavLink></li>
                     <li className="text-sm font-bold text-white uppercase">
-                        <Link to="/activities">Activities</Link>
+                        <NavLink to="/activities">Activities</NavLink>
                     </li>
                 </ul>
                 <div className="login-signup-button">

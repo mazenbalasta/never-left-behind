@@ -26,3 +26,7 @@ On 31 Jan 24,
 On 1 Feb 24,
     I do not know what happen but i do not like the fact the moment i log on today to check my code its not populating the categories no more its just a blank list for the drop down i dont kno what caused it there is nothing that i changed literally nothing. I also was able to complete my unit testing but i am stil shocked at how this is not working 
     
+
+On 5 Feb 24,
+
+    with the help of Trevor i finally got my code to work again and we able to implement the local brewery API im just trying now how to make it fit the page a little better cause the search bar is not looking like it suppose to but im sure but wenseday ill have it figured out api calls and create a seperate table on top of the activiites tables that list the name, street address, cit and state of the location of the breweries i might also add the phone number incase they wanna call and have the option to see if they are open i also created a facebook, X aka Twitter and Instagram page for the application as well and will synchronizing the links as well 

@@ -35,7 +35,10 @@ function App() {
                                         path="partner"
                                         element={<PartnerSignup />}
                                     />
+                                   
                                 </Route>
+                                <Route path='activitiesForm' element={<ActivitiesForm />} />
+                                <Route path="/activities" element={<ActivitiesList />} />
                                 <Route
                                     path="/messages/*"
                                     element={<ListMessages />}

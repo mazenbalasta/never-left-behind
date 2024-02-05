@@ -9,11 +9,13 @@ const GetLocalBars = () => {
     if (response.ok) {
       const data = await response.json();
       setBars(data);
+      console.log(data);
     }
   };
 
   return (
     <div>
+      
       <input type="text" value={postal} onChange={e => setPostal(e.target.value)} />
       <button onClick={getLocalBars}>Get Local Bars</button>
       {bars.map(bar => (
@@ -31,3 +33,9 @@ const GetLocalBars = () => {
 };
 
 export default GetLocalBars;
+
+
+
+
+
+

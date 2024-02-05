@@ -8,7 +8,6 @@ import os
 from chat import routerC
 
 
-
 app = FastAPI()
 
 app.include_router(veterans_accounts.router, tags=["Authentication"])
