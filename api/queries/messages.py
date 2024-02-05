@@ -40,8 +40,8 @@ class MessagesOut(BaseAccount):
     id: int
     title: str
     body: str
-    date: datetime
     account: int
+    date: datetime
     views: int
     response_count: int
 
@@ -55,6 +55,10 @@ class ResponsesOut(BaseAccount):
     message_id: int
     body: str
     date: datetime
+
+
+class MessageWithResponsesOut(MessagesOut):
+    responses: List[ResponsesOut]
 
 
 logger = logging.getLogger(__name__)
@@ -88,7 +92,7 @@ class MessagesRepo:
                             )
                         VALUES
                             (%s, %s, %s, %s)
-                        RETURNING id, title, body, account, date, coalesce(views, 0) AS views;
+                        RETURNING id, title, body, account, date, views;
                         """,
                         [
                             message.title,
@@ -98,8 +102,10 @@ class MessagesRepo:
                         ],
                     )
                     result = db.fetchone()
+                    print(result)
                     if result:
-                        return self.message_from_db_record(result + (0,))
+                        response_count = 0
+                        return self.message_from_db_record(result + (response_count,))
                     else:
                         raise HTTPException(status_code=500, detail="error in create message")
         except Exception as e:
@@ -113,7 +119,7 @@ class MessagesRepo:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT m.id, m.title, m.body, m.account, m.date, COALESCE(m.views, 0),
+                        SELECT m.id, m.title, m.body, m.account, m.date, m.views,
                         (SELECT COUNT(*) FROM responses WHERE message_id = m.id) AS response_count
                         FROM messages m ORDER BY m.date DESC;
                         """
@@ -130,7 +136,7 @@ class MessagesRepo:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT m.id, m.title, m.body, m.account, m.date, COALESCE(m.views, 0),
+                        SELECT m.id, m.title, m.body, m.account, m.date, m.views,
                         (SELECT COUNT(*) FROM responses WHERE message_id = m.id) AS response_count
                         FROM messages m WHERE m.id = %s;
                         """,
@@ -153,7 +159,7 @@ class MessagesRepo:
                         UPDATE messages
                         SET title = %s, body = %s, account = %s, date = %s
                         WHERE id = %s
-                        RETURNING id, title, body, account, date, COALESCE(views, 0),
+                        RETURNING id, title, body, account, date, views,
                         (SELECT COUNT(*) FROM responses WHERE message_id = %s) AS response_count;
                         """,
                         [message.title, message.body, message.account, message.date, message_id, message_id]
@@ -180,25 +186,54 @@ class MessagesRepo:
             logger.error(f'Error in delete_message: {e}')
             raise HTTPException(status_code=500, detail="Internal server error")
         
-    def get_message_with_responses(self, message_id: int) -> Union[Error, MessagesOut]:
+    def get_message_with_responses(self, message_id: int) -> Union[Error, MessageWithResponsesOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT m.id, m.title, m.body, m.account, m.date, COALESCE(m.views, 0),
-                        (SELECT COUNT(*) FROM responses WHERE message_id = m.id) AS response_count
-                        FROM messages m WHERE m.id = %s;
+                        SELECT m.id, m.title, m.body, m.account, m.date, m.views,
+                        FROM messages m 
+                        WHERE m.id = %s;
                         """,
                         [message_id]
                     )
-                    result = db.fetchone()
-                    if result is None:
+                    message_result = db.fetchone()
+                    if message_result is None:
                         raise HTTPException(status_code=404, detail="Message not found")
-                    return self.message_from_db_record(result)
+
+                    db.execute(
+                        """
+                        SELECT r.id, r.message_id, r.body, r.account, r.date
+                        FROM responses r
+                        WHERE r.message_id = %s;
+                        """,
+                        [message_id]
+                    )
+                    response_results = db.fetchall()
+
+                    responses = [
+                        ResponsesOut(
+                            id=response[0],
+                            message_id=response[1],
+                            body=response[2],
+                            account=response[3],
+                            date=response[4],
+                        ) for response in response_results]
+                    
+                    return MessageWithResponsesOut(
+                        id=message_result[0],
+                        title=message_result[1],
+                        body=message_result[2],
+                        account=message_result[3],
+                        date=message_result[4],
+                        views=message_result[5],
+                        response_count=len(responses),
+                        responses=responses
+                    )
         except Exception as e:
-            print(f"Error: {e}")
-            raise HTTPException(status_code=500, detail=str(e))
+            logger.error(f'Error in get_message_with_responses: {e}')
+            raise HTTPException(status_code=500, detail="Internal server error")
 
     def read_increment_message_views(self, message_id: int) -> bool:
         try:

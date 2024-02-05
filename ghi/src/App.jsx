@@ -6,7 +6,7 @@ import Chat from './Chat';
 // import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
-import { ListMessages, DeleteMessage, EditMessage, MessageForm } from './components/messages';
+import { ListMessages, DeleteMessage, EditMessage, CreateMessageForm } from './components/messages';
 
 
 function App() {
@@ -36,12 +36,7 @@ function App() {
                                         element={<PartnerSignup />}
                                     />
                                 </Route>
-                                {/* <Route> */}
-                                <Route path="/messages" element={<ListMessages />}>
-                                    <Route path="create" element={<MessageForm />} />
-                                    {/* <Route path=":id/update" element={<EditMessage />} />
-                                    <Route path=":id/delete"element={<DeleteMessage />} /> */}
-                                </Route>
+                                <Route path="/messages" element={<ListMessages />} />
                                 <Route path="/events" element={<Events />} />
                                 <Route path="/chat" element={<Chat />} />
                                 <Route path="/login" element={<Login />} />

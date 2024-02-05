@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { useGetTokenQuery, useGetMessageQuery, useUpdateMessageMutation } from "../../app/apiSlice"
 import { Button } from "../../components"
-import { arrowRight } from "../../assets/icons"
 
 
 function EditMessage( { messageId, onClose }) {
@@ -72,13 +71,11 @@ function EditMessage( { messageId, onClose }) {
                             type='submit'
                             label='Update'
                             size='small'                        
-                            imageURL={arrowRight}
                         />
                         <Button
                             type='button'
                             label='Cancel'
                             size='small'
-                            imageURL={arrowRight}
                             onClick={onClose}
                         />
                     </div>

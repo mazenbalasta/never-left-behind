@@ -1,6 +1,6 @@
 import EditMessage from "./EditMessage";
 import ListMessages from "./ListMessages";
-import MessageForm from "./MessageForm";
+import CreateMessageForm from "./CreateMessageForm";
 import DeleteMessage from './DeleteMessage'
 
-export { EditMessage, ListMessages, MessageForm, DeleteMessage };
+export { EditMessage, ListMessages, CreateMessageForm, DeleteMessage };

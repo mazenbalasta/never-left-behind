@@ -1,43 +1,65 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { useGetAllMessagesQuery, useDeleteMessageMutation } from '../../app/apiSlice';
+import { useGetAllMessagesQuery, useDeleteMessageMutation, useGetTokenQuery } from '../../app/apiSlice';
 import { Button, Modal } from '../../components'
 import { arrowRight } from '../../assets/icons'
 import EditMessage from './EditMessage';
+import CreateMessageForm from './CreateMessageForm';
 
 
 function ListMessages() {
-    const { data: messages, isLoading, isError, error, refetch } = useGetAllMessagesQuery();
+    const { data: messages, isLoading, isError, refetch } = useGetAllMessagesQuery();
     const [deleteMessage] = useDeleteMessageMutation();
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [editingMessageId, setEditingMessageId] = useState(null);
-    const navigate = useNavigate();
+    const [deletingMessageId, setDeletingMessageId] = useState(null);
+    const { data: tokenData } = useGetTokenQuery();
+
+    const isAuthenticated = tokenData && tokenData.account;
+    const userId = tokenData?.account?.id;
 
 
-    const handleEdit = (id) => {
-        setEditingMessageId(id);
-        setIsModalOpen(true);
+    const handleCreateMessage = () => {
+        setIsCreateModalOpen(true);
     };
 
-    const handleCloseModal = (updated) => {
-        setIsModalOpen(false);
+    const handleEditMessage = (id) => {
+        setEditingMessageId(id);
+        setIsEditModalOpen(true);
+    };
+
+    const handleCloseCreateModal = (updated) => {
+        setIsCreateModalOpen(false);
+        if (updated) {
+            refetch();
+        }
+    };
+
+    const handleCloseEditModal = (updated) => {
+        setIsEditModalOpen(false);
         setEditingMessageId(null);
         if (updated) {
             refetch();
         }
     };
 
-    const handleDelete = async (id) => {
-        if (window.confirm('Are you sure you want to delete this message?')) {
-            await deleteMessage(id).unwrap();
+    const handleDeleteMessage = async (id) => {
+        setDeletingMessageId(id);
+        setIsDeleteModalOpen(true);
+    };
+
+    const confirmDeleteMessage = async () => {
+        try {
+            await deleteMessage(deletingMessageId).unwrap();
             refetch();
+        } catch (error) {
+            console.error('Error deleting message', error);
+        } finally {
+            setIsDeleteModalOpen(false);
         }
     };
 
-
-    const navToCreateMessage = () => {
-        navigate('/messages/update');
-    };
 
     if (isLoading) return <p>Loading messages...</p>;
     if (isError) return <p>Error loading messages.</p>;
@@ -46,17 +68,31 @@ function ListMessages() {
         <main>
             <h1 className='text-3xl font-bold text-white text-center mt-10'>Messages</h1>
             <div className='container mx-auto mt-10 p-4'>
+                {isAuthenticated && (
                 <div className='flex justify-end mb-4'>
                     <Button
                         label='Create Message'
                         size='medium'
                         iconURL={arrowRight}
-                        onClick={navToCreateMessage}
+                        onClick={handleCreateMessage}
+                    />
+                    <Modal
+                        isOpen={isCreateModalOpen}
+                        title='Create Message'
+                        onClose={handleCloseCreateModal}
+                    >
+                        {isAuthenticated && (
+                        <CreateMessageForm 
+                            onClose={handleCloseCreateModal}
+                            accountId={userId}
                         />
+                        )}
+                    </Modal>
                 </div>
+                )}
                 <div className='container mx-auto mt-10 p-4'>
                     {messages.map(message => (
-                        <div key={message.id} className='bg-gray-500 shadow overflow-hidden sm:rounded-md p-4'>
+                        <div key={message.id} className='bg-gray-500 shadow overflow-hidden sm:rounded-md p-4 mb-1'>
                             <div className='flex items-center  justify-between '>
                                 <div className='flex-1 min-w-0'>
                                     <div className='text-sm leading-5 font-medium text-white truncate'>{message.title}</div>
@@ -77,41 +113,57 @@ function ListMessages() {
                                     </div>
                                 </div>
                                 <div className='flex-shrink-0 ml-4'>
-                                    <Button
-                                        label='Edit'
-                                        size='small'
-                                        onClick={() => handleEdit(message.id)}
-                                    />
-                                    <Modal 
-                                        isOpen={isModalOpen}
-                                        title='Edit Message'
-                                        onClose={() => handleCloseModal(false)}
-                                    >
-                                        {editingMessageId && (
-                                            <EditMessage 
-                                            messageId={editingMessageId}
-                                            onClose={handleCloseModal}
-                                        />
-                                        )}
-                                    </Modal>
+                                    {userId === message.account && (
+                                        <>
+                                            <Button
+                                                label='Edit'
+                                                size='small'
+                                                onClick={() => handleEditMessage(message.id)}
+                                            />
+                                            <Button
+                                                label='Delete'
+                                                size='small'
+                                                onClick={() => handleDeleteMessage(message.id)}
+                                            />
+                                        </>
+                                    )}
                                     <Button
                                         label='Reply'
                                         size='small'
                                         onClick={() => handleEdit(message.id)}
-                                    />
-                                    <Button
-                                        label='Delete'
-                                        size='small'
-                                        onClick={() => handleDelete(message.id)}
                                     />
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
+                <Modal 
+                    isOpen={isEditModalOpen}
+                    title='Edit Message'
+                    onClose={() => handleCloseEditModal(false)}
+                >
+                    {editingMessageId && (
+                        <EditMessage 
+                            messageId={editingMessageId}
+                            onClose={handleCloseEditModal}
+                        />
+                    )}
+                </Modal>
+                <Modal
+                    isOpen={isDeleteModalOpen}
+                    title='Confirm Delete'
+                    onClose={() => setIsDeleteModalOpen(false)}
+                >
+                    <p>Are you sure you want to delete this message?</p>
+                        <Button
+                            label='Delete'
+                            size='small'
+                            onClick={confirmDeleteMessage}
+                        />
+                </Modal>
             </div>
         </main>
     );
 }
 
-export default ListMessages
+export default ListMessages;
