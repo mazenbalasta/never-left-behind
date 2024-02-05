@@ -84,7 +84,7 @@ export const neverLeftBehindApi = createApi({
 export const {
     useGetAllAccountsQuery,
     useGetAllActivitiesQuery,
-    useGetAllCategoriesQuery,,
+    useGetAllCategoriesQuery,
     useGetTokenQuery,
     useLogoutMutation,
     useLoginMutation,

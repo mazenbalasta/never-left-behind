@@ -16,6 +16,8 @@ export {
     Resources,
     VeteranSignup,
     PartnerSignup,
+    ActivitiesForm,
+    ActivitiesList,
     Login,
     Button,
     Carousel,
