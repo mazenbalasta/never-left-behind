@@ -67,10 +67,22 @@ export const neverLeftBehindApi = createApi({
             }),
         }),
         createResponse: builder.mutation({
-            query: (response) => ({
-                url: '/api/messages/{message_id}/responses',
+            query: (messageId) => ({
+                url: `/api/messages/${messageId}/responses`,
                 method: 'POST',
                 body: response,
+            }),
+        }),
+        getMessageWithResponses: builder.query({
+            query: (messageId) => ({
+                url: `/api/messages/${messageId}/responses`,
+                method: 'GET',
+            }),
+        }),
+        incrementMessageViews: builder.mutation({
+            query: (messageId) => ({
+                url: `/api/messages/${messageId}/add-view`,
+                method: 'PUT',
             }),
         }),
         getToken: builder.query({
@@ -93,4 +105,6 @@ export const {
     useUpdateMessageMutation,
     useDeleteMessageMutation,
     useCreateResponseMutation,
+    useGetMessageWithResponsesQuery,
+    useIncrementMessageViewsMutation,
 } = neverLeftBehindApi;

@@ -192,7 +192,7 @@ class MessagesRepo:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT m.id, m.title, m.body, m.account, m.date, m.views,
+                        SELECT m.id, m.title, m.body, m.account, m.date, m.views
                         FROM messages m 
                         WHERE m.id = %s;
                         """,
