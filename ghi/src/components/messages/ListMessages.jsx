@@ -31,9 +31,9 @@ function ListMessages() {
     if (isError) return <p>Error loading messages.</p>;
 
     return (
-        <main>
-            <h1 className='text-3xl font-bold text-white text-center mt-10'>Messages</h1>
-            <div className='container mx-auto mt-10 p-4'>
+        <main className="relative bg-[#282c34]">
+            <h1 className='relative bg-[#282c34] text-3xl font-bold text-white text-center mt-10'>Messages</h1>
+            <div className='bg-[#282c34] container mx-auto mt-10 p-4'>
                 <div className='flex justify-end mb-4'>
                     <Button
                         label='Create Message'

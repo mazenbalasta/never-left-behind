@@ -3,6 +3,8 @@ import { FiMessageSquare } from "react-icons/fi";
 import { GrResources } from "react-icons/gr";
 import { MdCardMembership } from "react-icons/md";
 import { RxActivityLog } from "react-icons/rx";
+import React, { useState } from "react";
+
 
 export const socialMedia = [
     { src: facebook, alt: "Facebook logo" },
@@ -28,12 +30,13 @@ export const footerLinks = [
         ],
     },
         {
-        title: "Local watering holes",
-        links: [
-            { name: "Latroy?", link: "/" },
-            { name: "placeholder", link: "/" },
-        ],
-    },
+            title: "Local watering holes",
+            links: [
+                { name: "Latroy?", link: "/" },
+                { name: "Placeholder", link: "/" },
+            ],
+
+        },
 ];
 
 export const services = [

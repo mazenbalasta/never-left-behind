@@ -7,7 +7,7 @@ function HomePage() {
     const isLoggedIn = true; // Replace this with your actual login logic
 
     return (
-        <main className='relative text-white py-16'>
+        <main className='bg-[#282c34] relative text-white py-16'>
             <section className='padding'>
                 <Carousel />
                 <div className="text-center mt-8" >
