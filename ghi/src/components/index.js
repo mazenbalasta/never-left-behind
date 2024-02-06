@@ -9,6 +9,7 @@ import PartnerSignup from './PartnerSignup';
 import Login from "./Login";
 import ActivitiesForm from './ActivitiesForm';
 import ActivitiesList from "./ActivitiesList";
+import GetLocalBars from "./GetBars";
 
 export {
     Nav,
@@ -18,6 +19,7 @@ export {
     PartnerSignup,
     ActivitiesForm,
     ActivitiesList,
+    GetLocalBars,
     Login,
     Button,
     Carousel,

@@ -73,15 +73,15 @@ function ActivitiesForm() {
   
   return (
     <div className="flex flex-col bg-black-100 py-2">
-      <div className="p-6 max-w-  bg-gray shadow-md rounded-md">
+      <div className="p-6 max-w-full  bg-gray shadow-md rounded-md">
         <h4 className="font-bold mb-8 text-blue-300">Add an Activity</h4>
-        <form onSubmit={handleSubmit} className="space-y-10 hover:bg-red-123">
+        <form onSubmit={handleSubmit} className="space=full hover:bg-red-123">
           <div>
             <label className="block mb-1 text-blue-200">Name:</label>
             <input type="text" name="name" value={formData.name} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md text-black hover:bg-blue-100" />
           </div>
           <div>
-            <label className="block mb-1 text-blue-200">Description:</label>
+            <label className="block mb-1 text-bronze-200">Description:</label>
           <textarea type="textarea" name="description" value={formData.description} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md focus:outline-none text-black hover:bg-blue-100" />
           </div>
           <div>

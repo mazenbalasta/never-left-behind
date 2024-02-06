@@ -1,0 +1,49 @@
+Subutton {
+    background:fixed;
+    text-shadow: #912424;
+    
+    color: rgb(188, 142, 25);
+    background-color: #070149;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: 10px solid rgb(199, 158,80);
+    border-style: outset;
+    cursor: pointer;
+    width: 100%;
+    font: Lucida Calligraphy;
+}
+
+Subutton:hover {
+    color: rgb(192, 143, 17);
+    opacity: 0.8;
+    background-color: #070149;
+    border-style: inset;
+    shake: 0.5s;
+    shake-iteration-count: infinite;
+    shake-animation-timing-function: ease-in-out;
+    font: 1em sans-serif;
+
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+form {
+    border: 3px solid #912424;
+}
+
+input[type=text], input[type=number], input[address] {
+    width: 100%;
+    padding: 12px 20px;
+    margin:  0;
+    display: top;
+    border: 10px solid rgb(199, 158,80);
+    box-sizing: border-box;
+    color: rgb(199, 158,80);
+    background-color: #070149;
+    border-style: double;
+}
+

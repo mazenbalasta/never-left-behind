@@ -51,6 +51,7 @@ const Nav = () => {
                     <li className="text-sm font-bold text-white uppercase">
                         <NavLink to="/activities">Activities</NavLink>
                     </li>
+
                 </ul>
                 <div className="login-signup-button">
                     {!account && (

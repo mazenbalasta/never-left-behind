@@ -4,10 +4,11 @@ import { GrResources } from "react-icons/gr";
 import { MdCardMembership } from "react-icons/md";
 import { RxActivityLog } from "react-icons/rx";
 
+
 export const socialMedia = [
-    { src: facebook, alt: "Facebook logo" },
-    { src: instagram, alt: "Instagram logo" },
-    { src: twitter, alt: "Twitter logo" },
+    { src: facebook, alt: "Facebook logo", url: "https://www.facebook.com/profile.php?id=61556115600897" },
+    { src: instagram, alt: "Instagram logo", url: "https://www.instagram.com/neverlftbhnd/" },
+    { src: twitter, alt: "Twitter logo", url: "https://twitter.com/NeverLeftB/" },
 ];
 
 export const footerLinks = [
@@ -24,13 +25,13 @@ export const footerLinks = [
         title: "Get in touch",
         links: [
             { name: "TS Name mailto: jimiHendrix@nlb.com" },
-            { name: "Telephon tel: (123) 456-7890" },
+            { name: "Telephone tel: (123) 456-7890" },
         ],
     },
         {
-        title: "Local watering holes",
+        title: "Local Breweries",
         links: [
-            { name: "Latroy?", link: "/" },
+            { name: "Just want to find a local beer?", link: "/bars" },
             { name: "placeholder", link: "/" },
         ],
     },
