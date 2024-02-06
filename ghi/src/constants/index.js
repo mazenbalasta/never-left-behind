@@ -40,17 +40,23 @@ export const services = [
     {
         imgURL: FiMessageSquare,
         label: "Message Forum",
-        subtext: "Share your thoughts and questions. Our members will help you get answers."
+        subtext: "Share your thoughts and questions. Our members will help you get answers.",
+        buttonText: "Join the conversation",
+        path: "/messages",
     },
     {
         imgURL: GrResources,
         label: "Resources",
-        subtext: "Looking for veteran qualifications? We can help."
+        subtext: "Looking for veteran qualifications? We can help.",
+        buttonText: "Find resources",
+        path: "/resources",
     },
     {
         imgURL: RxActivityLog,
         label: "Activities",
-        subtext: "Find what to do in your area with fellow veterans."
+        subtext: "Find what to do in your area with fellow veterans.",
+        buttonText: "Find activities",
+        path: "/activities",
     },
     {
         imgURL: MdCardMembership,
@@ -60,6 +66,8 @@ export const services = [
         " - Access to message forum\n\n" +
         " - Access to activities\n\n" +
         " - Early access to new job\n" +
-        "listings and events"
+        "listings and events",
+        buttonText: "Become a member",
+        path: "/signup/veteran",
     },
 ];

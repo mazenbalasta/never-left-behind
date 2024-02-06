@@ -5,7 +5,7 @@ import { footerLinks, socialMedia } from "../constants";
 
 const Footer = () => {
   return (
-    <footer className='bg-gray-900 text-white'>
+    <footer className='bg-gray-900 text-white min-h-[10vh] min-w-full flex flex-col justify-center '>
       <div className='flex justify-between items-center gap-20 flex-wrap max-lg:flex-col mx-8'>
         <div className='max-container flex flex-1 justify-between lg:gap-10 gap-20 flex-wrap'>
           {footerLinks.map((section) => (

@@ -38,14 +38,13 @@ function EditMessage( { messageId, onClose }) {
     if (isError) return <p>Error loading the message</p>
 
     return (
-        <div className='max-w-md mx-auto mt-10'>
+            <div className='bg-white flex flex-col w-full rounded-[20px] shadow-3xl px-6 py-8 border-4 border-[rgb(199,158,80)] sm:px-10 sm:py-16'>
             <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
-                <h1 className='text-xl font-bold mb-5'>Edit Message</h1>
                 <form onSubmit={handleSubmit} id='edit-message-form'>
                     <div className='mb-4'>
                         <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='title'>Title</label>
                         <input
-                            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                            className='shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline'
                             value={formData.title}
                             onChange={handleChange}
                             placeholder='Enter a title'
@@ -58,7 +57,7 @@ function EditMessage( { messageId, onClose }) {
                     <div className='mb-6'>
                         <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='body'>Message Body</label>
                         <textarea
-                            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                            className='shadow appearance-none border rounded w-full py-2 px-3 text-[rgb(199,158,80)] leading-tight focus:outline-none focus:shadow-outline'
                             value={formData.body}
                             onChange={handleChange}
                             placeholder='Message body...'
