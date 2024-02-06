@@ -1,43 +1,13 @@
-import { copyrightSign } from "../assets/icons";
+import { copyrightSign, twitterX } from "../assets/icons";
 import { logo } from "../assets/images";
 import { footerLinks, socialMedia } from "../constants";
 
 
 const Footer = () => {
   return (
-    <div style={{ position: "relative", bottom: 0, height:"100px", width: "100%" }}>
-    <footer className='bg-gray-900'>
-      <div className='flex justify-between items-start gap-20 flex-wrap max-lg:flex-col'>
-        <div className='flex flex-col items-start'>
-          <a href='/'>
-            <img
-              src={logo}
-              alt='logo'
-              width={150}
-              height={46}
-              className='m-0'
-            />
-          </a>
-          <p className='mt-6 text-base leading-7 text-white sm:max-w-sm'>
-                Never Left Behind's focus is to enhance the lives of America's veterans by
-                fostering connections with their community through a range of social and outdoor
-                activities. Established in 2024, this organization is dedicated to integrating veterans
-                into their local communities, promoting engagement and well-being through various
-                outdoor and social events.
-          </p>
-          <div className='flex items-center gap-5 mt-8'>
-            {socialMedia.map((icon) => (
-              <div
-                className='flex justify-center items-center w-12 h-12 bg-white rounded-full'
-                key={icon.alt}
-              >
-                <img src={icon.src} alt={icon.alt} width={24} height={24} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className='flex flex-1 justify-between lg:gap-10 gap-20 flex-wrap'>
+    <footer className='bg-gray-900 text-white min-h-[10vh] min-w-full flex flex-col justify-center '>
+      <div className='flex justify-between items-center gap-20 flex-wrap max-lg:flex-col mx-8'>
+        <div className='max-container flex flex-1 justify-between lg:gap-10 gap-20 flex-wrap'>
           {footerLinks.map((section) => (
             <div key={section.title}>
               <h4 className='text-2xl leading-normal font-medium mt-6 text-white'>
@@ -60,12 +30,15 @@ const Footer = () => {
 
       <div className='flex justify-center items-center gap-5 mt-8 mx-8'>
         {socialMedia.map((icon) => (
-          <div
+          <a
+            href={icon.link}
+            key={icon.name}
             className='flex justify-center items-center w-12 h-12 bg-white rounded-full'
-            key={icon.alt}
+            target="_blank"
+            rel="noreferrer noopener"
           >
-            <img src={icon.src} alt={icon.alt} width={24} height={24} />
-          </div>
+            <img src={icon.src} alt={icon.alt} style={icon.alt === 'twitterX' ? { width: '30px', height: '30px' } : null} />
+          </a>
         ))}
       </div>
 
@@ -82,7 +55,6 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-    </div>
   );
 };
 
