@@ -9,14 +9,10 @@ import UserGreeting from '../functions/UserGreeeting'
 const Nav = () => {
     const { data:account } = useGetTokenQuery();
     const [logOut] = useLogoutMutation()
-    // console.log({account})
 
-    if (account) {
-        const firstName = account.account.first_name;
-    };
 
     return (
-        <header className="bg-gray-900">
+        <header className="bg-gray-900 py-8">
             <nav className="flex justify-between items-center max-container">
                 <div className="flex items-center flex-col">
                     <a href="/">

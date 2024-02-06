@@ -39,3 +39,9 @@ Recommended naming convention is `first_last.md`.
     -started messages
     -reasearched sockets
     -read about creating message forums
+
+30JAN - 5FEB24
+    -partner coded with team
+    -updated messages
+    -did some styling adjustments
+    -still working on reply in messages

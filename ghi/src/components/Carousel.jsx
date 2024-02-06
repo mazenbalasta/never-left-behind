@@ -15,11 +15,11 @@ const Carousel = () => {
     }, [images.length]);
 
     const descriptions = [
-        "write about us",
-        "write activities description",
-        "write events description",
-        "write jobs description",
-        "write messages description"
+        "Our Story",
+        "National/Local Activities",
+        "Hiring Events",
+        "Employment Opportunities",
+        "Collaborate With Fellow Veterans"
     ];
 
 

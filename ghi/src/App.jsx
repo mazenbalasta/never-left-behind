@@ -14,12 +14,13 @@ function App() {
     const baseUrl = import.meta.env.VITE_API_HOST
 
     return (
-        <main className="relative bg-[#282c34]">
+        <main className="relative min-h-screen min-w-full flex flex-col items-center ">
+
             <section>
                 <AuthProvider baseUrl={baseUrl}>
                     <Nav />
                     <section>
-                        <div className="App-header">
+                        <div className='bg-gradient-to-r from-[#282c34] via-[#50555c] to-[#a4a9af]'>
                             <Routes>
                                 <Route path="/" element={<HomePage />} />
                                 <Route

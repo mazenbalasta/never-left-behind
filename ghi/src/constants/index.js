@@ -23,8 +23,8 @@ export const footerLinks = [
     {
         title: "Get in touch",
         links: [
-            { name: "TS Name mailto: jimiHendrix@nlb.com" },
-            { name: "Telephon tel: (123) 456-7890" },
+            { name: "@TS Name", link: "mailto:jimiHendrix@nlb.com" },
+            { name: "Need help: 844.907-1342", link: "tel:(844) 907-1342" },
         ],
     },
         {
@@ -55,6 +55,11 @@ export const services = [
     {
         imgURL: MdCardMembership,
         label: "Benefits",
-        subtext: "I don't know what to say yet, but something is going here."
+        subtext: 
+        " - Access to resources\n\n" +
+        " - Access to message forum\n\n" +
+        " - Access to activities\n\n" +
+        " - Early access to new job\n" +
+        "listings and events"
     },
 ];
