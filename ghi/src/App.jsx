@@ -1,5 +1,5 @@
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login} from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, ActivitiesForm, ActivitiesList, Login} from './components';
 import HomePage from './HomePage';
 import Events from './Events';
 import EventForm from './EventForm';
@@ -40,6 +40,25 @@ function App() {
                                     />
                                 </Route>
                                 <Route path="/messages" element={<ListMessages />} />
+                                <Route path='activitiesForm' element={<ActivitiesForm />} />
+                                <Route path="/activities" element={<ActivitiesList />} />
+                                <Route
+                                    path="/messages/*"
+                                    element={<ListMessages />}
+                                >
+                                    <Route
+                                        path="create"
+                                        element={<MessageForm />}
+                                    />
+                                    <Route
+                                        path=":id/update"
+                                        element={<EditMessage />}
+                                    />
+                                    <Route
+                                        path=":id/delete"
+                                        element={<DeleteMessage />}
+                                    />
+                                </Route>
                                 <Route path="/events" element={<Events />} />
                                 <Route path="/createEvent" element={<EventForm />} />
                                 <Route path="/chat" element={<Chat />} />
