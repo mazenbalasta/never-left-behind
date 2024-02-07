@@ -132,7 +132,7 @@ const handleResetClick = async () => {
             <div className="shadow-md sm:rounded-lg">
                 <div className="flex flex-col">
                     <div className="shadow-md sm:rounded-lg">
-                        <h1 className="text-4xl underline font-bold text-white">Events</h1>
+                        <h1 className="pl-5 text-4xl underline font-bold text-white">Events</h1>
                         <h2 className="text-sm Chat-text ml-5 mt-5 font-bold text-white">Event Count: {events.length}</h2>
                         <table className="table-auto w-full divide-y divide-gray-200 dark:divide-gray-700">
                                 <thead className="bg-gray-900 dark:bg-gray-700">
@@ -244,7 +244,8 @@ const handleResetClick = async () => {
                                     <div className="h-9" />
                                 </div>
                             ) : (
-                                <body className="bg-gray-900 text-white font-bold text-4xl underline"> Mapping
+                                <body className="pl-5 bg-gray-900 text-white font-bold text-4xl underline"> Mapping
+                                    <div className="h-20" />
                                     <div className="h-20" />
                                     <div className="h-20" />
                                     <div className="h-20" />

@@ -10,6 +10,12 @@ export const neverLeftBehindApi = createApi({
         getAllAccounts: builder.query({
             query: () => '/api/accounts',
         }),
+        getAllActivities: builder.query({
+            query: () => '/api/activities',
+        }),
+        getAllCategories: builder.query({
+            query: () => '/api/categories',
+        }),
         logout: builder.mutation({
             query: () => ({
                 url: '/token',
@@ -96,6 +102,8 @@ export const neverLeftBehindApi = createApi({
 })
 export const {
     useGetAllAccountsQuery,
+    useGetAllActivitiesQuery,
+    useGetAllCategoriesQuery,
     useGetTokenQuery,
     useLogoutMutation,
     useLoginMutation,

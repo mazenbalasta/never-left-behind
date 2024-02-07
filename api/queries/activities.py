@@ -89,8 +89,6 @@ class ActivityRepo:
                         )
                         result.append(activity)
                     return result
-                    # activities = db.fetchall()
-                    # return [ActivitiesOut(activities)]
         except Exception:
             return {"message": "Could not get all activities"}
 

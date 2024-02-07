@@ -15,7 +15,7 @@ function Resources() {
                     <li className="hover:text-blue-500"><a href="https://www.veteranscrisisline.net/">https://www.veteranscrisisline.net/</a></li>
                     <li className="hover:text-blue-500"><a href="https://www.samhsa.gov/find-help/national-helpline">https://www.samhsa.gov/find-help/national-helpline</a></li>
                     <li className="hover:text-blue-500"><a href="https://www.health.mil/Military-Health-Topics/Centers-of-Excellence/Traumatic-Brain-Injury-Center-of-Excellence/A-Head-for-the-Future">https://www.health.mil/Military-Health-Topics/Centers-of-Excellence/A-Head-for-the-Future</a></li>
-                    <li className="hover:text-blue-500"><a href="https://www.militaryonesource.mil/resources/mobile-apps/de-stress-and-relax-with-chill-drills-by-military-onesource">Chill Drils</a></li>
+                    <li className="hover:text-blue-500"><a href="https://www.militaryonesource.mil/resources/mobile-apps/de-stress-and-relax-with-chill-drills-by-military-onesource">Chill Drills</a></li>
                     <li className="hover:text-blue-500"><a href="https://findtreatment.gov/">https://findtreatment.gov</a></li>
                     <li className="hover:text-blue-500"><a href="https://www.veterantraining.va.gov/movingforward/">https://www.veterantraining.va.gov/movingforward/</a></li>
                     <li className="hover:text-blue-500"><a href="https://www.nami.org/Your-Journey/Veterans-Active-Duty">https://www.nami.org/Your-Journey/Veterans-Active-Duty</a></li>

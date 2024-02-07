@@ -62,7 +62,7 @@ const Nav = () => {
                     <div className="grid grid-cols-2 gap-4 content-end">
                     {!account ? (
                         <>
-                            <button 
+                            <button
                                 className=" w-30 h-10 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold"
                                 onClick={closeMenu}
                             >
