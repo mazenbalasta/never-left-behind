@@ -11,7 +11,7 @@ class Error(BaseModel):
 class JobsIn(BaseModel):
     position: str
     company_name: str
-    role: str
+    description: str
     requirements: str
     qualifications: str
     pref_qualifications: str
@@ -23,7 +23,7 @@ class JobsOut(BaseModel):
     id: int
     position: str
     company_name: str
-    role: str
+    description: str
     requirements: str
     qualifications: str
     pref_qualifications: str
@@ -41,7 +41,7 @@ class JobsRepo:
                         (
                             position,
                             company_name,
-                            role,
+                            description,
                             requirements,
                             qualifications,
                             pref_qualifications,
@@ -55,7 +55,7 @@ class JobsRepo:
                     [
                         job.position,
                         job.company_name,
-                        job.role,
+                        job.description,
                         job.requirements,
                         job.qualifications,
                         job.pref_qualifications,
@@ -84,7 +84,7 @@ class JobsRepo:
                             id=record[0],
                             position=record[1],
                             company_name=record[2],
-                            role=record[3],
+                            description=record[3],
                             requirements=record[4],
                             qualifications=record[5],
                             pref_qualifications=record[6],
@@ -107,7 +107,7 @@ class JobsRepo:
                         SET
                             position = %s,
                             company_name = %s,
-                            role = %s,
+                            description = %s,
                             requirements = %s,
                             qualifications = %s,
                             pref_qualifications = %s,
@@ -119,7 +119,7 @@ class JobsRepo:
                         [
                             job.position,
                             job.company_name,
-                            job.role,
+                            job.description,
                             job.requirements,
                             job.qualifications,
                             job.pref_qualifications,
