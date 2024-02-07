@@ -28,3 +28,16 @@ Today I worked with Mazen on the front end authentication, we were able to get t
 
 Jan 31, 2024:
 Today I created a chat feature, letting members chat with each other. The chat is using websockets allowing for real time communication between anyone who is a user on our app.
+
+
+Feb 1, 2024:
+Today I added a create events page, this allows our partners to create an event as they see fit.
+
+Feb 2, 2024:
+Today I worked on the authenticated view for our partners, I added the ability to view all events, and the ability to view the details of an event. I also added the ability to view the details of an event.
+
+Feb 5 , 2024:
+Today I created the ability for partners to get approval status, protecting our views even further by requiring a partner to be approved before they can create and manage events.
+
+Feb 6, 2024:
+Today I created a chat monitor for bad words, this will help keep our chat clean and safe for all users. I also designed a banner for our webpage, and worked with rudy on the navbar.

@@ -84,9 +84,9 @@ class Chat extends React.Component {
   render() {
     return (
       <>
-        <div className="Chat-text">
-          <div className="w-full bg-gray-900 text-white">
-            <h1 className="Chat-text text-5xl underline font-virgil">NLB Radio</h1>
+        <div className="Chat-text" >
+          <div className="w-full bg-gray-900 text-green-600">
+            <h1 className="Chat-text text-5xl pt-5 underline font-virgil">NLB Radio</h1>
             <h2 className="text-xl">Your ID: {this.state.clientId}</h2>
             <table className="table-auto ml-6 flex-1  px-7 py-6 bg-black">
               <thead>
