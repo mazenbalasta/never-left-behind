@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import Events from './Events';
 import EventForm from './EventForm';
 import Chat from './Chat';
+import AboutUs from './AboutUs';
 // import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
@@ -57,6 +58,8 @@ function App() {
                                 <Route path="/createEvent" element={<EventForm />} />
                                 <Route path="/chat" element={<Chat />} />
                                 <Route path="/login" element={<Login />} />
+                                <Route path="/aboutus" element={<AboutUs />} />
+
                             </Routes>
 
                     </section>

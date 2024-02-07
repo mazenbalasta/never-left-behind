@@ -97,7 +97,7 @@ function VeteranSignup() {
     return (
         <>
             <div className="App-header">
-            <h1 className="mt-10 mb-10">SIGNUP TO BE A F**KING VETERAN</h1>
+            <h1 className="mt-10 mb-10">SIGNUP AS A VETERAN</h1>
             <div className="form-container mb-20">
                 <form
                     className="grid grid-cols-1 sm:grid-cols-2 gap-4"

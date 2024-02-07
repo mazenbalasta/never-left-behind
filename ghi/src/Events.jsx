@@ -2,11 +2,19 @@ import Radar from 'radar-sdk-js';
 import 'radar-sdk-js/dist/radar.css';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import{ useGetTokenQuery } from './app/apiSlice';
 
 function ShowEvent() {
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [geocodeData, setGeocodeData] = useState(null);
+
+    const { data: token } = useGetTokenQuery();
+
+    if (token && token.account) {
+        console.log(token.account.account_type);
+    }
+
 
     const getEvents = async () => {
         const eventsUrl = 'http://localhost:8000/api/events/';
@@ -100,11 +108,27 @@ const handleDeleteClick = async () => {
     }
 }
 
+const handleResetClick = async () => {
+        const eventsUrl = 'http://localhost:8000/api/events/';
+        const response = await fetch(eventsUrl);
+        if (response.ok) {
+            const eventsData = await response.json();
+
+            if (eventsData === undefined) {
+                return null;
+            }
+            setEvents(eventsData);
+            setSelectedEvent(null);
+        }
+    }
+
     return (
         <div className="flex flex-col bg-gray-900 w-screen">
-            <button type="button">
-                            <Link className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" to="/createEvent">Create Event</Link>
-                        </button>
+            {token && token.account.account_type === 'approved_partner' && (
+                <button className="mt-5"type="button">
+                    <Link className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" to="/createEvent">Create Event</Link>
+                </button>
+            )}
             <div className="shadow-md sm:rounded-lg">
                 <div className="flex flex-col">
                     <div className="shadow-md sm:rounded-lg">
@@ -208,7 +232,8 @@ const handleDeleteClick = async () => {
                                     <p className="text-lg text-white mb-5">City: {selectedEvent.city}</p>
                                     <p className="text-lg text-white mb-5">State: {selectedEvent.state.state_name}</p>
 
-                                    <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onClick={handleDeleteClick}>Delete Events</button>
+                                    <button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleDeleteClick}>Delete Events</button>
+                                    <button type="button" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleResetClick}>Close</button>
 
                                     <div className="h-20" />
                                     <div className="h-20" />

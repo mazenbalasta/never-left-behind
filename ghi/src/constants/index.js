@@ -16,7 +16,7 @@ export const footerLinks = [
     {
         title: "Help",
         links: [
-            { name: "About us", link: "/" },
+            { name: "About us", link: "/aboutus" },
             { name: "Resources", link: "/resources" },
             { name: "Benefits of becoming a Member", link: "/" },
             { name: "Privacy policy", link: "/" },
