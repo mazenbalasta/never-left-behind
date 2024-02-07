@@ -62,11 +62,17 @@ export const services = [
         imgURL: MdCardMembership,
         label: "Benefits",
         subtext: 
-        " - Access to resources\n\n" +
-        " - Access to message forum\n\n" +
-        " - Access to activities\n\n" +
+        "Veteran members get:\n" +
+        " - Access to resources\n" +
+        " - Access to message forum\n" +
+        " - Access to activities\n" +
         " - Early access to new job\n" +
-        "listings and events",
+        "listings and events\n" +
+        "Partnership members get:\n" +
+        "- all the benefits of a veteran member\n" +
+        "- Access to our partner network\n" +
+        "- ability to post new jobs,\n" +
+        "activities, and events?\n",
         buttonText: "Become a member",
         path: "/signup/veteran",
     },

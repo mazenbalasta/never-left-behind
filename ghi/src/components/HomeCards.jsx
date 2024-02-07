@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { Button } from "../components"
 import { arrowRight } from "../assets/icons"
 
+
 const HomeCardsWrapper = ({ cards }) => {
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
@@ -20,6 +21,16 @@ const HomeCards = ({ imgURL, label, subtext, buttonText, path }) => {
     const IconComponent = imgURL;
     const handleClick = () => {
         navigate(path);
+    }
+
+
+    const splitSubtext = (text) => {
+        return text.split('\n').map((line, index) => {
+            if (line.includes("Veteran members") || line.includes("Partnership members:")) {
+                return <span key={index} className="flex justify-start text-red">{line}</span>;
+            }
+            return <span key={index}>{line}</span>;
+        });
     };
 
   return (
@@ -31,9 +42,9 @@ const HomeCards = ({ imgURL, label, subtext, buttonText, path }) => {
             {label}
         </h3>
 
-        <p className='mt-3 break-words text-base sm:text-lg leading-normal text-center' style={{ whiteSpace: 'pre-line' }}>
-            {subtext}
-        </p>
+        <div className='mt-3 break-words text-base sm:text-lg leading-normal text-center' style={{ whiteSpace: 'pre-line' }}>
+            {splitSubtext(subtext)}
+        </div>
         <div className='mt-6 sm:mt-11 gap-4 justify-center'>
         <Button type='submit' label={buttonText} iconURL={arrowRight} onClick={handleClick} />
         </div>
