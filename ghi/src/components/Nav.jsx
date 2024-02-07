@@ -56,29 +56,27 @@ const Nav = () => {
                     <li className="nav-link text-sm font-bold text-white uppercase hover:text-blue-500" onClick={closeMenu}>
                         Jobs
                     </li>
-                    <li className="text-sm font-bold text-white uppercase">
-                        <NavLink to="/activitiesForm">Activities Form
-                        </NavLink></li>
-                    <li className="text-sm font-bold text-white uppercase">
-                        <NavLink to="/activities">Activities</NavLink>
+                    <li className="nav-link mr-2 text-sm font-bold text-white uppercase hover:text-blue-500" onClick={closeMenu}>
+                        Activities
                     </li>
-                </ul>
-                <div className="login-signup-button">
-                    {!account && (
-                        <button className="w-30 h-10 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold">
-                            <NavLink to="/login">Log In</NavLink>
-                        </button>
-                    )}
-                    {!account && (
-                        <DropdownButton
-                            label="Sign up"
-                            items={[
-                                { label: 'Veteran', link: '/signup/veteran' },
-                                { label: 'Partner', link: '/signup/partner' },
-                            ]}
-                        />
-                    )}
-                    {account && (
+                    <div className="grid grid-cols-2 gap-4 content-end">
+                    {!account ? (
+                        <>
+                            <button
+                                className=" w-30 h-10 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold"
+                                onClick={closeMenu}
+                            >
+                                <NavLink to="/login">Log In</NavLink>
+                            </button>
+                            <DropdownButton
+                                label="Sign up"
+                                items={[
+                                    { label: 'Veteran', link: '/signup/veteran' },
+                                    { label: 'Apply to be a Partner!', link: '/signup/partner' },
+                                ]}
+                            />
+                        </>
+                    ) : (
                         <button
                             onClick={() => { logOut(); closeMenu() }}
                             className="w-30 h-10 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold"

@@ -1,6 +1,5 @@
 import React from 'react'
 import Filter from 'bad-words';
-
 function MessageRow(props) {
   const when = new Date(props.message.timestamp);
   return (
@@ -85,8 +84,8 @@ class Chat extends React.Component {
   render() {
     return (
       <>
-        <div className="Chat-text" >
-          <div className="w-full bg-gray-900 text-green-600">
+        <div className="Chat-text App-header">
+          <div className="bg-gray-900 text-green-600 ">
             <h1 className="Chat-text text-5xl pt-5 underline font-virgil">NLB Radio</h1>
             <h2 className="text-xl">Your ID: {this.state.clientId}</h2>
             <table className="table-auto ml-6 flex-1  px-7 py-6 bg-black">
@@ -95,7 +94,7 @@ class Chat extends React.Component {
                   <th className="text-xl underline">Radio Traffic</th>
                 </tr>
               </thead>
-              <tbody className="overflow-y-scroll min-w-96 w-full max-h-96 flex flex-col-reverse h-screen">
+                <tbody className="overflow-y-scroll min-w-96 w-full text-lg max-h-96 flex flex-col-reverse h-screen">
                 {this.state.messages.map((message) => (
                   <MessageRow
                     key={message.clientId + message.timestamp}
@@ -107,7 +106,7 @@ class Chat extends React.Component {
             <form onSubmit={this.sendMessage}>
               <input
                 value={this.state.message}
-                className="form-control text-black w-96 px-3 py-3 message-input"
+                className="form-control text-black w-96 px-3 py-3 text-lg message-input"
                 type="text"
                 id="messageText"
                 autoComplete="off"

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useGetAllActivitiesQuery } from "../app/apiSlice";
-import './ActivitiesList.css';
 
 
 const ActivitiesList = () => {
@@ -9,7 +8,7 @@ const ActivitiesList = () => {
   const [barList, setBars] = useState([]);
 
 
-  if (isFetching) return 
+  if (isFetching) return
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -77,6 +76,7 @@ const ActivitiesList = () => {
           </tr>
         ))}
       </tbody>
+      </table>
     </div>
   );
 };
