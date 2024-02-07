@@ -47,8 +47,8 @@ steps = [
             title VARCHAR(255),
             body VARCHAR(1000),
             date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            account INT,
-            views INT,
+            account INT NOT NULL,
+            views INT DEFAULT 0,
             FOREIGN KEY(account) REFERENCES accounts(id)
         );
         """,
@@ -57,6 +57,7 @@ steps = [
         DROP TABLE messages;
         """
     ],
+
 
     # Step 4: Create responses table
     [
@@ -67,8 +68,8 @@ steps = [
             message_id INT NOT NULL,
             body VARCHAR(1000) NOT NULL,
             date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            account INT,
-            FOREIGN KEY(message_id) REFERENCES messages(id),
+            account INT NOT NULL,
+            FOREIGN KEY(message_id) REFERENCES messages(id) ON DELETE CASCADE,
             FOREIGN KEY(account) REFERENCES accounts(id)
         );
         """,
@@ -77,6 +78,7 @@ steps = [
         DROP TABLE responses;
         """
     ],
+
     # Step 5: Insert data to account types table
     [
         # "Up" SQL statement

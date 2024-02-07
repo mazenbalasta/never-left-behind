@@ -1,4 +1,4 @@
-import { facebook, instagram, twitter } from "../assets/icons";
+import { facebook, instagram, twitterX } from "../assets/icons";
 import { FiMessageSquare } from "react-icons/fi";
 import { GrResources } from "react-icons/gr";
 import { MdCardMembership } from "react-icons/md";
@@ -7,9 +7,9 @@ import React, { useState } from "react";
 
 
 export const socialMedia = [
-    { src: facebook, alt: "Facebook logo" },
-    { src: instagram, alt: "Instagram logo" },
-    { src: twitter, alt: "Twitter logo" },
+    { src: facebook, alt: "Facebook logo", link: "https://www.facebook.com/profile.php?id=61556115600897" },
+    { src: instagram, alt: "Instagram logo", link: "https://www.instagram.com/neverlftbhnd/" },
+    { src: twitterX, alt: "Twitter logo", link: "https://twitter.com/NeverLeftB/media" },
 ];
 
 export const footerLinks = [
@@ -25,8 +25,8 @@ export const footerLinks = [
     {
         title: "Get in touch",
         links: [
-            { name: "TS Name mailto: jimiHendrix@nlb.com" },
-            { name: "Telephon tel: (123) 456-7890" },
+            { name: "@TS Name", link: "mailto:jimiHendrix@nlb.com" },
+            { name: "Need help: 844.907-1342", link: "tel:(844) 907-1342" },
         ],
     },
         {
@@ -43,21 +43,40 @@ export const services = [
     {
         imgURL: FiMessageSquare,
         label: "Message Forum",
-        subtext: "Share your thoughts and questions. Our members will help you get answers."
+        subtext: "Share your thoughts and questions. Our members will help you get answers.",
+        buttonText: "Let's talk",
+        path: "/messages",
     },
     {
         imgURL: GrResources,
         label: "Resources",
-        subtext: "Looking for veteran qualifications? We can help."
+        subtext: "Looking for veteran qualifications? We can help.",
+        buttonText: "Find resources",
+        path: "/resources",
     },
     {
         imgURL: RxActivityLog,
         label: "Activities",
-        subtext: "Find what to do in your area with fellow veterans."
+        subtext: "Find what to do in your area with fellow veterans.",
+        buttonText: "Find activities",
+        path: "/activities",
     },
     {
         imgURL: MdCardMembership,
         label: "Benefits",
-        subtext: "I don't know what to say yet, but something is going here."
+        subtext: 
+        "Veteran members get:\n" +
+        " - Access to resources\n" +
+        " - Access to message forum\n" +
+        " - Access to activities\n" +
+        " - Early access to new job\n" +
+        "listings and events\n" +
+        "Partnership members get:\n" +
+        "- all the benefits of a veteran member\n" +
+        "- Access to our partner network\n" +
+        "- ability to post new jobs,\n" +
+        "activities, and events?\n",
+        buttonText: "Become a member",
+        path: "/signup/veteran",
     },
 ];

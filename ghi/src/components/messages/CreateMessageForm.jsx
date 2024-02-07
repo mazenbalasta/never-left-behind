@@ -1,57 +1,47 @@
-import { useNavigate } from 'react-router-dom';
-import { useCreateMessageMutation } from '../../app/apiSlice'
-import { Button } from '../../components'
-import { arrowRight } from '../../assets/icons'
-import { useState } from 'react';
-import { useGetTokenQuery } from '../../app/apiSlice';
-import { useAuthContext } from '@galvanize-inc/jwtdown-for-react'
-import { useEffect } from 'react';
+import {useState, useEffect} from 'react';
+import { useGetTokenQuery, useCreateMessageMutation } from '../../app/apiSlice'
+import { Button } from '..'
 
 
-function MessageForm() {
-    const { token } = useAuthContext()
-    // const { token: token } = useGetTokenQuery()
-    useEffect(() => {
-        console.log('Token:', token)
-    }, [token])
-
-
-
-
+function CreateMessageForm({ onClose }) {
+    const { data: tokenData } = useGetTokenQuery()
+    const [createMessage, { isLoading, isError }] = useCreateMessageMutation()
     const [message, setMessage] = useState({
         title: '',
         body: '',
-    })
+        account: tokenData.account.id,
+        date: new Date().toISOString()
+    });
 
-    const [createMessage] = useCreateMessageMutation()
-    const navigate = useNavigate()
+    useEffect(() => {
+        if (tokenData) {
+            setMessage((prevMessage) => ({ ...prevMessage, account: tokenData.account.id }))
+        }
+    }, [tokenData]);
 
     const handleChange = (event) => {
         const { name, value } = event.target
         setMessage((prevMessage) => ({ ...prevMessage, [name]: value }))
-    }
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            await createMessage(message).unwrap()
-            navigate('/messages')
+            await createMessage(message).unwrap();
+            onClose(true);
         } catch (error) {
-            console.error('Error submitting form', error)
+            console.error('Error submitting form', error);
+            onClose(false);
         }
-    }
+    };
 
-    const navToMessageList = () => {
-        navigate('/messages')
-    }
+    if (isLoading) return <p>Loading...</p>;
+    if (isError) return <p>Error loading the message</p>;
 
     return (
         <>
-            <div className="form-contain mb-20">
-                <div className="bg-gray-50 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <h1 className="text-xl color-white font-bold mb-5">
-                        Create a Message
-                    </h1>
+            <div className="max-w-md mx-auto mt-10">
+            <div className='bg-white flex flex-col w-full rounded-[20px] shadow-3xl px-6 py-8 border-4 border-[rgb(199,158,80)] sm:px-10 sm:py-16'>
                     <form onSubmit={handleSubmit} id="create-message-form">
                         <div className="mb-4">
                             <label
@@ -61,7 +51,7 @@ function MessageForm() {
                                 Title
                             </label>
                             <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                                 value={message.title}
                                 onChange={handleChange}
                                 placeholder="Enter a title"
@@ -74,34 +64,32 @@ function MessageForm() {
 
                         <div className="mb-6">
                             <label
-                                className="block text- text-sm font-bold mb-2"
+                                className="block text-gray-700 text-sm font-bold mb-2"
                                 htmlFor="body"
                             >
                                 Message Body
                             </label>
                             <textarea
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-[rgb(199,158,80)] leading-tight focus:outline-none focus:shadow-outline"
                                 value={message.body}
                                 onChange={handleChange}
                                 placeholder="Message body..."
-                                required
-                                name="body"
+                                required name="body"
                                 id="body"
                             />
                         </div>
                         <div className="flex items-center justify-between">
                             <Button
                                 type="submit"
-                                label="Create Message"
-                                size="medium"
-                                imageURL={arrowRight}
+                                label="Create"
+                                size="small"
+                                backgroundColor="bg-blue-500"
                             />
                             <Button
                                 type="button"
                                 label="Cancel"
-                                size="medium"
-                                imageURL={arrowRight}
-                                onClick={navToMessageList}
+                                size="small"
+                                onClick={onClose}
                             />
                         </div>
                     </form>
@@ -111,4 +99,4 @@ function MessageForm() {
     )
 };
 
-export default MessageForm;
+export default CreateMessageForm

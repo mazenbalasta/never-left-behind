@@ -8,7 +8,7 @@ import AboutUs from './AboutUs';
 // import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
-import { ListMessages, DeleteMessage, EditMessage, MessageForm } from './components/messages';
+import { ListMessages } from './components/messages';
 
 
 function App() {
@@ -16,11 +16,13 @@ function App() {
     const baseUrl = import.meta.env.VITE_API_HOST
 
     return (
-        <main>
+        <main className="relative min-h-screen min-w-full flex flex-col items-center">
+
             <section>
                 <AuthProvider baseUrl={baseUrl}>
                     <Nav />
                     <section>
+                        <div className='bg-gradient-to-r from-[#282c34] via-[#50555c] to-[#a4a9af]'>
                             <Routes>
                                 <Route path="/" element={<HomePage />} />
                                 <Route
@@ -37,31 +39,14 @@ function App() {
                                         element={<PartnerSignup />}
                                     />
                                 </Route>
-                                <Route
-                                    path="/messages/*"
-                                    element={<ListMessages />}
-                                >
-                                    <Route
-                                        path="create"
-                                        element={<MessageForm />}
-                                    />
-                                    <Route
-                                        path=":id/update"
-                                        element={<EditMessage />}
-                                    />
-                                    <Route
-                                        path=":id/delete"
-                                        element={<DeleteMessage />}
-                                    />
-                                </Route>
+                                <Route path="/messages" element={<ListMessages />} />
                                 <Route path="/events" element={<Events />} />
                                 <Route path="/createEvent" element={<EventForm />} />
                                 <Route path="/chat" element={<Chat />} />
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/aboutus" element={<AboutUs />} />
-
                             </Routes>
-
+                        </div>
                     </section>
                     <section>
                         <Footer />

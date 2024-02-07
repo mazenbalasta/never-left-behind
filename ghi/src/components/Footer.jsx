@@ -1,4 +1,4 @@
-import { copyrightSign } from "../assets/icons";
+import { copyrightSign, twitterX } from "../assets/icons";
 import { logo } from "../assets/images";
 import { footerLinks, socialMedia } from "../constants";
 import { useState, useEffect } from "react";
@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 const Footer = () => {
 
   return (
-    <footer className='bg-gray-900 text-white'>
+    <footer className='bg-gray-900 text-white min-h-[10vh] min-w-full flex flex-col justify-center '>
       <div className='flex justify-between items-center gap-20 flex-wrap max-lg:flex-col mx-8'>
         <div className='max-container flex flex-1 justify-between lg:gap-10 gap-20 flex-wrap'>
           {footerLinks.map((section) => (
@@ -34,12 +34,15 @@ const Footer = () => {
 
       <div className='flex justify-center items-center gap-5 mt-8 mx-8'>
         {socialMedia.map((icon) => (
-          <div
-            className='flex justify-center items-center w-12 h-12 bg-white rounded-full'
+          <a
+            href={icon.link}
             key={icon.alt}
+            className='flex justify-center items-center w-12 h-12 bg-white rounded-full'
+            target="_blank"
+            rel="noreferrer noopener"
           >
-            <img src={icon.src} alt={icon.alt} width={24} height={24} />
-          </div>
+            <img src={icon.src} alt={icon.alt} style={icon.alt === 'twitterX' ? { width: '30px', height: '30px' } : null} />
+          </a>
         ))}
 
       </div>
