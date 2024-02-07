@@ -7,7 +7,10 @@ import Resources from './Resources';
 import VeteranSignup from './VeteranSignup';
 import PartnerSignup from './PartnerSignup';
 import Login from "./Login";
+import ActivitiesForm from './ActivitiesForm';
+import ActivitiesList from "./ActivitiesList";
 import Jobslist from "./Jobslist";
+import JobDetail from "./JobDetail"
 
 export {
     Nav,
@@ -15,9 +18,12 @@ export {
     Resources,
     VeteranSignup,
     PartnerSignup,
+    ActivitiesForm,
+    ActivitiesList,
     Login,
     Button,
     Carousel,
     HomeCards,
-    Jobslist
+    Jobslist,
+    JobDetail
 }

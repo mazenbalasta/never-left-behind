@@ -1,5 +1,5 @@
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login, Jobslist} from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, ActivitiesForm, ActivitiesList, Login, Jobslist, JobDetail} from './components';
 import HomePage from './HomePage';
 import Events from './Events';
 import Chat from './Chat';
@@ -35,7 +35,10 @@ function App() {
                                         path="partner"
                                         element={<PartnerSignup />}
                                     />
+
                                 </Route>
+                                <Route path='activitiesForm' element={<ActivitiesForm />} />
+                                <Route path="/activities" element={<ActivitiesList />} />
                                 <Route
                                     path="/messages/*"
                                     element={<ListMessages />}
@@ -68,6 +71,10 @@ function App() {
                                 <Route
                                     path="/jobs"
                                      element={<Jobslist />}
+                                />
+                                <Route
+                                    path="/jobs/:id"
+                                    element={<JobDetail />}
                                 />
                             </Routes>
                         </div>

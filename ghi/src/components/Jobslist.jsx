@@ -1,22 +1,35 @@
-import React from 'react'
-import { useGetAllJobsQuery } from '../app/apiSlice'
+import { useGetAllJobsQuery } from '../app/apiSlice';
+import { useGetTokenQuery } from '../app/apiSlice';
 
 const Jobslist = () => {
-    const { data: jobs } = useGetAllJobsQuery()
-    console.log({ jobs })
+    const { data: jobs } = useGetAllJobsQuery();
+    const { data: account } = useGetTokenQuery();
+
+    const isPartner = account && account.account.account_type === 'partner'
 
     if (!jobs) {
         return <p>Loading...</p>
     }
 
     return (
-        <>
-            <h1 className="text-white">JOBS LIST</h1>
+        <div className="jobslist-container relative-flex items-center">
+            <h1 className="text-white mb-4 mt-5 text-center">JOBS LIST</h1>
+            <div className="flex justify-center">
+                {isPartner && (
+                <button
+
+                    type="button"
+                    className="alignment-center justify-center rounded-md bg-gray-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                >
+                    Create new job +
+                </button>
+                )}
+            </div>
             <div className="m-5">
                 {jobs.map((job) => (
                     <div
                         key={job.id}
-                        className="basis-1/4 group mx-2 mt- grid max-w-screen-4xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 overflow-hidden rounded-lg border py-8 text-white shadow transition hover:shadow-lg sm:mx-auto"
+                        className="w-3/4 mx-auto mt-10 grid max-w-screen-4xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 overflow-hidden rounded-lg border py-8 text-white shadow transition hover:shadow-lg"
                     >
                         <a
                             href="#"
@@ -55,13 +68,13 @@ const Jobslist = () => {
                                 </span>
                             </div>
                             <div className="mt-5 flex flex-col space-y-3 text-sm font-medium text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2">
-                                <div className=""></div>
+                                <div className="">Hello</div>
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     )
 }
 

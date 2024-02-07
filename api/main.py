@@ -3,7 +3,7 @@ from authenticator import authenticator
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from routers import activities, resources, events, messages, jobs
-from routers import veterans_accounts, partners_accounts
+from routers import veterans_accounts, partners_accounts, categories, bars
 import os
 from chat import routerC
 
@@ -14,10 +14,13 @@ app.include_router(veterans_accounts.router, tags=["Authentication"])
 app.include_router(partners_accounts.router, tags=["Authentication"])
 app.include_router(authenticator.router, tags=["Login/Logout"])
 app.include_router(activities.router, tags=["Activities"])
+app.include_router(activities.router, tags=["ActivitiesForm"])
+app.include_router(categories.router, tags=["Categories"])
 app.include_router(resources.router, tags=["Resources"])
 app.include_router(events.router, tags=["Events"])
 app.include_router(messages.router, tags=["Message Board"])
 app.include_router(jobs.router, tags=["Jobs"])
+app.include_router(bars.router, tags=["Bars"])
 app.include_router(routerC, tags=["Chat"])
 
 

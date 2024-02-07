@@ -1,4 +1,24 @@
 ## Journal
+Feb 08, 2024:
+
+Feb 07, 2024:
+
+Feb 06, 2024:
+
+Feb 05, 2024:
+
+Feb 02, 2024:
+
+Feb 01, 2024:
+
+Jan 31, 2024:
+
+Jan 30, 2024:
+
+Jan 29, 2024:
+
+Jan 26, 2024:
+
 Jan 25, 2024:
 - Worked with team on getting tailwind, redux and react router to work
 - Got everyting figured out and installed.

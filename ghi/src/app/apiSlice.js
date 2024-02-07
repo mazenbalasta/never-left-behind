@@ -10,8 +10,20 @@ export const neverLeftBehindApi = createApi({
         getAllAccounts: builder.query({
             query: () => '/api/accounts',
         }),
+        getAllActivities: builder.query({
+            query: () => '/api/activities',
+        }),
+        getAllCategories: builder.query({
+            query: () => '/api/categories',
+        }),
         getAllJobs: builder.query({
             query: () => '/api/jobs'
+        }),
+        getJobById: builder.query({
+            query: (id) => ({
+                url: `/api/jobs/${id}`,
+                method: 'GET'
+            }),
         }),
         logout: builder.mutation({
             query: () => ({
@@ -80,6 +92,8 @@ export const neverLeftBehindApi = createApi({
 })
 export const {
     useGetAllAccountsQuery,
+    useGetAllActivitiesQuery,
+    useGetAllCategoriesQuery,
     useGetTokenQuery,
     useLogoutMutation,
     useLoginMutation,
@@ -88,5 +102,6 @@ export const {
     useCreateMessageMutation,
     useUpdateMessageMutation,
     useDeleteMessageMutation,
-    useGetAllJobsQuery
+    useGetAllJobsQuery,
+    useGetJobByIdQuery
 } = neverLeftBehindApi;
