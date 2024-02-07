@@ -3,6 +3,8 @@ import { FiMessageSquare } from "react-icons/fi";
 import { GrResources } from "react-icons/gr";
 import { MdCardMembership } from "react-icons/md";
 import { RxActivityLog } from "react-icons/rx";
+import React, { useState } from "react";
+
 
 export const socialMedia = [
     { src: facebook, alt: "Facebook logo", link: "https://www.facebook.com/profile.php?id=61556115600897" },
@@ -14,7 +16,7 @@ export const footerLinks = [
     {
         title: "Help",
         links: [
-            { name: "About us", link: "/" },
+            { name: "About us", link: "/aboutus" },
             { name: "Resources", link: "/resources" },
             { name: "Benefits of becoming a Member", link: "/" },
             { name: "Privacy policy", link: "/" },
@@ -28,12 +30,13 @@ export const footerLinks = [
         ],
     },
         {
-        title: "Local watering holes",
-        links: [
-            { name: "Latroy?", link: "/" },
-            { name: "placeholder", link: "/" },
-        ],
-    },
+            title: "Local watering holes",
+            links: [
+                { name: "Latroy?", link: "/" },
+                { name: "Placeholder", link: "/" },
+            ],
+
+        },
 ];
 
 export const services = [

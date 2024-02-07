@@ -87,7 +87,8 @@ steps = [
             (account_type)
         VALUES
             ('veteran'),
-            ('partner');
+            ('partner'),
+            ('approved_partner');
         """,
         # "Down" SQL statement
         """

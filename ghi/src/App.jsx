@@ -2,7 +2,9 @@ import './App.css';
 import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login} from './components';
 import HomePage from './HomePage';
 import Events from './Events';
+import EventForm from './EventForm';
 import Chat from './Chat';
+import AboutUs from './AboutUs';
 // import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
@@ -14,7 +16,7 @@ function App() {
     const baseUrl = import.meta.env.VITE_API_HOST
 
     return (
-        <main className="relative min-h-screen min-w-full flex flex-col items-center ">
+        <main className="relative min-h-screen min-w-full flex flex-col items-center">
 
             <section>
                 <AuthProvider baseUrl={baseUrl}>
@@ -39,8 +41,10 @@ function App() {
                                 </Route>
                                 <Route path="/messages" element={<ListMessages />} />
                                 <Route path="/events" element={<Events />} />
+                                <Route path="/createEvent" element={<EventForm />} />
                                 <Route path="/chat" element={<Chat />} />
                                 <Route path="/login" element={<Login />} />
+                                <Route path="/aboutus" element={<AboutUs />} />
                             </Routes>
                         </div>
                     </section>

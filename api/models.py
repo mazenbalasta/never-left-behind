@@ -18,6 +18,7 @@ class DuplicateAccountError(ValueError):
 class AccountType(str, Enum):
     veteran = "veteran"
     partner = "partner"
+    approved_partner = "approved_partner"
 
 
 class VetAccountIn(BaseModel):

@@ -1,9 +1,11 @@
 import { copyrightSign, twitterX } from "../assets/icons";
 import { logo } from "../assets/images";
 import { footerLinks, socialMedia } from "../constants";
+import { useState, useEffect } from "react";
 
 
 const Footer = () => {
+
   return (
     <footer className='bg-gray-900 text-white min-h-[10vh] min-w-full flex flex-col justify-center '>
       <div className='flex justify-between items-center gap-20 flex-wrap max-lg:flex-col mx-8'>
@@ -20,7 +22,9 @@ const Footer = () => {
                     key={link.name}
                   >
                     <a href={link.link}>{link.name}</a>
+
                   </li>
+
                 ))}
               </ul>
             </div>
@@ -40,7 +44,9 @@ const Footer = () => {
             <img src={icon.src} alt={icon.alt} style={icon.alt === 'twitterX' ? { width: '30px', height: '30px' } : null} />
           </a>
         ))}
+
       </div>
+
 
       <div className="flex justify-between text-white-400 max-sm:flex-col max-sm:itemes-center mx-8 mt-8">
         <div className="flex flex-1 justify-center items-center gap-2 cursor-pointer">

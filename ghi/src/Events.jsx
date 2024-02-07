@@ -1,11 +1,20 @@
 import Radar from 'radar-sdk-js';
 import 'radar-sdk-js/dist/radar.css';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import{ useGetTokenQuery } from './app/apiSlice';
 
 function ShowEvent() {
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [geocodeData, setGeocodeData] = useState(null);
+
+    const { data: token } = useGetTokenQuery();
+
+    if (token && token.account) {
+        console.log(token.account.account_type);
+    }
+
 
     const getEvents = async () => {
         const eventsUrl = 'http://localhost:8000/api/events/';
@@ -29,7 +38,7 @@ function ShowEvent() {
 
     const handleEventClick = (event) => {
         setSelectedEvent(event);
-        const apiKey = 'prj_test_pk_6357799d3a263ed5010b4abed7177f71b353e94b';
+        const apiKey = 'prj_live_pk_6357799d3a263ed5010b4abed7177f71b353e94b';
         const getAddress = (event) => {
             const { street_address, city, state } = event;
             const formattedAddress = `${street_address}+${city}+${state.abbreviation}`;
@@ -79,17 +88,57 @@ function ShowEvent() {
     });
 }, [selectedEvent, geocodeData]);
 
+
+const handleDeleteClick = async () => {
+    if (selectedEvent) {
+        const eventUrl = `http://localhost:8000/api/events/${selectedEvent.id}/`;
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        const response = await fetch(eventUrl, requestOptions);
+        if (response.ok) {
+            setSelectedEvent(null);
+            getEvents();
+        } else {
+            console.log('error');
+        }
+    }
+}
+
+const handleResetClick = async () => {
+        const eventsUrl = 'http://localhost:8000/api/events/';
+        const response = await fetch(eventsUrl);
+        if (response.ok) {
+            const eventsData = await response.json();
+
+            if (eventsData === undefined) {
+                return null;
+            }
+            setEvents(eventsData);
+            setSelectedEvent(null);
+        }
+    }
+
     return (
         <div className="flex flex-col bg-gray-900 w-screen">
+            {token && token.account.account_type === 'approved_partner' && (
+                <button className="mt-5"type="button">
+                    <Link className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" to="/createEvent">Create Event</Link>
+                </button>
+            )}
             <div className="shadow-md sm:rounded-lg">
                 <div className="flex flex-col">
                     <div className="shadow-md sm:rounded-lg">
                         <h1 className="text-4xl underline font-bold text-white">Events</h1>
-                        <h2 className="text-4xl underline font-bold text-white">Event Count: {events.length}</h2>
+                        <h2 className="text-sm Chat-text ml-5 mt-5 font-bold text-white">Event Count: {events.length}</h2>
                         <table className="table-auto w-full divide-y divide-gray-200 dark:divide-gray-700">
                                 <thead className="bg-gray-900 dark:bg-gray-700">
-                                    <tr>
+                                    <tr className = "Chat-text">
                                         <th scope="col" className="p-4"></th>
+
                                         <th scope="col" className="py-3 px-6 text- font-medium tracking-wider text-left text-gray-400 uppercase dark:text-gray-400">
                                             Event Title
                                         </th>
@@ -118,11 +167,33 @@ function ShowEvent() {
                                             <td className="p-4 w-4">
                                                 <div className="flex items-center"></div>
                                             </td>
-                                            <td className="py-4 px-6 text-s font-medium text-white whitespace-nowrap dark:text-white">{event.event_title}</td>
-                                            <td className="py-4 px-6 text-s font-medium text-white whitespace-nowrap dark:text-white">{event.start_date}</td>
-                                            <td className="py-4 px-6 text-s font-medium text-white whitespace-nowrap dark:text-white">{event.end_date}</td>
-                                            <td className="py-4 px-6 text-s font-medium text-white whitespace-nowrap dark:text-white">{event.city}</td>
-                                            <td className="py-4 px-6 text-s font-medium text-white whitespace-nowrap dark:text-white">{event.state.state_name}</td>
+                                            <td className="py-4 px-6 text-s font-medium text-white text-center whitespace-nowrap dark:text-white">{event.event_title}</td>
+                                            <td className="py-4 px-6 text-s font-medium text-white text-right whitespace-nowrap dark:text-white">
+                                                {new Date(event.start_date).toLocaleDateString('en-US', {
+                                                    month: '2-digit',
+                                                    day: '2-digit',
+                                                    year: 'numeric'
+                                                })}{' '}
+                                                {new Date(event.start_date).toLocaleTimeString('en-US', {
+                                                    hour: '2-digit',
+                                                    minute: '2-digit',
+                                                    hour12: true
+                                                })}
+                                            </td>
+                                            <td className="py-4 px-6 text-s font-medium text-white text-center whitespace-nowrap dark:text-white">
+                                                {new Date(event.end_date).toLocaleDateString('en-US', {
+                                                    month: '2-digit',
+                                                    day: '2-digit',
+                                                    year: 'numeric'
+                                                })}{' '}
+                                                {new Date(event.end_date).toLocaleTimeString('en-US', {
+                                                    hour: '2-digit',
+                                                    minute: '2-digit',
+                                                    hour12: true
+                                                })}
+                                            </td>
+                                            <td className="py-4 px-6 text-s font-medium text-white text-right whitespace-nowrap dark:text-white">{event.city}</td>
+                                            <td className="py-4 px-6 text-s font-medium text-white text-right whitespace-nowrap dark:text-white">{event.state.state_name}</td>
                                         </tr>
                                     </tbody>
                                 ))}
@@ -133,15 +204,37 @@ function ShowEvent() {
                                 <div id="map" style={{ height: '100%', position: 'absolute', width: '100%' }} />
                             </div>
                             {selectedEvent ? (
-                                <div>
+                                <div className="Chat-text">
                                     <h2 className="text-2xl text-white font-bold mb-5">Selected Event Details:</h2>
                                     <p className="text-lg text-white mb-5">Event Title: {selectedEvent.event_title}</p>
-                                    <p className="text-lg text-white mb-5">Start Date: {selectedEvent.start_date}</p>
-                                    <p className="text-lg text-white mb-5">End Date: {selectedEvent.end_date}</p>
+                                    <p className="text-lg text-white mb-5">Start Date: {new Date(selectedEvent.start_date).toLocaleDateString('en-US', {
+                                        month: '2-digit',
+                                        day: '2-digit',
+                                        year: 'numeric'
+                                    })}{' '}
+                                    {new Date(selectedEvent.start_date).toLocaleTimeString('en-US', {
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: true
+                                    })}</p>
+                                    <p className="text-lg text-white mb-5">End Date: {new Date(selectedEvent.end_date).toLocaleDateString('en-US', {
+                                        month: '2-digit',
+                                        day: '2-digit',
+                                        year: 'numeric'
+                                    })}{' '}
+                                    {new Date(selectedEvent.end_date).toLocaleTimeString('en-US', {
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: true
+                                    })}</p>
                                     <p className="text-lg text-white mb-5">Description: {selectedEvent.description}</p>
                                     <p className="text-lg text-white mb-5">Street Address: {selectedEvent.street_address}</p>
                                     <p className="text-lg text-white mb-5">City: {selectedEvent.city}</p>
                                     <p className="text-lg text-white mb-5">State: {selectedEvent.state.state_name}</p>
+
+                                    <button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleDeleteClick}>Delete Events</button>
+                                    <button type="button" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleResetClick}>Close</button>
+
                                     <div className="h-20" />
                                     <div className="h-20" />
                                     <div className="h-20" />

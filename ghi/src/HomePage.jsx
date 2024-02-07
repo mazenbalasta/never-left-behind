@@ -10,10 +10,10 @@ function HomePage() {
         <main className='relative text-white py-16'>
             <section className='padding'>
                 <Carousel />
-                <div className="text-center mt-8 text-[calc(20px+2vmin)]" >
+                <div className="Chat-text uppercase text-center mt-8 text-[calc(20px+2vmin)]" >
                     <h1>Welcome!!!</h1>
                 </div>
-                <p className="text-center text-[calc(1px+2vmin)] text-[rgb(199, 158, 80)] mt-4">
+                <p className=" text-center text-[calc(1px+2vmin)] text-[rgb(199, 158, 80)] mt-4">
                     Never Left Behind's focus is to enhance the lives of America's veterans by fostering connections 
                     with their community through a range of social and outdoor activities. Established in 2024, this 
                     organization is dedicated to integrating veterans into their local communities, promoting engagement 

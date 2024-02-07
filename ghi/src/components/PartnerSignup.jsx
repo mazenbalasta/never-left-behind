@@ -108,7 +108,7 @@ function VeteranSignup() {
     return (
         <>
             <div className="App-header">
-            <h1 className="mt-10 mb-10">SIGNUP TO BE A F**KING PARTNER</h1>
+            <h1 className="mt-10 mb-10">APPLY TO BE A PARTNER</h1>
             <div className="form-container mb-20">
                 <form
                     className="grid grid-cols-1 sm:grid-cols-2 gap-4"
@@ -324,7 +324,7 @@ function VeteranSignup() {
                         type="submit"
                         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
-                        Register new account
+                        Apply Now
                     </button>
                 </form>
             </div>

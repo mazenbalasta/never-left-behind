@@ -9,14 +9,10 @@ class Error(BaseModel):
 
 
 class ResourcesIn(BaseModel):
-    name: str
-    description: Optional[str] = None
     url: str
 
 
 class ResourcesOut(BaseModel):
-    name: str
-    description: Optional[str] = None
     url: str
     id: int
 
@@ -29,17 +25,13 @@ class ResourcesRepo:
                     """
                     INSERT INTO resources
                         (
-                            name,
-                            description,
                             url
                         )
                     VALUES
-                        (%s, %s, %s)
+                        (%s)
                     Returning id;
                     """,
                     [
-                        resource.name,
-                        resource.description,
                         resource.url,
                     ],
                 )
@@ -64,9 +56,7 @@ class ResourcesRepo:
                     for record in records:
                         resource = ResourcesOut(
                             id=record[0],
-                            name=record[1],
-                            description=record[2],
-                            url=record[3],
+                            url=record[1],
                         )
                         result.append(resource)
                     return result
