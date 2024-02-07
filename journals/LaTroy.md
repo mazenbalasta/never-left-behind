@@ -30,3 +30,11 @@ On 1 Feb 24,
 On 5 Feb 24,
 
     with the help of Trevor i finally got my code to work again and we able to implement the local brewery API im just trying now how to make it fit the page a little better cause the search bar is not looking like it suppose to but im sure but wenseday ill have it figured out api calls and create a seperate table on top of the activiites tables that list the name, street address, cit and state of the location of the breweries i might also add the phone number incase they wanna call and have the option to see if they are open i also created a facebook, X aka Twitter and Instagram page for the application as well and will synchronizing the links as well 
+
+On 6 Feb 24,
+
+    I spent the most of the time merging and fixing merge conflicts with the team to have everything in order. Came across a few hiccups but everything is coming out perfect was able to get the foot noe and be link it to Get local bars. was able to adjust the css files to make it only apply to the desired webpage without it crashing everyone elses. 
+
+On 7 Feb 24,
+
+    On this day I was able to successfully finish the privacy policies and also finish all the other hiccups that was coming along with my part on the project so right now i believe is actually 98% done if not 100 and we are working to making everyone merge works and the request fix the issues that they have been coming a cross while doing their merges.

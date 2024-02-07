@@ -10,6 +10,7 @@ import Login from "./Login";
 import ActivitiesForm from './ActivitiesForm';
 import ActivitiesList from "./ActivitiesList";
 import GetLocalBars from "./GetBars";
+import PrivacyPolicy from "./Privacy Policy";
 
 export {
     Nav,
@@ -24,4 +25,5 @@ export {
     Button,
     Carousel,
     HomeCards,
+    PrivacyPolicy,
 }

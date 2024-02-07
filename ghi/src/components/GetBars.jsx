@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import './GetBars.css';
+import './ActivitiesList.css';
+
 
 
 const GetLocalBars = () => {
@@ -21,17 +22,17 @@ const GetLocalBars = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input
+        <input className='input'
           type="text"
           color="gold"
           value={postal}
           onChange={(e) => setPostal(e.target.value)}
           placeholder="Enter a 5-digit zip code"
         />
-        <button className='Subutton' type="submit">Find Local Breweries</button>
+        <button className='Sbtn' type="submit">Find Local Breweries</button>
         
-        <table>
-          <thead>
+        <table className='table'>
+          <thead className='thead'>
             <tr>
               <th>Name</th>
               <th>Street Address</th>
@@ -39,7 +40,7 @@ const GetLocalBars = () => {
               <th>State</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='tbody'>
             {barList.map((bar, index) => (
               <tr key={index}>
                 <td>{bar.name}</td>

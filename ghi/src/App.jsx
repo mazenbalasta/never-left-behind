@@ -1,9 +1,8 @@
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, ActivitiesForm, ActivitiesList, Login, GetLocalBars} from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, ActivitiesForm, ActivitiesList, Login, GetLocalBars, PrivacyPolicy} from './components';
 import HomePage from './HomePage';
 import Events from './Events';
 import Chat from './Chat';
-// import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
 import { ListMessages, DeleteMessage, EditMessage, MessageForm } from './components/messages';
@@ -39,6 +38,7 @@ function App() {
                                 </Route>
                                 <Route path='activitiesForm' element={<ActivitiesForm />} />
                                 <Route path="/activities" element={<ActivitiesList />} />
+                                <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
                                 <Route path="/bars" element={<GetLocalBars />} />
                                 <Route
                                     path="/messages/*"

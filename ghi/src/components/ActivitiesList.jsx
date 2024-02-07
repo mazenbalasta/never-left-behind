@@ -17,24 +17,24 @@ const ActivitiesList = () => {
 
     <div>
 
-      <table>
-        <thead>
+      <table className="table">
+        <thead className="thead">
             <tr>
-              <th>Activities</th>
-              <th>Description</th>
-              <th>Start Date</th>
+              <th >Activities</th>
+              <th >Description</th>
+              <th >Start Date</th>
               <th>End Date</th>
               <th>Location</th>
-            </tr>
+            </tr >
         </thead>
-        <tbody>
+        <tbody className="tbody">
           {activities.map((activity) => (
             <tr key={activity.id}>
               <td>{activity.name}</td>
-              <td>{activity.description}</td>
-              <td>{activity.start_date}</td>
-              <td>{activity.end_date}</td>
-              <td>{activity.location}</td>
+              <td >{activity.description}</td>
+              <td >{activity.start_date}</td>
+              <td >{activity.end_date}</td>
+              <td >{activity.location}</td>
             </tr>
           ))}
         </tbody>

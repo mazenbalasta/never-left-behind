@@ -18,7 +18,7 @@ export const footerLinks = [
             { name: "About us", link: "/" },
             { name: "Resources", link: "/resources" },
             { name: "Benefits of becoming a Member", link: "/" },
-            { name: "Privacy policy", link: "/" },
+            { name: "Privacy policy", link: "/PrivacyPolicy" },
         ],
     },
     {
@@ -32,7 +32,6 @@ export const footerLinks = [
         title: "Local Breweries",
         links: [
             { name: "Just want to find a local beer?", link: "/bars" },
-            { name: "placeholder", link: "/" },
         ],
     },
 ];
