@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useGetAllMessagesQuery, useGetTokenQuery, useIncrementMessageViewsMutation, useDeleteMessageMutation } from '../../app/apiSlice';
+import { 
+    useGetAllMessagesQuery,
+    useGetAllAccountsQuery,
+    useIncrementMessageViewsMutation,
+    useDeleteMessageMutation,
+    useGetTokenQuery,
+} from '../../app/apiSlice';
 import { Button, Modal } from '..'
 import { arrowRight } from '../../assets/icons'
 import MessageWithReplies from './MessageWithReplies';
@@ -8,11 +14,11 @@ import CreateMessageForm from './CreateMessageForm';
 
 function ListMessages() {
     const { data: messages, isLoading, isError, refetch } = useGetAllMessagesQuery();
-    const [selectedMessageId, setSelectedMessageId] = useState(null);
-
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+    const { data: accounts } = useGetAllAccountsQuery();
     const { data: tokenData } = useGetTokenQuery();
 
+    const [selectedMessageId, setSelectedMessageId] = useState(null);
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [incrementMessageViews] = useIncrementMessageViewsMutation();
     const [messageDeleted] = useDeleteMessageMutation();
 
@@ -30,7 +36,7 @@ function ListMessages() {
     };
 
 
-    const handleSelectedMessageCloseModal = () => {
+        const handleSelectedMessageCloseModal = () => {
         setSelectedMessageId(null);
     }
 
@@ -40,11 +46,11 @@ function ListMessages() {
             refetch();
         }
     }, [selectedMessageId, refetch]);
-
-
+    
+    
     const handleCreateMessage = () => {
         setIsCreateModalOpen(true);
-    };
+    };    
 
 
     const handleCloseCreateModal = (updated) => {
@@ -53,14 +59,19 @@ function ListMessages() {
             refetch();
         }
     };
+    
 
 
 
+    const findUsernameById = (accountId) => {
+        const account = accounts.find(account => account.id === accountId);
+        return account ? account.username : 'Unknown User';
+    };
 
-
-
-
-
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString("en-US", {year: 'numeric', month: 'long', day: 'numeric'});
+    };
 
 
     if (isLoading) return <p>Loading messages...</p>;
@@ -115,6 +126,16 @@ function ListMessages() {
                                     <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7s-8-3.134-8-7 3.582-7 8-7 8 3.134 8 7zM5.707 10.707a1 1 0 01-1.414-1.414L8.586 5.293a1 1 0 011.414 0l4.293 4.293a1 1 0 01-1.414 1.414L10 7.414l-4.293 4.293z" clipRule="evenodd" />
                                 </svg>
                                 {message.response_count} replies
+                            </div>
+                            {/* <div className='mt-2 text-sm leading-5 text-gray-700'>
+                                <strong>Posted by:</strong> {message.account === tokenData?.account?.id ? userName : 'Unknown User'}
+                            </div> */}
+
+                            <div className='mt-2 text-sm leading-5 text-gray-700'>
+                                <strong>Posted by:</strong> {findUsernameById(message.account)}
+                            </div>
+                            <div className='mt-2 text-sm leading-5 text-gray-700'>
+                                <strong>Posted on:</strong> {formatDate(message.date)}
                             </div>
                             <div className='self-center mt-8 mb-1'>
                                 {isAuthenticated && (
