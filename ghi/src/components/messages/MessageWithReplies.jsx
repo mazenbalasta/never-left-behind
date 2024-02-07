@@ -5,10 +5,11 @@ import EditMessage from './EditMessageForm';
 import ReplyMessageForm from './ReplyMessageForm';
 
 
-function MessageWithReplies(messageId) {
-    const { data: messageData, isLoading, isError } = useGetMessageWithResponsesQuery(messageId);
-    const [deleteMessage, { isLoading: isDeleting }] = useDeleteMessageMutation();
+function MessageWithReplies({ messageId }) {
+    const { data: messageData, isLoading, isError, refetch } = useGetMessageWithResponsesQuery(messageId);
+    const [deleteMessage] = useDeleteMessageMutation();
     const { data: tokenData } = useGetTokenQuery();
+    const [dataChanged, setDataChanged] = useState(false);
 
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -17,13 +18,15 @@ function MessageWithReplies(messageId) {
     const isAuthenticated = tokenData && tokenData.account;
     const userId = tokenData?.account?.id;
 
-    
-    const handleEditMessage = (id) => {
+      
+    const handleEditMessage = () => {
+        setDataChanged(true);
         setIsEditModalOpen(true);
     };
 
     
-    const handleDeleteMessage = async (id) => {
+    const handleDeleteMessage = async () => {
+        setDataChanged(true);
         setIsDeleteModalOpen(true);
     };    
 
@@ -33,21 +36,29 @@ function MessageWithReplies(messageId) {
     };
 
     
-    const handleCloseModals = () => {
+    const handleCloseModals = (updated) => {
         setIsEditModalOpen(false);
         setIsDeleteModalOpen(false);
         setIsReplyModalOpen(false);
+
+        if (updated) {
+            refetch();
+        }
     };
 
 
     const confirmDeleteMessage = async () => {
         try {
             await deleteMessage(messageId).unwrap();
+            setDataChanged(true);
             handleCloseModals();
+            refetch();
         } catch (error) {
             console.error('Error deleting message', error);
         }
     };
+
+    
 
 
     if (isLoading) return <p>Loading message...</p>;
@@ -61,11 +72,16 @@ function MessageWithReplies(messageId) {
                         <h1 className='text-3xl leading-5 font-medium text-black'>{messageData.title}</h1>
                         <p className='mt-2 text-sm leading-5 text-[rgb(199,158,80)]'>{messageData.body}</p>
                     </div>
-                    {messageData.responses.map(response => (
-                        <p key={response.id} className='text-sm text-gray-700'>{messageData.response.body}</p>
-                    ))}
+                    <div className='text-lg text-black'>Replies:</div>
+                    {messageData.responses
+                    .slice().sort((a, b) => new Date(b.date) - new Date(a.date))
+                    .map(response => (
+                        <li key={response.id} className='text-sm text-gray-700'>
+                            {response.body}
+                        </li>
+                    ))} 
                     <div className='flex justify-center mt-4'>
-                        {isAuthenticated && userId === messageData.account && (
+                        {isAuthenticated && messageData && userId === messageData.account && (
                             <>
                                 <Button
                                     label='Edit'
@@ -75,14 +91,15 @@ function MessageWithReplies(messageId) {
                                 <Button
                                     label='Delete'
                                     size='small'
-                                    onClick={() => handleDeleteMessage(messageId)} 
+                                    onClick={() => handleDeleteMessage(messageId)}
+                                    
                                 />
                             </>
                         )}
                         <Button 
                             label='Reply'
                             size='small'
-                            onClick={handleReplyMessage(messageId)}
+                            onClick={() => handleReplyMessage(messageId)}
                         />
                     </div>
                 </div>
@@ -91,7 +108,8 @@ function MessageWithReplies(messageId) {
             <Modal 
                 isOpen={isEditModalOpen}
                 title='Edit Message'
-                onClose={handleCloseModals()}
+                onClose={handleCloseModals}
+                showCloseButton={false}
             >
                 <EditMessage 
                     messageId={messageId}
@@ -101,7 +119,8 @@ function MessageWithReplies(messageId) {
             <Modal
                 isOpen={isDeleteModalOpen}
                 title='Confirm Delete'
-                onClose={handleCloseModals}
+                onClose={() => setIsDeleteModalOpen(false)}
+                showCloseButton={false}
             >
                 <p>Are you sure you want to delete this message?</p>
                 <Button
@@ -120,6 +139,7 @@ function MessageWithReplies(messageId) {
                 isOpen={isReplyModalOpen}
                 title='Reply to Message'
                 onClose={handleCloseModals}
+                showCloseButton={false}
             >
                 <ReplyMessageForm
                     messageId={messageId}

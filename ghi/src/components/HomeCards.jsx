@@ -34,7 +34,7 @@ const HomeCards = ({ imgURL, label, subtext, buttonText, path }) => {
         <p className='mt-3 break-words text-base sm:text-lg leading-normal text-center' style={{ whiteSpace: 'pre-line' }}>
             {subtext}
         </p>
-        <div className='mt-6 sm:mt-11 flex flex-wrap gap-4 justify-center'>
+        <div className='mt-6 sm:mt-11 gap-4 justify-center'>
         <Button type='submit' label={buttonText} iconURL={arrowRight} onClick={handleClick} />
         </div>
     </div>

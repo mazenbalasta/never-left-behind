@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useGetAllMessagesQuery, useGetTokenQuery, useIncrementMessageViewsMutation } from '../../app/apiSlice';
+import { useState, useEffect } from 'react'
+import { useGetAllMessagesQuery, useGetTokenQuery, useIncrementMessageViewsMutation, useDeleteMessageMutation } from '../../app/apiSlice';
 import { Button, Modal } from '..'
 import { arrowRight } from '../../assets/icons'
 import MessageWithReplies from './MessageWithReplies';
@@ -7,19 +7,45 @@ import CreateMessageForm from './CreateMessageForm';
 
 
 function ListMessages() {
-    const [incrementMessageViews] = useIncrementMessageViewsMutation();
     const { data: messages, isLoading, isError, refetch } = useGetAllMessagesQuery();
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [selectedMessageId, setSelectedMessageId] = useState(null);
+
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const { data: tokenData } = useGetTokenQuery();
+
+    const [incrementMessageViews] = useIncrementMessageViewsMutation();
+    const [messageDeleted] = useDeleteMessageMutation();
 
     const isAuthenticated = tokenData && tokenData.account;
     const userId = tokenData?.account?.id;
+
+    
+    const handleOpenSelectedMessageModal = async (messageId) => {
+        try {
+            await incrementMessageViews(messageId).unwrap();
+            setSelectedMessageId(messageId);
+        } catch (error) {
+            console.error('Failed to increment message views', error);
+        }
+    };
+
+
+    const handleSelectedMessageCloseModal = () => {
+        setSelectedMessageId(null);
+    }
+
+
+    useEffect(() => {
+        if (selectedMessageId === null) {
+            refetch();
+        }
+    }, [selectedMessageId, refetch]);
 
 
     const handleCreateMessage = () => {
         setIsCreateModalOpen(true);
     };
+
 
     const handleCloseCreateModal = (updated) => {
         setIsCreateModalOpen(false);
@@ -29,20 +55,12 @@ function ListMessages() {
     };
 
 
-    const handleOpenSelectedMessageModal = async (messageId) => {
-        try {
-            await incrementMessageViews(messageId).unwrap();
-            setSelectedMessageId(messageId);
-            console.log('messageId-----------:', messageId);
-        } catch (error) {
-            console.error('Failed to increment message views', error);
-        }
-    };
 
 
-    const handleSelectedMessageCloseModal = () => {
-        setSelectedMessageId(null);
-    };
+
+
+
+
 
 
     if (isLoading) return <p>Loading messages...</p>;
@@ -66,6 +84,7 @@ function ListMessages() {
                             isOpen={isCreateModalOpen}
                             title='Create Message'
                             onClose={handleCloseCreateModal}
+                            showCloseButton={false}
                         >
                             <CreateMessageForm 
                                 onClose={handleCloseCreateModal}
@@ -77,13 +96,12 @@ function ListMessages() {
                 <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10'>
                     {messages.map(message => (
                         <div key={message.id}
-                            onClick={() => handleOpenSelectedMessageModal(message.id)} 
-                            className='bg-white flex flex-col w-full rounded-[20px] shadow-3xl px-6 py-8 border-4 border-[rgb(199,158,80)] sm:px-10 sm:py-16'
+                            className='bg-white flex flex-col justify-center w-full rounded-[20px] shadow-3xl px-6 py-8 border-4 border-[rgb(199,158,80)] sm:px-10 sm:py-16'
                         >
                             <div className='min-w-0 text-center'>
                                 <h1 className='text-3xl leading-5 font-medium text-black'>{message.title}</h1>
                                 <div className='mt-2 text-sm leading-5 text-[rgb(199,158,80)]'>
-                                    {message.body}
+                                    {message.body.length > 50 ? message.body.substring(0, 30) + '...' : message.body}
                                 </div>
                             </div>
                             <div className='mt-2 flex items-start text-sm leading-5 text-gray-700'>
@@ -98,7 +116,7 @@ function ListMessages() {
                                 </svg>
                                 {message.response_count} replies
                             </div>
-                            <div className='flex flex-1 justify-center mt-4'>
+                            <div className='self-center mt-8 mb-1'>
                                 {isAuthenticated && (
                                     <Button
                                         label='Details'
@@ -111,7 +129,6 @@ function ListMessages() {
                     ))}
                 </div>
                 <Modal
-            
                     isOpen={Boolean(selectedMessageId)}
                     title='Message Details'
                     onClose={handleSelectedMessageCloseModal}
@@ -119,6 +136,7 @@ function ListMessages() {
                     {selectedMessageId && (
                         <MessageWithReplies
                             messageId={selectedMessageId}
+                            onClose={handleSelectedMessageCloseModal}
                         />
                     )}
                 </Modal>

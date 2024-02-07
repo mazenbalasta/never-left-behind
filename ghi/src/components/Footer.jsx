@@ -32,7 +32,7 @@ const Footer = () => {
         {socialMedia.map((icon) => (
           <a
             href={icon.link}
-            key={icon.name}
+            key={icon.alt}
             className='flex justify-center items-center w-12 h-12 bg-white rounded-full'
             target="_blank"
             rel="noreferrer noopener"

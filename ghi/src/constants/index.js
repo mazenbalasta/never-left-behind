@@ -41,7 +41,7 @@ export const services = [
         imgURL: FiMessageSquare,
         label: "Message Forum",
         subtext: "Share your thoughts and questions. Our members will help you get answers.",
-        buttonText: "Join the conversation",
+        buttonText: "Let's talk",
         path: "/messages",
     },
     {

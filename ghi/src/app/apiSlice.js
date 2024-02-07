@@ -67,10 +67,10 @@ export const neverLeftBehindApi = createApi({
             }),
         }),
         createResponse: builder.mutation({
-            query: (messageId) => ({
+            query: ({ messageId, ...data }) => ({
                 url: `/api/messages/${messageId}/responses`,
                 method: 'POST',
-                body: response,
+                body: data,
             }),
         }),
         getMessageWithResponses: builder.query({
@@ -108,3 +108,5 @@ export const {
     useGetMessageWithResponsesQuery,
     useIncrementMessageViewsMutation,
 } = neverLeftBehindApi;
+
+

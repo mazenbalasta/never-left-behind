@@ -1,6 +1,6 @@
 import Button from "./Button";
 
-const Modal = ({ isOpen, title, children, onClose }) => {
+const Modal = ({ isOpen, title, children, onClose, showCloseButton = true }) => {
     if (!isOpen) return null;
 
 
@@ -11,6 +11,14 @@ const Modal = ({ isOpen, title, children, onClose }) => {
 
                 {children}
 
+                {showCloseButton && (
+                    <Button
+                        label="Close"
+                        size="small"
+                        onClick={onClose}
+                        backgroundColor={"bg-red-500"}
+                    />  
+                )}
             </div>
         </div>
     );
