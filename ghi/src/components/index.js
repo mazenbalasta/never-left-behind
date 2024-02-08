@@ -26,7 +26,6 @@ export {
     Button,
     Modal,
     Carousel,
-    HomeCards,
     PrivacyPolicy,
     HomeCardsWrapper,
 }
