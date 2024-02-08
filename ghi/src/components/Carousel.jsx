@@ -18,7 +18,7 @@ const Carousel = () => {
     return (
         <div className='relative w-full'>
             {/* container */}
-            <div className='relative h-56 overflow-hidden rounded-xlg md:h-96'>
+            <div className='relative h-[500px] overflow-hidden rounded-lg md:h-[800px]'>
                 {/* slides */}
                 {images.map((img, index) => (
                     <div

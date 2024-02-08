@@ -49,6 +49,7 @@ const Login = () => {
                                     className="form-control"
                                     style={{ color: 'black' }}
                                     value={username}
+                                    required
                                     onChange={(e) =>
                                         setUsername(e.target.value)
                                     }
@@ -61,6 +62,7 @@ const Login = () => {
                                     type="password"
                                     className="form-control"
                                     style={{ color: 'black' }}
+                                    required
                                     value={password}
                                     onChange={(e) =>
                                         setPassword(e.target.value)
@@ -68,11 +70,12 @@ const Login = () => {
                                 />
                             </div>
                             <div>
-                                <input
-                                    className="btn btn-primary"
+                                <button
+                                    className="bg-blue-900 hover:bg-blue-600 text-white font-bold py-2 px-4 border border-black rounded-full"
                                     type="submit"
-                                    value="Login"
-                                />
+                                >
+                                    Login
+                                </button>
                             </div>
                         </form>
                     </div>
