@@ -30,47 +30,54 @@ const Login = () => {
 
     return (
         <>
-        <div className="App-header">
-            {account && <h1>YOU'RE LOGGED IN DUMMY!</h1>}
-            {!account && <h1>YOU'RE LOGGED OUT!!</h1>}
-            <div className="card text-bg-light mb-3">
-                <h5 className="card-header">Login</h5>
-                {errorMessage && <ErrorAlert alert="WARNING:  " message={errorMessage} />}
-                <div className="card-body">
-                    <form onSubmit={handleSubmit} className="text-color black">
-                        <div className="mb-3">
-                            <label className="form-label">Username: </label>
-                            <input
-                                name="username"
-                                type="text"
-                                className="form-control"
-                                style={{ color: 'black' }}
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Password: </label>
-                            <input
-                                name="password"
-                                type="password"
-                                className="form-control"
-                                style={{ color: 'black' }}
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </div>
-                        <div>
-                            <input
-                                className="btn btn-primary"
-                                type="submit"
-                                value="Login"
-                            />
-                        </div>
-                    </form>
+            <div className='App-header'>
+                <div className="card text-bg-light mb-3">
+                    <h5 className="card-header">Login</h5>
+                    {errorMessage && (
+                        <ErrorAlert alert="WARNING:  " message={errorMessage} />
+                    )}
+                    <div className="card-body">
+                        <form
+                            onSubmit={handleSubmit}
+                            className="text-color black"
+                        >
+                            <div className="mb-3">
+                                <label className="form-label">Username: </label>
+                                <input
+                                    name="username"
+                                    type="text"
+                                    className="form-control"
+                                    style={{ color: 'black' }}
+                                    value={username}
+                                    onChange={(e) =>
+                                        setUsername(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label className="form-label">Password: </label>
+                                <input
+                                    name="password"
+                                    type="password"
+                                    className="form-control"
+                                    style={{ color: 'black' }}
+                                    value={password}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    className="btn btn-primary"
+                                    type="submit"
+                                    value="Login"
+                                />
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
         </>
     )
 }

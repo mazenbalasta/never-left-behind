@@ -1,11 +1,10 @@
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, ActivitiesForm, ActivitiesList, Login, GetLocalBars, PrivacyPolicy} from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, ActivitiesForm, ActivitiesList, Login, Jobslist, CreateJob, GetLocalBars, PrivacyPolicy} from './components';
 import HomePage from './HomePage';
 import Events from './Events';
 import EventForm from './EventForm';
 import Chat from './Chat';
 import AboutUs from './AboutUs';
-// import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
 import { ListMessages } from './components/messages';
@@ -38,17 +37,35 @@ function App() {
                                         path="partner"
                                         element={<PartnerSignup />}
                                     />
-                                   
+
+
                                 </Route>
                                 <Route path='activitiesForm' element={<ActivitiesForm />} />
                                 <Route path="/activities" element={<ActivitiesList />} />
                                 <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
                                 <Route path="/bars" element={<GetLocalBars />} />
                                 <Route path="/messages" element={<ListMessages />} />
-                                <Route path="/events" element={<Events />} />
+                                <Route
+                                    path="/events"
+                                    element={<Events />}
+                                />
                                 <Route path="/createEvent" element={<EventForm />} />
-                                <Route path="/chat" element={<Chat />} />
-                                <Route path="/login" element={<Login />} />
+                                <Route
+                                    path="/chat"
+                                    element={<Chat />}
+                                />
+                                <Route
+                                    path="/login"
+                                     element={<Login />}
+                                />
+                                <Route
+                                    path="/jobs"
+                                     element={<Jobslist />}
+                                />
+                                <Route
+                                    path='/jobs/create'
+                                    element={<CreateJob />}
+                                />
                                 <Route path="/aboutus" element={<AboutUs />} />
                             </Routes>
                         </div>

@@ -18,6 +18,10 @@
     position: relative;
 }
 
+.jobslist-container {
+  width: 90%;
+}
+
 #button-dropdown {
     position: absolute;
     top: 100%;

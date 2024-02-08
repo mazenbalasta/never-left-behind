@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useGetAllAccountsQuery } from '../app/apiSlice'
+import { useGetAllAccountsQuery, useLoginMutation } from '../app/apiSlice'
 import PasswordMatchMessage from '../functions/FormUtils'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 
 function VeteranSignup() {
     const InitForm = {
@@ -9,6 +10,7 @@ function VeteranSignup() {
         last_name: '',
         username: '',
         password: '',
+        repeatPassword:'',
         email: '',
     }
 
@@ -19,18 +21,24 @@ function VeteranSignup() {
     const [repeatPassword, setRepeatPassword] = useState('')
     const [usedUsernames, setUsedUsernames] = useState([])
     const [usedEmails, setUsedEmails] = useState([])
+    const [isUsernameAvailable, setIsUsernameAvailable] = useState(true)
+    const [isEmailAvailable, setIsEmailAvailable] = useState(true)
 
-    const { data, isLoading } = useGetAllAccountsQuery()
+    const { data: allAccounts, isLoading } = useGetAllAccountsQuery()
+    const isPasswordMatch = password === repeatPassword
+    const navigate = useNavigate()
+    const [login] = useLoginMutation()
 
     useEffect(() => {
-        if (!isLoading) {
-            const dbUsernames = data.map((user) => user.username)
-            setUsedUsernames(dbUsernames)
-
-            const dbEmails = data.map((user) => user.email)
-            setUsedEmails(dbEmails)
+        if (!isLoading && allAccounts) {
+            const email = 'email'
+            const emails = allAccounts.map((account) => account[email])
+            setUsedEmails(emails)
+            const username = 'username'
+            const usernames = allAccounts.map((account) => account[username])
+            setUsedUsernames(usernames)
         }
-    }, [data, isLoading])
+    }, [allAccounts, isLoading])
 
     const isEmailUsed = (email) => {
         return usedEmails.includes(email)
@@ -51,6 +59,16 @@ function VeteranSignup() {
     const handleInputChange = (e) => {
         const inputName = e.target.name
         const value = e.target.value
+
+        if (inputName === 'username') {
+            const usernameAvailable = !isUsernameUsed(value)
+            setIsUsernameAvailable(usernameAvailable)
+        }
+
+        if (inputName === 'email') {
+            const emailAvailable = !isEmailUsed(value)
+            setIsEmailAvailable(emailAvailable)
+        }
 
         if (inputName === 'password') {
             setPassword(value)
@@ -85,6 +103,11 @@ function VeteranSignup() {
             if (response.ok) {
                 setFormData({ ...InitForm })
                 window.alert('Account created!')
+                login({
+                    username: formData.username,
+                    password: formData.password,
+                })
+                navigate('/')
             } else {
                 window.alert('Account creation failed!')
             }
@@ -97,163 +120,193 @@ function VeteranSignup() {
     return (
         <>
             <div className="App-header">
-            <h1 className="mt-10 mb-10">SIGNUP AS A VETERAN</h1>
-            <div className="form-container mb-20">
-                <form
-                    className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-                    onSubmit={handleSubmit}
-                >
-                    <div className="mb-5">
-                        <label
-                            htmlFor="first-name"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            First name
-                        </label>
-                        <input
-                            type="first-name"
-                            name="first_name"
-                            id="first-name"
-                            onChange={handleInputChange}
-                            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                            required
-                        />
-                    </div>
-                    <div className="mb-5">
-                        <label
-                            htmlFor="last-name"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Last name
-                        </label>
-                        <input
-                            type="last-name"
-                            name="last_name"
-                            id="last-name"
-                            onChange={handleInputChange}
-                            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                            required
-                        />
-                    </div>
-                    <div className="mb-5">
-                        <label
-                            htmlFor="username"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Username
-                        </label>
-                        <input
-                            type="username"
-                            name="username"
-                            id="username"
-                            autoComplete="username"
-                            onChange={handleInputChange}
-                            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                            required
-                        />
-                    </div>
-                    <div className="mb-5">
-                        <label
-                            htmlFor="email"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            name="email"
-                            id="email"
-                            onChange={handleInputChange}
-                            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                            required
-                        />
-                    </div>
-                    <div className="mb-5">
-                        <label
-                            htmlFor="password"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Enter password
-                        </label>
-                        <div className="relative">
-                            <input
-                                type={showPassword ? 'text' : 'password'}
-                                name="password"
-                                id="password"
-                                autoComplete="new-password"
-                                onChange={handleInputChange}
-                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                                required
-                            />
-                            <button
-                                type="button"
-                                className="absolute top-1/2 transform -translate-y-1/2 right-3 focus:outline-none"
-                                onClick={togglePassVisibility}
-                            >
-                                {showPassword ? '🫣' : '👀'}
-                            </button>
-                        </div>
-                    </div>
-                    <div className="mb-0">
-                        <label
-                            htmlFor="password"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Repeat password
-                        </label>
-                        <div className="relative">
-                            <input
-                                type={showRepeatPassword ? 'text' : 'password'}
-                                id="repeat-password"
-                                autoComplete="new-password"
-                                name="repeatPassword"
-                                onChange={handleInputChange}
-                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                                required
-                                pattern={password}
-                            />
-                            <button
-                                type="button"
-                                className="absolute top-1/2 transform -translate-y-1/2 right-3 focus:outline-none"
-                                onClick={toggleRepeatPassVisibility}
-                            >
-                                {showRepeatPassword ? '🫣' : '👀'}
-                            </button>
-                        </div>
-                        {PasswordMatchMessage(password, repeatPassword)}
-                    </div>
-                    <div className="flex items-start mb-5">
-                        <div className="flex items-center h-5">
-                            <input
-                                id="terms"
-                                type="checkbox"
-                                value=""
-                                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                                required
-                            />
-                        </div>
-                        <label
-                            htmlFor="terms"
-                            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                        >
-                            I agree with the{' '}
-                            <Link
-                                to="/"
-                                className="text-blue-600 hover:underline dark:text-blue-500"
-                            >
-                                terms and conditions
-                            </Link>
-                        </label>
-                    </div>
-                    <button
-                        type="submit"
-                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                <h1 className="mt-10 mb-10">SIGNUP AS A VETERAN</h1>
+                <div className="form-container mb-20">
+                    <form
+                        className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                        onSubmit={handleSubmit}
                     >
-                        Register new account
-                    </button>
-                </form>
+                        <div className="mb-5">
+                            <label
+                                htmlFor="first-name"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                First name
+                            </label>
+                            <input
+                                type="first-name"
+                                name="first_name"
+                                id="first-name"
+                                value={formData.first_name}
+                                onChange={handleInputChange}
+                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                required
+                            />
+                        </div>
+                        <div className="mb-5">
+                            <label
+                                htmlFor="last-name"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                Last name
+                            </label>
+                            <input
+                                type="last-name"
+                                name="last_name"
+                                id="last-name"
+                                value={formData.last_name}
+                                onChange={handleInputChange}
+                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                required
+                            />
+                        </div>
+                        <div className="mb-0">
+                            <label
+                                htmlFor="username"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                Username
+                            </label>
+                            <input
+                                type="username"
+                                name="username"
+                                id="username"
+                                value={formData.username}
+                                autoComplete="username"
+                                onChange={handleInputChange}
+                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                required
+                            />
+                            {isUsernameUsed(formData.username) && (
+                                <span className="text-red-500 text-sm">
+                                    This username is already in use.
+                                </span>
+                            )}
+                        </div>
+                        <div className="mb-0">
+                            <label
+                                htmlFor="email"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                Email
+                            </label>
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                required
+                            />
+                            {isEmailUsed(formData.email) && (
+                                <span className="text-red-500 text-sm">
+                                    This email is already in use.
+                                </span>
+                            )}
+                        </div>
+                        <div className="mb-5">
+                            <label
+                                htmlFor="password"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                Enter password
+                            </label>
+                            <div className="relative">
+                                <input
+                                    type={showPassword ? 'text' : 'password'}
+                                    name="password"
+                                    id="password"
+                                    autoComplete="new-password"
+                                    onChange={handleInputChange}
+                                    value={formData.password}
+                                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="absolute top-1/2 transform -translate-y-1/2 right-3 focus:outline-none"
+                                    onClick={togglePassVisibility}
+                                >
+                                    {showPassword ? '🫣' : '👀'}
+                                </button>
+                            </div>
+                        </div>
+                        <div className="mb-0">
+                            <label
+                                htmlFor="password"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                Repeat password
+                            </label>
+                            <div className="relative">
+                                <input
+                                    type={
+                                        showRepeatPassword ? 'text' : 'password'
+                                    }
+                                    id="repeat-password"
+                                    autoComplete="new-password"
+                                    name="repeatPassword"
+                                    onChange={handleInputChange}
+                                    value={formData.repeatPassword}
+                                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                    required
+                                    pattern={password}
+                                />
+                                <button
+                                    type="button"
+                                    className="absolute top-1/2 transform -translate-y-1/2 right-3 focus:outline-none"
+                                    onClick={toggleRepeatPassVisibility}
+                                >
+                                    {showRepeatPassword ? '🫣' : '👀'}
+                                </button>
+                            </div>
+                            {PasswordMatchMessage(password, repeatPassword)}
+                        </div>
+                        <div className="flex items-start mb-5">
+                            <div className="flex items-center h-5">
+                                <input
+                                    id="terms"
+                                    type="checkbox"
+                                    value=""
+                                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                                    required
+                                />
+                            </div>
+                            <label
+                                htmlFor="terms"
+                                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            >
+                                I agree with the{' '}
+                                <Link
+                                    to="/"
+                                    className="text-blue-600 hover:underline dark:text-blue-500"
+                                >
+                                    terms and conditions
+                                </Link>
+                            </label>
+                        </div>
+                        <button
+                            type="submit"
+                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            disabled={
+                                !isUsernameAvailable ||
+                                !isEmailAvailable ||
+                                !isPasswordMatch
+                            }
+                            style={
+                                !isUsernameAvailable ||
+                                !isEmailAvailable ||
+                                !isPasswordMatch
+                                    ? { cursor: 'not-allowed' }
+                                    : null
+                            }
+                        >
+                            Register new account
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
         </>
     )
 }
