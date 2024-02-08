@@ -4,13 +4,12 @@ import tailwindcss from 'tailwindcss'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), ],
     server: {
         host: true,
         strictPort: true,
         watch: {
             usePolling: true,
-            
         },
     },
 })

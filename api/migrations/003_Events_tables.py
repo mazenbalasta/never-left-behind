@@ -3,9 +3,9 @@ steps = [
     [
         """
         CREATE TABLE states (
-            id SERIAL PRIMARY KEY NOT NULL,
-            abbreviation VARCHAR(2) NOT NULL,
-            name VARCHAR(50) NOT NULL
+            state_id SERIAL PRIMARY KEY NOT NULL,
+            abbreviation VARCHAR(2) UNIQUE NOT NULL,
+            state_name VARCHAR(50) NOT NULL
         );
 
 
@@ -17,19 +17,6 @@ steps = [
     ],
     # step 2:
     [
-        """
-        CREATE TABLE cities (
-            id SERIAL PRIMARY KEY NOT NULL,
-            name VARCHAR(255) NOT NULL
-        );
-        """,
-        # "Down" SQL statement
-        """
-        DROP TABLE cities;
-        """,
-    ],
-    # step 3:
-    [
         # "Up" SQL statement
         """
         CREATE TABLE events (
@@ -39,8 +26,10 @@ steps = [
             end_date TIMESTAMP,
             description VARCHAR(500),
             street_address VARCHAR(255),
-            state INT REFERENCES states(id),
-            city VARCHAR(50) NOT NULL
+            city VARCHAR(50) NOT NULL,
+            state VARCHAR(2),
+            FOREIGN KEY(state)
+            REFERENCES states(abbreviation)
         );
         """,
         # "Down" SQL statement

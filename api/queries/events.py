@@ -1,101 +1,84 @@
-from pydantic import BaseModel
-from datetime import datetime
 from queries.pool import pool
-from typing import Optional, List, Union
+from typing import Union
 from fastapi import HTTPException
-
-
-class Error(BaseModel):
-    message: str
-
-
-class states(BaseModel):
-    abbreviation: str
-
-
-class cities(BaseModel):
-    name: str
-
-
-class EventsIn(BaseModel):
-    event_title: str
-    start_date: datetime
-    end_date: datetime
-    description: Optional[str] = None
-    state: states
-    city: str
-
-
-class EventsOut(BaseModel):
-    id: int
-    event_title: str
-    start_date: datetime
-    end_date: datetime
-    description: Optional[str] = None
-    state: states
-    city: str
+from models import EventsIn, EventsOut, EventsOutWithStateInfo, Error, States
 
 
 class EventsRepo:
     def create(self, event: EventsIn) -> EventsOut:
-        with pool.connection() as conn:
-            with conn.cursor() as db:
-                result = db.execute(
-                    """
-                    INSERT INTO Events
-                        (
-                            event_title,
-                            start_date,
-                            end_date,
-                            description,
-                            city,
-                            state
-                        )
-                    VALUES
-                        (%s, %s, %s, %s, %s, %s)
-                    RETURNING id;
-                    """,
-                    [
-                        event.event_title,
-                        event.start_date,
-                        event.end_date,
-                        event.description,
-                        event.city,
-                        event.state.abbreviation,
-                    ],
-                )
-                id = result.fetchone()[0]
-                old_data = event.dict()
-                return EventsOut(id=id, **old_data)
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        INSERT INTO events
+                            (
+                                event_title,
+                                start_date,
+                                end_date,
+                                description,
+                                street_address,
+                                city,
+                                state
+                            )
+                        VALUES
+                            (%s, %s, %s, %s, %s, %s, %s)
+                        RETURNING id;
+                        """,
+                        [
+                            event.event_title,
+                            event.start_date,
+                            event.end_date,
+                            event.description,
+                            event.street_address,
+                            event.city,
+                            event.state,
+                        ],
+                    )
+                    id = result.fetchone()[0]
+                    old_data = event.dict()
+                    return EventsOut(id=id, **old_data)
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
-    def list_events(self) -> Union[Error, List[EventsOut]]:
+    def list_events(self) -> Union[Error, EventsOutWithStateInfo]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT * FROM Events
-                        ORDER BY start_date DESC;
+                        SELECT *
+                        FROM events
+                        INNER JOIN states
+                        ON events.state = states.abbreviation
+                        ORDER BY start_date;
                         """
                     )
                     records = db.fetchall()
                     result = []
                     for record in records:
-                        event = EventsOut(
+                        event = EventsOutWithStateInfo(
                             id=record[0],
                             event_title=record[1],
                             start_date=record[2],
                             end_date=record[3],
                             description=record[4],
-                            state=states(abbreviation=record[5]),
+                            street_address=record[5],
                             city=record[6],
+                            state=States(
+                                state_id=record[8],
+                                abbreviation=record[9],
+                                state_name=record[10],
+                            ),
                         )
                         result.append(event)
                     return result
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
-    def update_event(self, event_id: int, event: EventsIn) -> Union[EventsOut, Error]:
+    def update_event(
+        self, event_id: int, event: EventsIn
+    ) -> Union[EventsOutWithStateInfo, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -103,12 +86,13 @@ class EventsRepo:
                         """
                         UPDATE events
                         SET
-                            event_title = %s,
-                            start_date = %s,
-                            end_date = %s,
-                            description = %s,
-                            state = %s,
-                            city = %s
+                            event_title = %s
+                            , start_date = %s
+                            , end_date = %s
+                            , description = %s
+                            , street_address = %s
+                            , state = %s
+                            , city = %s
                         WHERE id = %s
                         RETURNING
                             id,
@@ -116,37 +100,29 @@ class EventsRepo:
                             start_date,
                             end_date,
                             description,
-                            state,
-                            city;
+                            street_address,
+                            city,
+                            state;
                         """,
                         [
                             event.event_title,
                             event.start_date,
                             event.end_date,
                             event.description,
-                            event.state.abbreviation,
+                            event.street_address,
+                            event.state,
                             event.city,
                             event_id,
-                        ]
+                        ],
                     )
-                    result = db.fetchone()
-                    if result is None:
-                        raise HTTPException(status_code=404, detail="Message not found")
-
-                    updated_event = EventsOut(
-                        id=result[0],
-                        event_title=result[1],
-                        start_date=result[2],
-                        end_date=result[3],
-                        description=result[4],
-                        state=states(abbreviation=result[5]),
-                        city=result[6],
-                    )
-                    return updated_event
-        except HTTPException as error:
-            raise error
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+                    db.fetchone()[0]
+                    old_data = event.dict()
+                    return EventsOut(id=event_id, **old_data)
+        except Exception:
+            raise HTTPException(
+                status_code=500,
+                detail="Event failed to update, please check if event id exist",
+            )
 
     def delete_event(self, event_id: int):
         try:
@@ -156,12 +132,46 @@ class EventsRepo:
                         """
                         DELETE FROM events WHERE id = %s
                         """,
-                        [event_id]
+                        [event_id],
                     )
                     if db.rowcount == 0:
-                        raise HTTPException(status_code=404, detail="Message not found")
+                        raise HTTPException(
+                            status_code=404, detail="Delete failed"
+                        )
                     return True
-        except HTTPException as error:
-            raise error
+        except Exception:
+            raise HTTPException(status_code=500, detail="Delete failed")
+
+    def create_entries(self):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    for i in range(20000000000):
+                        db.execute(
+                            """
+                            INSERT INTO events
+                                (
+                                    event_title,
+                                    start_date,
+                                    end_date,
+                                    description,
+                                    street_address,
+                                    city,
+                                    state
+                                )
+                            VALUES
+                                (%s, %s, %s, %s, %s, %s, %s);
+                            """,
+                            [
+                                f"Event {i+1}",
+                                "2022-01-01",
+                                "2022-01-02",
+                                "Sample description",
+                                "Sample street address",
+                                "Sample city",
+                                "Sample state",
+                            ],
+                        )
+            return "Entries created successfully"
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))

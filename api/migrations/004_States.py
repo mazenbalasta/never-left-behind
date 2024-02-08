@@ -1,11 +1,11 @@
 steps = [
-    #step 1: uP
+    # step 1: uP
     [
         """
         INSERT INTO states
             (
                 abbreviation,
-                name
+                state_name
             )
         VALUES
                 ('AL','Alabama'),
@@ -59,7 +59,7 @@ steps = [
                 ('WI','Wisconsin'),
                 ('WY','Wyoming');
         """,
-    #step 2: Down
+        # step 2: Down
         """
         DELETE FROM states;
         """,

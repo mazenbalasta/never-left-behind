@@ -11,12 +11,13 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE categories;
-        """
+        """,
     ],
     # step 2
     [
         """
         CREATE TABLE Activities (
+            id SERIAL PRIMARY KEY NOT NULL,
             name VARCHAR(255) NOT NULL,
             description VARCHAR(255),
             start_date DATE NOT NULL,
@@ -31,5 +32,5 @@ steps = [
         """
         DROP TABLE Activities;
         """,
-    ]
+    ],
 ]

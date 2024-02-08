@@ -1,0 +1,154 @@
+.thead th {
+  background-color: rgb(0, 7, 74);
+  padding: 35px;
+  text-align: center;
+  color: rgb(199, 158, 80);
+  font-family: Lucida Calligraphy;
+  font-size: 35px;
+  
+  border-top-color: rgb(199, 158,80);
+  border-left-color: rgb(199, 158, 80);
+    border-right-color: rgb(64, 17, 5);
+    border-bottom-color: hwb(12 2% 75%);
+  border-width: 5px;
+  border-top-style: groove;
+    border-bottom-style: groove;
+    border-left-style: groove;
+    border-right-style: groove; 
+
+}
+.tbody tr:nth-child(even) {
+  background-color: hwb(12 2% 56%);
+  color: rgb(199, 158, 80);
+  text-align: center;
+  font-family: Lucida Calligraphy;
+  font-size: 25px;
+  padding: 25px;
+ 
+}
+tbody tr:nth-child(odd) {
+  background-color: rgb(115, 115, 115);
+  color: rgb(199, 158, 80);
+  text-align: center;
+  font-family: Lucida Calligraphy;
+  font-size: 25px;
+  
+  
+  
+  
+}
+
+.tbody tr:nth-child(even) :hover {
+  background-color: hwb(12 2% 75%);
+  color: rgb(199, 158, 80);
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 25px;
+  padding: 25px;
+  
+}
+.tbody tr:nth-child(odd) :hover {
+  background-color: hwb(240 45% 75%);
+  color: rgb(199, 158, 80);
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 25px;
+  padding: 25px;
+  
+}
+
+.tbody td {
+  color: rgb(199, 158, 80);
+  text-align: center;
+  font-family: Lucida Calligraphy;
+  font-size: 25px;
+  padding: 25px;
+  border-color: hwb(12 2% 75%);
+  border-width: 5px;
+  border-style: ridge;
+ 
+  margin: 25px;
+}
+
+.h4 {
+  color: rgb(199, 158, 80);
+  text-align: center;
+  font-family: Lucida Calligraphy;
+  font-size: 50px;
+  padding: 25px;
+  border-color: hwb(12 2% 75%);
+  border-width: 5px;
+  border-style: ridge;
+  background-color: hwb(234 0% 71%);
+  margin: 25px;
+}
+
+.table {
+ 
+  border-width: 5px;
+  border-style: groove;
+ 
+  margin: 25px;
+  padding: 25px;
+
+}
+
+
+.input[type=text], input[type=number], input[address] {
+    width: 35%;
+    padding: 12px 20px;
+    margin:  0;
+    display: center;
+    border: 10px solid rgb(199, 158,80);
+    box-sizing: border-box;
+    color: rgb(199, 158,80);
+    background-color: #070149;
+    border-style: double;
+}
+.Sbtn {
+    background: flex;
+    text-shadow: #912424;
+    width: fit-content;
+    color: rgb(188, 142, 25);
+    background-color: #070149;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: 10px solid rgb(199, 158,80);
+    border-style: outset;
+    cursor: pointer;
+    width: 100%;
+    font: Lucida Calligraphy;
+}
+
+.Sbtn:hover {
+    color: rgb(192, 143, 17);
+    opacity: 0.8;
+    background-color: #070149;
+    border-style: inset;
+
+
+}
+
+.label {
+    color: rgb(199, 158,80);
+    font-family: Lucida Calligraphy;
+    font-size: 25px;
+    padding: 25px;
+    border-color: hwb(12 2% 75%);
+    border-width: 5px;
+    border-style: ridge;
+    background-color: hwb(234 0% 71%);
+    margin: 70px;
+}
+
+.description {
+    color: rgb(199, 158,80);
+    font-family: Lucida Calligraphy;
+    font-size: 25px;
+    padding: 25px;
+    border-color: hwb(12 2% 75%);
+    border-width: 5px;
+    border-style: ridge;
+    background-color: hwb(234 0% 71%);
+    margin: 70px;
+}
