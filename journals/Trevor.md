@@ -41,3 +41,6 @@ Today I created the ability for partners to get approval status, protecting our 
 
 Feb 6, 2024:
 Today I created a chat monitor for bad words, this will help keep our chat clean and safe for all users. I also designed a banner for our webpage, and worked with rudy on the navbar.
+
+Feb 7, 2024:
+Today I worked with Rudy on the front end, we made a lot of CSS format improvements and got our code up to sync. I also worked on the chat feature front end.
