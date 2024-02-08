@@ -1,5 +1,4 @@
 steps = [
-
     [
         # UP
         """
@@ -8,7 +7,6 @@ steps = [
             name VARCHAR(255) NOT NULL
         );
         """,
-
         # DOWN
         """
         DROP TABLE roles CASCADE;

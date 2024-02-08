@@ -1,5 +1,4 @@
 steps = [
-
     # UP
     """
     CREATE TABLE local_bar(

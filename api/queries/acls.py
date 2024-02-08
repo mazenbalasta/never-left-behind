@@ -10,12 +10,12 @@ def get_local_bars(postal):
         )
         content = json.loads(response.content)
         local_bars = {
-           "name": content["name"],
-           "brewery_type": content["brewery_type"],
-           "address_1": content["address_1"],
-           "city": content["city"],
-           "state": content["state"],
-           "website_url": content["website_url"]
+            "name": content["name"],
+            "brewery_type": content["brewery_type"],
+            "address_1": content["address_1"],
+            "city": content["city"],
+            "state": content["state"],
+            "website_url": content["website_url"],
         }
 
         return local_bars
