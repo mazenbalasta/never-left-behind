@@ -163,7 +163,7 @@ class EventsRepo:
                                 (%s, %s, %s, %s, %s, %s, %s);
                             """,
                             [
-                                f"Event { i+1 }",
+                                f"Event {i + 1}",
                                 "2022-01-01",
                                 "2022-01-02",
                                 "Sample description",
