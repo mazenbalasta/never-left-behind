@@ -6,7 +6,7 @@ function Resources() {
 
     return (
         <div className="App-header">
-            <h1 className="welcome mb-5 underline">Resources</h1>
+            <h1 className="welcome mb-5 Chat-text">Resources</h1>
             <p className="help font-bold">Need help immediately? Call 911 or the Veterans Crisis Line at 1-800-273-8255 and Press 1, or text 838255.</p>
         <div className="card-container">
             <div className="card">

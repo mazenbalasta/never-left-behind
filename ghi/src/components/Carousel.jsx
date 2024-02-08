@@ -24,12 +24,12 @@ const Carousel = () => {
                     <div
                         key={index}
                         className={`absolute inset-0 h-full w-full bg-no-repeat bg-cover bg-center transition-opacity duration-700 ease-in-out ${index === activeIndex ? 'opacity-100' : 'opacity-0'}`}
-                        style={{ backgroundImage: `url(${img})` }} > 
+                        style={{ backgroundImage: `url(${img})` }} >
                     </div>
                 ))}
             </div>
             {/* navigation buttons */}
-            <button 
+            <button
                 className='absolute top-1/2 left-0 transform -translate-y-1/2 p-2 md:p-3 bg-white bg-opacity-30'
                 onClick={() => setActiveIndex(activeIndex => (activeIndex - 1 + images.length) % images.length)}
                 >

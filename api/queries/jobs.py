@@ -152,7 +152,6 @@ class JobsRepo:
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
-
     def job_detail(self, job_id: int):
         try:
             with pool.connection() as conn:
@@ -166,16 +165,16 @@ class JobsRepo:
                     )
                     record = db.fetchone()
                     job = JobsOut(
-                            id=record[0],
-                            position=record[1],
-                            company_name=record[2],
-                            description=record[3],
-                            requirements=record[4],
-                            qualifications=record[5],
-                            pref_qualifications=record[6],
-                            location=record[7],
-                            apply_url=record[8],
-                        )
+                        id=record[0],
+                        position=record[1],
+                        company_name=record[2],
+                        description=record[3],
+                        requirements=record[4],
+                        qualifications=record[5],
+                        pref_qualifications=record[6],
+                        location=record[7],
+                        apply_url=record[8],
+                    )
                     return job
         except Exception as e:
-            return {"error": "An error occurred while fetching job details"}
+            return {str(e): "An error occurred while fetching job details"}

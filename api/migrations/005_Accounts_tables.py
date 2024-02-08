@@ -11,7 +11,7 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE account_types;
-        """
+        """,
     ],
     # Step 2: Create accounts table
     [
@@ -36,7 +36,7 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE accounts;
-        """
+        """,
     ],
     # Step 3: Create message table
     [
@@ -55,10 +55,8 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE messages;
-        """
+        """,
     ],
-
-
     # Step 4: Create responses table
     [
         # "Up" SQL statement
@@ -76,9 +74,8 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE responses;
-        """
+        """,
     ],
-
     # Step 5: Insert data to account types table
     [
         # "Up" SQL statement
@@ -93,6 +90,6 @@ steps = [
         # "Down" SQL statement
         """
         DELETE FROM account_types;
-        """
+        """,
     ],
 ]

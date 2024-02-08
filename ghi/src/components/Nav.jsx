@@ -64,12 +64,6 @@ const Nav = () => {
                     className="nav-link text-sm font-bold text-white uppercase hover:text-blue-500"
                     onClick={closeMenu}
                 >
-                    <NavLink to="/resources">Resources</NavLink>
-                </li>
-                <li
-                    className="nav-link text-sm font-bold text-white uppercase hover:text-blue-500"
-                    onClick={closeMenu}
-                >
                     <NavLink to="/messages">Messages</NavLink>
                 </li>
                 <li
@@ -95,6 +89,12 @@ const Nav = () => {
                     onClick={closeMenu}
                 >
                     <NavLink to="/Activities">Activities</NavLink>
+                </li>
+                <li
+                    className="nav-link text-sm font-bold text-white uppercase hover:text-blue-500"
+                    onClick={closeMenu}
+                >
+                    <NavLink to="/resources">Resources</NavLink>
                 </li>
                 <div className="grid grid-cols-2 gap-4 content-end">
                     {!account ? (
