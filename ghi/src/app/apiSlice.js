@@ -16,6 +16,16 @@ export const neverLeftBehindApi = createApi({
         getAllCategories: builder.query({
             query: () => '/api/categories',
         }),
+        getAllJobs: builder.query({
+            query: () => '/api/jobs'
+        }),
+        createJob: builder.mutation({
+            query: (id) => ({
+                url: `/api/jobs/`,
+                method: 'POST',
+                body: job,
+            }),
+        }),
         logout: builder.mutation({
             query: () => ({
                 url: '/token',
@@ -37,7 +47,7 @@ export const neverLeftBehindApi = createApi({
                     credentials: 'include',
                 }
             },
-            // invalidatesTags: ['Account'],
+            invalidatesTags: ['Account'],
 
             invalidatesTags: (result) => {
                 return (result && ['Token']) || []
@@ -115,6 +125,6 @@ export const {
     useCreateResponseMutation,
     useGetMessageWithResponsesQuery,
     useIncrementMessageViewsMutation,
+    useGetAllJobsQuery,
+    useCreateJobMutation
 } = neverLeftBehindApi;
-
-

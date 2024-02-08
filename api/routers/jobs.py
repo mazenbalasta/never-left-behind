@@ -29,3 +29,8 @@ def delete_job(id: int, repo: JobsRepo = Depends()):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@router.get("/api/jobs/{id}", response_model=JobsOut)
+def get_job_detail(id: int, repo: JobsRepo = Depends()):
+    return repo.job_detail(id)

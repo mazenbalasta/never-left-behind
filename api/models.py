@@ -29,7 +29,6 @@ class VetAccountIn(BaseModel):
     first_name: str
     last_name: str
 
-
 class PartnerAccountIn(BaseModel):
     account_type: AccountType
     username: str
