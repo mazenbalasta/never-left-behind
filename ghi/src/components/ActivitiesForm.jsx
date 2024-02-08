@@ -72,55 +72,57 @@ function ActivitiesForm() {
   
   
   return (
-    <div className="flex flex-col bg-black-100 py-2">
-      <div className="p-6 max-w-full  bg-gray shadow-md rounded-md">
-        <h4 className="h4">Add an Activity</h4>
-        <form onSubmit={handleSubmit} className="thead">
-          <div>
+    <div className="App-header">
+      <div className="flex flex-col bg-black-100 py-2">
+        <div className="p-6 max-w-full  bg-gray shadow-md rounded-md">
+          <h4 className="h4">Add an Activity</h4>
+          <form onSubmit={handleSubmit} className="thead">
+            <div>
+              <br></br>
+              <label className="label">Activity Name:</label>
+              <input type="text" name="name" value={formData.name} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md text-black hover:bg-blue-100" />
             <br></br>
-            <label className="label">Activity Name:</label>
-            <input type="text" name="name" value={formData.name} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md text-black hover:bg-blue-100" />
-          <br></br>
-          </div>
-          <br></br>
-          <br></br>
-          <div>
-            <label className="label">Description:</label>
-          <textarea type="textarea" name="description" value={formData.description} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md focus:outline-none text-black hover:bg-blue-100" />
-          </div>
-          <div>
+            </div>
             <br></br>
             <br></br>
-            <label className="label">Start Date:</label>
-            <input type="date" name="start_date" value={formData.start_date} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md text-black hover:bg-blue-100" />
-          </div>
-          <div>
+            <div>
+              <label className="label">Description:</label>
+            <textarea type="textarea" name="description" value={formData.description} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md focus:outline-none text-black hover:bg-blue-100" />
+            </div>
+            <div>
+              <br></br>
+              <br></br>
+              <label className="label">Start Date:</label>
+              <input type="date" name="start_date" value={formData.start_date} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md text-black hover:bg-blue-100" />
+            </div>
+            <div>
+              <br></br>
+              <br></br>
+              <label className="label">End Date:</label>
+              <input type="date" name="end_date" value={formData.end_date} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md text-black hover:bg-blue-100" />
+            </div>
             <br></br>
             <br></br>
-            <label className="label">End Date:</label>
-            <input type="date" name="end_date" value={formData.end_date} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md text-black hover:bg-blue-100" />
-          </div>
-          <br></br>
-          <br></br>
-          <div>
-            <label className="label">Location:</label>
-            <input type="text" name="location" value={formData.location} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md text-black hover:bg-blue-100" />
-          </div>
-          <br></br>
-          <br></br>
-          <div>
-            <label className="label">Category:</label>
-            <select name="category" value={formData.category} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md text-black hover:bg-blue-100">
-              {Array. isArray(categories) && categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <button type="submit" className="w-full px-4 py-2 bg-blue-600 text-black rounded-md hover:bg-blue-700">Submit</button>
-        </form>
-      </div>
+            <div>
+              <label className="label">Location:</label>
+              <input type="text" name="location" value={formData.location} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md text-black hover:bg-blue-100" />
+            </div>
+            <br></br>
+            <br></br>
+            <div>
+              <label className="label">Category:</label>
+              <select name="category" value={formData.category} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md text-black hover:bg-blue-100">
+                {Array. isArray(categories) && categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button type="submit" className="w-full px-4 py-2 bg-blue-600 text-black rounded-md hover:bg-blue-700">Submit</button>
+          </form>
+        </div>
+        </div>
     </div>
   );
 }

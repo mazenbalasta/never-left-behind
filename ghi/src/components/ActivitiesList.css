@@ -26,7 +26,7 @@
   padding: 25px;
  
 }
-tbody tr:nth-child(odd) {
+.tbody tr:nth-child(odd) {
   background-color: rgb(115, 115, 115);
   color: rgb(199, 158, 80);
   text-align: center;

@@ -15,7 +15,7 @@ const ActivitiesList = () => {
 
   return (
 
-    <div>
+    <div className="App-header">
 
       <table className="table">
         <thead className="thead">

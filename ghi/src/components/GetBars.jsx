@@ -20,7 +20,7 @@ const GetLocalBars = () => {
  }
 
   return (
-    <div>
+    <div className='App-header'>
       <form onSubmit={handleSubmit}>
         <input className='input'
           type="text"
