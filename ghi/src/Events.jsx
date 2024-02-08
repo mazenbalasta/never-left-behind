@@ -11,10 +11,6 @@ function ShowEvent() {
 
     const { data: token } = useGetTokenQuery();
 
-    if (token && token.account) {
-        console.log(token.account.account_type);
-    }
-
 
     const getEvents = async () => {
         const eventsUrl = 'http://localhost:8000/api/events/';
@@ -42,7 +38,6 @@ function ShowEvent() {
         const getAddress = (event) => {
             const { street_address, city, state } = event;
             const formattedAddress = `${street_address}+${city}+${state.abbreviation}`;
-            console.log(formattedAddress);
             const geocodeUrl = `https://api.radar.io/v1/geocode/forward?query=${formattedAddress}`;
             const requestOptions = {
                 headers: {
@@ -53,7 +48,6 @@ function ShowEvent() {
                 .then(response => response.json())
                 .then(data => {
                     setGeocodeData(data);
-                    console.log(data);
                 })
                 .catch(error => console.log(error));
             }
@@ -200,7 +194,7 @@ const handleResetClick = async () => {
                             </table>
                             </div>
                             <div className="h-5" />
-                            <div className="map-container" style={{ height: '55%', position: 'absolute', width: '74%', marginLeft: '500px', padding:'1px' }}>
+                            <div className="map-container" style={{ height: '45%', position: 'absolute', width: '74%', marginLeft: '500px', padding:'1px' }}>
                                 <div id="map" style={{ height: '100%', position: 'absolute', width: '100%' }} />
                             </div>
                             {selectedEvent ? (

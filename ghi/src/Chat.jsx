@@ -104,9 +104,10 @@ class Chat extends React.Component {
               </tbody>
             </table>
             <form onSubmit={this.sendMessage}>
+              <p>Outgoing Transmission:</p>
               <input
                 value={this.state.message}
-                className="form-control text-black w-96 px-3 py-3 text-lg message-input"
+                className="form-control text-black w-1/2 px-3 py-3 text-lg message-input"
                 type="text"
                 id="messageText"
                 autoComplete="off"

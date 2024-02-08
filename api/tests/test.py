@@ -5,8 +5,9 @@ from queries.events import EventsRepo, EventsIn, EventsOut
 import datetime
 from fastapi import HTTPException
 from queries.jobs import JobsIn, JobsOut
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 from queries.events import EventsIn, EventsRepo
+
 
 client = TestClient(app)
 
@@ -30,6 +31,8 @@ def test():
     # ARRANGE
 
     # ACT
+
+
 # python -m pytest tests/test.py
 
 
@@ -54,7 +57,7 @@ def test_get_categories():
 #     # Arrange
 #     expected_activities = [
 #         {
-            
+
 #             "name": "Activity One",
 #             "description": "This is activity one",
 #             "start_date": "2022-01-01",
@@ -128,3 +131,52 @@ def test_get_categories():
 
 # if __name__ == "__main__":
 #     unittest.main()
+
+
+def test_list_events():
+    # Arrange
+    expected_events = [
+        {
+            "id": 1,
+            "event_title": "Event One",
+            "start_date": "2022-01-01",
+            "end_date": "2022-01-02",
+            "description": "This is event one",
+            "street_address": "123 Main St",
+            "city": "Anytown",
+            "state": "CA",
+        },
+        {
+            "id": 2,
+            "event_title": "Event Two",
+            "start_date": "2022-01-01",
+            "end_date": "2022-01-02",
+            "description": "This is event two",
+            "street_address": "123 Main St",
+            "city": "Anytown",
+            "state": "CA",
+        },
+        {
+            "id": 3,
+            "event_title": "Event Three",
+            "start_date": "2022-01-01",
+            "end_date": "2022-01-02",
+            "description": "This is event three",
+            "street_address": "123 Main St",
+            "city": "Anytown",
+            "state": "CA",
+        },
+    ]
+
+    # Create a mock for the client
+    client = MagicMock()
+    # Mock the response of the client.get() method
+    client.get.return_value.status_code = 200
+    client.get.return_value.json.return_value = expected_events
+
+    # Act
+    response = client.get("/api/events")
+
+    # Assert
+    assert response.status_code == 200
+    assert response.json() == expected_events

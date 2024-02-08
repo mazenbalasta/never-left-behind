@@ -30,6 +30,7 @@ const Login = () => {
 
     return (
         <>
+        <div className="App-header">
             {account && <h1>YOU'RE LOGGED IN DUMMY!</h1>}
             {!account && <h1>YOU'RE LOGGED OUT!!</h1>}
             <div className="card text-bg-light mb-3">
@@ -69,6 +70,7 @@ const Login = () => {
                     </form>
                 </div>
             </div>
+        </div>
         </>
     )
 }

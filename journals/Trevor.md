@@ -37,7 +37,7 @@ Feb 2, 2024:
 Today I worked on the authenticated view for our partners, I added the ability to view all events, and the ability to view the details of an event. I also added the ability to view the details of an event.
 
 Feb 5 , 2024:
-Today I created the ability for partners to get approval status, protecting our views even further by requiring a partner to be approved before they can create and manage events.
+Today I created the ability for partners to get approval status, protecting our views even further by requiring a partner to be approved before they can create and manage events. Me and LaTroy worked together on the 3rd party API implementation for the breweries, we were able to get the API to work and display the data on the page.
 
 Feb 6, 2024:
 Today I created a chat monitor for bad words, this will help keep our chat clean and safe for all users. I also designed a banner for our webpage, and worked with rudy on the navbar.
