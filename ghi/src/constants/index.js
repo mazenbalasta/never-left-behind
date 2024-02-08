@@ -17,16 +17,14 @@ export const footerLinks = [
         title: "Help",
         links: [
             { name: "About us", link: "/aboutus" },
-            { name: "Resources", link: "/resources" },
-            { name: "Benefits of becoming a Member", link: "/" },
             { name: "Privacy policy", link: "/" },
         ],
     },
     {
         title: "Get in touch",
         links: [
-            { name: "@TS Name", link: "mailto:jimiHendrix@nlb.com" },
-            { name: "Need help: 844.907-1342", link: "tel:(844) 907-1342" },
+            { name: "Email us", link: "mailto:neverleftbehind.vite@gmail.com" },
+            { name: "Need help call: 844.907-1342", link: "tel:(844) 907-1342" },
         ],
     },
         {
@@ -65,18 +63,10 @@ export const services = [
         imgURL: MdCardMembership,
         label: "Benefits",
         subtext: 
-        "Veteran members get:\n" +
-        " - Access to resources\n" +
-        " - Access to message forum\n" +
-        " - Access to activities\n" +
-        " - Early access to new job\n" +
-        "listings and events\n" +
-        "Partnership members get:\n" +
-        "- all the benefits of a veteran member\n" +
-        "- Access to our partner network\n" +
-        "- ability to post new jobs,\n" +
-        "activities, and events?\n",
-        buttonText: "Become a member",
-        path: "/signup/veteran",
+        "Special benefits for:\n" +
+        " - Veterans\n" +
+        " - Partners\n",
+        buttonText: "Learn more",
+        path: "/benefits",
     },
 ];

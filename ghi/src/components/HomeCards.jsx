@@ -26,8 +26,8 @@ const HomeCards = ({ imgURL, label, subtext, buttonText, path }) => {
 
     const splitSubtext = (text) => {
         return text.split('\n').map((line, index) => {
-            if (line.includes("Veteran members") || line.includes("Partnership members:")) {
-                return <span key={index} className="flex justify-start text-red">{line}</span>;
+            if (line.includes("Special benefits") || line.includes("")) {
+                return <span key={index} className="flex justify-center">{line}</span>;
             }
             return <span key={index}>{line}</span>;
         });

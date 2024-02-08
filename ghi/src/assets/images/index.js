@@ -4,6 +4,7 @@ import activities from './activities.jpg'
 import events from './events.jpg'
 import jobs from './jobs.jpg'
 import messages from './messages.jpg'
+import mentor from './mentor.jpg'
 
 export {
     logo,
@@ -11,5 +12,6 @@ export {
     activities,
     events,
     jobs,
-    messages
+    messages,
+    mentor
 }

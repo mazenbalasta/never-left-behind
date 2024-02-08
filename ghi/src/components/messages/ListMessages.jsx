@@ -84,7 +84,7 @@ function ListMessages() {
                     <h1>Messages</h1>
                 </div>
                 {isAuthenticated && (
-                    <div className='flex justify-center mb-4'>
+                    <div className='flex justify-center mt-20'>
                         <Button
                             label='Create Message'
                             size='medium'
@@ -104,7 +104,7 @@ function ListMessages() {
                         </Modal>
                     </div>
                 )}
-                <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10'>
+                <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-10 pt-[60px]'>
                     {messages.map(message => (
                         <div key={message.id}
                             className='bg-white flex flex-col justify-center w-full rounded-[20px] shadow-3xl px-6 py-8 border-4 border-[rgb(199,158,80)] sm:px-10 sm:py-16'

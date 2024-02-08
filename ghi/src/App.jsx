@@ -9,6 +9,7 @@ import AboutUs from './AboutUs';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
 import { ListMessages } from './components/messages';
+import MembershipBenefits from './components/MembershipBenefits';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
                                 <Route path="/chat" element={<Chat />} />
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/aboutus" element={<AboutUs />} />
+                                <Route path="/benefits" element={<MembershipBenefits />} />
                             </Routes>
                         </div>
                     </section>
