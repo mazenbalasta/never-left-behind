@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useGetAllActivitiesQuery } from "../app/apiSlice";
+import { useGetTokenQuery } from "../app/apiSlice";
+import { Link } from "react-router-dom";
 import './ActivitiesList.css';
 
 
@@ -7,16 +9,29 @@ const ActivitiesList = () => {
   const { data: activities = [], isFetching } = useGetAllActivitiesQuery();
   const [postal, setPostal] = useState("");
   const [barList, setBars] = useState([]);
+  const { data: token } = useGetTokenQuery();
+
+  if (token && token.account) {
+   
+    console.log(token);
+  }
+   
 
 
-  if (isFetching) return 
 
+  
+  
 
 
   return (
 
     <div className="App-header">
-
+         { token &&  (
+          <button className="Sbtn" type="button">
+              <Link to="/activitiesForm">Add Activity</Link>
+          </button>
+      )}
+      <h4 className="h4">Find an Activity</h4>
       <table className="table">
         <thead className="thead">
             <tr>

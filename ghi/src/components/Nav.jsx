@@ -91,12 +91,6 @@ const Nav = () => {
                     <NavLink to="/Activities">Activities</NavLink>
                 </li>
                 <li
-                    className="nav-link mr-2 text-sm font-bold text-white uppercase hover:text-blue-500"
-                    onClick={closeMenu}
-                >
-                    <NavLink to="/ActivitiesForm">Add Activities</NavLink>
-                </li>
-                <li
                     className="nav-link text-sm font-bold text-white uppercase hover:text-blue-500"
                     onClick={closeMenu}
                 >

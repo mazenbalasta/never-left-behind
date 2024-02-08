@@ -27,7 +27,7 @@ const GetLocalBars = () => {
           color="gold"
           value={postal}
           onChange={(e) => setPostal(e.target.value)}
-          placeholder="Enter a 5-digit zip code"
+          placeholder="Enter your zip code"
         />
         <button className='Sbtn' type="submit">Find Local Breweries</button>
         
