@@ -14,31 +14,17 @@ const Carousel = () => {
         return () => clearInterval(interval);
     }, [images.length]);
 
-    const descriptions = [
-        "Our Story",
-        "National/Local Activities",
-        "Hiring Events",
-        "Employment Opportunities",
-        "Collaborate With Fellow Veterans"
-    ];
-
-
 
     return (
-        <div className='relative w-full items-center justify-center'>
+        <div className='relative w-full'>
             {/* container */}
-            <div className='overflow-hidden w-full h-56 md:h-96 '>
+            <div className='relative h-56 overflow-hidden rounded-xlg md:h-96'>
                 {/* slides */}
                 {images.map((img, index) => (
                     <div
                         key={index}
-                        className={`absolute transition-opacity duration-700 ease-in-out' ${index === activeIndex ? 'opacity-100' : 'opacity-0'} w-full h-full bg-cover bg-center`}
+                        className={`absolute inset-0 h-full w-full bg-no-repeat bg-cover bg-center transition-opacity duration-700 ease-in-out ${index === activeIndex ? 'opacity-100' : 'opacity-0'}`}
                         style={{ backgroundImage: `url(${img})` }} >
-
-                        {/* text overlay */}
-                        <div className='absolute bottom-0 left-0 p-4 md:p-6 bg-black bg-opacity-50 w-full text-white'>
-                            <h2 className='text-xl md:text-2xl text-center font-bold '>{descriptions[index]}</h2>
-                        </div>
                     </div>
                 ))}
             </div>
