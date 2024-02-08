@@ -1,12 +1,5 @@
-import unittest
 from fastapi.testclient import TestClient
 from main import app
-from queries.events import EventsRepo, EventsIn, EventsOut
-import datetime
-from fastapi import HTTPException
-from queries.jobs import JobsIn, JobsOut
-from unittest.mock import patch
-from queries.events import EventsIn, EventsRepo
 
 client = TestClient(app)
 
