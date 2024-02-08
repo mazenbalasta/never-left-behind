@@ -38,3 +38,7 @@ On 6 Feb 24,
 On 7 Feb 24,
 
     On this day I was able to successfully finish the privacy policies and also finish all the other hiccups that was coming along with my part on the project so right now i believe is actually 98% done if not 100 and we are working to making everyone merge works and the request fix the issues that they have been coming a cross while doing their merges.
+
+On 8 Feb 24,
+
+    On this day i finialized the CSS for my corresponding pages which is Activiites and Bars also updated the activitiesfrom to where you can only view it if you are signed in either a veteran or a partner

@@ -96,12 +96,6 @@ const Nav = () => {
                 >
                     <NavLink to="/Activities">Activities</NavLink>
                 </li>
-                <li
-                    className="nav-link mr-2 text-sm font-bold text-white uppercase hover:text-blue-500"
-                    onClick={closeMenu}
-                >
-                    <NavLink to="/ActivitiesForm">Add Activities</NavLink>
-                </li>
                 <div className="grid grid-cols-2 gap-4 content-end">
                     {!account ? (
                         <>
