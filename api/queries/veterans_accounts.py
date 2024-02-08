@@ -144,10 +144,6 @@ class AccountQueries:
                         info.email,
                         info.first_name,
                         info.last_name,
-                        info.company_name,
-                        info.city,
-                        info.state,
-                        info.country,
                         username,
                     ],
                 )

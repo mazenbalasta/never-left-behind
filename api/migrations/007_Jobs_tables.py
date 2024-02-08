@@ -12,7 +12,10 @@ steps = [
             qualifications VARCHAR(1000),
             pref_qualifications VARCHAR(1000),
             location VARCHAR(255) NOT NULL,
-            apply_url VARCHAR(1000)
+            apply_url VARCHAR(1000),
+            created_by INT NOT NULL,
+            FOREIGN KEY (created_by)
+            REFERENCES accounts(id)
         );
         """,
         # "Down" SQL statement

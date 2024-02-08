@@ -67,6 +67,7 @@ const Jobslist = () => {
                                     Position: {job.position}
                                 </a>
                                 <p className="overflow-hidden pr-7 text-sm text-white">
+                                    <strong>Job Description: </strong>
                                     {job.description}
                                 </p>
                                 <div className="mt-3 flex items-center">

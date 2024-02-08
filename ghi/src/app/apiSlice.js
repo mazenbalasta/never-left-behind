@@ -17,14 +17,16 @@ export const neverLeftBehindApi = createApi({
             query: () => '/api/categories',
         }),
         getAllJobs: builder.query({
-            query: () => '/api/jobs'
+            query: () => '/api/jobs',
+            providesTags: ["Job"]
         }),
         createJob: builder.mutation({
-            query: (id) => ({
+            query: (formData) => ({
                 url: `/api/jobs/`,
                 method: 'POST',
-                body: job,
+                body: formData,
             }),
+            invalidatesTags: ["Job"]
         }),
         logout: builder.mutation({
             query: () => ({
