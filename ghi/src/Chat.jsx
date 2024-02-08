@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React from 'react'
+import Filter from 'bad-words';
 function MessageRow(props) {
   const when = new Date(props.message.timestamp);
   return (
@@ -53,8 +53,9 @@ class Chat extends React.Component {
       }, 1000);
     });
     this.socket.addEventListener('message', (message) => {
+      const filteredMessage = this.filterMessage(JSON.parse(message.data));
       this.setState({
-        messages: [JSON.parse(message.data), ...this.state.messages],
+        messages: [filteredMessage, ...this.state.messages],
       });
     });
   }
@@ -62,6 +63,13 @@ class Chat extends React.Component {
   componentDidMount() {
     this.connect();
   }
+
+  filterMessage(message) {
+    const filter = new Filter();
+    const filteredContent = filter.clean(message.content);
+    return { ...message, content: filteredContent };
+  }
+
 
   sendMessage(e) {
     e.preventDefault();
@@ -75,38 +83,39 @@ class Chat extends React.Component {
 
   render() {
     return (
-      <><div className="App-Section">
-        <div className="w-full bg-gray-900 text-green-600">
-            <h1 className="App-Section text-5xl underline font-virgil">NLB Radio</h1>
-          <h2 className="text-xl">Your ID: {this.state.clientId}</h2>
-          <table className="table-auto ml-6 flex-1  px-7 py-6 bg-black">
-            <thead>
-              <tr>
-                <th className="text-xl underline">Radio Traffic</th>
-              </tr>
-            </thead>
-            <tbody className="overflow-y-scroll min-w-96 w-full max-h-96 flex flex-col-reverse h-screen">
-              {this.state.messages.map((message) => (
-                <MessageRow
-                  key={message.clientId + message.timestamp}
-                  message={message}
-                />
-              ))}
-            </tbody>
-          </table>
-          <form onSubmit={this.sendMessage}>
-            <input
-              value={this.state.message}
-              className="form-control text-black w-96 px-3 py-3 message-input"
-              type="text"
-              id="messageText"
-              autoComplete="off"
-              spellCheck="True"
-              onChange={this.updateMessage}
-            />
-            <button type="submit" className="mt-7 ml-7 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-lg px-7 py-3 mb-3 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Send It!</button>
-          </form>
-        </div>
+      <>
+        <div className="Chat-text App-header">
+          <div className="bg-gray-900 text-green-600 ">
+            <h1 className="Chat-text text-5xl pt-5 underline font-virgil">NLB Radio</h1>
+            <h2 className="text-xl">Your ID: {this.state.clientId}</h2>
+            <table className="table-auto ml-6 flex-1  px-7 py-6 bg-black">
+              <thead>
+                <tr>
+                  <th className="text-xl underline">Radio Traffic</th>
+                </tr>
+              </thead>
+                <tbody className="overflow-y-scroll min-w-96 w-full text-lg max-h-96 flex flex-col-reverse h-screen">
+                {this.state.messages.map((message) => (
+                  <MessageRow
+                    key={message.clientId + message.timestamp}
+                    message={message}
+                  />
+                ))}
+              </tbody>
+            </table>
+            <form onSubmit={this.sendMessage}>
+              <input
+                value={this.state.message}
+                className="form-control text-black w-96 px-3 py-3 text-lg message-input"
+                type="text"
+                id="messageText"
+                autoComplete="off"
+                spellCheck="True"
+                onChange={this.updateMessage}
+              />
+              <button type="submit" className="mt-7 ml-7 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-lg px-7 py-3 mb-3 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Send It!</button>
+            </form>
+          </div>
         </div>
       </>
     );

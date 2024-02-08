@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from authenticator import authenticator
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
+from routers import activities, resources, events, messages, jobs, states
+from routers import veterans_accounts, partners_accounts
 from routers import activities, resources, events, messages, jobs
 from routers import veterans_accounts, partners_accounts, categories, bars
 import os
@@ -22,6 +24,7 @@ app.include_router(messages.router, tags=["Message Board"])
 app.include_router(jobs.router, tags=["Jobs"])
 app.include_router(bars.router, tags=["Bars"])
 app.include_router(routerC, tags=["Chat"])
+app.include_router(states.router, tags=["States"])
 
 
 app.add_middleware(

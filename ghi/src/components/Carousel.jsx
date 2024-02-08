@@ -15,11 +15,11 @@ const Carousel = () => {
     }, [images.length]);
 
     const descriptions = [
-        "write about us",
-        "write activities description",
-        "write events description",
-        "write jobs description",
-        "write messages description"
+        "Our Story",
+        "National/Local Activities",
+        "Hiring Events",
+        "Employment Opportunities",
+        "Collaborate With Fellow Veterans"
     ];
 
 
@@ -27,7 +27,7 @@ const Carousel = () => {
     return (
         <div className='relative w-full items-center justify-center'>
             {/* container */}
-            <div className='overflow-hidden w-full h-96 '>
+            <div className='overflow-hidden w-full h-56 md:h-96 '>
                 {/* slides */}
                 {images.map((img, index) => (
                     <div
@@ -36,21 +36,21 @@ const Carousel = () => {
                         style={{ backgroundImage: `url(${img})` }} > 
 
                         {/* text overlay */}
-                        <div className='absolute bottom-0 left-0 p-6 bg-black bg-opacity-50 w-full text-white'>
-                            <h2 className='text-2xl text-center font-bold '>{descriptions[index]}</h2>
+                        <div className='absolute bottom-0 left-0 p-4 md:p-6 bg-black bg-opacity-50 w-full text-white'>
+                            <h2 className='text-xl md:text-2xl text-center font-bold '>{descriptions[index]}</h2>
                         </div>
                     </div>
                 ))}
             </div>
             {/* navigation buttons */}
             <button 
-                className='absolute top-1/2 left-0 transform -translate-y-1/2 p-3 bg-white bg-opacity-30'
+                className='absolute top-1/2 left-0 transform -translate-y-1/2 p-2 md:p-3 bg-white bg-opacity-30'
                 onClick={() => setActiveIndex(activeIndex => (activeIndex - 1 + images.length) % images.length)}
                 >
                     <FaChevronCircleLeft />
             </button>
             <button
-                className='absolute top-1/2 right-0 transform -translate-y-1/2 p-3 bg-white bg-opacity-30'
+                className='absolute top-1/2 right-0 transform -translate-y-1/2 p-2 md:p-3 bg-white bg-opacity-30'
                 onClick={() => setActiveIndex(activeIndex => (activeIndex + 1) % images.length)}
                 >
                     <FaChevronCircleRight />

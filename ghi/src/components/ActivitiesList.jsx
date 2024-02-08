@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useGetAllActivitiesQuery } from "../app/apiSlice";
-import './ActivitiesList.css';
 
 
 const ActivitiesList = () => {
