@@ -84,17 +84,17 @@ class Chat extends React.Component {
   render() {
     return (
       <>
-        <div className="Chat-text App-header">
-          <div className="container bg-gray-900 text-green-600 ">
-            <h1 className="Chat-text text-5xl pt-5 underline font-virgil">NLB Radio</h1>
+        <div className="Chat-text w-screen bg-gradient-to-r from-[#282c34] via-[#50555c] to-[#a4a9af]">
+          <div className="bg-gray-900 text-green-600 pl-5">
+            <h1 className="Chat-text text-5xl pt-5 pl-5 mb-5 underline font-virgil">NLB Radio</h1>
             <h2 className="text-xl">Your ID: {this.state.clientId}</h2>
-            <table className="container table-auto ml-0 flex-1 px-7 py-6 bg-black">
+            <table className="container table-auto flex-1 px-7 py-6 bg-black">
               <thead>
                 <tr>
                   <th className="text-xl underline">Radio Traffic</th>
                 </tr>
               </thead>
-                <tbody className="overflow-y-scroll min-w-96 w-full text-lg max-h-96 flex flex-col-reverse h-screen">
+                <tbody className="overflow-y-scroll w-full text-lg flex flex-col-reverse h-screen">
                 {this.state.messages.map((message) => (
                   <MessageRow
                     key={message.clientId + message.timestamp}
@@ -104,7 +104,7 @@ class Chat extends React.Component {
               </tbody>
             </table>
             <form onSubmit={this.sendMessage}>
-              <p>Outgoing Transmission:</p>
+              <p className="text-xl pl-5 pt-5">Outgoing Transmission:</p>
               <input
                 value={this.state.message}
                 className="form-control text-black w-1/2 px-3 py-3 text-lg message-input"

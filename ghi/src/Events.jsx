@@ -58,7 +58,7 @@ function ShowEvent() {
     Radar.initialize('prj_test_pk_785399a5eb0266150d9be0a637123c0598dee255');
     const map = new Radar.ui.map({
         container: 'map',
-        style: 'radar-dark-v1',
+        style: 'radar-default-v1',
         center: [-89.9911, 39.7342],
         zoom: 3.5,
     });
@@ -117,7 +117,7 @@ const handleResetClick = async () => {
     }
 
     return (
-        <div className="flex flex-col bg-gray-900 w-screen">
+        <div className="flex flex-col bg-gradient-to-r from-[#282c34] via-[#50555c] to-[#a4a9af] w-screen">
             {token && token.account.account_type === 'approved_partner' && (
                 <button className="mt-5"type="button">
                     <Link className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" to="/createEvent">Create Event</Link>
@@ -126,10 +126,10 @@ const handleResetClick = async () => {
             <div className="shadow-md sm:rounded-lg">
                 <div className="flex flex-col">
                     <div className="shadow-md sm:rounded-lg">
-                        <h1 className="pl-5 text-4xl underline font-bold text-white">Events</h1>
+                        <h1 className="Chat-text pl-5 pt-5 text-4xl underline font-bold text-white">Events</h1>
                         <h2 className="text-sm Chat-text ml-5 mt-5 font-bold text-white">Event Count: {events.length}</h2>
                         <table className="table-auto w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <thead className="bg-gray-900 dark:bg-gray-700">
+                                <thead className="card bg-gray-900 dark:bg-gray-700">
                                     <tr className = "Chat-text">
                                         <th scope="col" className="p-4"></th>
 
@@ -152,8 +152,8 @@ const handleResetClick = async () => {
                                 </thead>
                                 </table>
                         <div className="inline-block overflow-y-scroll w-full max-h-96">
-                            <table className="table-auto w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <thead className="bg-gray-900 dark:bg-gray-700">
+                            <table className="table-auto w-full divide-y divide-gray-200 dark:divide-gray-200">
+                                <thead className="bg-gradient-to-r from-[#282c34] via-[#50555c] to-[#a4a9af] dark:bg-gray-700">
                                 </thead>
                                 {events.map(event => (
                                     <tbody className="bg-gray-700 divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
@@ -199,9 +199,9 @@ const handleResetClick = async () => {
                             </div>
                             {selectedEvent ? (
                                 <div className="Chat-text">
-                                    <h2 className="text-2xl text-white font-bold mb-5">Selected Event Details:</h2>
-                                    <p className="text-lg text-white mb-5">Event Title: {selectedEvent.event_title}</p>
-                                    <p className="text-lg text-white mb-5">Start Date: {new Date(selectedEvent.start_date).toLocaleDateString('en-US', {
+                                    <h2 className="text-2xl text-white font-bold mb-5 pl-5 ">Selected Event Details:</h2>
+                                    <p className="text-lg text-white mb-5 pl-5">Event Title: {selectedEvent.event_title}</p>
+                                    <p className="text-lg text-white mb-5 pl-5">Start Date: {new Date(selectedEvent.start_date).toLocaleDateString('en-US', {
                                         month: '2-digit',
                                         day: '2-digit',
                                         year: 'numeric'
@@ -211,7 +211,7 @@ const handleResetClick = async () => {
                                         minute: '2-digit',
                                         hour12: true
                                     })}</p>
-                                    <p className="text-lg text-white mb-5">End Date: {new Date(selectedEvent.end_date).toLocaleDateString('en-US', {
+                                    <p className="text-lg text-white mb-5 pl-5">End Date: {new Date(selectedEvent.end_date).toLocaleDateString('en-US', {
                                         month: '2-digit',
                                         day: '2-digit',
                                         year: 'numeric'
@@ -221,13 +221,13 @@ const handleResetClick = async () => {
                                         minute: '2-digit',
                                         hour12: true
                                     })}</p>
-                                    <p className="text-lg text-white mb-5">Description: {selectedEvent.description}</p>
-                                    <p className="text-lg text-white mb-5">Street Address: {selectedEvent.street_address}</p>
-                                    <p className="text-lg text-white mb-5">City: {selectedEvent.city}</p>
-                                    <p className="text-lg text-white mb-5">State: {selectedEvent.state.state_name}</p>
+                                    <p className="text-lg text-white mb-5 pl-5">Description: {selectedEvent.description}</p>
+                                    <p className="text-lg text-white mb-5 pl-5">Street Address: {selectedEvent.street_address}</p>
+                                    <p className="text-lg text-white mb-5 pl-5">City: {selectedEvent.city}</p>
+                                    <p className="text-lg text-white mb-5 pl-5">State: {selectedEvent.state.state_name}</p>
 
-                                    <button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleDeleteClick}>Delete Events</button>
-                                    <button type="button" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleResetClick}>Close</button>
+                                    <button type="button" class="text-white ml-5 bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleDeleteClick}>Delete Events</button>
+                                    <button type="button" class="text-white ml-5 bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleResetClick}>Close</button>
 
                                     <div className="h-20" />
                                     <div className="h-20" />
@@ -238,7 +238,7 @@ const handleResetClick = async () => {
                                     <div className="h-9" />
                                 </div>
                             ) : (
-                                <body className="pl-5 bg-gray-900 text-white font-bold text-4xl underline"> Mapping
+                                <body className="Chat-text pl-5 bg-gradient-to-r from-[#282c34] via-[#50555c] to-[#a4a9af] text-white font-bold text-4xl underline"> Mapping
                                     <div className="h-20" />
                                     <div className="h-20" />
                                     <div className="h-20" />

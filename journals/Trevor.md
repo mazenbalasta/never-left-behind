@@ -1,5 +1,5 @@
 ## Journal
-This is the journal of Trevor.
+This is the book of Trevor.
 
 Jan 19, 2024:
 Today I worked on the Authentication for accounts. I created a table for accounts, as well as the function for creating an account with authentication.
@@ -47,4 +47,7 @@ Today I worked with Rudy on the front end, we made a lot of CSS format improveme
 
 
 Feb 8, 2024:
-Today I finalized the project with my teammates and friends, we were able to get the project to a point where we are all happy with it. I also worked on my portion of the final documentation for the project. We talked about the future of the project and how we can continue to improve it. We also talked about our experience this far the lessons we learned alone the way.
+Today I finalized the project with my teammates and friends, we were able to get the project to a point where we are all happy with it. I also worked on my portion of the final documentation for the project. We talked about the future of the project and how we can continue to improve it. We also talked about our experience this far and the lessons we learned alone the way.
+
+Feb 9, 2024:
+Thank you to everyone on this team, I have learned so much and I am excited to see where this project goes in the future. I am proud of each and every one of you. It was an honor.

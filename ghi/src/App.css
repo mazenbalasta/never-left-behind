@@ -14,12 +14,14 @@
     color: white;
 }
 
+
+
 .dropdown-container {
     position: relative;
 }
 
 .jobslist-container {
-  width: 90%;
+    width: 90%;
 }
 
 #button-dropdown {
