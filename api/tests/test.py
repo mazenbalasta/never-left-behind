@@ -1,5 +1,8 @@
 from fastapi.testclient import TestClient
 from main import app
+import unittest
+from queries.jobs import JobsIn, JobsOut
+from unittest.mock import patch
 
 client = TestClient(app)
 

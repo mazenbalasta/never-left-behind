@@ -8,7 +8,7 @@ const Jobslist = () => {
     const { data: jobs } = useGetAllJobsQuery()
     const { data: account } = useGetTokenQuery()
     const navigate = useNavigate()
-    const isPartner = account && account.account.account_type === 'partner'
+    const isApprovedPartner = account && account.account.account_type === 'approved_partner'
 
     const [selectedJob, setSelectedJob] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -39,7 +39,7 @@ const Jobslist = () => {
                     JOBS LIST
                 </h1>
                 <div className="flex justify-center">
-                    {isPartner && (
+                    {isApprovedPartner && (
                         <button
                             type="button"
                             onClick={() => handleCreateJobClick()}
@@ -88,7 +88,6 @@ const Jobslist = () => {
                                         Location: {job.location}
                                     </span>
                                 </div>
-                                
                             </div>
                         </div>
                     ))}
