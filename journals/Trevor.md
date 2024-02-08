@@ -44,3 +44,7 @@ Today I created a chat monitor for bad words, this will help keep our chat clean
 
 Feb 7, 2024:
 Today I worked with Rudy on the front end, we made a lot of CSS format improvements and got our code up to sync. I also worked on the chat feature front end.
+
+
+Feb 8, 2024:
+Today I finalized the project with my teammates and friends, we were able to get the project to a point where we are all happy with it. I also worked on my portion of the final documentation for the project. We talked about the future of the project and how we can continue to improve it. We also talked about our experience this far the lessons we learned alone the way.

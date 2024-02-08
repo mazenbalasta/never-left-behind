@@ -6,7 +6,8 @@ function PrivacyPolicy() {
 
 
     return (
-    <div className="body">
+    <div className="body App-header">
+        <div className="card bg-slate-900 text-center">
         <body className='par'>
             <h4 className="h4">PRIVACY POLICY</h4>
             <div className="subtitle">Last updated February 06, 2024</div>
@@ -16,7 +17,7 @@ function PrivacyPolicy() {
             <br />
             <p className="lup">This privacy notice for Never Left Behind INC (doing business as NLBehind, NLB) (we, us, or our), describes how and why we might collect, store, use, and/or share (process) your information when you use our services (Services), such as when you:</p>
             <ul className='lup'>
-                <li>Visit our website at <a className='link' href="http://www.NeverLeftBehind.com" style={{ color:'blue' }}><button>Neverleftbehind</button></a>, or any website of ours that links to this privacy notice</li>
+                <li>Visit our website at <a className='link text-xl' href="http://www.NeverLeftBehind.com"><button>Neverleftbehind</button></a>, or any website of ours that links to this privacy notice</li>
             </ul>
             <ul className='lup'>
                 <li>Download and use our mobile application (NEv3rLEftB3hind), or any other application of ours that links to this privacy notice</li>
@@ -29,58 +30,58 @@ function PrivacyPolicy() {
             <br />
             <br />
             <p>Questions or concerns? Reading this privacy notice will help you understand your privacy rights and choices. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at
-                    <a className='link' href="Eato:neverleftbehind.vite.legal@gmail.com" style={{ color:'blue' }}>Our Policy Team</a>
-                
+                    <a className='link text-xl' href="Eato:neverleftbehind.vite.legal@gmail.com"> Policy Team</a>
+
             </p>
             <br />
             <br />
             <br />
             <br />
             <h1 className='h1'>TABLE OF CONTENTS</h1 >
-                <ul className='lu'>
-                    <li>
+                <ul className='lu text-xl'>
+                    <li className="link text-xl">
                         <a href="#1">Introduction</a>
                     </li>
-                    <li>
+                    <li className="link text-xl" text-xl>
                         <a href="#2">What Data Do We Collect?</a>
                     </li>
-                    <li>
+                    <li className="link text-xl">
                         <a href="#3">How Do We Collect Your Data?</a>
                     </li>
-                    <li>
+                    <li className="link text-xl">
                         <a href="#4">How Will We Use Your Data?</a>
                     </li>
-                    <li>
+                    <li className="link text-xl">
                         <a href="#5">How Do We Store Your Data?</a>
                     </li>
-                    <li>
+                    <li className="link text-xl">
                         <a href="#6">Marketing</a>
                     </li>
-                    <li>
+                    <li className="link text-xl">
                         <a href="#7">What Are Your Data Protection Rights?</a>
                     </li>
-                    <li>
+                    <li className="link text-xl">
                         <a href="#8">What Are Cookies?</a>
                     </li>
-                    <li>
+                    <li className="link text-xl">
                         <a href="#9">How Do We Use Cookies?</a>
                     </li>
-                    <li>
+                    <li className="link text-xl">
                         <a href="#10">What Types of Cookies Do We Use?</a>
                     </li>
-                    <li>
+                    <li className="link text-xl">
                         <a href="#11">How to Manage Your Cookies</a>
                     </li>
-                    <li>
+                    <li className="link text-xl">
                         <a href="#12">Privacy Policies of Other Websites</a>
                     </li>
-                    <li>
+                    <li className="link text-xl">
                         <a href="#13">Changes to Our Privacy Policy</a>
                     </li>
-                    <li>
+                    <li className="link text-xl">
                         <a href="#14">How to Contact Us</a>
                     </li>
-                    <li>
+                    <li className="link text-xl">
                         <a href="#15">How to Contact the Appropriate Authorities</a>
                     </li>
                 </ul>
@@ -89,8 +90,8 @@ function PrivacyPolicy() {
             <br />
             <br />
             <h1 className='h1'  id="1">1. Introduction</h1 >
-            <p>This privacy notice aims to give you information on how we collect and process your personal data through your use of our Services, including any data you may provide through our Services when you sign up for our newsletter, purchase a product or service, or take part in a competition. 
-                This website is not intended for children and we do not knowingly collect data relating to children. It is important that you read this privacy notice together with any other privacy notice or fair processing notice we may provide on specific occasions when we are collecting or processing personal data about you so that you are fully aware of how and why we are using your data. This privacy notice supplements the other notices and is not intended to override them. 
+            <p>This privacy notice aims to give you information on how we collect and process your personal data through your use of our Services, including any data you may provide through our Services when you sign up for our newsletter, purchase a product or service, or take part in a competition.
+                This website is not intended for children and we do not knowingly collect data relating to children. It is important that you read this privacy notice together with any other privacy notice or fair processing notice we may provide on specific occasions when we are collecting or processing personal data about you so that you are fully aware of how and why we are using your data. This privacy notice supplements the other notices and is not intended to override them.
                 This privacy notice is provided in a layered format so you can click through to the specific areas set out below. Please also use the Glossary to understand the meaning of some of the terms used in this privacy notice.
             </p>
             <br />
@@ -138,7 +139,7 @@ function PrivacyPolicy() {
             <br />
             <br />
             <h2 className='heading2'>Technical Data</h2>
-            <p>Includes internet protocol (IP) address, your login data, browser type and version, time zone setting and location, browser plug-in types and versions, operating system and platform, and other technology on the devices you use to access our Services. 
+            <p>Includes internet protocol (IP) address, your login data, browser type and version, time zone setting and location, browser plug-in types and versions, operating system and platform, and other technology on the devices you use to access our Services.
             </p>
             <br />
             <br />
@@ -517,10 +518,11 @@ function PrivacyPolicy() {
             <a href="https://register.state.gov/contactus/contactusform?_gl=1*pho0ej*_gcl_au*MTU0NjMyMzUzMy4xNzA3MzI1MTc0"> USA website</a>
             </body>
     </div>
+    </div>
     );
 }
 
 export default PrivacyPolicy;
 
-        
+
 // Path: ghi/src/components/Resources.jsx

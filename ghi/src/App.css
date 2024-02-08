@@ -135,3 +135,9 @@
 .nav-link:hover::before {
     width: 100%;
 }
+
+
+.link:hover {
+    background-position: 0;
+    color: blue;
+}

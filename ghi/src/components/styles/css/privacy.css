@@ -36,7 +36,7 @@
 }
 
 .link {
-    color: #3030F1;
+    color: white;
     font-size: 14px;
     font-family: Arial;
     word-break: break-word;
@@ -48,15 +48,16 @@
 }
 
 .lu {
-    color: #3030F1;
+    color: white;
     font-size: 14px;
     font-family: Arial;
     word-break: break-word;
 }
+
 .lup {
     color: rgb(194, 170, 10);
     font-size: 14px;
     font-family: Arial;
     word-break: break-word;
-   
+
 }
