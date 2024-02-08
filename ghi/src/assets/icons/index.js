@@ -5,7 +5,7 @@ import copyrightSign from './copyright-sign.svg';
 import hamburger from './hamburger.svg';
 import instagram from './instagram.svg';
 import facebook from './facebook.svg';
-import twitter from './twitter.svg';
+import twitterX from './twitter-x.svg';
 
 export {
     arrowRight,
@@ -15,5 +15,5 @@ export {
     hamburger,
     instagram,
     facebook,
-    twitter,
+    twitterX
 }

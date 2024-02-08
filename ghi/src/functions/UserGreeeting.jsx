@@ -16,7 +16,7 @@ export const UserGreeting = ({ firstName }) => {
     }, [])
 
     return (
-            <h1 className='text-white'>
+            <h1 className='text-white bg-gray-700 px-6 pb-2'>
                 {greeting}
                 {firstName}!
             </h1>

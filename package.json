@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "bad-words": "^3.0.4",
+    "pytest": "^1.0.0",
     "maplibre-gl": "^3.6.2",
     "pytest": "^1.0.0",
     "radar-sdk-js": "^4.1.17",

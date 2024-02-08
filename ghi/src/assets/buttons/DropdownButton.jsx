@@ -37,7 +37,7 @@ const DropdownButton = ({ label, items }) => {
             {isOpen && (
                 <div
                     id="button-dropdown"
-                    className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700"
+                    className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-30 dark:bg-gray-700"
                 >
                     <ul className="py-2 text-md text-black-700 dark:text-black-200 font-bold">
                         {items.map((item, index) => (

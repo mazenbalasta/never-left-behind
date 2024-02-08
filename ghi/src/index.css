@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap");
-@import 'font.css';
+@import url('font.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -19,6 +19,10 @@
   .bg-neutral-800 {
     background-color: #333333;
   }
+
+  .Chat-text {
+    font-family: 'Virgil';
+  }
 }
 
 body {
@@ -34,7 +38,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
 
 @layer components {
   .max-container {
@@ -73,6 +76,6 @@ code {
   }
 }
 
-.App-Section {
+.Chat-text {
   font-family: 'Virgil'
 }

@@ -103,3 +103,56 @@ class AccountQueries:
                         last_name=record[6],
                     )
                 return None
+
+    async def update(
+        self, username: str, info: VetAccountIn, hashed_password: str
+    ) -> AccountOutWithPassword:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    UPDATE accounts
+                    SET
+                        account_type = %s
+                        , username = %s
+                        , password = %s
+                        , email = %s
+                        , first_name = %s
+                        , last_name = %s
+                        , company_name = %s
+                        , city = %s
+                        , state = %s
+                        , country = %s
+                    WHERE username = %s
+                    RETURNING
+                        id,
+                        account_type,
+                        username,
+                        password,
+                        email,
+                        first_name,
+                        last_name,
+                        company_name,
+                        city,
+                        state,
+                        country;
+                    """,
+                    [
+                        info.account_type,
+                        info.username,
+                        hashed_password,
+                        info.email,
+                        info.first_name,
+                        info.last_name,
+                        info.company_name,
+                        info.city,
+                        info.state,
+                        info.country,
+                        username,
+                    ],
+                )
+                db.fetchone()[0]
+                old_data = info.dict()
+                return AccountOutWithPassword(
+                    id=id, hashed_password=hashed_password, **old_data
+                )
