@@ -1,0 +1,62 @@
+.body {
+    background: inherit;
+    text-align: center;
+}
+
+.title {
+    font-family: Arial;
+    font-size: 26px;
+    color: rgb(194, 170, 10);
+}
+
+.subtitle {
+    font-family: Arial;
+    color: rgb(194, 170, 10);
+    font-size: 14px;
+}
+
+.h1 {
+    font-family: Arial;
+    font-size: 19px;
+    color: rgb(126, 9, 9);
+    text-shadow: #3030F1;
+}
+
+.heading2 {
+    font-family: Arial;
+    font-size: 17px;
+    color: rgb(126, 9, 9);
+}
+
+.par {
+    color: rgb(194, 170, 10);
+    font-size: 16px;
+    font-family: Arial;
+    font-variant-position: normal;
+}
+
+.link {
+    color: #3030F1;
+    font-size: 14px;
+    font-family: Arial;
+    word-break: break-word;
+}
+
+.link:hover {
+    color: #3030F1;
+    text-decoration: underline;
+}
+
+.lu {
+    color: #3030F1;
+    font-size: 14px;
+    font-family: Arial;
+    word-break: break-word;
+}
+.lup {
+    color: rgb(194, 170, 10);
+    font-size: 14px;
+    font-family: Arial;
+    word-break: break-word;
+   
+}

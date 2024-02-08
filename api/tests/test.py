@@ -1,4 +1,3 @@
-import unittest
 from fastapi.testclient import TestClient
 from main import app
 from queries.events import EventsRepo, EventsIn, EventsOut

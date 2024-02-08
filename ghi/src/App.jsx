@@ -1,5 +1,5 @@
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login} from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, ActivitiesForm, ActivitiesList, Login, GetLocalBars, PrivacyPolicy} from './components';
 import HomePage from './HomePage';
 import Events from './Events';
 import EventForm from './EventForm';
@@ -38,7 +38,12 @@ function App() {
                                         path="partner"
                                         element={<PartnerSignup />}
                                     />
+                                   
                                 </Route>
+                                <Route path='activitiesForm' element={<ActivitiesForm />} />
+                                <Route path="/activities" element={<ActivitiesList />} />
+                                <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+                                <Route path="/bars" element={<GetLocalBars />} />
                                 <Route path="/messages" element={<ListMessages />} />
                                 <Route path="/events" element={<Events />} />
                                 <Route path="/createEvent" element={<EventForm />} />

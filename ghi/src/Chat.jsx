@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Filter from 'bad-words';
 function MessageRow(props) {
   const when = new Date(props.message.timestamp);
