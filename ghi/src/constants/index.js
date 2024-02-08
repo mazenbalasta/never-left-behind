@@ -6,6 +6,7 @@ import { RxActivityLog } from "react-icons/rx";
 import React, { useState } from "react";
 
 
+
 export const socialMedia = [
     { src: facebook, alt: "Facebook logo", link: "https://www.facebook.com/profile.php?id=61556115600897" },
     { src: instagram, alt: "Instagram logo", link: "https://www.instagram.com/neverlftbhnd/" },
@@ -19,24 +20,22 @@ export const footerLinks = [
             { name: "About us", link: "/aboutus" },
             { name: "Resources", link: "/resources" },
             { name: "Benefits of becoming a Member", link: "/" },
-            { name: "Privacy policy", link: "/" },
+            { name: "Privacy policy", link: "/PrivacyPolicy" },
         ],
     },
     {
         title: "Get in touch",
         links: [
-            { name: "@TS Name", link: "mailto:jimiHendrix@nlb.com" },
-            { name: "Need help: 844.907-1342", link: "tel:(844) 907-1342" },
+            { name: "TS Name mailto: jimiHendrix@nlb.com" },
+            { name: "Telephone tel: (123) 456-7890" },
         ],
     },
         {
-            title: "Local watering holes",
-            links: [
-                { name: "Latroy?", link: "/" },
-                { name: "Placeholder", link: "/" },
-            ],
-
-        },
+        title: "Local Breweries",
+        links: [
+            { name: "Just want to find a local beer?", link: "/bars" },
+        ],
+    },
 ];
 
 export const services = [

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { logo } from '../assets/images'
 import { hamburger } from '../assets/icons'
 import { DropdownButton } from '../assets/buttons'
-import { NavLink } from 'react-router-dom' 
+import { NavLink } from 'react-router-dom'
 import { useGetTokenQuery, useLogoutMutation } from '../app/apiSlice'
 import UserGreeting from '../functions/UserGreeeting'
 import NLB_Banner from '../assets/images/NLB-Banner.png'
@@ -94,7 +94,13 @@ const Nav = () => {
                     className="nav-link mr-2 text-sm font-bold text-white uppercase hover:text-blue-500"
                     onClick={closeMenu}
                 >
-                    Activities
+                    <NavLink to="/Activities">Activities</NavLink>
+                </li>
+                <li
+                    className="nav-link mr-2 text-sm font-bold text-white uppercase hover:text-blue-500"
+                    onClick={closeMenu}
+                >
+                    <NavLink to="/ActivitiesForm">Add Activities</NavLink>
                 </li>
                 <div className="grid grid-cols-2 gap-4 content-end">
                     {!account ? (

@@ -12,6 +12,8 @@ import ActivitiesForm from './ActivitiesForm';
 import ActivitiesList from "./ActivitiesList";
 import Jobslist from "./Jobslist";
 import CreateJob from "./CreateJob";
+import GetLocalBars from "./GetBars";
+import PrivacyPolicy from "./Privacy Policy";
 
 export {
     Nav,
@@ -21,10 +23,12 @@ export {
     PartnerSignup,
     ActivitiesForm,
     ActivitiesList,
+    GetLocalBars,
     Login,
     Button,
     Modal,
     Carousel,
+    PrivacyPolicy,
     HomeCardsWrapper,
     Jobslist,
     CreateJob
