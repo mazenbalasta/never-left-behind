@@ -6,9 +6,10 @@ function PrivacyPolicy() {
 
 
     return (
-    <div className="body App-header">
-        <div className="card bg-slate-900 text-center">
         <body className='par'>
+            <div className="body App-header">
+            <div className="card par bg-slate-900 text-center">
+
             <h4 className="h4">PRIVACY POLICY</h4>
             <div className="subtitle">Last updated February 06, 2024</div>
             <br />
@@ -516,9 +517,10 @@ function PrivacyPolicy() {
             <br />
             <br />
             <a href="https://register.state.gov/contactus/contactusform?_gl=1*pho0ej*_gcl_au*MTU0NjMyMzUzMy4xNzA3MzI1MTc0"> USA website</a>
-            </body>
+
     </div>
     </div>
+    </body>
     );
 }
 
