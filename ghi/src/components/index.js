@@ -11,7 +11,7 @@ import Login from "./Login";
 import ActivitiesForm from './ActivitiesForm';
 import ActivitiesList from "./ActivitiesList";
 import Jobslist from "./Jobslist";
-import JobDetail from "./JobDetail"
+import CreateJob from "./CreateJob";
 
 export {
     Nav,
@@ -27,5 +27,5 @@ export {
     Carousel,
     HomeCardsWrapper,
     Jobslist,
-    JobDetail
+    CreateJob
 }

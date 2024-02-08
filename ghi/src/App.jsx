@@ -1,11 +1,10 @@
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login, Jobslist, JobDetail} from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, Login, Jobslist, CreateJob} from './components';
 import HomePage from './HomePage';
 import Events from './Events';
 import EventForm from './EventForm';
 import Chat from './Chat';
 import AboutUs from './AboutUs';
-// import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
 import { ListMessages } from './components/messages';
@@ -59,8 +58,8 @@ function App() {
                                      element={<Jobslist />}
                                 />
                                 <Route
-                                    path="/jobs/:id"
-                                    element={<JobDetail />}
+                                    path='/jobs/create'
+                                    element={<CreateJob />}
                                 />
                                 <Route path="/aboutus" element={<AboutUs />} />
                             </Routes>

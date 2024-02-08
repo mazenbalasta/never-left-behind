@@ -11,10 +11,10 @@ from queries.events import EventsIn, EventsRepo
 client = TestClient(app)
 
 
-def test():
-    """
-    TEST TEMPLATE
-    """
+# def test():
+    # """
+    # TEST TEMPLATE
+    # """
 
     # (AAA)
     # ARRANGE
@@ -54,7 +54,6 @@ def test_get_categories():
 #     # Arrange
 #     expected_activities = [
 #         {
-            
 #             "name": "Activity One",
 #             "description": "This is activity one",
 #             "start_date": "2022-01-01",
@@ -128,3 +127,34 @@ def test_get_categories():
 
 # if __name__ == "__main__":
 #     unittest.main()
+
+
+class TestCreateJob(unittest.TestCase):
+    def test_create_job_success(self):
+
+        mock_job_input = JobsIn(
+            position="Software Engineer",
+            company_name="NLB Corp",
+            description="This is the description of the available position",
+            requirements="",
+            qualifications="",
+            pref_qualifications="",
+            location="",
+            apply_url=""
+        )
+
+        with patch('queries.jobs.JobsRepo.create') as mock_create:
+            mock_create.return_value = JobsOut(id=1, **mock_job_input.dict())
+
+            # Act
+            response = client.post("/api/jobs", json=mock_job_input.dict())
+
+            # Assert
+            self.assertEqual(response.status_code, 200)
+            result = response.json()
+            self.assertIn('id', result)
+            self.assertEqual(result['position'], mock_job_input.position)
+            self.assertEqual(result['pref_qualifications'], mock_job_input.pref_qualifications)
+
+if __name__ == '__main__':
+    unittest.main()

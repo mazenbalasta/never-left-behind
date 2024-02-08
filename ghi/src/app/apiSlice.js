@@ -19,10 +19,11 @@ export const neverLeftBehindApi = createApi({
         getAllJobs: builder.query({
             query: () => '/api/jobs'
         }),
-        getJobById: builder.query({
+        createJob: builder.mutation({
             query: (id) => ({
-                url: `/api/jobs/${id}`,
-                method: 'GET'
+                url: `/api/jobs/`,
+                method: 'POST',
+                body: job,
             }),
         }),
         logout: builder.mutation({
@@ -125,7 +126,5 @@ export const {
     useGetMessageWithResponsesQuery,
     useIncrementMessageViewsMutation,
     useGetAllJobsQuery,
-    useGetJobByIdQuery
+    useCreateJobMutation
 } = neverLeftBehindApi;
-
-
