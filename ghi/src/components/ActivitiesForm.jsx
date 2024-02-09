@@ -108,7 +108,7 @@ function ActivitiesForm() {
               <label className="label">Category:</label>
               <select name="category" value={formData.category} onChange={handleFormChange} className="w-full px-4 py-2 border rounded-md text-black hover:bg-blue-100">
                 {Array. isArray(categories) && categories.map((category) => (
-                  <option key={category.id} value={category.id}>
+                  <option key={category.id} value={category.name}>
                     {category.name}
                   </option>
                 ))}
