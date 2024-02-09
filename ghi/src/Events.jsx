@@ -1,6 +1,6 @@
 import Radar from 'radar-sdk-js';
 import 'radar-sdk-js/dist/radar.css';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import{ useGetTokenQuery } from './app/apiSlice';
 
@@ -17,20 +17,18 @@ function ShowEvent() {
         const response = await fetch(eventsUrl);
         if (response.ok) {
             const eventData = await response.json();
-
             if (eventData === undefined) {
                 return null;
             }
-
             setEvents(eventData);
-        } else {
-            console.log('error');
         }
     }
+
 
     useEffect(() => {
         getEvents();
     }, []);
+
 
     const handleEventClick = (event) => {
         setSelectedEvent(event);
@@ -49,7 +47,6 @@ function ShowEvent() {
                 .then(data => {
                     setGeocodeData(data);
                 })
-                .catch(error => console.log(error));
             }
             getAddress(event);
         }
@@ -96,8 +93,6 @@ const handleDeleteClick = async () => {
         if (response.ok) {
             setSelectedEvent(null);
             getEvents();
-        } else {
-            console.log('error');
         }
     }
 }

@@ -1,10 +1,8 @@
-import React from 'react';
-
 function AboutUs() {
     return (
         <div>
-            <div className='bg-[#282c34] App-header'>
-                <div className="bg-[#282c34] relative text-white text-4xl text-center font-bold py-16">
+            <div className='bg-gradient-to-r from-[#282c34] via-[#50555c] to-[#a4a9af] App-header'>
+                <div className="relative text-white text-4xl text-center font-bold py-16">
                     <h1 className="Chat-text ">About Us</h1>
                 </div>
                 <div className="card bg-[#282c34] text-center text-white mt-8 text-lg width: 500px; text-align: justify">

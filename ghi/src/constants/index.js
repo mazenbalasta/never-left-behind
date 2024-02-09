@@ -3,7 +3,6 @@ import { FiMessageSquare } from "react-icons/fi";
 import { GrResources } from "react-icons/gr";
 import { MdCardMembership } from "react-icons/md";
 import { RxActivityLog } from "react-icons/rx";
-import React, { useState } from "react";
 
 
 
@@ -45,11 +44,14 @@ export const services = [
         path: "/messages",
     },
     {
-        imgURL: GrResources,
-        label: "Resources",
-        subtext: "Looking for veteran qualifications? We can help.",
-        buttonText: "Find resources",
-        path: "/resources",
+        imgURL: MdCardMembership,
+        label: "Benefits",
+        subtext:
+        "Special benefits for:\n" +
+        " - Veterans\n" +
+        " - Partners\n",
+        buttonText: "Learn more",
+        path: "/benefits",
     },
     {
         imgURL: RxActivityLog,
@@ -59,13 +61,11 @@ export const services = [
         path: "/activities",
     },
     {
-        imgURL: MdCardMembership,
-        label: "Benefits",
-        subtext: 
-        "Special benefits for:\n" +
-        " - Veterans\n" +
-        " - Partners\n",
-        buttonText: "Learn more",
-        path: "/benefits",
+        imgURL: GrResources,
+        label: "Resources",
+        subtext: "Looking for assistance tailored to veterans? We can help.",
+        buttonText: "Find resources",
+        path: "/resources",
     },
+
 ];

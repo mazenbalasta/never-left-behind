@@ -1,5 +1,4 @@
 steps = [
-    # step 1: uP
     [
         """
         INSERT INTO states
@@ -59,7 +58,6 @@ steps = [
                 ('WI','Wisconsin'),
                 ('WY','Wyoming');
         """,
-        # step 2: Down
         """
         DELETE FROM states;
         """,

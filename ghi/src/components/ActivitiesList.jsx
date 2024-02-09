@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { useGetAllActivitiesQuery } from "../app/apiSlice";
 import { useGetTokenQuery } from "../app/apiSlice";
 import { Link } from "react-router-dom";
@@ -7,20 +6,7 @@ import './ActivitiesList.css';
 
 const ActivitiesList = () => {
   const { data: activities = [], isFetching } = useGetAllActivitiesQuery();
-  const [postal, setPostal] = useState("");
-  const [barList, setBars] = useState([]);
   const { data: token } = useGetTokenQuery();
-
-  if (token && token.account) {
-   
-    console.log(token);
-  }
-   
-
-
-
-  
-  
 
 
   return (
