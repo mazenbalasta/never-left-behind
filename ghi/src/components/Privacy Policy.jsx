@@ -525,6 +525,3 @@ function PrivacyPolicy() {
 }
 
 export default PrivacyPolicy;
-
-
-// Path: ghi/src/components/Resources.jsx
