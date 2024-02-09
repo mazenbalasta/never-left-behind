@@ -1,4 +1,8 @@
 ## Journal
+Feb 09, 2024:
+- Created a delete view for Jobs list for the owner of listing
+- Code cleanup for final push
+
 Feb 08, 2024:
 - Created a list view for all jobs.
 - Created a modal for listing a clicked job from list view that contains further information about the job.
