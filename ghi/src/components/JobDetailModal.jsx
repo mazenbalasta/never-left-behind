@@ -2,7 +2,7 @@ import Modal from 'react-modal'
 
 const JobDetailModal = ({ isOpen, job, onRequestClose }) => {
     const handleApplyClick = () => {
-        window.location.href = job.apply_url
+        window.open(job.apply_url, '_blank', 'noreferrer noopener')
     }
 
     return (

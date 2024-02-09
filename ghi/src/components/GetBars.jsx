@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import './ActivitiesList.css';
 
-
-
 const GetLocalBars = () => {
   const [postal, setPostal] = useState('');
   const [barList, setBars] = useState([]);
-
-
+  const [noBars, setNoBars] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,13 +12,15 @@ const GetLocalBars = () => {
     if (response.ok) {
       const data = await response.json();
       setBars(data);
+      setNoBars(data.length === 0);
     }
- }
+  }
 
   return (
     <div className='App-header'>
       <form onSubmit={handleSubmit}>
-        <input className='input'
+        <input
+          className='input'
           type="text"
           color="gold"
           value={postal}
@@ -40,14 +39,20 @@ const GetLocalBars = () => {
             </tr>
           </thead>
           <tbody className='tbody'>
-            {barList.map((bar, index) => (
-              <tr key={index}>
-                <td>{bar.name}</td>
-                <td>{bar.address_1}</td>
-                <td>{bar.city}</td>
-                <td>{bar.state_province}</td>
+            {noBars ? (
+              <tr>
+                <td colSpan="4">No brewery found in your immediate area, new breweries are always being added to our database, so stay tuned!</td>
               </tr>
-            ))}
+            ) : (
+              barList.map((bar, index) => (
+                <tr key={index}>
+                  <td>{bar.name}</td>
+                  <td>{bar.address_1}</td>
+                  <td>{bar.city}</td>
+                  <td>{bar.state_province}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </form>
