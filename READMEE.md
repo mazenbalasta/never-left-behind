@@ -7,7 +7,7 @@
 * LaTroy Richardson Sr - Project Documentation Manager
 
 
-
+**Never Left Behind** - For veterans by veterans 
 
 ## Design
 
@@ -79,20 +79,60 @@ Our goal is to solve the problem of isolation among veterans by fostering commun
 * Event viewing functionality for opportunity seekers in the Events tab
 * Ability for users to view local activities in their region via the Activities tab
 
+## Install Extensions
+
+-   Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
+-   Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
+
+### Installing python dependencies locally
+
+In order for VSCode's built in code completion and intelligence to
+work correctly, it needs the dependencies from the requirements.txt file
+installed. We do this inside docker, but not in the workspace.
+
+So we need to create a virtual environment and pip install the requirements.
+
+From inside the `api` folder:
+
+```bash
+python -m venv .venv
+```
+
+Then activate the virtual environment
+
+```bash
+source .venv/bin/activate
+```
+
+And finally install the dependencies
+
+```bash
+pip install -r requirements.txt
+```
+Then make sure the venv is selected in VSCode by checking the lower right of the
+VSCode status bar
+
+In some instances you may have to upgrade your virtual environment
+```bash
+python.exe -m pip install --upgrade pip
+```
+
+
+
 ## Installation
 
-In order to run this application you need to install the following:
 
-
-**Make sure you have Docker, Git, and Javascript latest versions**
+**Make sure you have Docker, pip, and Javascript latest versions**
 
 1. Fork this repository
 https://gitlab.com/veterans-r-us/never-left-behind.git
 
-2. Clone the forked repository  into y ou desired computer folder:
-git clone<http://gitlab.com/**yourrepo**>
+2. Clone the forked repository  into your desired computer folder:
+git clone<https://gitlab.com/Tynyx/never-left-behind.git>
 
-3. Build the volumes and containers in docker by doing the following:
+3. 
+
+3. Build the volumes and containers in docker by doing the following commands in terminal:
 ```
 Docker volume create pg-admin
 Docker volume create postgres-data
