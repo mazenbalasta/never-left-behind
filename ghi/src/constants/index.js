@@ -37,13 +37,6 @@ export const footerLinks = [
 
 export const services = [
     {
-        imgURL: FiMessageSquare,
-        label: "Message Forum",
-        subtext: "Share your thoughts and questions. Our members will help you get answers.",
-        buttonText: "Let's talk",
-        path: "/messages",
-    },
-    {
         imgURL: MdCardMembership,
         label: "Benefits",
         subtext:
@@ -54,16 +47,26 @@ export const services = [
         path: "/benefits",
     },
     {
+        imgURL: FiMessageSquare,
+        label: "Message Forum",
+        subtext: "Share your thoughts and questions. Our members will help you get answers.",
+        buttonText: "Let's talk",
+        path: "/messages",
+    },
+    {
         imgURL: RxActivityLog,
         label: "Activities",
-        subtext: "Find what to do in your area with fellow veterans.",
+        subtext: "Find what to do in your area\n" +
+        "with\n" +
+        "fellow veterans.",
         buttonText: "Find activities",
         path: "/activities",
     },
     {
         imgURL: GrResources,
         label: "Resources",
-        subtext: "Looking for assistance tailored to veterans? We can help.",
+        subtext: "Looking for assistance tailored to veterans?\n" +
+        "We can help.",
         buttonText: "Find resources",
         path: "/resources",
     },
