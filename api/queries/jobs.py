@@ -17,6 +17,7 @@ class JobsIn(BaseModel):
     pref_qualifications: str
     location: str
     apply_url: str
+    created_by: int
 
 
 class JobsOut(BaseModel):
@@ -29,6 +30,7 @@ class JobsOut(BaseModel):
     pref_qualifications: str
     location: str
     apply_url: str
+    created_by: int
 
 
 class JobsRepo:
@@ -46,10 +48,11 @@ class JobsRepo:
                             qualifications,
                             pref_qualifications,
                             location,
-                            apply_url
+                            apply_url,
+                            created_by
                         )
                     VALUES
-                        (%s, %s, %s, %s, %s, %s, %s, %s)
+                        (%s, %s, %s, %s, %s, %s, %s, %s,%s)
                     RETURNING id;
                     """,
                     [
@@ -61,6 +64,7 @@ class JobsRepo:
                         job.pref_qualifications,
                         job.location,
                         job.apply_url,
+                        job.created_by,
                     ],
                 )
                 id = db.fetchone()[0]
@@ -90,6 +94,7 @@ class JobsRepo:
                             pref_qualifications=record[6],
                             location=record[7],
                             apply_url=record[8],
+                            created_by=record[9],
                         )
                         result.append(jobs)
                     return result
@@ -111,7 +116,8 @@ class JobsRepo:
                             qualifications = %s,
                             pref_qualifications = %s,
                             location = %s,
-                            apply_url = %s
+                            apply_url = %s,
+                            created_by = %s
                         WHERE id = %s
                         RETURNING id;
                         """,
@@ -124,6 +130,7 @@ class JobsRepo:
                             job.pref_qualifications,
                             job.location,
                             job.apply_url,
+                            job.created_by,
                             job_id,
                         ],
                     )
@@ -143,13 +150,14 @@ class JobsRepo:
                         """,
                         [job_id],
                     )
-                    if db.rowcount == 0:
-                        raise HTTPException(
-                            status_code=404, detail="Job not found"
-                        )
-                    return True
+                    if db.rowcount > 0:
+                        return True
+        except HTTPException as e:
+            raise e
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+        return False
 
     def job_detail(self, job_id: int):
         try:
@@ -173,6 +181,7 @@ class JobsRepo:
                         pref_qualifications=record[6],
                         location=record[7],
                         apply_url=record[8],
+                        created_by=record[9],
                     )
                     return job
         except Exception as e:

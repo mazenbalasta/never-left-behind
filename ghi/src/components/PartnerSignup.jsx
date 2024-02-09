@@ -33,6 +33,7 @@ function PartnerSignup() {
     const isPasswordMatch = password === repeatPassword;
     const navigate = useNavigate();
     const [login] = useLoginMutation();
+    const baseUrl = import.meta.env.VITE_API_HOST
 
     useEffect(() => {
         if (!isLoading && allAccounts) {
@@ -95,7 +96,7 @@ function PartnerSignup() {
         )
 
         if (confirmSubmit) {
-            const url = `http://localhost:8000/api/accounts/partners`
+            const url = `${baseUrl}/api/accounts/partners`
             const fetchConfig = {
                 method: 'post',
                 body: JSON.stringify(formData),
@@ -172,7 +173,7 @@ function PartnerSignup() {
                                 Username
                             </label>
                             <input
-                                type="username"
+                                type="text"
                                 name="username"
                                 id="username"
                                 value={formData.username}
@@ -361,7 +362,7 @@ function PartnerSignup() {
                             >
                                 I agree with the{' '}
                                 <Link
-                                    to="/"
+                                    to="/PrivacyPolicy"
                                     className="text-blue-600 hover:underline dark:text-blue-500"
                                 >
                                     terms and conditions

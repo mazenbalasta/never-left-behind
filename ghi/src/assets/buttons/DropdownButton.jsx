@@ -13,7 +13,7 @@ const DropdownButton = ({ label, items }) => {
             <button
                 id="dropdownDefaultButton"
                 onClick={toggleDropdown}
-                className="flex items-center w-30 h-10 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold"
+                className="flex items-center w-24 h-9 hover:bg-blue-800 bg-white text-black px-4 py-2 rounded-full text-sm font-bold"
                 type="button"
             >
                 <span className="mr-1">{label}</span>
@@ -37,15 +37,15 @@ const DropdownButton = ({ label, items }) => {
             {isOpen && (
                 <div
                     id="button-dropdown"
-                    className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-30 dark:bg-gray-700"
+                    className=" bg-white divide-y divide-gray-100 rounded-lg shadow w-30 dark:bg-gray-700"
                 >
-                    <ul className="py-2 text-md text-black-700 dark:text-black-200 font-bold">
+                    <ul className="py-2 text-md text-black-700 dark:text-black-200 font-normal">
                         {items.map((item, index) => (
                             <li key={index}>
                                 <Link
                                     to={item.link}
                                     onClick={toggleDropdown}
-                                    className="block px-4 py-2 hover:bg-blue-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    className="block px-4 py-1 hover:bg-blue-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                 >
                                     {item.label}
                                 </Link>

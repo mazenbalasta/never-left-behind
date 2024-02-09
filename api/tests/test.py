@@ -76,11 +76,12 @@ class TestCreateJob(unittest.TestCase):
             position="Software Engineer",
             company_name="NLB Corp",
             description="This is the description of the available position",
-            requirements="",
-            qualifications="",
-            pref_qualifications="",
-            location="",
-            apply_url="",
+            requirements="Bachelor's degree in Computer Science",
+            qualifications="Experience in Vite, React, Postgresql, Docker and FastApi",
+            pref_qualifications="2+ years of experience in web development",
+            location="Cityville",
+            apply_url="https://neverleftbehind.com/apply",
+            created_by=3
         )
 
         with patch("queries.jobs.JobsRepo.create") as mock_create:

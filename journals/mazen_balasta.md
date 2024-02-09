@@ -1,15 +1,25 @@
 ## Journal
+Feb 09, 2024:
+- Added a button that filters all jobs to jobs created by logged in approved partner.
+- Added delete button for deleting job only owned by logged in approved partner.
+- Created a delete view for Jobs list for the owner of listing
+- Code cleanup for final push
+
 Feb 08, 2024:
+- Added a created_by field on jobs table to link a job listing with a foreign key to partner account who posted the job.
+- Made a create job form for ghi only visible to logged in users with account type approved_partner.
+
+Feb 07, 2024:
 - Created a list view for all jobs.
 - Created a modal for listing a clicked job from list view that contains further information about the job.
 - Created a show detail of job endpoint.
 - Code cleanup
 
-Feb 07, 2024:
+Feb 06, 2024:
 - Code celanup
 - Worked with team on improving Login page
 
-Feb 06, 2024:
+Feb 05, 2024:
 - Discussed with team on what further functionality will be added to the app.
 - Coded with team on improving the feel of the whole app.
 
