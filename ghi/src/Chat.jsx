@@ -28,40 +28,39 @@ class Chat extends React.Component {
         this.updateMessage = this.updateMessage.bind(this)
     }
 
-    connect() {
-        if (this.loading && !this.state.connected) {
-            return
-        }
-        this.loading = true
-        const chatUrl = import.meta.env.VITE_API_WS
-        console.log({ chatUrl })
-        const url = `${chatUrl}/chat/${this.state.clientId}`
-        this.socket = new WebSocket(url)
-        this.socket.addEventListener('open', () => {
-            this.setState({ connected: true })
-            this.loading = false
-        })
-        this.socket.addEventListener('close', () => {
-            this.setState({ connected: false })
-            this.loading = false
-            setTimeout(() => {
-                this.connect()
-            }, 1000)
-        })
-        this.socket.addEventListener('error', () => {
-            this.setState({ connected: false })
-            this.loading = false
-            setTimeout(() => {
-                this.connect()
-            }, 1000)
-        })
-        this.socket.addEventListener('message', (message) => {
-            const filteredMessage = this.filterMessage(JSON.parse(message.data))
-            this.setState({
-                messages: [filteredMessage, ...this.state.messages],
-            })
-        })
+  connect() {
+    if (this.loading && !this.state.connected) {
+      return;
     }
+    this.loading = true;
+    const chatUrl = import.meta.env.VITE_API_WS;
+    const url = `${chatUrl}/chat/${this.state.clientId}`;
+    this.socket = new WebSocket(url);
+    this.socket.addEventListener('open', () => {
+      this.setState({ connected: true });
+      this.loading = false;
+    });
+    this.socket.addEventListener('close', () => {
+      this.setState({ connected: false });
+      this.loading = false;
+      setTimeout(() => {
+        this.connect();
+      }, 1000);
+    });
+    this.socket.addEventListener('error', () => {
+      this.setState({ connected: false });
+      this.loading = false;
+      setTimeout(() => {
+        this.connect();
+      }, 1000);
+    });
+    this.socket.addEventListener('message', (message) => {
+      const filteredMessage = this.filterMessage(JSON.parse(message.data));
+      this.setState({
+        messages: [filteredMessage, ...this.state.messages],
+      });
+    });
+  }
 
     componentDidMount() {
         this.connect()

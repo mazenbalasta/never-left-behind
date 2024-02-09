@@ -13,8 +13,6 @@ steps = [
         DROP TABLE states;
         """,
     ],
-
-
     [
         """
         CREATE TABLE events (

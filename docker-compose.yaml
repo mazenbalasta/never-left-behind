@@ -46,6 +46,10 @@ services:
             - VITE_API_KEY_TEST=$VITE_API_KEY_TEST
             - VITE_API_WS=$VITE_API_WS
 
+            VITE_API_KEY_TEST=$VITE_API_KEY_TEST
+
+            VITE_API_KEY_LIVE=$VITE_API_KEY_LIVE
+
     pg-admin:
         image: dpage/pgadmin4
         volumes:

@@ -10,8 +10,6 @@ steps = [
         DROP TABLE account_types;
         """,
     ],
-
-
     [
         """
         CREATE TABLE accounts (
@@ -34,8 +32,6 @@ steps = [
         DROP TABLE accounts;
         """,
     ],
-
-
     [
         """
         CREATE TABLE messages (
@@ -52,8 +48,6 @@ steps = [
         DROP TABLE messages;
         """,
     ],
-
-
     [
         """
         CREATE TABLE responses (
@@ -70,8 +64,6 @@ steps = [
         DROP TABLE responses;
         """,
     ],
-
-
     [
         """
         INSERT INTO account_types

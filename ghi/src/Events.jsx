@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import{ useGetTokenQuery } from './app/apiSlice';
 
+
+
 function ShowEvent() {
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -30,10 +32,13 @@ function ShowEvent() {
         getEvents();
     }, []);
 
+    const mapUrlLive = import.meta.env.VITE_API_KEY_LIVE;
+    console.log(mapUrlLive);
 
     const handleEventClick = (event) => {
         setSelectedEvent(event);
-        const apiKey = 'prj_live_pk_6357799d3a263ed5010b4abed7177f71b353e94b';
+        const apiKey =`${mapUrlLive}`;
+        console.log(apiKey);
         const getAddress = (event) => {
             const { street_address, city, state } = event;
             const formattedAddress = `${street_address}+${city}+${state.abbreviation}`;
@@ -52,8 +57,9 @@ function ShowEvent() {
             getAddress(event);
         }
 
+    const mapUrl = import.meta.env.VITE_API_KEY_TEST;
     useEffect(() => {
-    Radar.initialize('prj_test_pk_785399a5eb0266150d9be0a637123c0598dee255');
+    Radar.initialize(`${mapUrl}`);
     const map = new Radar.ui.map({
         container: 'map',
         style: 'radar-default-v1',
@@ -152,7 +158,7 @@ const handleResetClick = async () => {
                                 <thead className="bg-gradient-to-r from-[#282c34] via-[#50555c] to-[#a4a9af] dark:bg-gray-700">
                                 </thead>
                                 {events.map(event => (
-                                    <tbody className="bg-gray-700 divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                                    <tbody key={event.id} className="bg-gray-700 divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                                         <tr className="hover:bg-gray-600 dark:hover:bg-gray-700" onClick={() => handleEventClick(event)}>
                                             <td className="p-4 w-4">
                                                 <div className="flex items-center"></div>
@@ -222,8 +228,8 @@ const handleResetClick = async () => {
                                     <p className="text-lg text-white mb-5 pl-5">City: {selectedEvent.city}</p>
                                     <p className="text-lg text-white mb-5 pl-5">State: {selectedEvent.state.state_name}</p>
 
-                                    <button type="button" class="text-white ml-5 bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleDeleteClick}>Delete Events</button>
-                                    <button type="button" class="text-white ml-5 bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleResetClick}>Close</button>
+                                    <button type="button" className="text-white ml-5 bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleDeleteClick}>Delete Events</button>
+                                    <button type="button" className="text-white ml-5 bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleResetClick}>Close</button>
 
                                     <div className="h-20" />
                                     <div className="h-20" />
@@ -234,7 +240,7 @@ const handleResetClick = async () => {
                                     <div className="h-9" />
                                 </div>
                             ) : (
-                                <body className="Chat-text pl-5 bg-gradient-to-r from-[#282c34] via-[#50555c] to-[#a4a9af] text-white font-bold text-4xl underline"> Mapping
+                                <div className="Chat-text pl-5 bg-gradient-to-r from-[#282c34] via-[#50555c] to-[#a4a9af] text-white font-bold text-4xl underline"> Mapping
                                     <div className="h-20" />
                                     <div className="h-20" />
                                     <div className="h-20" />
@@ -247,7 +253,7 @@ const handleResetClick = async () => {
                                     <div className="h-20" />
                                     <div className="h-20" />
                                     <div className="h-10" />
-                                </body>
+                                </div>
                             )}
                         </div>
                     </div>

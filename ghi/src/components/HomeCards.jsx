@@ -34,7 +34,7 @@ const HomeCards = ({ imgURL, label, subtext, buttonText, path }) => {
     };
 
   return (
-    <div className='bg-white flex flex-col items-center w-full rounded-[20px] shadow-3xl px-6 py-8 border-4 border-[rgb(199,158,80)] sm:px-10 sm:py-16'>
+    <div className='mb-24 bg-white flex flex-col items-center w-full rounded-[20px] shadow-3xl px-6 py-8 border-4 border-[rgb(199,158,80)] sm:px-10 sm:py-16'>
         <div className='w-11 h-11 flex justify-center items-center bg-gray-900 rounded-full'>
             <IconComponent size={24} color="white" />
         </div>

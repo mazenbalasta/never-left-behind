@@ -3,7 +3,6 @@ import {
     useGetAllMessagesQuery,
     useGetAllAccountsQuery,
     useIncrementMessageViewsMutation,
-    useDeleteMessageMutation,
     useGetTokenQuery,
 } from '../../app/apiSlice';
 import { Button, Modal } from '..'
@@ -20,7 +19,6 @@ function ListMessages() {
     const [selectedMessageId, setSelectedMessageId] = useState(null);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [incrementMessageViews] = useIncrementMessageViewsMutation();
-    const [messageDeleted] = useDeleteMessageMutation();
 
     const isAuthenticated = tokenData && tokenData.account;
     const userId = tokenData?.account?.id;
@@ -36,7 +34,7 @@ function ListMessages() {
     };
 
 
-        const handleSelectedMessageCloseModal = () => {
+    const handleSelectedMessageCloseModal = () => {
         setSelectedMessageId(null);
     }
 
@@ -110,7 +108,9 @@ function ListMessages() {
                             className='bg-white flex flex-col justify-center w-full rounded-[20px] shadow-3xl px-6 py-8 border-4 border-[rgb(199,158,80)] sm:px-10 sm:py-16'
                         >
                             <div className='min-w-0 text-center'>
-                                <h1 className='Chat-text text-3xl leading-5 font-medium text-black'>{message.title}</h1>
+                                <h1 className='Chat-text text-3xl leading-5 font-medium text-black pt-2'>
+                                    {message.title.length > 10 ? message.title.substring(0, 10) + '...' : message.title}
+                                </h1>
                                 <div className='mt-2 text-sm leading-5 text-[rgb(199,158,80)]'>
                                     {message.body.length > 50 ? message.body.substring(0, 30) + '...' : message.body}
                                 </div>
@@ -127,9 +127,6 @@ function ListMessages() {
                                 </svg>
                                 {message.response_count} replies
                             </div>
-                            {/* <div className='mt-2 text-sm leading-5 text-gray-700'>
-                                <strong>Posted by:</strong> {message.account === tokenData?.account?.id ? userName : 'Unknown User'}
-                            </div> */}
 
                             <div className='mt-2 text-sm leading-5 text-gray-700'>
                                 <strong>Posted by:</strong> {findUsernameById(message.account)}

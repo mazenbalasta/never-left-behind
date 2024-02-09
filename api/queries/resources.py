@@ -36,9 +36,7 @@ class ResourcesRepo:
                     ],
                 )
                 id = db.fetchone()[0]
-                print("______ID_____:", id)
                 old_data = resource.dict()
-                print("----OLD DATA----:", old_data)
                 return ResourcesOut(id=id, **old_data)
 
     def list_resources(self) -> Union[List[ResourcesOut], Error]:
@@ -61,7 +59,6 @@ class ResourcesRepo:
                         result.append(resource)
                     return result
         except Exception as e:
-            print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
     def delete_resource(self, resource_id: int):
@@ -82,5 +79,4 @@ class ResourcesRepo:
         except HTTPException as error:
             raise error
         except Exception as e:
-            print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))

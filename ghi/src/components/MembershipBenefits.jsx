@@ -9,14 +9,14 @@ return (
             <p className="text-lg text-start">Become a member and enjoy a range of exclusive benefits.</p>
         </div>
 
-        <div className='flex justify-center items-start w-screen my-20 flex-wrap'>
-            
+        <div className='flex justify-center items-start w-screen my-20 flex-wrap gap-[20rem]'>
+
             {/* veteran column */}
             <div className="px-4 py-20 max-w-xl">
                 <img
                     src={aboutUs}
                     alt="About Us"
-                    className="h-auto max-w-lg mx-auto rounded-lg mb-4"
+                    className="w-full h-auto max-w-lg rounded-lg"
                 />
                 <h2 className="Chat-text text-4xl font-bold mb-4">Veteran Membership Benefits</h2>
                 <p className="text-xl mb-2">Join our community and enjoy a range of exclusive benefits:</p>
@@ -31,7 +31,7 @@ return (
                 <a href="/signup/veteran" className="mt-5 inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
                     Veteran signup
                     <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                     </svg>
                 </a>
             </div>
@@ -57,7 +57,7 @@ return (
                 <a href="/signup/partner" className="mt-5 inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
                     Partner application
                     <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                     </svg>
                 </a>            
             </div>

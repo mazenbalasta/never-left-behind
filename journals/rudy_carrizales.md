@@ -20,6 +20,7 @@ Recommended naming convention is `first_last.md`.
     -updated messages
     -did some styling adjustments
     -still working on reply in messages
+    -wrote message tests
 
 29JAN24
     -partner coded with team

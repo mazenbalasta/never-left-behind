@@ -4,10 +4,9 @@ import { services } from "./constants";
 
 
 function HomePage() {
-    const isLoggedIn = true; // Replace this with your actual login logic
 
     return (
-        <main className='relative text-white py-16'>
+        <main className='relative text-white'>
             <section className='padding'>
                 <Carousel />
                 <div className="Chat-text uppercase text-center mt-8 text-[calc(20px+2vmin)]" >
