@@ -209,7 +209,7 @@ function EventForm() {
                                     State
                                 </label>
                         <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange = {handleStateChange} value={state} required name="state" id="state">
-                                <option selected className="text-black">Please select a state</option>
+                                <option className="text-black">Please select a state</option>
                                 {states.map(state => (
                                     <option className="text-black"key={state.state_name} value={state.state_name}>
                                         {state.state_name}

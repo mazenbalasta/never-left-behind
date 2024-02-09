@@ -33,12 +33,10 @@ function ShowEvent() {
     }, []);
 
     const mapUrlLive = import.meta.env.VITE_API_KEY_LIVE;
-    console.log(mapUrlLive);
 
     const handleEventClick = (event) => {
         setSelectedEvent(event);
         const apiKey =`${mapUrlLive}`;
-        console.log(apiKey);
         const getAddress = (event) => {
             const { street_address, city, state } = event;
             const formattedAddress = `${street_address}+${city}+${state.abbreviation}`;

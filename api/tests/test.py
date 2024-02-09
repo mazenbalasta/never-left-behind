@@ -3,7 +3,7 @@ from main import app
 from queries.jobs import JobsIn, JobsOut
 from unittest.mock import patch, MagicMock
 from queries.messages import MessagesOut, MessagesRepo
-from datetime import datetime, MagicMock
+from datetime import datetime
 import unittest
 
 
@@ -139,7 +139,7 @@ class TestMessagesRepo(unittest.TestCase):
 
     @patch('queries.pool.pool.connection')
     def test_delete_message_succesful(self, mock_connection):
-            
+
         # Arrange
         message_id = 1
         mock_cursor = MagicMock()
