@@ -70,7 +70,7 @@ function MessageWithReplies({ messageId }) {
             {messageData && (                
                 <div className="bg-white flex flex-col w-full rounded-[20px] shadow-3xl px-6 py-8 border-4 border-[rgb(199,158,80)]">
                     <div className='min-w-0 text-center'>
-                        <h1 className='text-3xl leading-5 font-medium text-black'>{messageData.title}</h1>
+                        <h1 className='text-3xl leading-5 font-medium text-black overflow-auto mt-3 pb-2'>{messageData.title}</h1>
                         <p className='mt-2 text-sm leading-5 text-[rgb(199,158,80)]'>{messageData.body}</p>
                     </div>
                     <div className='text-lg text-black'>Replies:</div>
