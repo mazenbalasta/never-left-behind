@@ -32,12 +32,10 @@ function ShowEvent() {
     }, []);
 
     const mapUrlLive = import.meta.env.VITE_API_KEY_LIVE;
-    console.log(mapUrlLive);
 
     const handleEventClick = (event) => {
         setSelectedEvent(event);
         const apiKey =`${mapUrlLive}`;
-        console.log(apiKey);
         const getAddress = (event) => {
             const { street_address, city, state } = event;
             const formattedAddress = `${street_address}+${city}+${state.abbreviation}`;
@@ -48,42 +46,53 @@ function ShowEvent() {
                 }
             };
             fetch(geocodeUrl, requestOptions)
-                .then(response => response.json())
-                .then(data => {
+            .then(response => response.json())
+            .then(data => {
+                if (data.addresses[0] === undefined) {
+                    setGeocodeData(null);
+                } else {
                     setGeocodeData(data);
-                })
-            }
-            getAddress(event);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching geocode data:', error);
+                setGeocodeData(null);
+            });
         }
+        getAddress(event);
+    }
 
     const mapUrl = import.meta.env.VITE_API_KEY_TEST;
     useEffect(() => {
-    Radar.initialize(`${mapUrl}`);
-    const map = new Radar.ui.map({
-        container: 'map',
-        style: 'radar-default-v1',
-        center: [-89.9911, 39.7342],
-        zoom: 3.5,
-    });
+        Radar.initialize(`${mapUrl}`);
+        const map = new Radar.ui.map({
+            container: 'map',
+            style: 'radar-default-v1',
+            center: [-89.9911, 39.7342],
+            zoom: 3.5,
+        });
 
-    if (selectedEvent && geocodeData) {
-        const { latitude, longitude } = geocodeData.addresses[0];
-        map.setCenter([longitude, latitude]);
-        map.setZoom(14);
-        Radar.ui.marker({ text: selectedEvent.event_title })
-            .setLngLat([longitude, latitude])
-            .addTo(map);
-    }
+        if (selectedEvent && geocodeData) {
+            const { latitude, longitude } = geocodeData.addresses[0];
+            map.setCenter([longitude, latitude]);
+            map.setZoom(14);
+            Radar.ui.marker({ text: selectedEvent.event_title })
+                .setLngLat([longitude, latitude])
+                .addTo(map);
+        } else {
+            map.setCenter([-89.9911, 39.7342]);
+            map.setZoom(3.5);
+        }
 
-    map.on('click', (e) => {
-        const { lngLat } = e;
-        const [longitude, latitude] = lngLat;
-        const markerText = 'Clicked Location';
-        Radar.ui.marker({ text: markerText })
-            .setLngLat([longitude, latitude])
-            .addTo(map);
-    });
-}, [selectedEvent, geocodeData]);
+        map.on('click', (e) => {
+            const { lngLat } = e;
+            const [longitude, latitude] = lngLat;
+            const markerText = 'Clicked Location';
+            Radar.ui.marker({ text: markerText })
+                .setLngLat([longitude, latitude])
+                .addTo(map);
+        });
+    }, [selectedEvent, geocodeData]);
 
 
 const handleDeleteClick = async () => {

@@ -7,7 +7,7 @@
 * LaTroy Richardson Sr - Project Documentation Manager
 
 
-**Never Left Behind** - For veterans by veterans 
+**Never Left Behind** - For veterans by veterans
 
 ## Design
 
@@ -130,7 +130,7 @@ https://gitlab.com/veterans-r-us/never-left-behind.git
 2. Clone the forked repository  into your desired computer folder:
 git clone<https://gitlab.com/Tynyx/never-left-behind.git>
 
-3. 
+3.
 
 3. Build the volumes and containers in docker by doing the following commands in terminal:
 ```
@@ -141,3 +141,9 @@ Docker compose -up --build
 Ensure the commands worked and docker is running
 
 View the project in the browser: http://localhost:5173/
+
+
+## JIRA Board link
+This is our link for issue tracking and project management
+
+https://never-left-behind.atlassian.net/jira/software/projects/NEV/boards/1

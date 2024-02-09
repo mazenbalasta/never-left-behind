@@ -38,8 +38,6 @@ services:
         user: "1000:1000"
         volumes:
             - ./ghi:/app
-
-
         ports:
             - "5173:5173"
         environment:
