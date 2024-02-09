@@ -33,7 +33,7 @@ On 31 Jan 24,
 
 On 1 Feb 24,
 
-    I do not know what happen but i do not like the fact the moment i log on today to check my code its not populating the categories no more its just a blank list for the drop down i dont kno what caused it there is nothing that i changed literally nothing. I also was able to complete my unit testing but i am still shocked at how this is not working 
+    I do not know what happen but i do not like the fact the moment i log on today to check my code its not populating the categories no more its just a blank list for the drop down I dont kno what caused it there is nothing that i changed literally nothing. I also was able to complete my unit testing but i am still shocked at how this is not working 
     
 
 On 5 Feb 24,
