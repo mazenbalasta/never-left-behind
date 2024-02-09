@@ -6,7 +6,13 @@ Each team member is required to keep a development journal, which should be a si
 
 Recommended naming convention is `first_last.md`.
 
-6-7JAN24
+7-9FEB24
+    -updated messages
+    -did final additions and corrections
+    -added merges
+    -problem-shot with team
+
+6-7FEB24
     -updated messages
         -changed layout
         -updated views through modals
