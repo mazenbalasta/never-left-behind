@@ -4,19 +4,26 @@ import { useNavigate } from "react-router-dom";
 
 const CreateJob = () => {
     const navigate = useNavigate()
-    const { data: account } = useGetTokenQuery();
+    const { data: account, isLoading } = useGetTokenQuery();
     const [createJob] = useCreateJobMutation();
+
+    const createdBy = account ? account.account.id : null
+
     const [formData, setFormData] = useState({
-       position: "",
-       company_name: "",
-       description: "",
-       requirements: "",
-       qualifications: "",
-       pref_qualifications: "",
-       location: "",
-       apply_url: "",
-       created_by: account.account.id
-    });
+        position: '',
+        company_name: '',
+        description: '',
+        requirements: '',
+        qualifications: '',
+        pref_qualifications: '',
+        location: '',
+        apply_url: '',
+        created_by: createdBy,
+    })
+
+    if (isLoading) {
+        return <p>Loading...</p>
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -66,7 +73,7 @@ const CreateJob = () => {
                                 id="position"
                                 value={formData.position}
                                 onChange={handleInputChange}
-                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                className="w-80 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                 required
                             />
                         </div>
@@ -83,7 +90,7 @@ const CreateJob = () => {
                                 id="company_name"
                                 value={formData.company_name}
                                 onChange={handleInputChange}
-                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                className="w-80 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                 required
                             />
                         </div>
@@ -94,13 +101,13 @@ const CreateJob = () => {
                             >
                                 Job Description:
                             </label>
-                            <input
+                            <textarea
                                 type="description"
                                 name="description"
                                 id="description"
                                 value={formData.description}
                                 onChange={handleInputChange}
-                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                className="h-40 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                 required
                             />
                         </div>
@@ -111,13 +118,13 @@ const CreateJob = () => {
                             >
                                 Requirements:
                             </label>
-                            <input
+                            <textarea
                                 type="requirements"
                                 name="requirements"
                                 id="requirements"
                                 value={formData.requirements}
                                 onChange={handleInputChange}
-                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                className="h-40 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                 required
                             />
                         </div>
@@ -128,12 +135,12 @@ const CreateJob = () => {
                             >
                                 Qualifications:
                             </label>
-                            <input
+                            <textarea
                                 name="qualifications"
                                 id="qualifications"
                                 value={formData.qualifications}
                                 onChange={handleInputChange}
-                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                className="h-32 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                 required
                             />
                         </div>
@@ -144,12 +151,12 @@ const CreateJob = () => {
                             >
                                 Preferred Qualifications:
                             </label>
-                            <input
+                            <textarea
                                 id="pref_qualifications"
                                 name="pref_qualifications"
                                 onChange={handleInputChange}
                                 value={formData.pref_qualifications}
-                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                className="h-32 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                 required
                             />
                         </div>

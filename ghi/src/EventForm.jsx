@@ -11,6 +11,8 @@ function EventForm() {
     const [states, setStates] = useState([]);
     const [state, setState] = useState('');
 
+    const baseUrl = import.meta.env.VITE_API_HOST
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -23,7 +25,7 @@ function EventForm() {
         eventData.city = city;
         eventData.state = state;
 
-        const eventUrl = 'http://localhost:8000/api/events/';
+        const eventUrl = `${baseUrl}/api/events/`;
         const fetchConfig = {
             method: 'POST',
             body: JSON.stringify(eventData),
@@ -77,7 +79,7 @@ function EventForm() {
     }
 
     const fetchStateData = async () => {
-        const stateUrl = 'http://localhost:8000/api/states/';
+        const stateUrl = `${baseUrl}/api/states/`
         const response = await fetch(stateUrl);
         if (response.ok) {
             const stateData = await response.json();

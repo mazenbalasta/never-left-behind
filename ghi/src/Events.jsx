@@ -10,10 +10,11 @@ function ShowEvent() {
     const [geocodeData, setGeocodeData] = useState(null);
 
     const { data: token } = useGetTokenQuery();
+    const baseUrl = import.meta.env.VITE_API_HOST;
 
 
     const getEvents = async () => {
-        const eventsUrl = 'http://localhost:8000/api/events/';
+        const eventsUrl = `${baseUrl}/api/events/`;
         const response = await fetch(eventsUrl);
         if (response.ok) {
             const eventData = await response.json();
@@ -82,7 +83,7 @@ function ShowEvent() {
 
 const handleDeleteClick = async () => {
     if (selectedEvent) {
-        const eventUrl = `http://localhost:8000/api/events/${selectedEvent.id}/`;
+        const eventUrl = `${baseUrl}/api/events/${selectedEvent.id}/`;
         const requestOptions = {
             method: 'DELETE',
             headers: {
@@ -98,7 +99,7 @@ const handleDeleteClick = async () => {
 }
 
 const handleResetClick = async () => {
-        const eventsUrl = 'http://localhost:8000/api/events/';
+        const eventsUrl = `${baseUrl}/api/events/`;
         const response = await fetch(eventsUrl);
         if (response.ok) {
             const eventsData = await response.json();

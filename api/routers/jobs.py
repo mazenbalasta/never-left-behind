@@ -1,6 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException, Response, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from queries.jobs import JobsIn, JobsOut, JobsRepo
 from typing import List
+from fastapi.responses import JSONResponse
 
 router = APIRouter()
 
@@ -15,20 +16,23 @@ def list_jobs(repo: JobsRepo = Depends()):
     return repo.list_jobs()
 
 
-@router.put("/api/jobs/{id}", response_model=bool)
+@router.put("/api/jobs/{id}", response_model=JobsOut)
 def update_job(id: int, job: JobsIn, repo: JobsRepo = Depends()):
     return repo.update_job(id, job)
 
 
-@router.delete("/api/jobs/{id}", status_code=status.HTTP_200_OK)
+@router.delete("/api/jobs/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_job(id: int, repo: JobsRepo = Depends()):
     try:
         success = repo.delete_job(id)
         if not success:
             raise HTTPException(status_code=404, detail="Job not found")
+    except HTTPException as e:
+        raise e 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+    return JSONResponse(content={"message": "Job deleted successfully"}, status_code=status.HTTP_204_NO_CONTENT)
 
 
 @router.get("/api/jobs/{id}", response_model=JobsOut)

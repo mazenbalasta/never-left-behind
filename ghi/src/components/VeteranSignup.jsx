@@ -28,6 +28,7 @@ function VeteranSignup() {
     const isPasswordMatch = password === repeatPassword
     const navigate = useNavigate()
     const [login] = useLoginMutation()
+    const baseUrl = import.meta.env.VITE_API_HOST
 
     useEffect(() => {
         if (!isLoading && allAccounts) {
@@ -90,7 +91,7 @@ function VeteranSignup() {
         )
 
         if (confirmSubmit) {
-            const url = `http://localhost:8000/api/accounts/veterans`
+            const url = `${baseUrl}/api/accounts/veterans`
             const fetchConfig = {
                 method: 'post',
                 body: JSON.stringify(formData),
@@ -168,7 +169,7 @@ function VeteranSignup() {
                                 Username
                             </label>
                             <input
-                                type="username"
+                                type="text"
                                 name="username"
                                 id="username"
                                 value={formData.username}
@@ -279,7 +280,7 @@ function VeteranSignup() {
                             >
                                 I agree with the{' '}
                                 <Link
-                                    to="/"
+                                    to="/PrivacyPolicy"
                                     className="text-blue-600 hover:underline dark:text-blue-500"
                                 >
                                     terms and conditions

@@ -16,8 +16,10 @@ function ActivitiesForm() {
     category: "",
   });
 
+  const baseUrl = import.meta.env.VITE_API_HOST
+
   const getData = async () => {
-    const url = 'http://localhost:8000/api/activities/';
+    const url = `${baseUrl}/api/activities/`;
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
@@ -34,7 +36,7 @@ function ActivitiesForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch('http://localhost:8000/api/activities/', {
+    const response = await fetch(`${baseUrl}/api/activities/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

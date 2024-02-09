@@ -52,7 +52,7 @@ const Nav = () => {
             <ul
                 className={`grid grid-cols-7 gap-6 content-center bg-gray-700 ${
                     isMenuOpen ? 'flex flex-col items-center' : 'hidden'
-                } md:flex md:flex-row md:justify-between items-center text-2xl py-6 px-16`}
+                } md:flex md:flex-row md:justify-between items-center text-2xl py-6 px-10`}
             >
                 <li
                     className="nav-link text-sm font-bold text-white uppercase hover:text-blue-500"
@@ -96,11 +96,11 @@ const Nav = () => {
                 >
                     <NavLink to="/resources">Resources</NavLink>
                 </li>
-                <div className="grid grid-cols-2 gap-4 content-end">
+                <div className="flex w-48">
                     {!account ? (
                         <>
                             <button
-                                className=" w-30 h-10 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold"
+                                className="w-26 h-9 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold"
                                 onClick={closeMenu}
                             >
                                 <NavLink to="/login">Log In</NavLink>
@@ -125,14 +125,14 @@ const Nav = () => {
                                 logOut()
                                 closeMenu()
                             }}
-                            className="w-30 h-10 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold"
+                            className="w-26 h-9 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold"
                         >
                             Logout
                         </button>
                     )}
                 </div>
             </ul>
-            <div className="bg-gray-900 Chat-text">
+            <div className="bg-gray-900 font-medium">
                 {account && (
                     <UserGreeting firstName={account.account.first_name} />
                 )}

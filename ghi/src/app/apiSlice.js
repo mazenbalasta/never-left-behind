@@ -18,7 +18,7 @@ export const neverLeftBehindApi = createApi({
         }),
         getAllJobs: builder.query({
             query: () => '/api/jobs',
-            providesTags: ["Job"]
+            providesTags: ['Job'],
         }),
         createJob: builder.mutation({
             query: (formData) => ({
@@ -26,7 +26,14 @@ export const neverLeftBehindApi = createApi({
                 method: 'POST',
                 body: formData,
             }),
-            invalidatesTags: ["Job"]
+            invalidatesTags: ['Job'],
+        }),
+        deleteJob: builder.mutation({
+            query: (id) => ({
+                url: `/api/jobs/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Job'],
         }),
         logout: builder.mutation({
             query: () => ({
@@ -128,5 +135,6 @@ export const {
     useGetMessageWithResponsesQuery,
     useIncrementMessageViewsMutation,
     useGetAllJobsQuery,
-    useCreateJobMutation
+    useCreateJobMutation,
+    useDeleteJobMutation
 } = neverLeftBehindApi;

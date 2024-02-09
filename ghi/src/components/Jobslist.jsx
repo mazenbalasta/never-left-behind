@@ -1,17 +1,27 @@
 import { useState } from 'react'
-import { useGetAllJobsQuery } from '../app/apiSlice'
-import { useGetTokenQuery } from '../app/apiSlice'
+import {
+    useGetAllJobsQuery,
+    useGetTokenQuery,
+    useDeleteJobMutation,
+} from '../app/apiSlice'
 import { useNavigate } from 'react-router'
 import JobDetailModal from './JobDetailModal'
 
-const Jobslist = () => {
+const JobsList = () => {
     const { data: jobs } = useGetAllJobsQuery()
     const { data: account } = useGetTokenQuery()
+    const [deleteJob] = useDeleteJobMutation()
     const navigate = useNavigate()
-    const isApprovedPartner = account && account.account.account_type === 'approved_partner'
+    const isApprovedPartner =
+        account && account.account.account_type === 'approved_partner'
 
     const [selectedJob, setSelectedJob] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [userJobs, setUserJobs] = useState(null)
+
+    if (jobs) {
+        const created = jobs.map((job) => job.created_by)
+    }
 
     if (!jobs) {
         return <p>Loading...</p>
@@ -23,13 +33,50 @@ const Jobslist = () => {
         setIsModalOpen(true)
     }
 
+    const postedJobByUser = (jobs, userId) => {
+        return jobs.filter((job) => job.created_by === userId)
+    }
+
+    const handleUserFilterClick = () => {
+        if (account && account.account.id) {
+            const filteredJobs = postedJobByUser(jobs, account.account.id)
+            setUserJobs(filteredJobs)
+            if (filteredJobs.length === 0) {
+                window.alert(
+                    'You currently have no job posted, please create a new job or browse through our jobs list.'
+                )
+                setUserJobs(null)
+            }
+        }
+    }
+
     const handleCreateJobClick = () => {
-        navigate(`/jobs/create`)
+        navigate('/jobs/create')
     }
 
     const closeSlider = () => {
         setIsModalOpen(false)
         setSelectedJob(null)
+    }
+
+    const handleShowAllJobs = () => {
+        setUserJobs(null)
+    }
+
+    const handleDelete = async (id) => {
+        const confirm = window.confirm(
+            'Are you sure you want to delete this job?'
+        )
+        if (confirm) {
+            try {
+                await deleteJob(id)
+                window.alert('Job deleted successfully')
+                setUserJobs(null)
+            } catch (error) {
+                window.alert('An error has occured, please try again later')
+                navigate('/jobs')
+            }
+        }
     }
 
     return (
@@ -38,26 +85,53 @@ const Jobslist = () => {
                 <h1 className="text-white mb-4 mt-5 text-center text-lg">
                     JOBS LIST
                 </h1>
-                <div className="flex justify-center">
+                <div className="flex justify-center mb-5">
                     {isApprovedPartner && (
                         <button
                             type="button"
-                            onClick={() => handleCreateJobClick()}
-                            className="alignment-center justify-center rounded-md bg-gray-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                            onClick={handleCreateJobClick}
+                            className="justify-center rounded-md bg-gray-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
                         >
-                            Create a new job +
+                            Create a New Job
                         </button>
                     )}
                 </div>
-                <div className="jobslist-container m-5">
-                    {jobs.map((job) => (
+                {isApprovedPartner && (
+                    <>
+                        {userJobs ? (
+                            <div className="flex justify-center mb-5">
+                                <button
+                                    type="button"
+                                    onClick={handleShowAllJobs}
+                                    className="justify-center rounded-md bg-gray-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                                >
+                                    Show All Jobs
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="flex justify-center mb-5">
+                                <button
+                                    type="button"
+                                    onClick={handleUserFilterClick}
+                                    className="justify-center rounded-md bg-gray-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                                >
+                                    Show Jobs Posted By You
+                                </button>
+                            </div>
+                        )}
+                    </>
+                )}
+                <div className="jobslist-container">
+                    {(userJobs || jobs).map((job) => (
                         <div
                             key={job.id}
-                            onClick={() => handleCardClick(job.id)}
-                            className="w-3/4 mx-auto mt-10 grid max-w-screen-4xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 overflow-hidden rounded-lg border py-8 text-white shadow transition hover:shadow-lg"
+                            className="relative w-3/4 mx-auto mb-10 grid max-w-screen-4xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 overflow-hidden rounded-lg border py-8 text-white shadow transition hover:shadow-lg"
                         >
-                            <div className="col-span-11 flex flex-col pr-8 text-left sm:pl-4">
-                                <h1 className="text-sm text-white-900">
+                            <button
+                                onClick={() => handleCardClick(job.id)}
+                                className="col-span-11 sm:pl-4 m-5 flex flex-col text-left"
+                            >
+                                <h1 className="text-sm text-white-900 mb-3">
                                     Company: {job.company_name}
                                 </h1>
                                 <a
@@ -66,7 +140,7 @@ const Jobslist = () => {
                                 >
                                     Position: {job.position}
                                 </a>
-                                <p className="overflow-hidden pr-7 text-sm text-white">
+                                <p className="overflow-hidden pr-7 leading-normal text-sm text-white">
                                     <strong>Job Description: </strong>
                                     {job.description}
                                 </p>
@@ -89,7 +163,19 @@ const Jobslist = () => {
                                         Location: {job.location}
                                     </span>
                                 </div>
-                            </div>
+                            </button>
+                            {userJobs && (
+                                <div className="absolute bottom-0 right-0 p-4">
+                                    <button
+                                        key={`delete-${job.id}`}
+                                        type="button"
+                                        onClick={() => handleDelete(job.id)}
+                                        className="mr-2 w-24 justify-center rounded-md bg-gray-700 px-3 py-2 text-sm font-semibold text-red-300 shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>
@@ -105,4 +191,4 @@ const Jobslist = () => {
     )
 }
 
-export default Jobslist
+export default JobsList

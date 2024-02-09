@@ -1,4 +1,9 @@
 ## Journal
+Feb 09, 2024:
+- Added a button that filters all jobs to jobs created by logged in approved partner.
+- Added delete button for deleting job only owned by logged in approved partner.
+- code cleanup
+
 Feb 08, 2024:
 - Added a created_by field on jobs table to link a job listing with a foreign key to partner account who posted the job.
 - Made a create job form for ghi only visible to logged in users with account type approved_partner.

@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from queries.pool import pool
 from typing import List, Union
-from fastapi import HTTPException
+from fastapi import HTTPException, Response
 
 
 class Error(BaseModel):
@@ -99,7 +99,6 @@ class JobsRepo:
                         result.append(jobs)
                     return result
         except Exception as e:
-            print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
     def update_job(self, job_id: int, job: JobsIn) -> Union[JobsOut, Error]:
@@ -151,13 +150,14 @@ class JobsRepo:
                         """,
                         [job_id],
                     )
-                    if db.rowcount == 0:
-                        raise HTTPException(
-                            status_code=404, detail="Job not found"
-                        )
-                    return True
+                    if db.rowcount > 0:
+                        return True
+        except HTTPException as e:
+            raise e
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+        return False
 
     def job_detail(self, job_id: int):
         try:
