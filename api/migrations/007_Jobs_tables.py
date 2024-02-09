@@ -1,7 +1,5 @@
 steps = [
-    # step 1:
     [
-        # "Up" SQL statement
         """
         CREATE TABLE jobs (
             id SERIAL PRIMARY KEY NOT NULL,
@@ -18,7 +16,6 @@ steps = [
             REFERENCES accounts(id)
         );
         """,
-        # "Down" SQL statement
         """
         DROP TABLE jobs;
         """,

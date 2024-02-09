@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -20,6 +19,7 @@ def create_role(role_name: str):
     db = SessionLocal()
     db.add(Role(name=role_name))
     db.commit()
+
 
 @app.put("/roles/{role_name}/{account_id}")
 def assign_role(role_name: str, account_id: int):

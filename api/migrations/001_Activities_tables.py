@@ -1,19 +1,17 @@
 steps = [
-    # step 1
     [
-        # "Up" SQL statement
         """
         CREATE TABLE categories (
             id SERIAL PRIMARY KEY NOT NULL,
             name VARCHAR(255) NOT NULL
         );
         """,
-        # "Down" SQL statement
         """
         DROP TABLE categories;
         """,
     ],
-    # step 2
+
+
     [
         """
         CREATE TABLE Activities (
@@ -28,7 +26,7 @@ steps = [
             REFERENCES categories(id)
         );
         """,
-        # "Down" SQL statement
+
         """
         DROP TABLE Activities;
         """,

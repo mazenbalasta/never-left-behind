@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 
 function EventForm() {
@@ -35,7 +35,6 @@ function EventForm() {
         const response = await fetch(eventUrl, fetchConfig);
         if (response.ok) {
             const newEvent = await response.json();
-            console.log(newEvent);
             setEventTitle('');
             setStartDate('');
             setEndDate('');
@@ -46,7 +45,6 @@ function EventForm() {
 
         } else if (response.status === 400) {
             const error = await response.json();
-            console.log(error);
         }
     }
 
@@ -83,7 +81,6 @@ function EventForm() {
         const response = await fetch(stateUrl);
         if (response.ok) {
             const stateData = await response.json();
-            console.log(stateData);
             setStates(stateData);
         }
     }
@@ -93,11 +90,12 @@ function EventForm() {
     }, []);
 
     return (
+        <div>
         <div className="bg-[#282c34] relative text-white py-16">
-            <h1 className="Chat-text text-4xl font-bold text-white">Create an Event!</h1>
-            <div className="form mb-20 ">
+            <h1 className="Chat-text text-4xl text-center font-bold text-white w-screen pb-5">Create an Event!</h1>
+            <div className="form mb-20 flex justify-center items-center">
                 <form
-                    className=" w-full max-w-sm m-auto bg-gray-900 p-10 rounded-lg shadow-lg dark:bg-gray-800 dark:shadow-lg-light"
+                    className="w-1/2 bg-gray-900 p-10 rounded-lg shadow-lg dark:bg-gray-800 dark:shadow-lg-light"
                     onSubmit={handleSubmit}
                 >
                     <div className="mb-5">
@@ -226,6 +224,7 @@ function EventForm() {
                 </form>
             </div>
         </div>
+    </div>
     );
 }
 

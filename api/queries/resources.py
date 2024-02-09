@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from fastapi import HTTPException
 from queries.pool import pool
-from typing import List, Union, Optional
+from typing import List, Union
 
 
 class Error(BaseModel):

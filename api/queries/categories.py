@@ -29,10 +29,7 @@ class CategoryRepo:
                     )
                     result = []
                     for record in db:
-                        category = CategoryOut(
-                            id=record[0],
-                            name=record[1]
-                        )
+                        category = CategoryOut(id=record[0], name=record[1])
                         result.append(category)
                     return result
         except Exception:

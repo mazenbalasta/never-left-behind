@@ -1,5 +1,5 @@
-from pydantic import BaseModel, validator
-from typing import Optional, List, Union
+from pydantic import BaseModel
+from typing import List, Union
 from datetime import datetime
 from fastapi import HTTPException
 import logging
@@ -9,18 +9,14 @@ from queries.pool import pool
 class Error(BaseModel):
     message: str
 
+
 class BaseAccount(BaseModel):
     account: int
 
-    # @validator("account")
-    # def account_must_be_int(cls, valid):
-    #     if not isinstance(valid, int):
-    #         raise ValueError("Account must be an integer")
-    #     return valid
 
 class MessageViewIn(BaseModel):
     views: int
-    # body: str
+
 
 class MessageViewOut(BaseModel):
     id: int
@@ -75,10 +71,9 @@ class MessagesRepo:
             views=record[5],
             response_count=record[6],
         )
-    
 
     def create(self, message: MessagesIn) -> MessagesOut:
-        try: 
+        try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
@@ -105,13 +100,18 @@ class MessagesRepo:
                     print(result)
                     if result:
                         response_count = 0
-                        return self.message_from_db_record(result + (response_count,))
+                        return self.message_from_db_record(
+                            result + (response_count,)
+                        )
                     else:
-                        raise HTTPException(status_code=500, detail="error in create message")
+                        raise HTTPException(
+                            status_code=500, detail="error in create message"
+                        )
         except Exception as e:
             logger.error(f"Error in create: {e}")
-            raise HTTPException(status_code=500, detail="Internal server error")
-
+            raise HTTPException(
+                status_code=500, detail="Internal server error"
+            )
 
     def list_messages(self) -> Union[Error, List[MessagesOut]]:
         try:
@@ -125,11 +125,16 @@ class MessagesRepo:
                         """
                     )
                     records = db.fetchall()
-                    return [self.message_from_db_record(record) for record in records]
+                    return [
+                        self.message_from_db_record(record)
+                        for record in records
+                    ]
         except Exception as e:
             logger.error(f"Error in list messages: {e}")
-            raise HTTPException(status_code=500, detail="Internal server error")
-    
+            raise HTTPException(
+                status_code=500, detail="Internal server error"
+            )
+
     def get_message(self, message_id: int) -> Union[MessagesOut, Error]:
         try:
             with pool.connection() as conn:
@@ -140,17 +145,23 @@ class MessagesRepo:
                         (SELECT COUNT(*) FROM responses WHERE message_id = m.id) AS response_count
                         FROM messages m WHERE m.id = %s;
                         """,
-                        [message_id]
+                        [message_id],
                     )
                     result = db.fetchone()
                     if result is None:
-                        raise HTTPException(status_code=404, detail="Message not found")
+                        raise HTTPException(
+                            status_code=404, detail="Message not found"
+                        )
                     return self.message_from_db_record(result)
         except Exception as e:
-            logger.error(f'Error in get_message: {e}')
-            raise HTTPException(status_code=500, detail="Internal server error")
+            logger.error(f"Error in get_message: {e}")
+            raise HTTPException(
+                status_code=500, detail="Internal server error"
+            )
 
-    def update_message(self, message_id: int, message: MessagesIn) -> Union[MessagesOut, Error]:
+    def update_message(
+        self, message_id: int, message: MessagesIn
+    ) -> Union[MessagesOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -162,15 +173,26 @@ class MessagesRepo:
                         RETURNING id, title, body, account, date, views,
                         (SELECT COUNT(*) FROM responses WHERE message_id = %s) AS response_count;
                         """,
-                        [message.title, message.body, message.account, message.date, message_id, message_id]
+                        [
+                            message.title,
+                            message.body,
+                            message.account,
+                            message.date,
+                            message_id,
+                            message_id,
+                        ],
                     )
                     result = db.fetchone()
                     if result is None:
-                        raise HTTPException(status_code=404, detail="Message not found")
+                        raise HTTPException(
+                            status_code=404, detail="Message not found"
+                        )
                     return self.message_from_db_record(result)
         except Exception as e:
-            logger.error(f'Error in update_message: {e}')
-            raise HTTPException(status_code=500, detail="Internal server error")
+            logger.error(f"Error in update_message: {e}")
+            raise HTTPException(
+                status_code=500, detail="Internal server error"
+            )
 
     def delete_message(self, message_id: int) -> bool:
         try:
@@ -180,27 +202,35 @@ class MessagesRepo:
                         "DELETE FROM messages WHERE id = %s", [message_id]
                     )
                     if db.rowcount == 0:
-                        raise HTTPException(status_code=404, detail="Message not found")
+                        raise HTTPException(
+                            status_code=404, detail="Message not found"
+                        )
                     return True
         except Exception as e:
-            logger.error(f'Error in delete_message: {e}')
-            raise HTTPException(status_code=500, detail="Internal server error")
-        
-    def get_message_with_responses(self, message_id: int) -> Union[Error, MessageWithResponsesOut]:
+            logger.error(f"Error in delete_message: {e}")
+            raise HTTPException(
+                status_code=500, detail="Internal server error"
+            )
+
+    def get_message_with_responses(
+        self, message_id: int
+    ) -> Union[Error, MessageWithResponsesOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
                         SELECT m.id, m.title, m.body, m.account, m.date, m.views
-                        FROM messages m 
+                        FROM messages m
                         WHERE m.id = %s;
                         """,
-                        [message_id]
+                        [message_id],
                     )
                     message_result = db.fetchone()
                     if message_result is None:
-                        raise HTTPException(status_code=404, detail="Message not found")
+                        raise HTTPException(
+                            status_code=404, detail="Message not found"
+                        )
 
                     db.execute(
                         """
@@ -208,7 +238,7 @@ class MessagesRepo:
                         FROM responses r
                         WHERE r.message_id = %s;
                         """,
-                        [message_id]
+                        [message_id],
                     )
                     response_results = db.fetchall()
 
@@ -219,8 +249,10 @@ class MessagesRepo:
                             body=response[2],
                             account=response[3],
                             date=response[4],
-                        ) for response in response_results]
-                    
+                        )
+                        for response in response_results
+                    ]
+
                     return MessageWithResponsesOut(
                         id=message_result[0],
                         title=message_result[1],
@@ -229,11 +261,13 @@ class MessagesRepo:
                         date=message_result[4],
                         views=message_result[5],
                         response_count=len(responses),
-                        responses=responses
+                        responses=responses,
                     )
         except Exception as e:
-            logger.error(f'Error in get_message_with_responses: {e}')
-            raise HTTPException(status_code=500, detail="Internal server error")
+            logger.error(f"Error in get_message_with_responses: {e}")
+            raise HTTPException(
+                status_code=500, detail="Internal server error"
+            )
 
     def read_increment_message_views(self, message_id: int) -> bool:
         try:
@@ -246,25 +280,33 @@ class MessagesRepo:
                             WHERE id = %s
                             RETURNING id;
                             """,
-                            [message_id],
-                        )
+                        [message_id],
+                    )
                     if db.rowcount == 0:
-                        raise HTTPException(status_code=404, detail="Message not found")
+                        raise HTTPException(
+                            status_code=404, detail="Message not found"
+                        )
                     return True
         except Exception as e:
-            logger.error(f'Error in read_increment_message_views: {e}')
-            raise HTTPException(status_code=500, detail="Internal server error")
-            
+            logger.error(f"Error in read_increment_message_views: {e}")
+            raise HTTPException(
+                status_code=500, detail="Internal server error"
+            )
 
-
-    def create_response(self, message_id: int, response: ResponsesIn) -> ResponsesOut:
+    def create_response(
+        self, message_id: int, response: ResponsesIn
+    ) -> ResponsesOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    db.execute('SELECT id FROM messages WHERE id = %s', [message_id])
+                    db.execute(
+                        "SELECT id FROM messages WHERE id = %s", [message_id]
+                    )
                     if db.rowcount == 0:
-                        raise HTTPException(status_code=404, detail="Message not found")
-                    
+                        raise HTTPException(
+                            status_code=404, detail="Message not found"
+                        )
+
                     db.execute(
                         """
                         INSERT INTO responses
@@ -294,9 +336,10 @@ class MessagesRepo:
                     date=result[4],
                 )
         except Exception as e:
-            logger.error(f'Error in create_response: {e}')
-            raise HTTPException(status_code=500, detail="Internal server error")
-    
+            logger.error(f"Error in create_response: {e}")
+            raise HTTPException(
+                status_code=500, detail="Internal server error"
+            )
 
     def get_message_stats(self, message_id: int) -> dict:
         with pool.connection() as conn:
@@ -317,4 +360,7 @@ class MessagesRepo:
                 )
                 views_count = db.fetchone()[0]
 
-                return {"response_count": response_count, "views_count": views_count}
+                return {
+                    "response_count": response_count,
+                    "views_count": views_count,
+                }

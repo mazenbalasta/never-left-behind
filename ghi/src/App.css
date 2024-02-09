@@ -14,24 +14,6 @@
     color: white;
 }
 
-.chat-container {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 80%;
-    overflow: hidden;
-}
-
-.chat-message {
-    margin: 10px 0;
-    padding: 10px 15px;
-    border-radius: 20px;
-    background-color: #007bff;
-    color: white;
-    max-width: 70%;
-}
-
 
 
 .dropdown-container {
@@ -39,7 +21,7 @@
 }
 
 .jobslist-container {
-  width: 90%;
+    width: 90%;
 }
 
 #button-dropdown {
@@ -91,7 +73,7 @@
 .card {
     background-color: #cacace;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     padding: 20px;
     margin: 20px;
     text-align: left;
@@ -136,6 +118,7 @@
     padding: 5px 0;
     position: relative;
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: all 0.3s ease-in-out;
 }
@@ -158,4 +141,10 @@
 
 .nav-link:hover::before {
     width: 100%;
+}
+
+
+.link:hover {
+    background-position: 0;
+    color: blue;
 }

@@ -7,7 +7,7 @@ function ActivitiesForm() {
 
   const [activities, setActivities] = useState([]);
   const [formData, setFormData] = useState({
-        
+
     name: "",
     description: "",
     start_date: "",
@@ -33,7 +33,7 @@ function ActivitiesForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     const response = await fetch('http://localhost:8000/api/activities/', {
       method: 'POST',
       headers: {
@@ -41,13 +41,8 @@ function ActivitiesForm() {
       },
       body: JSON.stringify(formData),
     });
-    console.log(formData);
 
-    if (!response.ok) {
-      console.log('There was an error');
-    }
 
-    
     if (response.ok) {
       setFormData({
         name: "",
@@ -69,8 +64,8 @@ function ActivitiesForm() {
   }
 
 
-  
-  
+
+
   return (
     <div className="App-header">
       <div className="flex flex-col bg-black-100 py-2">
@@ -119,7 +114,7 @@ function ActivitiesForm() {
                 ))}
               </select>
             </div>
-            <button type="submit" className="w-full px-4 py-2 bg-blue-600 text-black rounded-md hover:bg-blue-700">Submit</button>
+            <button type="submit" className="Sbtn">Submit</button>
           </form>
         </div>
         </div>

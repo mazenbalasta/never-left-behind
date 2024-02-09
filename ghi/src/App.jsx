@@ -8,6 +8,7 @@ import AboutUs from './AboutUs';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react'
 import { ListMessages } from './components/messages';
+import MembershipBenefits from './components/MembershipBenefits';
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
                                     element={<CreateJob />}
                                 />
                                 <Route path="/aboutus" element={<AboutUs />} />
+                                <Route path="/benefits" element={<MembershipBenefits />} />
                             </Routes>
                         </div>
                     </section>

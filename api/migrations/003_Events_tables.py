@@ -1,5 +1,4 @@
 steps = [
-    # step 1:
     [
         """
         CREATE TABLE states (
@@ -10,14 +9,13 @@ steps = [
 
 
         """,
-        # "Down" SQL statement
         """
         DROP TABLE states;
         """,
     ],
-    # step 2:
+
+
     [
-        # "Up" SQL statement
         """
         CREATE TABLE events (
             id SERIAL PRIMARY KEY NOT NULL,
@@ -32,7 +30,6 @@ steps = [
             REFERENCES states(abbreviation)
         );
         """,
-        # "Down" SQL statement
         """
         DROP TABLE events;
         """,

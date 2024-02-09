@@ -84,7 +84,7 @@ class AccountQueries:
     async def get(self, email: str) -> Optional[AccountOutWithPassword]:
         with pool.connection() as conn:
             with conn.cursor() as db:
-                result = db.execute(
+                db.execute(
                     """
                     SELECT *
                     FROM accounts

@@ -15,7 +15,6 @@ const GetLocalBars = () => {
     if (response.ok) {
       const data = await response.json();
       setBars(data);
-      console.log(data);
     }
  }
 
@@ -27,10 +26,10 @@ const GetLocalBars = () => {
           color="gold"
           value={postal}
           onChange={(e) => setPostal(e.target.value)}
-          placeholder="Enter a 5-digit zip code"
+          placeholder="Enter your zip code"
         />
         <button className='Sbtn' type="submit">Find Local Breweries</button>
-        
+
         <table className='table'>
           <thead className='thead'>
             <tr>
@@ -57,9 +56,3 @@ const GetLocalBars = () => {
 }
 
 export default GetLocalBars;
-
-
-
-
-
-
