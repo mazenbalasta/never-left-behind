@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from queries.pool import pool
 from typing import List, Union
-from fastapi import HTTPException, Response
+from fastapi import HTTPException
 
 
 class Error(BaseModel):
@@ -172,17 +172,17 @@ class JobsRepo:
                     )
                     record = db.fetchone()
                     job = JobsOut(
-                            id=record[0],
-                            position=record[1],
-                            company_name=record[2],
-                            description=record[3],
-                            requirements=record[4],
-                            qualifications=record[5],
-                            pref_qualifications=record[6],
-                            location=record[7],
-                            apply_url=record[8],
-                            created_by=record[9],
-                        )
+                        id=record[0],
+                        position=record[1],
+                        company_name=record[2],
+                        description=record[3],
+                        requirements=record[4],
+                        qualifications=record[5],
+                        pref_qualifications=record[6],
+                        location=record[7],
+                        apply_url=record[8],
+                        created_by=record[9],
+                    )
                     return job
         except Exception as e:
             return {str(e): "An error occurred while fetching job details"}
