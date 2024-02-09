@@ -31,8 +31,8 @@ class Chat extends React.Component {
       return;
     }
     this.loading = true;
-    // Should be an environment variable in the future
-    const url = `ws://localhost:8000/chat/${this.state.clientId}`;
+    const chatUrl = import.meta.env.VITE_API_WS;
+    const url = `${chatUrl}/chat/${this.state.clientId}`;
     this.socket = new WebSocket(url);
     this.socket.addEventListener('open', () => {
       this.setState({ connected: true });

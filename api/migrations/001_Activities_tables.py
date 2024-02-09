@@ -10,8 +10,6 @@ steps = [
         DROP TABLE categories;
         """,
     ],
-
-
     [
         """
         CREATE TABLE Activities (
@@ -26,7 +24,6 @@ steps = [
             REFERENCES categories(id)
         );
         """,
-
         """
         DROP TABLE Activities;
         """,

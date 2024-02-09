@@ -97,7 +97,6 @@ class MessagesRepo:
                         ],
                     )
                     result = db.fetchone()
-                    print(result)
                     if result:
                         response_count = 0
                         return self.message_from_db_record(
