@@ -9,7 +9,7 @@ class Error(BaseModel):
     message: str
 
 
-class category(BaseModel):
+class Category(BaseModel):
     id: int
     name: str
 
@@ -31,6 +31,16 @@ class ActivitiesOut(BaseModel):
     end_date: date
     location: str
     category: int
+
+
+class ActivitiesOutWithCategory(BaseModel):
+    id: int
+    name: str
+    description: Optional[str] = None
+    start_date: date
+    end_date: date
+    location: str
+    category: Category
 
 
 class ActivityRepo:
@@ -73,19 +83,25 @@ class ActivityRepo:
                         """
                         SELECT *
                         FROM activities
+                        INNER JOIN categories
+                        ON activities.category = categories.id
                         ORDER BY start_date;
                         """
                     )
+                    records = db.fetchall()
                     result = []
-                    for record in db:
-                        activity = ActivitiesOut(
+                    for record in records:
+                        activity = ActivitiesOutWithCategory(
                             id=record[0],
                             name=record[1],
                             description=record[2],
                             start_date=record[3],
                             end_date=record[4],
                             location=record[5],
-                            category=record[6],
+                            category=Category(
+                                id=record[7],
+                                name=record[8],
+                            )
                         )
                         result.append(activity)
                     return result

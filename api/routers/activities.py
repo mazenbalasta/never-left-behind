@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from typing import List
-from queries.activities import ActivitiesIn, ActivitiesOut, ActivityRepo
+from queries.activities import ActivitiesIn, ActivitiesOut, ActivityRepo, ActivitiesOutWithCategory
 
 router = APIRouter()
 
@@ -10,7 +10,7 @@ def create_activity(activity: ActivitiesIn, repo: ActivityRepo = Depends()):
     return repo.create_activity(activity)
 
 
-@router.get("/api/activities", response_model=List[ActivitiesOut])
+@router.get("/api/activities", response_model=List[ActivitiesOutWithCategory])
 def list_activities(repo: ActivityRepo = Depends()):
     return repo.list_activities()
 
