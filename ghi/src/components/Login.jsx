@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useLoginMutation, useGetTokenQuery } from '../app/apiSlice'
+import { useLoginMutation } from '../app/apiSlice'
 import { useNavigate } from 'react-router-dom'
 import { ErrorAlert } from '../assets/alerts'
 
@@ -10,7 +10,6 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState('')
 
     const [ login, loginStatus ] = useLoginMutation();
-    const { data: account } = useGetTokenQuery()
     const navigate = useNavigate()
 
 
