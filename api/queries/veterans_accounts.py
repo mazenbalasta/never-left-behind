@@ -3,8 +3,6 @@ from typing import Optional, List, Union
 from models import VetAccountIn, AccountOutWithPassword
 from fastapi import HTTPException
 
-# from queries.pool import Queries
-
 
 class DuplicateAccountError(ValueError):
     pass

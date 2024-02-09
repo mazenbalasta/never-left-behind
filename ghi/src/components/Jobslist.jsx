@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useGetAllJobsQuery } from '../app/apiSlice'
 import { useGetTokenQuery } from '../app/apiSlice'
 import { useNavigate } from 'react-router'

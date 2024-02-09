@@ -1,7 +1,5 @@
 steps = [
-    # step 1:
     [
-        # "Up" SQL statement
         """
         CREATE TABLE jobs (
             id SERIAL PRIMARY KEY NOT NULL,
@@ -15,7 +13,6 @@ steps = [
             apply_url VARCHAR(1000)
         );
         """,
-        # "Down" SQL statement
         """
         DROP TABLE jobs;
         """,

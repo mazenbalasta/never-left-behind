@@ -1,5 +1,4 @@
 steps = [
-    # step 1: uP
     [
         """
         INSERT INTO categories
@@ -13,7 +12,6 @@ steps = [
                 ('Job Fair')
 
         """,
-        # step 2: Down
         """
         DELETE FROM categories;
         """,

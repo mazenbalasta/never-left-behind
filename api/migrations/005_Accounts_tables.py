@@ -1,21 +1,18 @@
 steps = [
-    # Step 1: Create accounts_type table
     [
-        # "Up" SQL statement
         """
         CREATE TABLE account_types (
             id SERIAL PRIMARY KEY NOT NULL,
             account_type VARCHAR(20) UNIQUE NOT NULL
         );
         """,
-        # "Down" SQL statement
         """
         DROP TABLE account_types;
         """,
     ],
-    # Step 2: Create accounts table
+
+
     [
-        # "Up" SQL statement
         """
         CREATE TABLE accounts (
             id SERIAL PRIMARY KEY NOT NULL,
@@ -33,14 +30,13 @@ steps = [
             FOREIGN KEY(state) REFERENCES states(abbreviation)
         );
         """,
-        # "Down" SQL statement
         """
         DROP TABLE accounts;
         """,
     ],
-    # Step 3: Create message table
+
+
     [
-        # "Up" SQL statement
         """
         CREATE TABLE messages (
             id SERIAL PRIMARY KEY NOT NULL,
@@ -52,14 +48,13 @@ steps = [
             FOREIGN KEY(account) REFERENCES accounts(id)
         );
         """,
-        # "Down" SQL statement
         """
         DROP TABLE messages;
         """,
     ],
-    # Step 4: Create responses table
+
+
     [
-        # "Up" SQL statement
         """
         CREATE TABLE responses (
             id SERIAL PRIMARY KEY NOT NULL,
@@ -71,14 +66,13 @@ steps = [
             FOREIGN KEY(account) REFERENCES accounts(id)
         );
         """,
-        # "Down" SQL statement
         """
         DROP TABLE responses;
         """,
     ],
-    # Step 5: Insert data to account types table
+
+
     [
-        # "Up" SQL statement
         """
         INSERT INTO account_types
             (account_type)
@@ -87,7 +81,6 @@ steps = [
             ('partner'),
             ('approved_partner');
         """,
-        # "Down" SQL statement
         """
         DELETE FROM account_types;
         """,

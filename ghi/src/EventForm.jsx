@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 
 function EventForm() {
@@ -35,7 +35,6 @@ function EventForm() {
         const response = await fetch(eventUrl, fetchConfig);
         if (response.ok) {
             const newEvent = await response.json();
-            console.log(newEvent);
             setEventTitle('');
             setStartDate('');
             setEndDate('');
@@ -46,7 +45,6 @@ function EventForm() {
 
         } else if (response.status === 400) {
             const error = await response.json();
-            console.log(error);
         }
     }
 
@@ -83,7 +81,6 @@ function EventForm() {
         const response = await fetch(stateUrl);
         if (response.ok) {
             const stateData = await response.json();
-            console.log(stateData);
             setStates(stateData);
         }
     }
