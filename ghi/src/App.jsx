@@ -15,6 +15,7 @@ function App() {
 
     const baseUrl = import.meta.env.VITE_API_HOST
 
+
     return (
         <main className="relative min-h-screen min-w-full flex flex-col items-center">
 

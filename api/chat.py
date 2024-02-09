@@ -61,7 +61,7 @@ class ConnectionManager:
                 "message_id": self.next_message_id(),
             }
         )
-        print("active connections:", len(self.active_connections))
+        len(self.active_connections)
         for connection in self.active_connections:
             await connection.send_text(payload)
 

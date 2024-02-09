@@ -21,14 +21,10 @@ def get_local_bars(postal):
         return local_bars
 
     except RequestException as e:
-        print(f"request failed: {e}")
         return None, None
     except KeyError as e:
-        print(f"response content invalid: {e}")
         return None, None
     except json.JSONDecodeError as e:
-        print(f"response content invalid: {e}")
         return None, None
     except Exception as e:
-        print(f"an unexpected error occurred: {e}")
         return None, None

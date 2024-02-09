@@ -147,7 +147,6 @@ class ActivityRepo:
         except HTTPException as error:
             raise error
         except Exception as e:
-            print(f"Error: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
     def delete_activity(self, activity_id: int):
