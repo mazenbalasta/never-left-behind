@@ -1,6 +1,5 @@
 import json
 import requests
-from requests.exceptions import RequestException
 
 
 def get_local_bars(postal):
