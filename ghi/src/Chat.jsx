@@ -85,7 +85,7 @@ class Chat extends React.Component {
     render() {
         return (
             <>
-                <div className="Chat-text w-screen bg-gradient-to-r from-[#282c34] via-[#50555c] to-[#a4a9af]">
+                <div className="Chat-text overflow-y-hidden w-screen bg-gradient-to-r from-[#282c34] via-[#50555c] to-[#a4a9af]">
                     <div className="bg-gray-900 text-green-600 pl-5">
                         <h1 className="Chat-text text-5xl pt-5 pl-5 mb-5 underline font-virgil">
                             NLB Radio
@@ -93,7 +93,8 @@ class Chat extends React.Component {
                         <h2 className="text-xl">
                             Your ID: {this.state.clientId}
                         </h2>
-                        <table className="container table-auto flex-1 px-7 py-6 bg-black">
+                        <div className="chat-window">
+                            <table className="container overflow-y-hidden table-auto flex-1 px-7 py-6 bg-black">
                             <thead>
                                 <tr>
                                     <th className="text-xl underline">
@@ -101,7 +102,7 @@ class Chat extends React.Component {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="overflow-y-scroll w-full text-lg flex flex-col-reverse h-screen">
+                            <tbody className="chat-window w-full text-lg flex flex-col-reverse h-screen">
                                 {this.state.messages.map((message) => (
                                     <MessageRow
                                         key={
@@ -112,6 +113,7 @@ class Chat extends React.Component {
                                 ))}
                             </tbody>
                         </table>
+                        </div>
                         <form onSubmit={this.sendMessage}>
                             <p className="text-xl pl-5 pt-5">
                                 Outgoing Transmission:

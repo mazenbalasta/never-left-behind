@@ -24,7 +24,7 @@ export const footerLinks = [
         title: "Get in touch",
         links: [
             { name: "Email us", link: "mailto:neverleftbehind.vite@gmail.com" },
-            { name: "Need help call: 844.907-1342", link: "tel:(844) 907-1342" },
+            { name: "Need help call: (844) 907-1342", link: "tel:(844) 907-1342" },
         ],
     },
         {

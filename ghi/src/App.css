@@ -14,7 +14,10 @@
     color: white;
 }
 
-
+.chat-window {
+    max-height: 600px;
+    overflow-y: auto;
+}
 
 .dropdown-container {
     position: relative;
