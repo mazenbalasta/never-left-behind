@@ -1,70 +1,88 @@
-# Module3 Project Gamma
+# Never Left Behind
 
-## Getting started
+**Team and Roles:**
+* Rudy Carrizales - Project Manager and Frontend Design
+* Trevor Moore - Leader of Mental Breaks and Debugging
+* Mazen Balasta - Leader of Inspiration and Unit Testing
+* LaTroy Richardson Sr - Project Documentation Manager
 
-You have a project repository, now what? The next section
-lists all of the deliverables that are due at the end of the
-week. Below is some guidance for getting started on the
-tasks for this week.
+
+**Never Left Behind** - For veterans by veterans
+
+## Design
+
+- [API Design](docs/API.md)
+- [GHI](docs/GHI.md)
+- [Integrations](docs/Integrations.md)
+
+
+
+## Built With
+<a href="https://black.readthedocs.io/en/latest/index.html">
+  <img src="https://apibakery-public-assets.s3.amazonaws.com/blog/Black-Logo.png" alt="Black" width="200"/>
+</a>
+
+
+
+<a href="https://jwtdown-fastapi.readthedocs.io/en/stable/intro.html">
+  <img src="https://mms.businesswire.com/media/20230530005012/en/1802833/2/galvanize_logo_a-stride-company_full-color_light-background_%281%29.jpg" alt="Jwtdown-FastAPI" width="250"/>
+</a>
+
+
+<a href="https://www.activestate.com/resources/quick-reads/how-to-pip-install-requests-python-package/">
+  <img src="https://cdn.activestate.com/wp-content/uploads/2021/08/pip-install-requests-1000x500.png" alt="Requests" width="200"/>
+</a>
+
+<a href="https://fastapi.tiangolo.com/">
+  <img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" alt="FastAPI" width="200"/>
+</a>
+
+<a href="https://www.uvicorn.org/">
+  <img src="https://www.uvicorn.org/uvicorn.png" alt="Uvicorn" width="200"/>
+</a>
+
+<a href="https://docs.pytest.org/en/7.1.x/getting-started.html">
+  <img src="https://docs.pytest.org/en/7.1.x/_static/pytest_logo_curves.svg" alt="Pytest" width="200"/>
+</a>
+
+<a href="https://www.psycopg.org/psycopg3/docs/basic/install.html">
+  <img src="https://www.psycopg.org/psycopg3/docs/_static/psycopg.svg" alt="Psycopg" width="200"/>
+</a>
+
+<a href="https://websockets.readthedocs.io/en/stable/intro/index.html">
+  <img src="https://websockets.readthedocs.io/en/stable/_static/websockets.svg" alt="Websockets" width="200"/>
+</a>
+
+
+
+
+
+## Intended Market
+
+Our platform is designed for:
+
+* **Veterans:** We aim to foster a sense of community among veterans, providing a space for them to meet each other and find information about their favorite activities. We also provide resources specifically tailored for veterans.
+
+* **Charity Organizations:** Charity organizations can use our platform to reach out to veterans, share their events and activities, and provide useful resources.
+
+* **Employers:** Employers can use our platform to connect with veterans, share job opportunities, and participate in community events and activities.
+
+Our goal is to solve the problem of isolation among veterans by fostering community outreach, providing data for events and activities, and offering easily accessible resources.
+
+## Functionality
+
+* Account creation for veterans
+* Access to a resources tab with available resource links for veterans
+* Login functionality for account holders to access their profiles and communicate with other veterans
+* Login and post functionality for partners to share events or opportunities after account vetting
+* Ability for employers to post job positions in the Events tab after proper vetting
+* Event viewing functionality for opportunity seekers in the Events tab
+* Ability for users to view local activities in their region via the Activities tab
 
 ## Install Extensions
 
 -   Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
 -   Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
-
-## Deliverables
-
--   [ ] Wire-frame diagrams
--   [ ] API documentation
--   [ ] Project is deployed to Caprover (BE, DB) & GitLab-pages (FE)
--   [ ] GitLab issue board is setup and in use (or project management tool of choice)
--   [ ] Journals
-
-## Project layout
-
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
-
-### Directories
-
-Several directories have been added to your project. The
-directories `docs` and `journals` are places for you and
-your team-mates to, respectively, put any documentation
-about your project that you create and to put your
-project-journal entries. See the _README.md_ file in each
-directory for more info.
-
-The other directories, `ghi` and `api`, are services, that
-you can start building off of.
-
-Inside of `ghi` is a minimal React app that has an "under construction" page.
-This app is written using the [Vite](https://vitejs.dev/) bundler. The example
-code is also using [jsdoc](https://jsdoc.app/) to provide type hints for
-JavaScript. You are not required to use JSDoc yourself, and you will be removing
-these examples and providing your own code for `App.jsx`
-
-Inside of `api` is a minimal FastAPI application.
-"Where are all the files?" you might ask? Well, the
-`main.py` file is the whole thing, and go take look inside
-of it... There's not even much in there..., hmm? That is
-FastAPI, we'll learn more about it in the coming days. Can
-you figure out what this little web-application does even
-though you haven't learned about FastAPI yet?
-
-Also in `api` is a directory for your migrations.
-If you choose to use PostgreSQL, then you'll want to use
-migrations to control your database. Unlike Django, where
-migrations were automatically created for you, you'll write
-yours by hand using DDL. Don't worry about not knowing what
-DDL means; we have you covered. There's a sample migration
-in there that creates two tables so you can see what they
-look like.
-
-The Dockerfile and Dockerfile.dev run your migrations
-for you automatically.
 
 ### Installing python dependencies locally
 
@@ -91,82 +109,41 @@ And finally install the dependencies
 ```bash
 pip install -r requirements.txt
 ```
-
 Then make sure the venv is selected in VSCode by checking the lower right of the
 VSCode status bar
 
-### Other files
+In some instances you may have to upgrade your virtual environment
+```bash
+python.exe -m pip install --upgrade pip
+```
 
-The following project files have been created as a minimal
-starting point. Please follow the guidance for each one for
-a most successful project.
 
--   `docker-compose.yaml`: there isn't much in here, just a
-    **really** simple UI and FastAPI service. Add services
-    (like a database) to this file as you did with previous
-    projects in module #2.
--   `.gitlab-ci.yml`: This is your "ci/cd" file where you will
-    configure automated unit tests, code quality checks, and
-    the building and deployment of your production system.
-    Currently, all it does is deploy an "under construction"
-    page to your production UI on GitLab and a sample backend
-    to CapRover. We will learn much more about this file.
--   `.gitignore`: This is a file that prevents unwanted files
-    from getting added to your repository, files like
-    `pyc` files, `__pycache__`, etc. We've set it up so that
-    it has a good default configuration for Python projects.
--   `.env.sample`: This file is a template to copy when
-    creating environment variables for your team. Create a
-    copy called `.env` and put your own passwords in here
-    without fear of it being committed to git (see `.env`
-    listed in `.gitignore`). You can also put team related
-    environment variables in here, things like api and signing
-    keys that shouldn't be committed; these should be
-    duplicated in your deployed environments.
 
-## How to complete the initial deploy
+## Installation
 
-There will be further guidance on completing the initial
-deployment, but it just consists of these steps:
 
-### Setup GitLab repo/project
+**Make sure you have Docker, pip, and Javascript latest versions**
 
--   make sure this project is in a group. If it isn't, stop
-    now and move it to a GitLab group
--   remove the fork relationship: In GitLab go to:
+1. Fork this repository
+https://gitlab.com/veterans-r-us/never-left-behind.git
 
-    Settings -> General -> Advanced -> Remove fork relationship
+2. Clone the forked repository  into your desired computer folder:
+git clone<https://gitlab.com/Tynyx/never-left-behind.git>
 
--   add these GitLab CI/CD variables:
-    -   PUBLIC_URL : this is your gitlab pages URL
-    -   VITE_APP_API_HOST: enter "blank" for now
+3.
 
-#### Your GitLab pages URL
+3. Build the volumes and containers in docker by doing the following commands in terminal:
+```
+Docker volume create pg-admin
+Docker volume create postgres-data
+Docker compose -up --build
+```
+Ensure the commands worked and docker is running
 
-You can't find this in GitLab until after you've done a deploy
-but you can figure it out yourself from your GitLab project URL.
+View the project in the browser: http://localhost:5173/
 
-If this is your project URL
 
-https://gitlab.com/GROUP_NAME/PROJECT_NAME
+## JIRA Board link
+This is our link for issue tracking and project management
 
-then your GitLab pages URL will be
-
-https://GROUP_NAME.gitlab.io/PROJECT_NAME
-
-### Initialize CapRover
-
-1. Attain IP address and domain from an instructor
-1. Follow the steps in the CD Cookbook in Learn.
-
-### Update GitLab CI/CD variables
-
-Copy the service URL for your CapRover service and then paste
-that into the value for the REACT_APP_API_HOST CI/CD variable
-in GitLab.
-
-### Deploy it
-
-Merge a change into main to kick off the initial deploy. Once the build pipeline
-finishes you should be able to see an "under construction" page on your GitLab
-pages site.
+https://never-left-behind.atlassian.net/jira/software/projects/NEV/boards/1
