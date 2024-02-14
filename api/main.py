@@ -31,10 +31,8 @@ app.include_router(states.router, tags=["States"])
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        os.environ.get(
-            "https://never-left-behind-veterans-r-us-f6bdcd9fc60e57def2a9122364944c2.gitlab.io/",
-            "http://localhost:5173",
-        )
+        "https://never-left-behind-veterans-r-us-f6bdcd9fc60e57def2a9122364944c2.gitlab.io/",
+        os.environ.get("CORS_HOST"),
     ],
     allow_credentials=True,
     allow_methods=["*"],
