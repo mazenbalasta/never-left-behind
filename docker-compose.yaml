@@ -18,7 +18,9 @@ services:
 
     fastapi:
         environment:
-            CORS_HOST: http://localhost:5173
+            CORS_HOST:
+                - http://localhost:5173
+                - https://never-left-behind-veterans-r-us-f6bdcd9fc60e57def2a9122364944c2.gitlab.io/
             DATABASE_URL: postgresql://user:password@postgres/nlb-db
             PORT: 8000
             SIGNING_KEY: 5iaIwE402XVbgV2PLwfR2ZhmeASg8b3N/ki/bCWiLxo=
