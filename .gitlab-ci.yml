@@ -68,19 +68,19 @@ build-front-end-job:
         # You need to substitute in your real values for
         # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
         # Don't forget to also replace PROJECT NAME in the npm run build line as well
-        PUBLIC_URL: https://VETERANS-R-US.gitlab.io/NEVER-LEFT-BEHIND
+        PUBLIC_URL: https://VETERANS-R-US.gitlab.io/never-left-behind
         VITE_API_HOST: https://oct-2023-10-et-api.mod3projects.com
     script:
         - cd ghi
         - npm install
-        # - npm run lint
-        - npm run build -- --base=/NEVER-LEFT-BEHIND/
+        - npm run lint
+        - npm run build -- --base=/never-left-behind/
         # The following line creates a _redirects file to redirect all URLs to index.html
         # Documentation: https://docs.gitlab.com/ee/user/project/pages/redirects.html#rewrite-all-requests-to-a-root-indexhtml
-        - echo "/* /index.html 200" > dist/_redirects
+        - cp build/index.html build/404.html
     artifacts:
         paths:
-            - ghi/dist/
+            - ghi/build/
 
 
 
@@ -94,7 +94,7 @@ pages:
   needs:
     - build-front-end-job
   script:
-    - mv ghi/dist/ public
+    - mv ghi/build/ public
   artifacts:
     paths:
       - public
