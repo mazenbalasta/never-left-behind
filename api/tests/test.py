@@ -32,6 +32,9 @@ def test_get_categories():
         {"id": 17, "name": "Netflix and Chill"},
         {"id": 18, "name": "Movie Theater"},
     ]
+    client = MagicMock()
+    client.get.return_value.status_code = 200
+    client.get.return_value.json.return_value = expected_categories
 
     response = client.get("/api/categories")
 
