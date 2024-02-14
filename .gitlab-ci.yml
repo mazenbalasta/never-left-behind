@@ -68,7 +68,7 @@ build-front-end-job:
         # You need to substitute in your real values for
         # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
         # Don't forget to also replace PROJECT NAME in the npm run build line as well
-        PUBLIC_URL: https://VETERANS-R-US.gitlab.io/never-left-behind
+        PUBLIC_URL: https://never-left-behind-veterans-r-us-f6bdcd9fc60e57def2a9122364944c2.gitlab.io/
         VITE_API_HOST: https://oct-2023-10-et-api.mod3projects.com
         VITE_API_WS: wss://oct-2023-10-et-api.mod3projects.com
         VITE_API_KEY_TEST: prj_test_pk_785399a5eb0266150d9be0a637123c0598dee255
