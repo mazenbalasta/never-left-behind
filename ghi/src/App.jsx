@@ -13,7 +13,7 @@ import MembershipBenefits from './components/MembershipBenefits';
 
 function App() {
 
-    const baseUrl = import.meta.env.PUBLIC_URL
+    const baseUrl = "https://never-left-behind-veterans-r-us-f6bdcd9fc60e57def2a9122364944c2.gitlab.io/"
 
 
     return (

@@ -33,7 +33,7 @@ class Chat extends React.Component {
       return;
     }
     this.loading = true;
-    const chatUrl = import.meta.env.VITE_API_WS;
+    const chatUrl = "https://never-left-behind-veterans-r-us-f6bdcd9fc60e57def2a9122364944c2.gitlab.io/";
     const url = `${chatUrl}/chat/${this.state.clientId}`;
     this.socket = new WebSocket(url);
     this.socket.addEventListener('open', () => {
