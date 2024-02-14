@@ -12,8 +12,8 @@ import MembershipBenefits from './components/MembershipBenefits';
 
 
 function App() {
-    const domain = /https:\/\/[^/]+/;
-    const baseUrl = import.meta.env.PUBLIC_URL.replace(domain, '');
+
+    const baseUrl = import.meta.env.PUBLIC_URL
 
 
     return (
