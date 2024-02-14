@@ -1,4 +1,5 @@
 import { aboutUs, mentor } from '../assets/images';
+import { Link } from 'react-router-dom'
 
 
 function MembershipBenefits() {
@@ -28,19 +29,19 @@ return (
                     <li className='w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600'>Member Directory</li>
                     <li className='w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600'>Mentorship Programs</li>
                 </ul>
-                <a href="/signup/veteran" className="mt-5 inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                <Link to="/signup/veteran" className="mt-5 inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
                     Veteran signup
                     <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                     </svg>
-                </a>
+                </Link>
             </div>
 
 
             {/* partner column */}
             <div className='px-4 py-20 max-w-xl'>
-                <img 
-                    src={mentor} 
+                <img
+                    src={mentor}
                     alt="Mentor"
                     className=" h-[21.5rem] max-w-xl rounded-lg"
                 />
@@ -53,13 +54,13 @@ return (
                     <li className='w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600'>Providing Mentorship</li>
                     <li className='w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600'>Activity Hosting</li>
                     <li className='w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600'>And more!</li>
-                </ul> 
-                <a href="/signup/partner" className="mt-5 inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                </ul>
+                <Link to="/signup/partner" className="mt-5 inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
                     Partner application
                     <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                     </svg>
-                </a>            
+                </Link>
             </div>
         </div>
     </div>

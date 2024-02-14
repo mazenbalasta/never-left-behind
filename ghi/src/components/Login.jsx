@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useLoginMutation } from '../app/apiSlice'
 import { useNavigate } from 'react-router-dom'
 import { ErrorAlert } from '../assets/alerts'
+import { Link } from 'react-router-dom'
 
 
 const Login = () => {
@@ -98,19 +99,19 @@ const Login = () => {
 
                     <p className="mt-10 text-center text-sm text-gray-400">
                         Not a member?{' '}
-                        <a
-                            href="/signup/veteran"
+                        <Link
+                            to="/signup/veteran"
                             className="font-semibold leading-6 text-indigo-400 hover:text-indigo-300"
                         >
                             Sign up to be a Veteran{' '}
-                        </a>
+                        </Link>
                         or a{' '}
-                        <a
-                            href="/signup/partner"
+                        <Link
+                            to="/signup/partner"
                             className="font-semibold leading-6 text-indigo-400 hover:text-indigo-300"
                         >
                             Partner
-                        </a>
+                        </Link>
                     </p>
                 </div>
             </div>

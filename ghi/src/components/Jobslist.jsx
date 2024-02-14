@@ -6,6 +6,7 @@ import {
 } from '../app/apiSlice'
 import { useNavigate } from 'react-router'
 import JobDetailModal from './JobDetailModal'
+import { Link } from 'react-router-dom'
 
 const JobsList = () => {
     const { data: jobs } = useGetAllJobsQuery()
@@ -134,12 +135,12 @@ const JobsList = () => {
                                 <h1 className="text-sm text-white-900 mb-3">
                                     Company: {job.company_name}
                                 </h1>
-                                <a
-                                    href="#"
+                                <Link
+                                    to="#"
                                     className="mb-3 overflow-hidden pr-7 text-lg font-semibold sm:text-xl text-white"
                                 >
                                     Position: {job.position}
-                                </a>
+                                </Link>
                                 <p className="overflow-hidden pr-7 leading-normal text-sm text-white">
                                     <strong>Job Description: </strong>
                                     {job.description}

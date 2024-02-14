@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './styles/css/privacy.css';
 
 
@@ -18,7 +19,7 @@ function PrivacyPolicy() {
             <br />
             <p className="lup">This privacy notice for Never Left Behind INC (doing business as NLBehind, NLB) (we, us, or our), describes how and why we might collect, store, use, and/or share (process) your information when you use our services (Services), such as when you:</p>
             <ul className='lup'>
-                <li>Visit our website at <a className='link text-xl' href="http://www.NeverLeftBehind.com"><button>Neverleftbehind</button></a>, or any website of ours that links to this privacy notice</li>
+                <li>Visit our website at <Link className='link text-xl' to="http://www.NeverLeftBehind.com"><button>Neverleftbehind</button></Link>, or any website of ours that links to this privacy notice</li>
             </ul>
             <ul className='lup'>
                 <li>Download and use our mobile application (NEv3rLEftB3hind), or any other application of ours that links to this privacy notice</li>
@@ -31,7 +32,7 @@ function PrivacyPolicy() {
             <br />
             <br />
             <p>Questions or concerns? Reading this privacy notice will help you understand your privacy rights and choices. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at
-                    <a className='link text-xl' href="Eato:neverleftbehind.vite.legal@gmail.com"> Policy Team</a>
+                    <Link className='link text-xl' to="Eato:neverleftbehind.vite.legal@gmail.com"> Policy Team</Link>
 
             </p>
             <br />
@@ -41,49 +42,49 @@ function PrivacyPolicy() {
             <h1 className='h1'>TABLE OF CONTENTS</h1 >
                 <ul className='lu text-xl'>
                     <li className="link text-xl">
-                        <a href="#1">Introduction</a>
+                        <Link to="#1">Introduction</Link>
                     </li>
                     <li className="link text-xl" text-xl>
-                        <a href="#2">What Data Do We Collect?</a>
+                        <Link to="#2">What Data Do We Collect?</Link>
                     </li>
                     <li className="link text-xl">
-                        <a href="#3">How Do We Collect Your Data?</a>
+                        <Link to="#3">How Do We Collect Your Data?</Link>
                     </li>
                     <li className="link text-xl">
-                        <a href="#4">How Will We Use Your Data?</a>
+                        <Link to="#4">How Will We Use Your Data?</Link>
                     </li>
                     <li className="link text-xl">
-                        <a href="#5">How Do We Store Your Data?</a>
+                        <Link to="#5">How Do We Store Your Data?</Link>
                     </li>
                     <li className="link text-xl">
-                        <a href="#6">Marketing</a>
+                        <Link to="#6">Marketing</Link>
                     </li>
                     <li className="link text-xl">
-                        <a href="#7">What Are Your Data Protection Rights?</a>
+                        <Link to="#7">What Are Your Data Protection Rights?</Link>
                     </li>
                     <li className="link text-xl">
-                        <a href="#8">What Are Cookies?</a>
+                        <Link to="#8">What Are Cookies?</Link>
                     </li>
                     <li className="link text-xl">
-                        <a href="#9">How Do We Use Cookies?</a>
+                        <Link to="#9">How Do We Use Cookies?</Link>
                     </li>
                     <li className="link text-xl">
-                        <a href="#10">What Types of Cookies Do We Use?</a>
+                        <Link to="#10">What Types of Cookies Do We Use?</Link>
                     </li>
                     <li className="link text-xl">
-                        <a href="#11">How to Manage Your Cookies</a>
+                        <Link to="#11">How to Manage Your Cookies</Link>
                     </li>
                     <li className="link text-xl">
-                        <a href="#12">Privacy Policies of Other Websites</a>
+                        <Link to="#12">Privacy Policies of Other Websites</Link>
                     </li>
                     <li className="link text-xl">
-                        <a href="#13">Changes to Our Privacy Policy</a>
+                        <Link to="#13">Changes to Our Privacy Policy</Link>
                     </li>
                     <li className="link text-xl">
-                        <a href="#14">How to Contact Us</a>
+                        <Link to="#14">How to Contact Us</Link>
                     </li>
                     <li className="link text-xl">
-                        <a href="#15">How to Contact the Appropriate Authorities</a>
+                        <Link to="#15">How to Contact the Appropriate Authorities</Link>
                     </li>
                 </ul>
             <br />
@@ -516,7 +517,7 @@ function PrivacyPolicy() {
             <br />
             <br />
             <br />
-            <a href="https://register.state.gov/contactus/contactusform?_gl=1*pho0ej*_gcl_au*MTU0NjMyMzUzMy4xNzA3MzI1MTc0"> USA website</a>
+            <Link to="https://register.state.gov/contactus/contactusform?_gl=1*pho0ej*_gcl_au*MTU0NjMyMzUzMy4xNzA3MzI1MTc0"> USA website</Link>
 
     </div>
     </div>

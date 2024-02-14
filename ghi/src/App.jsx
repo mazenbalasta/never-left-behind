@@ -12,8 +12,8 @@ import MembershipBenefits from './components/MembershipBenefits';
 
 
 function App() {
-
-    const baseUrl = import.meta.env.VITE_API_HOST
+    const domain = /https:\/\/[^/]+/;
+    const baseUrl = process.env.PUBLIC_URL.replace(domain, '');
 
 
     return (

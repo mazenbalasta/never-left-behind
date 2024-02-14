@@ -2,6 +2,7 @@ import { copyrightSign, twitterX } from "../assets/icons";
 import { logo } from "../assets/images";
 import { footerLinks, socialMedia } from "../constants";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 
 const Footer = () => {
@@ -21,7 +22,7 @@ const Footer = () => {
                     className='mt-3 text-base leading-normal text-white-400 hover:text-gray-500'
                     key={link.name}
                   >
-                    <a href={link.link}>{link.name}</a>
+                    <Link to={link.link}>{link.name}</Link>
 
                   </li>
 
@@ -34,15 +35,15 @@ const Footer = () => {
 
       <div className='flex justify-center items-center gap-5 mt-8 mx-8'>
         {socialMedia.map((icon) => (
-          <a
-            href={icon.link}
+          <Link
+            to={icon.link}
             key={icon.alt}
             className='flex justify-center items-center w-12 h-12 bg-white rounded-full'
             target="_blank"
             rel="noreferrer noopener"
           >
             <img src={icon.src} alt={icon.alt} style={icon.alt === 'twitterX' ? { width: '30px', height: '30px' } : null} />
-          </a>
+          </Link>
         ))}
 
       </div>

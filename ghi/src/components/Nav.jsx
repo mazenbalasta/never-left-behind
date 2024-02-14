@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { logo } from '../assets/images'
 import { hamburger } from '../assets/icons'
 import { DropdownButton } from '../assets/buttons'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { useGetTokenQuery, useLogoutMutation } from '../app/apiSlice'
 import UserGreeting from '../functions/UserGreeeting'
 import NLB_Banner from '../assets/images/NLB-Banner.png'
+
 
 const Nav = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -28,14 +29,14 @@ const Nav = () => {
             >
                 <nav className="flex justify-between items-center w-full px-4 lg:px-4">
                     <div className="flex items-center flex-shrink-0">
-                        <a href="/">
+                        <Link to="/">
                             <img
                                 src={logo}
                                 alt="logo"
                                 width={180}
                                 height={29}
                             />
-                        </a>
+                        </Link>
                     </div>
                     <div className="flex justify-center items-center flex-grow">
                         <div className="md:hidden" onClick={toggleMenu}>
