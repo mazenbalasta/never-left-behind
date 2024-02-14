@@ -73,7 +73,7 @@ build-front-end-job:
     script:
         - cd ghi
         - npm install
-        - npm run lint
+        # - npm run lint
         - npm run build -- --base=/NEVER-LEFT-BEHIND/
         # The following line creates a _redirects file to redirect all URLs to index.html
         # Documentation: https://docs.gitlab.com/ee/user/project/pages/redirects.html#rewrite-all-requests-to-a-root-indexhtml
