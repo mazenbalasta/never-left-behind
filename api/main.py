@@ -30,7 +30,7 @@ app.include_router(states.router, tags=["States"])
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.environ.get("CORS_HOST")],
+    allow_origins=[os.environ.get("PUBLIC_URL, http://localhost:5173")],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
