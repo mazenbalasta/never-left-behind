@@ -76,10 +76,10 @@ build-front-end-job:
         - npm run build
         # The following line creates a _redirects file to redirect all URLs to index.html
         # Documentation: https://docs.gitlab.com/ee/user/project/pages/redirects.html#rewrite-all-requests-to-a-root-indexhtml
-        - cp build/index.html build/404.html
+        - cp dist/index.html dist/404.html
     artifacts:
         paths:
-            - ghi/build/
+            - ghi/dist/
 
 
 
