@@ -26,7 +26,7 @@ function AboutUs() {
                             <strong className="text-xl">What We Offer:</strong>
                             <p>At Never Left Behind, you'll find a wealth of resources tailored to the needs of veterans, including:</p>
                             <ul style={{ listStyleType: 'none' }}>
-                                <li>Comprehensive guides on navigating VA benefits, healthcare, and education opportunities</li>
+                                <li>Comprehensive guides on navigating VA benefits, healthcare and education opportunities</li>
                                 <li>Job search assistance, career development resources, and connections to veteran-friendly employers</li>
                                 <li>Mental health support, counseling services, and peer-to-peer networks</li>
                                 <li>Opportunities for community engagement, volunteerism, and advocacy</li>
