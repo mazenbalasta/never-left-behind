@@ -17,6 +17,20 @@ def test_get_categories():
         {"id": 2, "name": "Fishing"},
         {"id": 3, "name": "Water Sports"},
         {"id": 4, "name": "Job Fair"},
+        {"id": 5, "name": "Basketball"},
+        {"id": 6, "name": "Football"},
+        {"id": 7, "name": "Tennis"},
+        {"id": 8, "name": "Hiking"},
+        {"id": 9, "name": "Golf"},
+        {"id": 10, "name": "Gym Session"},
+        {"id": 11, "name": "Esports"},
+        {"id": 12, "name": "Shopping"},
+        {"id": 13, "name": "Lunch Buddy"},
+        {"id": 14, "name": "Mountain Biking"},
+        {"id": 15, "name": "Arts and Crafts"},
+        {"id": 16, "name": "Bowling"},
+        {"id": 17, "name": "Netflix and Chill"},
+        {"id": 18, "name": "Movie Theater"},
     ]
 
     response = client.get("/api/categories")
@@ -81,7 +95,7 @@ class TestCreateJob(unittest.TestCase):
             pref_qualifications="2+ years of experience in web development",
             location="Cityville",
             apply_url="https://neverleftbehind.com/apply",
-            created_by=3
+            created_by=3,
         )
 
         with patch("queries.jobs.JobsRepo.create") as mock_create:
