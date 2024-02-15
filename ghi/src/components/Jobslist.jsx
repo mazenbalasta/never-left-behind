@@ -20,12 +20,12 @@ const JobsList = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [userJobs, setUserJobs] = useState(null)
 
-    if (jobs) {
-        const created = jobs.map((job) => job.created_by)
+    if (!jobs) {
+        return <p className="App-header">Loading...</p>
     }
 
-    if (!jobs) {
-        return <p className='App-header'>Loading...</p>
+    if (jobs) {
+        const created = jobs.map((job) => job.created_by)
     }
 
     const handleCardClick = (jobId) => {

@@ -14,6 +14,7 @@ import Jobslist from "./Jobslist";
 import CreateJob from "./CreateJob";
 import GetLocalBars from "./GetBars";
 import PrivacyPolicy from "./Privacy Policy";
+import NotFound from "./NotFound";
 
 export {
     Nav,
@@ -31,5 +32,6 @@ export {
     PrivacyPolicy,
     HomeCardsWrapper,
     Jobslist,
-    CreateJob
+    CreateJob,
+    NotFound
 }

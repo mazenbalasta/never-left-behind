@@ -1,5 +1,5 @@
 import './App.css';
-import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, ActivitiesForm, ActivitiesList, Login, Jobslist, CreateJob, GetLocalBars, PrivacyPolicy} from './components';
+import { Footer, Nav, Resources, VeteranSignup, PartnerSignup, ActivitiesForm, ActivitiesList, Login, Jobslist, CreateJob, GetLocalBars, PrivacyPolicy, NotFound} from './components';
 import HomePage from './HomePage';
 import Events from './Events';
 import EventForm from './EventForm';
@@ -70,6 +70,7 @@ function App() {
                                 />
                                 <Route path="/aboutus" element={<AboutUs />} />
                                 <Route path="/benefits" element={<MembershipBenefits />} />
+                                <Route path="*" element={<NotFound />} />
                             </Routes>
                         </div>
                     </section>

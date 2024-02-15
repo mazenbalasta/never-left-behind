@@ -2,16 +2,16 @@ import { useState } from 'react'
 import { logo } from '../assets/images'
 import { hamburger } from '../assets/icons'
 import { DropdownButton } from '../assets/buttons'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useGetTokenQuery, useLogoutMutation } from '../app/apiSlice'
 import UserGreeting from '../functions/UserGreeeting'
 import NLB_Banner from '../assets/images/NLB-Banner.png'
-
 
 const Nav = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const { data: account } = useGetTokenQuery()
     const [logOut] = useLogoutMutation()
+    const navigate = useNavigate()
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
@@ -125,6 +125,7 @@ const Nav = () => {
                             onClick={() => {
                                 logOut()
                                 closeMenu()
+                                navigate('/')
                             }}
                             className="w-26 h-9 hover:bg-blue-800 bg-white text-black px-4 py-2 mr-5 rounded-full text-sm font-bold"
                         >
