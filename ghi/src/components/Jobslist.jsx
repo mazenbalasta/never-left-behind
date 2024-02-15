@@ -25,7 +25,7 @@ const JobsList = () => {
     }
 
     if (!jobs) {
-        return <p>Loading...</p>
+        return <p className='App-header'>Loading...</p>
     }
 
     const handleCardClick = (jobId) => {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { 
+import {
     useGetAllMessagesQuery,
     useGetAllAccountsQuery,
     useIncrementMessageViewsMutation,
@@ -23,7 +23,7 @@ function ListMessages() {
     const isAuthenticated = tokenData && tokenData.account;
     const userId = tokenData?.account?.id;
 
-    
+
     const handleOpenSelectedMessageModal = async (messageId) => {
         try {
             await incrementMessageViews(messageId).unwrap();
@@ -44,11 +44,11 @@ function ListMessages() {
             refetch();
         }
     }, [selectedMessageId, refetch]);
-    
-    
+
+
     const handleCreateMessage = () => {
         setIsCreateModalOpen(true);
-    };    
+    };
 
 
     const handleCloseCreateModal = (updated) => {
@@ -57,7 +57,7 @@ function ListMessages() {
             refetch();
         }
     };
-    
+
 
 
 
@@ -72,7 +72,7 @@ function ListMessages() {
     };
 
 
-    if (isLoading) return <p>Loading messages...</p>;
+    if (isLoading) return <p className='App-header'>Loading messages...</p>;
     if (isError) return <p>Error loading messages.</p>;
 
     return (
@@ -95,7 +95,7 @@ function ListMessages() {
                             onClose={handleCloseCreateModal}
                             showCloseButton={false}
                         >
-                            <CreateMessageForm 
+                            <CreateMessageForm
                                 onClose={handleCloseCreateModal}
                                 accountId={userId}
                             />
